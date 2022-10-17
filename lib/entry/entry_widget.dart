@@ -84,26 +84,7 @@ class _EntryWidgetState extends State<EntryWidget> {
           context.pushNamed('Home');
         }
       } else {
-        if ((apiResultyb1?.statusCode ?? 200) == 404) {
-          context.goNamed('Login');
-        } else {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                title: Text('오류'),
-                content: Text('서버 오류가 발생하여 다시 실행해주세요'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            },
-          );
-          return;
-        }
+        context.goNamed('Login');
       }
     });
 
