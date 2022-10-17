@@ -48,7 +48,7 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
           },
         ),
         title: Text(
-          '이용내역',
+          '운행내역',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,

@@ -60,109 +60,60 @@ class _SettingWidgetState extends State<SettingWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(-0.9, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Text(
-                    '정보',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                        ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(-0.9, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Text(
+                      '정보',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-                      child: Text(
-                        '현재 버전',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 16,
-                            ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.89, 0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 5),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
                         child: Text(
-                          FFAppState().appVersion,
+                          '현재 버전',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
                                     fontSize: 16,
-                                    fontWeight: FontWeight.normal,
                                   ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  '회사소개',
-                  style: FlutterFlowTheme.of(context).title3.override(
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
-                  size: 20,
-                ),
-                tileColor: Color(0xFFF5F5F5),
-                dense: false,
-              ),
-              Divider(),
-              ListTile(
-                title: Text(
-                  '약관 및 정책',
-                  style: FlutterFlowTheme.of(context).title3.override(
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
-                  size: 20,
-                ),
-                tileColor: Color(0xFFF5F5F5),
-                dense: false,
-              ),
-              Divider(),
-              Align(
-                alignment: AlignmentDirectional(-0.9, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Text(
-                    '알림',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                      Align(
+                        alignment: AlignmentDirectional(-0.89, 0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 5),
+                          child: Text(
+                            FFAppState().appVersion,
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                          ),
                         ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                child: ListTile(
+                ListTile(
                   title: Text(
-                    '알림설정',
+                    '회사소개',
                     style: FlutterFlowTheme.of(context).title3.override(
                           fontFamily: 'Poppins',
                           fontSize: 16,
@@ -177,36 +128,161 @@ class _SettingWidgetState extends State<SettingWidget> {
                   tileColor: Color(0xFFF5F5F5),
                   dense: false,
                 ),
-              ),
-              Divider(),
-              Align(
-                alignment: AlignmentDirectional(-0.9, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Text(
-                    '계정',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                Divider(),
+                ListTile(
+                  title: Text(
+                    '약관 및 정책',
+                    style: FlutterFlowTheme.of(context).title3.override(
                           fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Color(0xFF303030),
+                    size: 20,
+                  ),
+                  tileColor: Color(0xFFF5F5F5),
+                  dense: false,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() => FFAppState().apiToken = '');
-                    setState(() => FFAppState().driverId = '');
-                    setState(() => FFAppState().isOnDuty = false);
-                    setState(() => FFAppState().callRequest = null);
-                    setState(() => FFAppState().latestCallState = '');
+                Divider(),
+                Align(
+                  alignment: AlignmentDirectional(-0.9, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Text(
+                      '알림',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                  child: ListTile(
+                    title: Text(
+                      '알림설정',
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xFF303030),
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
+                  ),
+                ),
+                Divider(),
+                Align(
+                  alignment: AlignmentDirectional(-0.9, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Text(
+                      '계정',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                  child: InkWell(
+                    onTap: () async {
+                      setState(() => FFAppState().apiToken = '');
+                      setState(() => FFAppState().driverId = '');
+                      setState(() => FFAppState().isOnDuty = false);
+                      setState(() => FFAppState().callRequest = null);
+                      setState(() => FFAppState().latestCallState = '');
 
-                    context.goNamed('Login');
+                      context.goNamed('Login');
+                    },
+                    child: ListTile(
+                      title: Text(
+                        '로그아웃',
+                        style: FlutterFlowTheme.of(context).title3.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      tileColor: Color(0xFFF5F5F5),
+                      dense: false,
+                    ),
+                  ),
+                ),
+                Divider(),
+                InkWell(
+                  onTap: () async {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('탈퇴'),
+                              content: Text('회원 탈퇴를 진행하시겠습니까?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('취소'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      apiResult9ee =
+                          await BackofficeGroup.deleteDriverCall.call(
+                        driverId: FFAppState().driverId,
+                      );
+                      if ((apiResult9ee?.succeeded ?? true)) {
+                        setState(() => FFAppState().apiToken = '');
+                        setState(() => FFAppState().driverId = '');
+                        setState(() => FFAppState().callRequest = null);
+                        setState(() => FFAppState().latestCallState = '');
+                        setState(() => FFAppState().isOnDuty = false);
+
+                        context.goNamed('Login');
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    }
+
+                    setState(() {});
                   },
                   child: ListTile(
                     title: Text(
-                      '로그아웃',
+                      '탈퇴하기',
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
@@ -217,81 +293,9 @@ class _SettingWidgetState extends State<SettingWidget> {
                     dense: false,
                   ),
                 ),
-              ),
-              Divider(),
-              InkWell(
-                onTap: () async {
-                  var confirmDialogResponse = await showDialog<bool>(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('탈퇴'),
-                            content: Text('회원 탈퇴를 진행하시겠습니까?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, false),
-                                child: Text('취소'),
-                              ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, true),
-                                child: Text('확인'),
-                              ),
-                            ],
-                          );
-                        },
-                      ) ??
-                      false;
-                  if (confirmDialogResponse) {
-                    apiResult9ee = await BackofficeGroup.deleteDriverCall.call(
-                      driverId: FFAppState().driverId,
-                    );
-                    if ((apiResult9ee?.succeeded ?? true)) {
-                      setState(() => FFAppState().apiToken = '');
-                      setState(() => FFAppState().driverId = '');
-                      setState(() => FFAppState().callRequest = null);
-                      setState(() => FFAppState().latestCallState = '');
-                      setState(() => FFAppState().isOnDuty = false);
-
-                      context.goNamed('Login');
-                    } else {
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('오류'),
-                            content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('확인'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
-                  }
-
-                  setState(() {});
-                },
-                child: ListTile(
-                  title: Text(
-                    '탈퇴하기',
-                    style: FlutterFlowTheme.of(context).title3.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  tileColor: Color(0xFFF5F5F5),
-                  dense: false,
-                ),
-              ),
-              Divider(),
-            ],
+                Divider(),
+              ],
+            ),
           ),
         ),
       ),

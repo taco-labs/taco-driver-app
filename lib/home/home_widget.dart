@@ -251,6 +251,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
+                          timerController?.onExecute.add(
+                            StopWatchExecute.start,
+                          );
                         } else {
                           await showDialog(
                             context: context,
