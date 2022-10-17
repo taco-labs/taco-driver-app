@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1091893732211-vpguv42qnf07fnmmk7do9pk450kvr6pg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1091893732211-vpguv42qnf07fnmmk7do9pk450kvr6pg</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1091893732211-35l7oj1g01in4viieag63qktfeih2e8l.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBdtMYXQ5zcUk68eHwstLHfwODVcUE9goU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1091893732211</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tacolabs.taco.driver</string>
+	<key>PROJECT_ID</key>
+	<string>intense-emblem-359207</string>
+	<key>STORAGE_BUCKET</key>
+	<string>intense-emblem-359207.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1091893732211:ios:1def5971878f4d5eeb1b06</string>
+</dict>
+</plist>
