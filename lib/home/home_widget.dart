@@ -306,6 +306,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
+                          timerController?.onExecute.add(
+                            StopWatchExecute.stop,
+                          );
                         } else {
                           await showDialog(
                             context: context,
@@ -382,21 +385,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                       latitude: random_data.randomDouble(0, 0),
                       longitude: random_data.randomDouble(0, 0),
                     );
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          content: Text('타이머 액션'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    if (!(apiResult0wj?.succeeded ?? true)) {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('오류'),
+                            content: Text('위치 갱신 서버 오류'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('확인'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                     timerController?.onExecute.add(
                       StopWatchExecute.start,
                     );
