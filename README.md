@@ -1,4 +1,4 @@
-# Taco Driver App
+# Taco Driver
 
 A new Flutter project.
 

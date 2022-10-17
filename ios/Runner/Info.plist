@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Taco Driver App</string>
+	<string>Taco Driver</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Taco Driver App</string>
+	<string>Taco Driver</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -26,10 +26,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>tacodriverapp.com</string>
+        <string>tacodriver.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>tacodriverapp</string>
+        <string>tacodriver</string>
         </array>
         </dict>
     </array>
@@ -43,7 +43,12 @@
 	<true/>
 
 
-
+	<key>PermissionGroupNotification</key>
+      <string>Allow notification</string>
+	<key>NSCameraUsageDescription</key>
+      <string>Allow camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+      <string>Allow access to Photo Library</string>
 
 
 	<key>UILaunchStoryboardName</key>

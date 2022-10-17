@@ -29,17 +29,81 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, _) => HomePageWidget(),
+      errorBuilder: (context, _) => EntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => EntryWidget(),
           routes: [
             FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
-              builder: (context, params) => HomePageWidget(),
+              name: 'Entry',
+              path: 'entry',
+              builder: (context, params) => EntryWidget(),
+            ),
+            FFRoute(
+              name: 'Login',
+              path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'VerifyCode',
+              path: 'verifyCode',
+              builder: (context, params) => VerifyCodeWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                authSmsStateKey:
+                    params.getParam('authSmsStateKey', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'RegisterDriver',
+              path: 'registerDriver',
+              builder: (context, params) => RegisterDriverWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                authSmsStateKey:
+                    params.getParam('authSmsStateKey', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'Home',
+              path: 'home',
+              builder: (context, params) => HomeWidget(),
+            ),
+            FFRoute(
+              name: 'OnDrivingToDeparture',
+              path: 'onDrivingToDeparture',
+              builder: (context, params) => OnDrivingToDepartureWidget(),
+            ),
+            FFRoute(
+              name: 'OnDrivingToArrival',
+              path: 'onDrivingToArrival',
+              builder: (context, params) => OnDrivingToArrivalWidget(),
+            ),
+            FFRoute(
+              name: 'RegisterLicense',
+              path: 'registerLicense',
+              builder: (context, params) => RegisterLicenseWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                authSmsStateKey:
+                    params.getParam('authSmsStateKey', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'DriverProfile',
+              path: 'driverProfile',
+              builder: (context, params) => DriverProfileWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'RideHistory',
+              path: 'rideHistory',
+              builder: (context, params) => RideHistoryWidget(),
+            ),
+            FFRoute(
+              name: 'Setting',
+              path: 'setting',
+              builder: (context, params) => SettingWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

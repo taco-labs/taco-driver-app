@@ -1,6 +1,6 @@
 {
-    "name": "Taco Driver App",
-    "short_name": "Taco Driver App",
+    "name": "Taco Driver",
+    "short_name": "Taco Driver",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

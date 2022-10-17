@@ -9,8 +9,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Signin  flow Group Code
 
 class SigninFlowGroup {
-  static String baseUrl =
-      'http://alb-taco-dev-851043754.ap-northeast-2.elb.amazonaws.com:18882/driver/signin';
+  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver/signin';
   static Map<String, String> headers = {};
   static SMSVerificationRequestCall sMSVerificationRequestCall =
       SMSVerificationRequestCall();
@@ -66,15 +65,63 @@ class SMSVerificationAndSigninCall {
       returnBody: true,
     );
   }
+
+  dynamic apiToken(dynamic response) => getJsonField(
+        response,
+        r'''$.token''',
+      );
+  dynamic driverInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.driver''',
+      );
+  dynamic driverId(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.id''',
+      );
+  dynamic driverType(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverType''',
+      );
+  dynamic driverFirstName(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.firstName''',
+      );
+  dynamic driverLastName(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.lastName''',
+      );
+  dynamic driverPhoneNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.phone''',
+      );
+  dynamic driverGenderCode(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.gender''',
+      );
+  dynamic driverAppOs(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.appOs''',
+      );
+  dynamic driverAppVersion(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.osVersion''',
+      );
+  dynamic driverIsActive(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.active''',
+      );
+  dynamic driverIsOnDuty(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.onDuty''',
+      );
 }
 
 /// End Signin  flow Group Code
 
-/// Start Signin Group Code
+/// Start Signup Group Code
 
-class SigninGroup {
-  static String baseUrl =
-      'http://alb-taco-dev-851043754.ap-northeast-2.elb.amazonaws.com:18882/driver';
+class SignupGroup {
+  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver';
   static Map<String, String> headers = {};
   static SignupCall signupCall = SignupCall();
 }
@@ -108,10 +155,10 @@ class SignupCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Signup',
-      apiUrl: '${SigninGroup.baseUrl}/signup',
+      apiUrl: '${SignupGroup.baseUrl}/signup',
       callType: ApiCallType.POST,
       headers: {
-        ...SigninGroup.headers,
+        ...SignupGroup.headers,
       },
       params: {},
       body: body,
@@ -119,15 +166,63 @@ class SignupCall {
       returnBody: true,
     );
   }
+
+  dynamic apiToken(dynamic response) => getJsonField(
+        response,
+        r'''$.token''',
+      );
+  dynamic driverInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.driver''',
+      );
+  dynamic driverId(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.id''',
+      );
+  dynamic driverType(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverType''',
+      );
+  dynamic driverFirstName(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.firstName''',
+      );
+  dynamic driverLastName(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.lastName''',
+      );
+  dynamic driverPhoneNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.phone''',
+      );
+  dynamic driverGenderCode(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.gender''',
+      );
+  dynamic driverAppOs(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.appOs''',
+      );
+  dynamic driverAppVersion(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.osVersion''',
+      );
+  dynamic driverIsActive(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.active''',
+      );
+  dynamic dirverIsOnDuty(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.onDuty''',
+      );
 }
 
-/// End Signin Group Code
+/// End Signup Group Code
 
 /// Start Driver Info Group Code
 
 class DriverInfoGroup {
-  static String baseUrl =
-      'http://alb-taco-dev-851043754.ap-northeast-2.elb.amazonaws.com:18882/driver';
+  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver';
   static Map<String, String> headers = {
     'Authorization': 'Bearer [apiToken]',
   };
@@ -160,6 +255,51 @@ class GetDriverCall {
       returnBody: true,
     );
   }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic driverType(dynamic response) => getJsonField(
+        response,
+        r'''$.driverType''',
+      );
+  dynamic firstName(dynamic response) => getJsonField(
+        response,
+        r'''$.firstName''',
+      );
+  dynamic lastName(dynamic response) => getJsonField(
+        response,
+        r'''$.lastName''',
+      );
+  dynamic phoneNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.phone''',
+      );
+  dynamic genderCode(dynamic response) => getJsonField(
+        response,
+        r'''$.gender''',
+      );
+  dynamic appOs(dynamic response) => getJsonField(
+        response,
+        r'''$.appOs''',
+      );
+  dynamic appVersion(dynamic response) => getJsonField(
+        response,
+        r'''$.osVersion''',
+      );
+  dynamic isActive(dynamic response) => getJsonField(
+        response,
+        r'''$.active''',
+      );
+  dynamic isOnDuty(dynamic response) => getJsonField(
+        response,
+        r'''$.onDuty''',
+      );
+  dynamic birthday(dynamic response) => getJsonField(
+        response,
+        r'''$.birtyday''',
+      );
 }
 
 class UpdateDriverCall {
@@ -320,12 +460,12 @@ class UpdateDriverSettlementAccountCall {
 /// Start Backoffice Group Code
 
 class BackofficeGroup {
-  static String baseUrl =
-      'http://alb-taco-dev-851043754.ap-northeast-2.elb.amazonaws.com:18883/driver';
+  static String baseUrl = 'https://backoffice.dev.api.taco-labs.com/driver';
   static Map<String, String> headers = {
     'Authorization': 'Bearer backoffice_secret_dev',
   };
   static DeleteDriverCall deleteDriverCall = DeleteDriverCall();
+  static ActivateDriverCall activateDriverCall = ActivateDriverCall();
 }
 
 class DeleteDriverCall {
@@ -345,7 +485,143 @@ class DeleteDriverCall {
   }
 }
 
+class ActivateDriverCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Activate Driver',
+      apiUrl: '${BackofficeGroup.baseUrl}/${driverId}/activate',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...BackofficeGroup.headers,
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
 /// End Backoffice Group Code
+
+/// Start Taxi Call Group Code
+
+class TaxiCallGroup {
+  static String baseUrl = 'https://driver.dev.api.taco-labs.com';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [apiToken]',
+  };
+  static GetLatestTaxiCallCall getLatestTaxiCallCall = GetLatestTaxiCallCall();
+  static ListTaxiCallCall listTaxiCallCall = ListTaxiCallCall();
+  static AcceptTaxiCallTicketCall acceptTaxiCallTicketCall =
+      AcceptTaxiCallTicketCall();
+  static RejectTaxiCallTicketCall rejectTaxiCallTicketCall =
+      RejectTaxiCallTicketCall();
+}
+
+class GetLatestTaxiCallCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Latest Taxi Call',
+      apiUrl: '${TaxiCallGroup.baseUrl}/driver/${driverId}/taxicall_latest',
+      callType: ApiCallType.GET,
+      headers: {
+        ...TaxiCallGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class ListTaxiCallCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Taxi Call',
+      apiUrl: '${TaxiCallGroup.baseUrl}/driver/${driverId}/taxicall',
+      callType: ApiCallType.GET,
+      headers: {
+        ...TaxiCallGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  dynamic callList(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      );
+  dynamic pageToken(dynamic response) => getJsonField(
+        response,
+        r'''$.pageToken''',
+      );
+}
+
+class AcceptTaxiCallTicketCall {
+  Future<ApiCallResponse> call({
+    String? ticketId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Accept Taxi Call Ticket',
+      apiUrl: '${TaxiCallGroup.baseUrl}/ticket/${ticketId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...TaxiCallGroup.headers,
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class RejectTaxiCallTicketCall {
+  Future<ApiCallResponse> call({
+    String? ticketId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Reject Taxi Call Ticket',
+      apiUrl: '${TaxiCallGroup.baseUrl}/ticket/${ticketId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...TaxiCallGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+}
+
+/// End Taxi Call Group Code
+
+class GetUUIDCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get UUID',
+      apiUrl: 'https://www.uuidtools.com/api/generate/v4',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic uuid(dynamic response) => getJsonField(
+        response,
+        r'''$[0]''',
+      );
+}
 
 class ApiPagingParams {
   int nextPageNumber = 0;
