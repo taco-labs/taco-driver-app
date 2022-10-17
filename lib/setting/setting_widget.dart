@@ -199,7 +199,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                     setState(() => FFAppState().apiToken = '');
                     setState(() => FFAppState().driverId = '');
                     setState(() => FFAppState().isOnDuty = false);
-                    setState(() => FFAppState().callRequest = '');
+                    setState(() => FFAppState().callRequest = null);
                     setState(() => FFAppState().latestCallState = '');
 
                     context.goNamed('Login');
@@ -250,7 +250,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                     if ((apiResult9ee?.succeeded ?? true)) {
                       setState(() => FFAppState().apiToken = '');
                       setState(() => FFAppState().driverId = '');
-                      setState(() => FFAppState().callRequest = '');
+                      setState(() => FFAppState().callRequest = null);
                       setState(() => FFAppState().latestCallState = '');
                       setState(() => FFAppState().isOnDuty = false);
 

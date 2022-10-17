@@ -223,9 +223,7 @@ class SignupCall {
 
 class DriverInfoGroup {
   static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver';
-  static Map<String, String> headers = {
-    'Authorization': 'Bearer [apiToken]',
-  };
+  static Map<String, String> headers = {};
   static GetDriverCall getDriverCall = GetDriverCall();
   static UpdateDriverCall updateDriverCall = UpdateDriverCall();
   static UpdateOnDutyCall updateOnDutyCall = UpdateOnDutyCall();
@@ -250,6 +248,7 @@ class GetDriverCall {
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       returnBody: true,
@@ -322,6 +321,7 @@ class UpdateDriverCall {
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
@@ -347,6 +347,7 @@ class UpdateOnDutyCall {
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
@@ -374,6 +375,7 @@ class UpdateDriverLocationCall {
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
@@ -401,6 +403,7 @@ class RegisterSettlementAccountCall {
       callType: ApiCallType.POST,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
@@ -421,6 +424,7 @@ class GetSettlementAccountCall {
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       returnBody: true,
@@ -446,6 +450,7 @@ class UpdateDriverSettlementAccountCall {
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
@@ -641,6 +646,7 @@ class ListTaxiCallCall {
       callType: ApiCallType.GET,
       headers: {
         ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       returnBody: true,
@@ -669,6 +675,7 @@ class AcceptTaxiCallTicketCall {
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -688,6 +695,7 @@ class RejectTaxiCallTicketCall {
       callType: ApiCallType.DELETE,
       headers: {
         ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       returnBody: true,

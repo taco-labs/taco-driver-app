@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
+import 'dart:convert';
 
 class FFAppState {
   static final FFAppState _instance = FFAppState._internal();
@@ -46,11 +47,11 @@ class FFAppState {
 
   String latestCallState = '';
 
-  String callRequest = '';
-
   bool isOnDuty = false;
 
   String driverFirstName = '';
+
+  dynamic callRequest;
 }
 
 LatLng? _latLngFromString(String? val) {

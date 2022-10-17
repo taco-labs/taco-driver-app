@@ -43,10 +43,12 @@ class _EntryWidgetState extends State<EntryWidget> {
             apiToken: FFAppState().apiToken,
           );
           if ((apiResultLatestCall?.succeeded ?? true)) {
-            setState(() => FFAppState().latestCallState = getJsonField(
-                  (apiResultLatestCall?.jsonBody ?? ''),
-                  r'''$.currentState''',
-                ).toString());
+            setState(() => FFAppState().latestCallState =
+                TaxiCallGroup.getLatestTaxiCallCall
+                    .callCurrentState(
+                      (apiResultLatestCall?.jsonBody ?? ''),
+                    )
+                    .toString());
             setState(() => FFAppState().callRequest =
                 (apiResultLatestCall?.jsonBody ?? ''));
             if (FFAppState().latestCallState == 'DRIVER_TO_DEPARTURE') {
