@@ -509,9 +509,7 @@ class ActivateDriverCall {
 
 class TaxiCallGroup {
   static String baseUrl = 'https://driver.dev.api.taco-labs.com';
-  static Map<String, String> headers = {
-    'Authorization': 'Bearer [apiToken]',
-  };
+  static Map<String, String> headers = {};
   static GetLatestTaxiCallCall getLatestTaxiCallCall = GetLatestTaxiCallCall();
   static ListTaxiCallCall listTaxiCallCall = ListTaxiCallCall();
   static AcceptTaxiCallTicketCall acceptTaxiCallTicketCall =
@@ -531,6 +529,7 @@ class GetLatestTaxiCallCall {
       callType: ApiCallType.GET,
       headers: {
         ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       returnBody: true,
