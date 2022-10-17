@@ -536,6 +536,99 @@ class GetLatestTaxiCallCall {
       returnBody: true,
     );
   }
+
+  dynamic callCurrentState(dynamic response) => getJsonField(
+        response,
+        r'''$.currentState''',
+      );
+  dynamic callBasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.basePrice''',
+      );
+  dynamic callExtraPrice(dynamic response) => getJsonField(
+        response,
+        r'''$.additionalPrice''',
+      );
+  dynamic callRequestMaxExtraPrice(dynamic response) => getJsonField(
+        response,
+        r'''$.requestMaxAdditionalPrice''',
+      );
+  dynamic callRequestBasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.requestBasePrice''',
+      );
+  dynamic arrivalPointLatitude(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.point.latitude''',
+      );
+  dynamic arrivalPointLongitude(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.point.longitude''',
+      );
+  dynamic arrivalAddressName(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.addressName''',
+      );
+  dynamic arrivalAddressDepth1(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.regionDepth1''',
+      );
+  dynamic arrivalAddressDepth2(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.regionDepth2''',
+      );
+  dynamic arrivalAddressDepth3(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.regionDepth3''',
+      );
+  dynamic arrivalAddressMainNo(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.mainAddressNo''',
+      );
+  dynamic arrivalAddressSubNo(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.subAddressNo''',
+      );
+  dynamic distanceInMeters(dynamic response) => getJsonField(
+        response,
+        r'''$.distance''',
+      );
+  dynamic etaNanoseconds(dynamic response) => getJsonField(
+        response,
+        r'''$.eta''',
+      );
+  dynamic departurePointLatitude(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.point.latitude''',
+      );
+  dynamic departurePointLongitude(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.point.longitude''',
+      );
+  dynamic departureAddressName(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.addressName''',
+      );
+  dynamic departureAddressDepth1(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.regionDepth1''',
+      );
+  dynamic departureAddressDepth2(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.regionDepth2''',
+      );
+  dynamic departureAddressDepth3(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.regionDepth3''',
+      );
+  dynamic departureAddressMainNo(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.mainAddressNo''',
+      );
+  dynamic departureAddressSubNo(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.subAddressNo''',
+      );
 }
 
 class ListTaxiCallCall {

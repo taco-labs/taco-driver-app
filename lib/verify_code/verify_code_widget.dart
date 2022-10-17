@@ -31,7 +31,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   ApiCallResponse? apiResultLatestCall;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
-  ApiCallResponse? apiUpdateUserResult;
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -211,56 +210,31 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                         }
 
                         fcmToken = await actions.getFcmToken();
-                        apiUpdateUserResult =
-                            await DriverInfoGroup.updateDriverCall.call(
+                        apiResultLatestCall =
+                            await TaxiCallGroup.getLatestTaxiCallCall.call(
                           driverId: FFAppState().driverId,
                           apiToken: FFAppState().apiToken,
-                          appOs: FFAppState().appOs,
-                          appVersion: FFAppState().appVersion,
-                          appFcmToken: fcmToken,
                         );
-                        if ((apiUpdateUserResult?.succeeded ?? true)) {
-                          apiResultLatestCall =
-                              await TaxiCallGroup.getLatestTaxiCallCall.call(
-                            driverId: FFAppState().driverId,
-                            apiToken: FFAppState().apiToken,
-                          );
-                          if ((apiResultLatestCall?.succeeded ?? true)) {
-                            setState(() =>
-                                FFAppState().latestCallState = getJsonField(
-                                  (apiResultLatestCall?.jsonBody ?? ''),
-                                  r'''$.currentState''',
-                                ).toString());
-                            setState(() => FFAppState().callRequest =
-                                (apiResultLatestCall?.jsonBody ?? ''));
-                            if (FFAppState().latestCallState ==
-                                'DRIVER_TO_DEPARTURE') {
-                              context.pushNamed('OnDrivingToDeparture');
-                            } else {
-                              if (FFAppState().latestCallState ==
-                                  'DRIVER_TO_ARRIVAL') {
-                                context.pushNamed('OnDrivingToArrival');
-                              } else {
-                                context.goNamed('Home');
-                              }
-                            }
+                        if ((apiResultLatestCall?.succeeded ?? true) ||
+                            ((apiResultLatestCall?.statusCode ?? 200) == 404)) {
+                          setState(() => FFAppState().latestCallState =
+                              TaxiCallGroup.getLatestTaxiCallCall
+                                  .callCurrentState(
+                                    (apiResultLatestCall?.jsonBody ?? ''),
+                                  )
+                                  .toString());
+                          setState(() => FFAppState().callRequest =
+                              (apiResultLatestCall?.jsonBody ?? ''));
+                          if (FFAppState().latestCallState ==
+                              'DRIVER_TO_DEPARTURE') {
+                            context.pushNamed('OnDrivingToDeparture');
                           } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('오류'),
-                                  content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            if (FFAppState().latestCallState ==
+                                'DRIVER_TO_ARRIVAL') {
+                              context.pushNamed('OnDrivingToArrival');
+                            } else {
+                              context.goNamed('Home');
+                            }
                           }
                         } else {
                           await showDialog(
