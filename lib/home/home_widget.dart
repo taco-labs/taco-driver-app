@@ -5,7 +5,7 @@ import '../flutter_flow/flutter_flow_timer.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/random_data_util.dart' as random_data;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +24,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResult0wj;
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResultkg1;
+  LatLng? currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -378,12 +379,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                   onEnded: () async {
+                    currentUserLocationValue = await getCurrentUserLocation(
+                        defaultLocation: LatLng(0.0, 0.0));
                     apiResult0wj =
                         await DriverInfoGroup.updateDriverLocationCall.call(
                       driverId: FFAppState().driverId,
                       apiToken: FFAppState().apiToken,
-                      latitude: random_data.randomDouble(0, 0),
-                      longitude: random_data.randomDouble(0, 0),
+                      latitude: functions
+                          .toLatitudeFromLatLng(currentUserLocationValue!),
+                      longitude: functions
+                          .toLongitudeFromLatLng(currentUserLocationValue!),
                     );
                     if (!(apiResult0wj?.succeeded ?? true)) {
                       await showDialog(
