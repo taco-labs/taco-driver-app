@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,11 +105,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                     child: TextFormField(
                       controller: textController,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        'textController',
-                        Duration(milliseconds: 2000),
-                        () => setState(() {}),
-                      ),
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -156,19 +150,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             topRight: Radius.circular(4.0),
                           ),
                         ),
-                        suffixIcon: textController!.text.isNotEmpty
-                            ? InkWell(
-                                onTap: () async {
-                                  textController?.clear();
-                                  setState(() {});
-                                },
-                                child: Icon(
-                                  Icons.clear,
-                                  color: Color(0xFF757575),
-                                  size: 22,
-                                ),
-                              )
-                            : null,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                       textAlign: TextAlign.center,

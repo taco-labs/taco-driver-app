@@ -4,10 +4,12 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_timer.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -30,6 +32,10 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.initWorkmanager();
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -307,9 +313,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
-                          timerController?.onExecute.add(
-                            StopWatchExecute.stop,
-                          );
+                          await actions.registerSyncLocationTask();
                         } else {
                           await showDialog(
                             context: context,
