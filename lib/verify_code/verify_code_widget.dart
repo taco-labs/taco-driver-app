@@ -264,6 +264,23 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                 );
                               },
                             );
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Get Latest Call'),
+                                  content: Text(
+                                      (apiResultLatestCall?.jsonBody ?? '')),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
                         } else {
                           await showDialog(
@@ -277,6 +294,23 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
                                     child: Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Update Driver'),
+                                content: Text(
+                                    (apiResultUpdateDriver?.jsonBody ?? '')),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
                                   ),
                                 ],
                               );
@@ -310,6 +344,22 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
                                     child: Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('SMS signin'),
+                                content: Text((apiResultf8v?.jsonBody ?? '')),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
                                   ),
                                 ],
                               );
