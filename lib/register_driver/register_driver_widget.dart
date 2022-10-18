@@ -449,8 +449,9 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             ),
                             child: CheckboxListTile(
                               value: termsofUseValue ??= false,
-                              onChanged: (newValue) =>
-                                  setState(() => termsofUseValue = newValue!),
+                              onChanged: (newValue) async {
+                                setState(() => termsofUseValue = newValue!);
+                              },
                               title: Text(
                                 '이용약관 동의 (필수)',
                                 style: FlutterFlowTheme.of(context).bodyText1,
@@ -465,26 +466,26 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Theme(
-                              data: ThemeData(
-                                unselectedWidgetColor: Color(0xFF95A1AC),
+                          child: Theme(
+                            data: ThemeData(
+                              unselectedWidgetColor: Color(0xFF95A1AC),
+                            ),
+                            child: CheckboxListTile(
+                              value: privacyPolicyValue ??= false,
+                              onChanged: (newValue) async {
+                                setState(() => privacyPolicyValue = newValue!);
+                              },
+                              title: Text(
+                                '개인정보처리방침 동의 (필수)',
+                                style: FlutterFlowTheme.of(context).bodyText1,
                               ),
-                              child: CheckboxListTile(
-                                value: privacyPolicyValue ??= false,
-                                onChanged: (newValue) => setState(
-                                    () => privacyPolicyValue = newValue!),
-                                title: Text(
-                                  '개인정보처리방침 동의 (필수)',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                tileColor: Color(0xFFF5F5F5),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                dense: false,
-                                controlAffinity:
-                                    ListTileControlAffinity.trailing,
+                              tileColor: Color(0xFFF5F5F5),
+                              activeColor:
+                                  FlutterFlowTheme.of(context).primaryColor,
+                              dense: false,
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),

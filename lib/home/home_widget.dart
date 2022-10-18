@@ -258,9 +258,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
-                          timerController?.onExecute.add(
-                            StopWatchExecute.start,
-                          );
+                          await actions.registerSyncLocationTask();
                         } else {
                           await showDialog(
                             context: context,
@@ -282,7 +280,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
                         setState(() {});
                       },
-                      text: '콜 대기',
+                      text: FFAppState().isOnDuty ? '콜 멈추기' : '콜 대기',
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
@@ -313,7 +311,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
-                          await actions.registerSyncLocationTask();
+                          await actions.cancelSyncLocationTask();
                         } else {
                           await showDialog(
                             context: context,

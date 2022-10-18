@@ -8,10 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 import 'package:workmanager/workmanager.dart';
 
-Future registerSyncLocationTask() async {
-  Workmanager().registerPeriodicTask(
+Future cancelSyncLocationTask() async {
+  Workmanager().cancelByUniqueName(
     "1",
-    "syncLocationTask",
-    frequency: const Duration(seconds: 1),
   );
 }
