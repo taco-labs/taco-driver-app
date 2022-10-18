@@ -12,7 +12,13 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
     switch (task) {
       case 'syncLocationTask':
-        print("syncLocationTask was executed");
+        debugPrint("syncLocationTask was executed");
+        Workmanager().registerOneOffTask(
+          "1",
+          "syncLocationTask",
+          initialDelay: const Duration(seconds: 10),
+          existingWorkPolicy: ExistingWorkPolicy.append,
+        );
         break;
     }
     return Future.value(true);

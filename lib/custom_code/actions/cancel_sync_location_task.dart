@@ -9,7 +9,5 @@ import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 
 Future cancelSyncLocationTask() async {
-  Workmanager().cancelByUniqueName(
-    "1",
-  );
+  Workmanager().cancelAll();
 }

@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 
 Future registerSyncLocationTask() async {
-  Workmanager().registerPeriodicTask(
+  Workmanager().registerOneOffTask(
     "1",
     "syncLocationTask",
-    frequency: const Duration(seconds: 1),
+    initialDelay: const Duration(seconds: 10),
+    existingWorkPolicy: ExistingWorkPolicy.append,
   );
 }
