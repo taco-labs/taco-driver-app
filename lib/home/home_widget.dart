@@ -280,7 +280,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
                         setState(() {});
                       },
-                      text: FFAppState().isOnDuty ? '콜 멈추기' : '콜 대기',
+                      text: '콜 대기',
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
