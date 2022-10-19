@@ -269,9 +269,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                               builder: (alertDialogContext) {
                                 return AlertDialog(
                                   title: Text('Get Latest Call'),
-                                  content: Text(
-                                      (apiResultLatestCall?.statusCode ?? 200)
-                                          .toString()),
+                                  content: Text(getJsonField(
+                                    (apiResultLatestCall?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString()),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
@@ -305,9 +306,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             builder: (alertDialogContext) {
                               return AlertDialog(
                                 title: Text('Update Driver'),
-                                content: Text(
-                                    (apiResultUpdateDriver?.statusCode ?? 200)
-                                        .toString()),
+                                content: Text(getJsonField(
+                                  (apiResultUpdateDriver?.jsonBody ?? ''),
+                                  r'''$.message''',
+                                ).toString()),
                                 actions: [
                                   TextButton(
                                     onPressed: () =>
@@ -356,8 +358,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             builder: (alertDialogContext) {
                               return AlertDialog(
                                 title: Text('SMS signin'),
-                                content: Text((apiResultf8v?.statusCode ?? 200)
-                                    .toString()),
+                                content: Text(getJsonField(
+                                  (apiResultf8v?.jsonBody ?? ''),
+                                  r'''$.message''',
+                                ).toString()),
                                 actions: [
                                   TextButton(
                                     onPressed: () =>

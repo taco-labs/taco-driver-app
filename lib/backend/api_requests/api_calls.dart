@@ -145,6 +145,7 @@ class SignupCall {
   "driverType": "${driverType}",
   "firstName": "${firstName}",
   "lastName": "${lastName}",
+  "birthday": "${birthday}",
   "gender": "${gender}",
   "phone": "${phone}",
   "appOs": "${appOs}",
