@@ -6,8 +6,9 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
-import 'package:workmanager/workmanager.dart';
+import 'package:geolocator/geolocator.dart';
+import '../../custom_code/actions/init_geolocator_stream.dart';
 
-Future cancelSyncLocationTask() async {
-  Workmanager().cancelAll();
+Future cancelStreamCurrentLocation() async {
+  positionStream!.cancel();
 }

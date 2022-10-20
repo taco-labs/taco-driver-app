@@ -1,4 +1,4 @@
 export 'get_fcm_token.dart' show getFcmToken;
-export 'init_workmanager.dart' show initWorkmanager;
-export 'register_sync_location_task.dart' show registerSyncLocationTask;
-export 'cancel_sync_location_task.dart' show cancelSyncLocationTask;
+export 'init_geolocator_stream.dart' show initGeolocatorStream;
+export 'start_stream_current_location.dart' show startStreamCurrentLocation;
+export 'cancel_stream_current_location.dart' show cancelStreamCurrentLocation;
