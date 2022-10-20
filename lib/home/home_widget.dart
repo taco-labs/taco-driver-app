@@ -260,6 +260,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
+                          await actions.startStreamCurrentLocation();
                         } else {
                           await showDialog(
                             context: context,
@@ -312,9 +313,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
-                          timerController?.onExecute.add(
-                            StopWatchExecute.stop,
-                          );
+                          await actions.cancelStreamCurrentLocation();
                         } else {
                           await showDialog(
                             context: context,
