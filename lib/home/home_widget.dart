@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/permissions_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -23,7 +24,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   StopWatchTimer? timerController;
   String? timerValue;
   int? timerMilliseconds;
-  ApiCallResponse? apiResult0wj;
+  ApiCallResponse? apiResultd76;
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResultkg1;
   LatLng? currentUserLocationValue;
@@ -250,6 +251,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     alignment: AlignmentDirectional(0, 0.15),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        await requestPermission(locationPermission);
                         apiResult438 =
                             await DriverInfoGroup.updateOnDutyCall.call(
                           apiToken: FFAppState().apiToken,
@@ -258,7 +260,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
-                          await actions.registerSyncLocationTask();
+                          timerController?.onExecute.add(
+                            StopWatchExecute.start,
+                          );
                         } else {
                           await showDialog(
                             context: context,
@@ -280,7 +284,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
                         setState(() {});
                       },
-                      text: '콜 대기',
+                      text: '콜 받기',
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
@@ -311,7 +315,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
-                          await actions.cancelSyncLocationTask();
+                          timerController?.onExecute.add(
+                            StopWatchExecute.stop,
+                          );
                         } else {
                           await showDialog(
                             context: context,
@@ -353,7 +359,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                 FlutterFlowTimer(
                   timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
-                    timerMilliseconds ??= 1000,
+                    timerMilliseconds ??= 10000,
                     hours: true,
                     minute: true,
                     second: true,
@@ -361,7 +367,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                   timer: timerController ??= StopWatchTimer(
                     mode: StopWatchMode.countDown,
-                    presetMillisecond: timerMilliseconds ??= 1000,
+                    presetMillisecond: timerMilliseconds ??= 10000,
                     onChange: (value) {
                       setState(() {
                         timerMilliseconds = value;
@@ -383,7 +389,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   onEnded: () async {
                     currentUserLocationValue = await getCurrentUserLocation(
                         defaultLocation: LatLng(0.0, 0.0));
-                    apiResult0wj =
+                    apiResultd76 =
                         await DriverInfoGroup.updateDriverLocationCall.call(
                       driverId: FFAppState().driverId,
                       apiToken: FFAppState().apiToken,
@@ -392,13 +398,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                       longitude: functions
                           .toLongitudeFromLatLng(currentUserLocationValue!),
                     );
-                    if (!(apiResult0wj?.succeeded ?? true)) {
+                    if (!(apiResultd76?.succeeded ?? true)) {
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
                           return AlertDialog(
-                            title: Text('오류'),
-                            content: Text('위치 갱신 서버 오류'),
+                            title: Text('위치 갱신 실패'),
+                            content: Text(
+                                (apiResultd76?.statusCode ?? 200).toString()),
                             actions: [
                               TextButton(
                                 onPressed: () =>
@@ -410,9 +417,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                         },
                       );
                     }
-                    timerController?.onExecute.add(
-                      StopWatchExecute.start,
-                    );
 
                     setState(() {});
                   },
