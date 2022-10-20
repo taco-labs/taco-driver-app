@@ -417,6 +417,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         },
                       );
                     }
+                    timerController?.onExecute.add(
+                      StopWatchExecute.start,
+                    );
 
                     setState(() {});
                   },
