@@ -776,6 +776,29 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   ],
                 ),
               ),
+              FFButtonWidget(
+                onPressed: () async {
+                  await actions.launchKakaoNavi(
+                    37.4927431676548,
+                    127.013867969161,
+                  );
+                },
+                text: 'Button',
+                options: FFButtonOptions(
+                  width: 130,
+                  height: 40,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
             ],
           ),
         ),
