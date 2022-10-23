@@ -53,8 +53,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-	<key>NSLocationWhenInUseUsageDescription</key>
-      <string>Allow location</string>
+
 	<key>PermissionGroupNotification</key>
       <string>Allow notification</string>
 	<key>NSCameraUsageDescription</key>

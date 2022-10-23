@@ -52,6 +52,14 @@ class FFAppState {
   String driverFirstName = '';
 
   dynamic callRequest;
+
+  bool isOnDrivingToDeparture = false;
+
+  bool isOnDrivingToArrival = false;
+
+  bool isOnCallWaiting = false;
+
+  bool isOnCallViewing = false;
 }
 
 LatLng? _latLngFromString(String? val) {

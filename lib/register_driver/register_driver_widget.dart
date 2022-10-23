@@ -22,9 +22,8 @@ class RegisterDriverWidget extends StatefulWidget {
 }
 
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
-
+  ApiCallResponse? apiResultbos;
+  String? getFcmTokenResult;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
@@ -32,8 +31,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? phoneNumberController;
   bool? termsofUseValue;
   bool? privacyPolicyValue;
-  ApiCallResponse? apiResultbos;
-  String? getFcmTokenResult;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -100,19 +97,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                          child: InkWell(
-                            onTap: () async {},
-                            child: Container(
-                              width: 90,
-                              height: 90,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80',
-                                fit: BoxFit.fitWidth,
-                              ),
+                          child: Container(
+                            width: 90,
+                            height: 90,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.network(
+                              'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80',
+                              fit: BoxFit.fitWidth,
                             ),
                           ),
                         ),

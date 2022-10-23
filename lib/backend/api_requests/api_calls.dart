@@ -522,6 +522,8 @@ class TaxiCallGroup {
       AcceptTaxiCallTicketCall();
   static RejectTaxiCallTicketCall rejectTaxiCallTicketCall =
       RejectTaxiCallTicketCall();
+  static TaxiCallDriverToArrivalCall taxiCallDriverToArrivalCall =
+      TaxiCallDriverToArrivalCall();
 }
 
 class GetLatestTaxiCallCall {
@@ -683,6 +685,11 @@ class AcceptTaxiCallTicketCall {
       returnBody: true,
     );
   }
+
+  dynamic callCurrentState(dynamic response) => getJsonField(
+        response,
+        r'''$.currentState''',
+      );
 }
 
 class RejectTaxiCallTicketCall {
@@ -699,6 +706,26 @@ class RejectTaxiCallTicketCall {
         'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class TaxiCallDriverToArrivalCall {
+  Future<ApiCallResponse> call({
+    String? taxiCallRequestId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Taxi Call Driver To Arrival',
+      apiUrl: '${TaxiCallGroup.baseUrl}/${taxiCallRequestId}/to_arrival',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
       returnBody: true,
     );
   }
