@@ -238,15 +238,20 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                 (apiResultLatestCall?.jsonBody ?? ''));
                             if (FFAppState().latestCallState ==
                                 'DRIVER_TO_DEPARTURE') {
-                              context.pushNamed('OnDrivingToDeparture');
+                              setState(() =>
+                                  FFAppState().isOnDrivingToDeparture = true);
                             } else {
                               if (FFAppState().latestCallState ==
                                   'DRIVER_TO_ARRIVAL') {
-                                context.pushNamed('OnDrivingToArrival');
+                                setState(() =>
+                                    FFAppState().isOnDrivingToArrival = true);
                               } else {
-                                context.goNamed('Home');
+                                setState(
+                                    () => FFAppState().isOnCallWaiting = true);
                               }
                             }
+
+                            context.goNamed('Home');
                           } else {
                             await showDialog(
                               context: context,
