@@ -703,7 +703,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
-                                  if (FFAppState().isOnDrivingToDeparture)
+                                  if (FFAppState().isArrived)
                                     Align(
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Padding(
