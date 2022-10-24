@@ -6,17 +6,18 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
-import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:kakao_flutter_sdk_navi/kakao_flutter_sdk_navi.dart';
 
 Future launchKakaoNavi(
   double latitude,
   double longitude,
 ) async {
-  bool isInstalled = await NaviApi.instance.isKakaoNaviInstalled();
-  if (!isInstalled) {
-    debugPrint('카카오내비 미설치');
+  if (await NaviApi.instance.isKakaoNaviInstalled()) {
+    await NaviApi.instance.navigate(
+      destination: Location(name: '출발지', x: '$longitude', y: '$latitude'),
+      option: NaviOption(coordType: CoordType.wgs84),
+    );
+  } else {
     launchBrowserTab(Uri.parse(NaviApi.webNaviInstall));
-    return;
   }
 }

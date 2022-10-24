@@ -8,7 +8,13 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
 StreamSubscription<Position>? positionStream;
+const String kakaoAppKey = 'ad4db5aa94cc0675585a6203dd19747d';
 
-Future initGeolocatorStream() async {}
+Future initDriverHome() async {
+  KakaoSdk.init(
+    nativeAppKey: '$kakaoAppKey',
+  );
+}

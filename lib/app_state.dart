@@ -60,6 +60,8 @@ class FFAppState {
   bool isOnCallWaiting = false;
 
   bool isOnCallViewing = false;
+
+  bool isArrived = false;
 }
 
 LatLng? _latLngFromString(String? val) {
