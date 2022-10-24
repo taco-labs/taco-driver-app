@@ -655,7 +655,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                      if (FFAppState().isOnDrivingToArrival)
+                      if (FFAppState().isArrived)
                         Container(
                           decoration: BoxDecoration(
                             color:
