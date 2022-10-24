@@ -770,6 +770,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               onDuty: true,
                             );
                             if ((apiResult438?.succeeded ?? true)) {
+                              setState(() => FFAppState().isOnDuty = true);
                               setState(
                                   () => FFAppState().isOnCallWaiting = true);
                               await actions.startStreamCurrentLocation();
