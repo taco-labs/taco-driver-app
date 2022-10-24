@@ -52,16 +52,20 @@ class _EntryWidgetState extends State<EntryWidget> {
             setState(() => FFAppState().callRequest =
                 (apiResultLatestCall?.jsonBody ?? ''));
             if (FFAppState().latestCallState == 'DRIVER_TO_DEPARTURE') {
-              context.pushNamed('OnDrivingToDeparture');
+              setState(() => FFAppState().isOnDrivingToDeparture = true);
             } else {
               if (FFAppState().latestCallState == 'DRIVER_TO_ARRIVAL') {
-                context.pushNamed('OnDrivingToArrival');
+                setState(() => FFAppState().isOnDrivingToArrival = true);
               } else {
-                context.goNamed('Home');
+                setState(() => FFAppState().isOnCallWaiting = true);
               }
             }
+
+            context.goNamed('Home');
           } else {
             if ((apiResultLatestCall?.statusCode ?? 200) == 404) {
+              setState(() => FFAppState().isOnCallWaiting = true);
+
               context.pushNamed('Home');
             } else {
               await showDialog(

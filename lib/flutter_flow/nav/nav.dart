@@ -71,16 +71,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
-              name: 'OnDrivingToDeparture',
-              path: 'onDrivingToDeparture',
-              builder: (context, params) => OnDrivingToDepartureWidget(),
-            ),
-            FFRoute(
-              name: 'OnDrivingToArrival',
-              path: 'onDrivingToArrival',
-              builder: (context, params) => OnDrivingToArrivalWidget(),
-            ),
-            FFRoute(
               name: 'RegisterLicense',
               path: 'registerLicense',
               builder: (context, params) => RegisterLicenseWidget(

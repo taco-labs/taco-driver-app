@@ -514,48 +514,46 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
-                                  if (FFAppState().isOnDrivingToDeparture)
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            await actions.launchKakaoNavi(
-                                              37.4927431676548,
-                                              127.013867969161,
-                                            );
-                                            setState(() => FFAppState()
-                                                    .isOnDrivingToDeparture =
-                                                false);
-                                            setState(() => FFAppState()
-                                                .isOnDrivingToArrival = true);
-                                          },
-                                          text: '출발지 이동',
-                                          options: FFButtonOptions(
-                                            width: 120,
-                                            height: 60,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white,
-                                                      fontSize: 20,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 10, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await actions.launchKakaoNavi(
+                                            37.4927431676548,
+                                            127.013867969161,
+                                          );
+                                          setState(() => FFAppState()
+                                              .isOnDrivingToDeparture = false);
+                                          setState(() => FFAppState()
+                                              .isOnDrivingToArrival = true);
+                                        },
+                                        text: '출발지 이동',
+                                        options: FFButtonOptions(
+                                          width: 120,
+                                          height: 60,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
                                           ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -609,47 +607,46 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
-                                  if (FFAppState().isOnDrivingToDeparture)
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            await actions.launchKakaoNavi(
-                                              37.4927431676548,
-                                              127.013867969161,
-                                            );
-                                            setState(() => FFAppState()
-                                                .isOnDrivingToArrival = false);
-                                            setState(() =>
-                                                FFAppState().isArrived = true);
-                                          },
-                                          text: '운행 시작',
-                                          options: FFButtonOptions(
-                                            width: 120,
-                                            height: 60,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white,
-                                                      fontSize: 20,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 10, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await actions.launchKakaoNavi(
+                                            37.4927431676548,
+                                            127.013867969161,
+                                          );
+                                          setState(() => FFAppState()
+                                              .isOnDrivingToArrival = false);
+                                          setState(() =>
+                                              FFAppState().isArrived = true);
+                                        },
+                                        text: '운행 시작',
+                                        options: FFButtonOptions(
+                                          width: 120,
+                                          height: 60,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
                                           ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -703,43 +700,42 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.normal,
                                         ),
                                   ),
-                                  if (FFAppState().isArrived)
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            setState(() =>
-                                                FFAppState().isArrived = false);
-                                            setState(() => FFAppState()
-                                                .isOnCallWaiting = true);
-                                          },
-                                          text: '운행 종료',
-                                          options: FFButtonOptions(
-                                            width: 120,
-                                            height: 60,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white,
-                                                      fontSize: 20,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 10, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          setState(() =>
+                                              FFAppState().isArrived = false);
+                                          setState(() => FFAppState()
+                                              .isOnCallWaiting = true);
+                                        },
+                                        text: '운행 종료',
+                                        options: FFButtonOptions(
+                                          width: 120,
+                                          height: 60,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
                                           ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
