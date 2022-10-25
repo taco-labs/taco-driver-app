@@ -236,6 +236,8 @@ class DriverInfoGroup {
       GetSettlementAccountCall();
   static UpdateDriverSettlementAccountCall updateDriverSettlementAccountCall =
       UpdateDriverSettlementAccountCall();
+  static GetDriverImageUrlsCall getDriverImageUrlsCall =
+      GetDriverImageUrlsCall();
 }
 
 class GetDriverCall {
@@ -309,12 +311,16 @@ class UpdateDriverCall {
     String? appOs = '',
     String? appVersion = '',
     String? appFcmToken = '',
+    bool? profileImageUploaded,
+    bool? licenseImageUploaded,
   }) {
     final body = '''
 {
   "appOs": "${appOs}",
   "appVersion": "${appVersion}",
-  "appFcmToken": "${appFcmToken}"
+  "appFcmToken": "${appFcmToken}",
+  "profileImageUploaded": ${profileImageUploaded},
+  "licenseImageUploaded": ${licenseImageUploaded}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Driver',
@@ -461,6 +467,25 @@ class UpdateDriverSettlementAccountCall {
   }
 }
 
+class GetDriverImageUrlsCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Driver Image Urls',
+      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/image_urls',
+      callType: ApiCallType.GET,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+}
+
 /// End Driver Info Group Code
 
 /// Start Backoffice Group Code
@@ -472,6 +497,8 @@ class BackofficeGroup {
   };
   static DeleteDriverCall deleteDriverCall = DeleteDriverCall();
   static ActivateDriverCall activateDriverCall = ActivateDriverCall();
+  static ForceAcceptTaxiCallRequestCall forceAcceptTaxiCallRequestCall =
+      ForceAcceptTaxiCallRequestCall();
 }
 
 class DeleteDriverCall {
@@ -509,6 +536,26 @@ class ActivateDriverCall {
   }
 }
 
+class ForceAcceptTaxiCallRequestCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? taxiCallRequestId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Force Accept Taxi Call Request',
+      apiUrl:
+          '${BackofficeGroup.baseUrl}/${driverId}/force_accept/${taxiCallRequestId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...BackofficeGroup.headers,
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
 /// End Backoffice Group Code
 
 /// Start Taxi Call Group Code
@@ -524,6 +571,8 @@ class TaxiCallGroup {
       RejectTaxiCallTicketCall();
   static TaxiCallDriverToArrivalCall taxiCallDriverToArrivalCall =
       TaxiCallDriverToArrivalCall();
+  static CancelTaxiCallRequestCall cancelTaxiCallRequestCall =
+      CancelTaxiCallRequestCall();
 }
 
 class GetLatestTaxiCallCall {
@@ -726,6 +775,25 @@ class TaxiCallDriverToArrivalCall {
       },
       params: {},
       bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class CancelTaxiCallRequestCall {
+  Future<ApiCallResponse> call({
+    String? taxiCallRequestId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Cancel Taxi Call Request',
+      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
       returnBody: true,
     );
   }
