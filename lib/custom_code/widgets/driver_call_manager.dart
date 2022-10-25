@@ -7,11 +7,11 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
-import '../custom_code/actions/index.dart' as actions;
-import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../actions/index.dart' as actions;
+import '../widgets/index.dart' as custom_widgets;
 import 'package:firebase_messaging/firebase_messaging.dart';
-import '../backend/api_requests/api_calls.dart';
-import '../flutterflow/flutter_flow_widgets.dart';
+import '../../backend/api_requests/api_calls.dart';
+import '../../flutter_flow/flutter_flow_widgets.dart';
 
 class DriverCallManager extends StatefulWidget {
   const DriverCallManager({
