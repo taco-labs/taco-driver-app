@@ -9,3 +9,4 @@ export 'register_license/register_license_widget.dart'
 export 'driver_profile/driver_profile_widget.dart' show DriverProfileWidget;
 export 'ride_history/ride_history_widget.dart' show RideHistoryWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
+export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
