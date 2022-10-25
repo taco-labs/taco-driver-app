@@ -36,7 +36,7 @@ dependencies:
   firebase_core: 1.19.1
   firebase_core_platform_interface: 4.4.3
   firebase_core_web: 1.6.6
-  firebase_messaging: 11.4.4
+  firebase_messaging: ^11.4.4
   flutter_animate: 1.0.0
   font_awesome_flutter: 10.1.0
   from_css_color: 2.0.0
