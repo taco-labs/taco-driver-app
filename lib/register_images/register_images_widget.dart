@@ -1,8 +1,10 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -22,6 +24,7 @@ class RegisterImagesWidget extends StatefulWidget {
 }
 
 class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
+  ApiCallResponse? apiResulttx0;
   String? uploadedUrl;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -123,10 +126,38 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      uploadedUrl = await actions.uploadImage(
-                        context,
-                        'd',
+                      apiResulttx0 =
+                          await DriverInfoGroup.getDriverImageUrlsCall.call(
+                        driverId: FFAppState().driverId,
+                        apiToken: FFAppState().apiToken,
                       );
+                      if ((apiResulttx0?.succeeded ?? true)) {
+                        uploadedUrl = await actions.uploadImage(
+                          context,
+                          DriverInfoGroup.getDriverImageUrlsCall
+                              .uploadProfileImageUrl(
+                            (apiResulttx0?.jsonBody ?? ''),
+                          ),
+                        );
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text(
+                                  (apiResulttx0?.statusCode ?? 200).toString()),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
 
                       setState(() {});
                     },
@@ -155,7 +186,10 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                         shape: BoxShape.rectangle,
                       ),
                       child: Image.network(
-                        '',
+                        random_data.randomImageUrl(
+                          0,
+                          0,
+                        ),
                         width: 200,
                         height: 120,
                         fit: BoxFit.cover,

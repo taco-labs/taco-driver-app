@@ -18,6 +18,14 @@ Future<String> uploadImage(BuildContext context, String uploadUrl) async {
     print(file.name);
     print(file.bytes);
 
+    print(file.name);
+    print(file.size);
+
+    http.Response response =
+        await http.put(Uri.parse(uploadUrl), body: file.bytes);
+    print(response.statusCode);
+    print(response.toString());
+
     return '';
   } else {
     return '';

@@ -68,13 +68,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? HomeWidget() : RegisterImagesWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : EntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : RegisterImagesWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : EntryWidget(),
           routes: [
             FFRoute(
               name: 'Entry',
@@ -312,7 +312,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/registerImages';
+            return '/entry';
           }
           return null;
         },

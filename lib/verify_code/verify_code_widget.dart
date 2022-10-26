@@ -251,7 +251,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                               }
                             }
 
-                            context.goNamed('Home');
+                            context.goNamed('RegisterImages');
                           } else {
                             await showDialog(
                               context: context,
