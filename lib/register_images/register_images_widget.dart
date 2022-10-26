@@ -1,9 +1,8 @@
-import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -23,9 +22,7 @@ class RegisterImagesWidget extends StatefulWidget {
 }
 
 class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
-
+  String? uploadedUrl;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -82,27 +79,18 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.network(
-                                    valueOrDefault<String>(
-                                      uploadedFileUrl,
-                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                                    ),
+                                    uploadedUrl!,
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
-                                  tag: valueOrDefault<String>(
-                                    uploadedFileUrl,
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                                  ),
+                                  tag: uploadedUrl!,
                                   useHeroAnimation: true,
                                 ),
                               ),
                             );
                           },
                           child: Hero(
-                            tag: valueOrDefault<String>(
-                              uploadedFileUrl,
-                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                            ),
+                            tag: uploadedUrl!,
                             transitionOnUserGestures: true,
                             child: Container(
                               width: 100,
@@ -112,10 +100,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
-                                valueOrDefault<String>(
-                                  uploadedFileUrl,
-                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                                ),
+                                uploadedUrl!,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -126,44 +111,12 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      final selectedMedia =
-                          await selectMediaWithSourceBottomSheet(
-                        context: context,
-                        allowPhoto: true,
+                      uploadedUrl = await actions.uploadImage(
+                        context,
+                        'd',
                       );
-                      if (selectedMedia != null &&
-                          selectedMedia.every((m) =>
-                              validateFileFormat(m.storagePath, context))) {
-                        setState(() => isMediaUploading = true);
-                        var downloadUrls = <String>[];
-                        try {
-                          showUploadMessage(
-                            context,
-                            'Uploading file...',
-                            showLoading: true,
-                          );
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                              (m) async =>
-                                  await uploadData(m.storagePath, m.bytes),
-                            ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          isMediaUploading = false;
-                        }
-                        if (downloadUrls.length == selectedMedia.length) {
-                          setState(() => uploadedFileUrl = downloadUrls.first);
-                          showUploadMessage(context, 'Success!');
-                        } else {
-                          setState(() {});
-                          showUploadMessage(context, 'Failed to upload media');
-                          return;
-                        }
-                      }
+
+                      setState(() {});
                     },
                     text: '프로필 사진 등록',
                     options: FFButtonOptions(
