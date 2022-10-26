@@ -407,6 +407,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               await actions.launchKakaoNavi(
                                 37.4927431676548,
                                 127.013867969161,
+                                "출발지",
                               );
                               setState(() =>
                                   FFAppState().isOnDrivingToDeparture = false);
@@ -489,6 +490,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               await actions.launchKakaoNavi(
                                 37.4927431676548,
                                 127.013867969161,
+                                "목적지",
                               );
                               setState(() =>
                                   FFAppState().isOnDrivingToArrival = false);

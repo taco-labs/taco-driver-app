@@ -1,4 +1,5 @@
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -24,11 +25,15 @@ class RegisterDriverWidget extends StatefulWidget {
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   ApiCallResponse? apiResultbos;
   String? getFcmTokenResult;
+  String? radioButtonValue;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? phoneNumberController;
+  TextEditingController? carNumberController;
+  TextEditingController? licenseNumberController;
+  TextEditingController? businessRegistrationNumberController;
   bool? termsofUseValue;
   bool? privacyPolicyValue;
   final formKey = GlobalKey<FormState>();
@@ -42,6 +47,9 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
     phoneNumberController = TextEditingController(text: widget.phoneNumber);
+    carNumberController = TextEditingController();
+    licenseNumberController = TextEditingController();
+    businessRegistrationNumberController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -52,6 +60,9 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     firstNameController?.dispose();
     lastNameController?.dispose();
     phoneNumberController?.dispose();
+    carNumberController?.dispose();
+    licenseNumberController?.dispose();
+    businessRegistrationNumberController?.dispose();
     super.dispose();
   }
 
@@ -84,225 +95,206 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFDBE2E7),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                          child: Container(
-                            width: 90,
-                            height: 90,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.network(
-                              'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80',
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Form(
                     key: formKey,
                     autovalidateMode: AutovalidateMode.disabled,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                          child: TextFormField(
-                            controller: phoneNumberController,
-                            readOnly: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: '휴대폰번호',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText2,
-                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
+                            child: TextFormField(
+                              controller: phoneNumberController,
+                              readOnly: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '휴대폰번호',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 0, 24),
                               ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                              keyboardType: TextInputType.phone,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                            keyboardType: TextInputType.phone,
                           ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 5, 16),
-                                child: TextFormField(
-                                  controller: lastNameController,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: '성',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        width: 2,
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 5, 0),
+                                    child: TextFormField(
+                                      controller: lastNameController,
+                                      autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: '성',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        filled: true,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                20, 24, 0, 24),
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                      keyboardType: TextInputType.name,
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            20, 24, 0, 24),
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                  keyboardType: TextInputType.name,
                                 ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5, 0, 20, 16),
-                                child: TextFormField(
-                                  controller: firstNameController,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: '이름',
-                                    labelStyle:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        width: 2,
+                                Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 20, 0),
+                                    child: TextFormField(
+                                      controller: firstNameController,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: '이름',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        filled: true,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                20, 24, 0, 24),
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                      keyboardType: TextInputType.name,
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            20, 24, 0, 24),
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                  keyboardType: TextInputType.name,
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 5,
                                   child: TextFormField(
                                     controller: birthDateController,
                                     obscureText: false,
@@ -354,12 +346,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                Expanded(
+                                  flex: 1,
                                   child: Text(
                                     '-',
                                     textAlign: TextAlign.center,
@@ -367,12 +355,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                Expanded(
+                                  flex: 1,
                                   child: TextFormField(
                                     controller: genderCodeController,
                                     obscureText: false,
@@ -423,74 +407,255 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 0, 0, 16),
-                                  child: Text(
-                                    '* * * * * *',
-                                    textAlign: TextAlign.start,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  flex: 4,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: Text(
+                                      '* * * * * *',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                          child: Theme(
-                            data: ThemeData(
-                              unselectedWidgetColor: Color(0xFF95A1AC),
-                            ),
-                            child: CheckboxListTile(
-                              value: termsofUseValue ??= false,
-                              onChanged: (newValue) async {
-                                setState(() => termsofUseValue = newValue!);
-                              },
-                              title: Text(
-                                '이용약관 동의 (필수)',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              tileColor: Color(0xFFF5F5F5),
-                              activeColor:
-                                  FlutterFlowTheme.of(context).primaryColor,
-                              dense: false,
-                              controlAffinity: ListTileControlAffinity.trailing,
+                              ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          child: Theme(
-                            data: ThemeData(
-                              unselectedWidgetColor: Color(0xFF95A1AC),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                            child: FlutterFlowRadioButton(
+                              options: ['개인 택시', '법인 택시'].toList(),
+                              initialValue: '개인 택시',
+                              onChanged: (val) =>
+                                  setState(() => radioButtonValue = val),
+                              optionHeight: 30,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.black,
+                                  ),
+                              buttonPosition: RadioButtonPosition.left,
+                              direction: Axis.horizontal,
+                              radioButtonColor: Colors.blue,
+                              inactiveRadioButtonColor: Color(0x8A000000),
+                              toggleable: false,
+                              horizontalAlignment: WrapAlignment.start,
+                              verticalAlignment: WrapCrossAlignment.start,
                             ),
-                            child: CheckboxListTile(
-                              value: privacyPolicyValue ??= false,
-                              onChanged: (newValue) async {
-                                setState(() => privacyPolicyValue = newValue!);
-                              },
-                              title: Text(
-                                '개인정보처리방침 동의 (필수)',
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
+                            child: TextFormField(
+                              controller: carNumberController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '차량번호',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
                               ),
-                              tileColor: Color(0xFFF5F5F5),
-                              activeColor:
-                                  FlutterFlowTheme.of(context).primaryColor,
-                              dense: false,
-                              controlAffinity: ListTileControlAffinity.trailing,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
+                            child: TextFormField(
+                              controller: licenseNumberController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '택시운전 자격증번호',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                            child: TextFormField(
+                              controller: businessRegistrationNumberController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '사업자등록번호 10자리',
+                                labelStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                            child: Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Color(0xFF95A1AC),
+                              ),
+                              child: CheckboxListTile(
+                                value: termsofUseValue ??= false,
+                                onChanged: (newValue) async {
+                                  setState(() => termsofUseValue = newValue!);
+                                },
+                                title: Text(
+                                  '이용약관 동의 (필수)',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                tileColor: Color(0xFFF5F5F5),
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                dense: false,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                            child: Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Color(0xFF95A1AC),
+                              ),
+                              child: CheckboxListTile(
+                                value: privacyPolicyValue ??= false,
+                                onChanged: (newValue) async {
+                                  setState(
+                                      () => privacyPolicyValue = newValue!);
+                                },
+                                title: Text(
+                                  '개인정보처리방침 동의 (필수)',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                tileColor: Color(0xFFF5F5F5),
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                dense: false,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -527,7 +692,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     )
                                     .toString());
 
-                            context.goNamed('RegisterLicense');
+                            context.goNamed('RegisterInstallment');
                           } else {
                             await showDialog(
                               context: context,

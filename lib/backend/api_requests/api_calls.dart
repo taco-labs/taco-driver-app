@@ -484,6 +484,31 @@ class GetDriverImageUrlsCall {
       returnBody: true,
     );
   }
+
+  dynamic uploadUrls(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls''',
+      );
+  dynamic uploadProfileImageUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls.profileImage''',
+      );
+  dynamic uploadLicenseImageUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls.licenseImage''',
+      );
+  dynamic downloadUrls(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls''',
+      );
+  dynamic downloadProfileImageUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls.profileImage''',
+      );
+  dynamic downloadLicenseImageUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls.licenseImage''',
+      );
 }
 
 /// End Driver Info Group Code
