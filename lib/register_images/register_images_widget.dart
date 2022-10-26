@@ -79,18 +79,27 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.network(
-                                    uploadedUrl!,
+                                    valueOrDefault<String>(
+                                      uploadedUrl,
+                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                    ),
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
-                                  tag: uploadedUrl!,
+                                  tag: valueOrDefault<String>(
+                                    uploadedUrl,
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                  ),
                                   useHeroAnimation: true,
                                 ),
                               ),
                             );
                           },
                           child: Hero(
-                            tag: uploadedUrl!,
+                            tag: valueOrDefault<String>(
+                              uploadedUrl,
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                            ),
                             transitionOnUserGestures: true,
                             child: Container(
                               width: 100,
@@ -100,7 +109,10 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
-                                uploadedUrl!,
+                                valueOrDefault<String>(
+                                  uploadedUrl,
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                ),
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
