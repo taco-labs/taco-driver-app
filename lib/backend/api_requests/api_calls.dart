@@ -598,6 +598,7 @@ class TaxiCallGroup {
       TaxiCallDriverToArrivalCall();
   static CancelTaxiCallRequestCall cancelTaxiCallRequestCall =
       CancelTaxiCallRequestCall();
+  static DoneTaxiCallCall doneTaxiCallCall = DoneTaxiCallCall();
 }
 
 class GetLatestTaxiCallCall {
@@ -819,6 +820,32 @@ class CancelTaxiCallRequestCall {
         'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class DoneTaxiCallCall {
+  Future<ApiCallResponse> call({
+    String? taxiCallRequestId = '',
+    int? basePrice,
+    String? apiToken = '',
+  }) {
+    final body = '''
+{
+  "basePrice": ${basePrice}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Done taxi call',
+      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}/done',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
       returnBody: true,
     );
   }

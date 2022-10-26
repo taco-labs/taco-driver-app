@@ -82,18 +82,27 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.network(
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                    valueOrDefault<String>(
+                                      uploadedFileUrl,
+                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                    ),
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
-                                  tag: 'circleImageTag',
+                                  tag: valueOrDefault<String>(
+                                    uploadedFileUrl,
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                  ),
                                   useHeroAnimation: true,
                                 ),
                               ),
                             );
                           },
                           child: Hero(
-                            tag: 'circleImageTag',
+                            tag: valueOrDefault<String>(
+                              uploadedFileUrl,
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                            ),
                             transitionOnUserGestures: true,
                             child: Container(
                               width: 100,
@@ -103,7 +112,10 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
-                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                valueOrDefault<String>(
+                                  uploadedFileUrl,
+                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
+                                ),
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -189,12 +201,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (formKey.currentState == null ||
-                            !formKey.currentState!.validate()) {
-                          return;
-                        }
-
-                        context.pushNamed('Home');
+                        context.goNamed('RegisterInstallment');
                       },
                       text: '확인',
                       options: FFButtonOptions(
