@@ -71,7 +71,7 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      '최근 이용내역',
+                      '최근 운행내역',
                       style: FlutterFlowTheme.of(context).bodyText2,
                     ),
                   ],

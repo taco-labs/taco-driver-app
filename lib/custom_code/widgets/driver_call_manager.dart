@@ -35,6 +35,82 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
 
+  Future setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+
+    // foreground handler
+    FirebaseMessaging.onMessage.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) async {
+    String data = message.data.toString();
+    debugPrint(
+      'Message received $data',
+    );
+
+    /*String callReqId = getJsonField(
+      FFAppState().callRequest,
+      r'''$.id''',
+    );*/
+    String receivedCallReqId = message.data['taxiCallRequestId'];
+    String receivedCallState = message.data['taxiCallState'];
+
+    switch (message.data['taxiCallState']) {
+      case 'TAXI_CALL_REQUESTED':
+        {
+          setState(() {
+            FFAppState().callRequest = message.data;
+            FFAppState().isOnCallWaiting = false;
+            FFAppState().isOnCallViewing = true;
+          });
+        }
+        break;
+      case 'USER_CANCELLED':
+        {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('확인'),
+                  ),
+                ],
+              );
+            },
+          );
+          setState(() {
+            FFAppState().callRequest = null;
+            FFAppState().isOnDrivingToDeparture = false;
+            FFAppState().isOnCallWaiting = true;
+          });
+        }
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setupInteractedMessage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

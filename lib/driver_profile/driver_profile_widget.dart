@@ -1,92 +1,58 @@
-import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DriverProfileWidget extends StatefulWidget {
   const DriverProfileWidget({
     Key? key,
-    this.phoneNumber,
+    this.driverInfo,
   }) : super(key: key);
 
-  final String? phoneNumber;
+  final dynamic driverInfo;
 
   @override
   _DriverProfileWidgetState createState() => _DriverProfileWidgetState();
 }
 
 class _DriverProfileWidgetState extends State<DriverProfileWidget> {
-  ApiCallResponse? apiResulttx8;
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? phoneNumberController;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      apiResulttx8 = await DriverInfoGroup.getDriverCall.call(
-        apiToken: FFAppState().apiToken,
-        driverId: FFAppState().driverId,
-      );
-      if (!(apiResulttx8?.succeeded ?? true)) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('오류'),
-              content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('확인'),
-                ),
-              ],
-            );
-          },
-        );
-        context.pop();
-      }
-    });
-
     birthDateController = TextEditingController(
-        text: DriverInfoGroup.getDriverCall
-            .birthday(
-              (apiResulttx8?.jsonBody ?? ''),
-            )
-            .toString());
+        text: getJsonField(
+      widget.driverInfo,
+      r'''$.birthday''',
+    ).toString());
     genderCodeController = TextEditingController(
-        text: DriverInfoGroup.getDriverCall
-            .genderCode(
-              (apiResulttx8?.jsonBody ?? ''),
-            )
-            .toString());
+        text: getJsonField(
+      widget.driverInfo,
+      r'''$.gender''',
+    ).toString());
     firstNameController = TextEditingController(
-        text: DriverInfoGroup.getDriverCall
-            .firstName(
-              (apiResulttx8?.jsonBody ?? ''),
-            )
-            .toString());
+        text: getJsonField(
+      widget.driverInfo,
+      r'''$.firstName''',
+    ).toString());
     lastNameController = TextEditingController(
-        text: DriverInfoGroup.getDriverCall
-            .lastName(
-              (apiResulttx8?.jsonBody ?? ''),
-            )
-            .toString());
+        text: getJsonField(
+      widget.driverInfo,
+      r'''$.lastName''',
+    ).toString());
     phoneNumberController = TextEditingController(
-        text: DriverInfoGroup.getDriverCall
-            .phoneNumber(
-              (apiResulttx8?.jsonBody ?? ''),
-            )
-            .toString());
+        text: getJsonField(
+      widget.driverInfo,
+      r'''$.phone''',
+    ).toString());
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

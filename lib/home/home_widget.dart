@@ -20,6 +20,7 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResultkg1;
+  ApiCallResponse? apiResulttx8;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -67,7 +68,39 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('DriverProfile');
+                apiResulttx8 = await DriverInfoGroup.getDriverCall.call(
+                  apiToken: FFAppState().apiToken,
+                  driverId: FFAppState().driverId,
+                );
+                if ((apiResulttx8?.succeeded ?? true)) {
+                  context.pushNamed(
+                    'DriverProfile',
+                    queryParams: {
+                      'driverInfo': serializeParam(
+                        (apiResulttx8?.jsonBody ?? ''),
+                        ParamType.JSON,
+                      ),
+                    }.withoutNulls,
+                  );
+                } else {
+                  await showDialog(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: Text('오류'),
+                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(alertDialogContext),
+                            child: Text('확인'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+
+                setState(() {});
               },
               child: ListTile(
                 title: Text(
@@ -92,7 +125,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
               child: ListTile(
                 title: Text(
-                  '이용내역',
+                  '운행내역',
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
@@ -297,7 +330,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           options: FFButtonOptions(
                             width: 150,
                             height: 60,
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'Poppins',
@@ -313,27 +346,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                       ),
                   ],
-                ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  setState(() => FFAppState().isOnCallWaiting = false);
-                  setState(() => FFAppState().isOnCallViewing = true);
-                },
-                text: 'Button',
-                options: FFButtonOptions(
-                  width: 130,
-                  height: 40,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ],

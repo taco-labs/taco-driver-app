@@ -11,10 +11,11 @@ import 'package:kakao_flutter_sdk_navi/kakao_flutter_sdk_navi.dart';
 Future launchKakaoNavi(
   double latitude,
   double longitude,
+  String destName,
 ) async {
   if (await NaviApi.instance.isKakaoNaviInstalled()) {
     await NaviApi.instance.navigate(
-      destination: Location(name: '출발지', x: '$longitude', y: '$latitude'),
+      destination: Location(name: destName, x: '$longitude', y: '$latitude'),
       option: NaviOption(coordType: CoordType.wgs84),
     );
   } else {

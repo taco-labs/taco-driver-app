@@ -83,7 +83,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'DriverProfile',
               path: 'driverProfile',
               builder: (context, params) => DriverProfileWidget(
-                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                driverInfo: params.getParam('driverInfo', ParamType.JSON),
               ),
             ),
             FFRoute(
