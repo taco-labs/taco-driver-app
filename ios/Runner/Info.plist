@@ -53,16 +53,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-	<key>NSCameraUsageDescription</key>
-      <string>In order to take a picture or video, this app requires permission to access the camera.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-      <string>In order to upload media, this app requires permission to access the photo library.</string>
+
 	<key>PermissionGroupNotification</key>
       <string>Allow notification</string>
 	<key>NSCameraUsageDescription</key>
       <string>Allow camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
       <string>Allow access to Photo Library</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+      <string>Allow locations</string>
 
 
 	<key>UILaunchStoryboardName</key>

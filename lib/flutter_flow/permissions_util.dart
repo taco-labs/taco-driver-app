@@ -9,10 +9,10 @@ const kPermissionStateToBool = {
   PermissionStatus.permanentlyDenied: false,
 };
 
-final locationPermission = Permission.location;
 final notificationsPermission = Permission.notification;
 final cameraPermission = Permission.camera;
 final photoLibraryPermission = Permission.photos;
+final locationPermission = Permission.location;
 
 Future<bool> getPermissionStatus(Permission setting) async {
   if (kIsWeb) {

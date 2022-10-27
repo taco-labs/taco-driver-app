@@ -114,6 +114,42 @@ class SMSVerificationAndSigninCall {
         response,
         r'''$.driver.onDuty''',
       );
+  dynamic driverLicenseId(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverLicenseId''',
+      );
+  dynamic driverBusinessNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.companyRegistrationNumber''',
+      );
+  dynamic driverCarNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.carNumber''',
+      );
+  dynamic driverUploadUrlInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls''',
+      );
+  dynamic driverProfileImageUploadUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls.profileImage''',
+      );
+  dynamic driverLicenseImageUploadUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls.licenseImage''',
+      );
+  dynamic driverDownloadUrlInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls''',
+      );
+  dynamic driverProfileImageDownloadUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls.profileImage''',
+      );
+  dynamic driverLicenseImageDownloadUrl(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls.licenseImage''',
+      );
 }
 
 /// End Signin  flow Group Code
@@ -139,6 +175,8 @@ class SignupCall {
     String? appFcmToken = '',
     String? driverLicenseId = '',
     String? smsVerificationStateKey = '',
+    String? carNumber = '',
+    String? companyRegistrationNumber = '',
   }) {
     final body = '''
 {
@@ -152,7 +190,9 @@ class SignupCall {
   "appVersion": "${appVersion}",
   "appFcmToken": "${appFcmToken}",
   "driverLicenseId": "${driverLicenseId}",
-  "smsVerificationStateKey": "${smsVerificationStateKey}"
+  "smsVerificationStateKey": "${smsVerificationStateKey}",
+  "carNumber": "${carNumber}",
+  "companyRegistrationNumber": "${companyRegistrationNumber}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Signup',
@@ -302,6 +342,42 @@ class GetDriverCall {
         response,
         r'''$.birtyday''',
       );
+  dynamic aa(dynamic response) => getJsonField(
+        response,
+        r'''$.driverLicenseId''',
+      );
+  dynamic bb(dynamic response) => getJsonField(
+        response,
+        r'''$.companyRegistrationNumber''',
+      );
+  dynamic cc(dynamic response) => getJsonField(
+        response,
+        r'''$.carNumber''',
+      );
+  dynamic dd(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls''',
+      );
+  dynamic ee(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls.profileImage''',
+      );
+  dynamic ff(dynamic response) => getJsonField(
+        response,
+        r'''$.uploadUrls.licenseImage''',
+      );
+  dynamic gg(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls''',
+      );
+  dynamic hh(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls.profileImage''',
+      );
+  dynamic jj(dynamic response) => getJsonField(
+        response,
+        r'''$.downloadUrls.licenseImage''',
+      );
 }
 
 class UpdateDriverCall {
@@ -313,6 +389,7 @@ class UpdateDriverCall {
     String? appFcmToken = '',
     bool? profileImageUploaded,
     bool? licenseImageUploaded,
+    String? carNumber = '',
   }) {
     final body = '''
 {
@@ -320,7 +397,8 @@ class UpdateDriverCall {
   "appVersion": "${appVersion}",
   "appFcmToken": "${appFcmToken}",
   "profileImageUploaded": ${profileImageUploaded},
-  "licenseImageUploaded": ${licenseImageUploaded}
+  "licenseImageUploaded": ${licenseImageUploaded},
+  "carNumber": "${carNumber}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Driver',
@@ -418,6 +496,27 @@ class RegisterSettlementAccountCall {
       returnBody: true,
     );
   }
+
+  dynamic aa(dynamic response) => getJsonField(
+        response,
+        r'''$.driverId''',
+      );
+  dynamic bb(dynamic response) => getJsonField(
+        response,
+        r'''$.bank''',
+      );
+  dynamic cc(dynamic response) => getJsonField(
+        response,
+        r'''$.accountNumber''',
+      );
+  dynamic dd(dynamic response) => getJsonField(
+        response,
+        r'''$.createTime''',
+      );
+  dynamic ee(dynamic response) => getJsonField(
+        response,
+        r'''$.updateTime''',
+      );
 }
 
 class GetSettlementAccountCall {
@@ -437,6 +536,27 @@ class GetSettlementAccountCall {
       returnBody: true,
     );
   }
+
+  dynamic aa(dynamic response) => getJsonField(
+        response,
+        r'''$.driverId''',
+      );
+  dynamic bb(dynamic response) => getJsonField(
+        response,
+        r'''$.bank''',
+      );
+  dynamic cc(dynamic response) => getJsonField(
+        response,
+        r'''$.accountNumber''',
+      );
+  dynamic dd(dynamic response) => getJsonField(
+        response,
+        r'''$.createTime''',
+      );
+  dynamic ee(dynamic response) => getJsonField(
+        response,
+        r'''$.updateTime''',
+      );
 }
 
 class UpdateDriverSettlementAccountCall {
@@ -711,6 +831,30 @@ class GetLatestTaxiCallCall {
         response,
         r'''$.departure.address.subAddressNo''',
       );
+  dynamic aa(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+  dynamic bb(dynamic response) => getJsonField(
+        response,
+        r'''$.userId''',
+      );
+  dynamic cc(dynamic response) => getJsonField(
+        response,
+        r'''$.driverId''',
+      );
+  dynamic dd(dynamic response) => getJsonField(
+        response,
+        r'''$.requestMinAdditionalPrice''',
+      );
+  dynamic ee(dynamic response) => getJsonField(
+        response,
+        r'''$.createTime''',
+      );
+  dynamic ff(dynamic response) => getJsonField(
+        response,
+        r'''$.updateTime''',
+      );
 }
 
 class ListTaxiCallCall {
@@ -793,7 +937,8 @@ class TaxiCallDriverToArrivalCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Taxi Call Driver To Arrival',
-      apiUrl: '${TaxiCallGroup.baseUrl}/${taxiCallRequestId}/to_arrival',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}/to_arrival',
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,

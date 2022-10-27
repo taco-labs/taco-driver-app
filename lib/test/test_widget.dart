@@ -1,10 +1,9 @@
-import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,12 +16,9 @@ class TestWidget extends StatefulWidget {
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
-
-  TextEditingController? yourNameController;
-  TextEditingController? cityController;
   String? stateValue;
+  TextEditingController? cityController;
+  TextEditingController? yourNameController;
   TextEditingController? myBioController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -114,75 +110,28 @@ class _TestWidgetState extends State<TestWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      final selectedMedia =
-                          await selectMediaWithSourceBottomSheet(
-                        context: context,
-                        imageQuality: 80,
-                        allowPhoto: true,
-                        backgroundColor:
-                            FlutterFlowTheme.of(context).primaryBackground,
-                        textColor: FlutterFlowTheme.of(context).primaryText,
-                        pickerFontFamily: 'Outfit',
-                      );
-                      if (selectedMedia != null &&
-                          selectedMedia.every((m) =>
-                              validateFileFormat(m.storagePath, context))) {
-                        setState(() => isMediaUploading = true);
-                        var downloadUrls = <String>[];
-                        try {
-                          showUploadMessage(
-                            context,
-                            'Uploading file...',
-                            showLoading: true,
-                          );
-                          downloadUrls = (await Future.wait(
-                            selectedMedia.map(
-                              (m) async =>
-                                  await uploadData(m.storagePath, m.bytes),
-                            ),
-                          ))
-                              .where((u) => u != null)
-                              .map((u) => u!)
-                              .toList();
-                        } finally {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          isMediaUploading = false;
-                        }
-                        if (downloadUrls.length == selectedMedia.length) {
-                          setState(() => uploadedFileUrl = downloadUrls.first);
-                          showUploadMessage(context, 'Success!');
-                        } else {
-                          setState(() {});
-                          showUploadMessage(context, 'Failed to upload media');
-                          return;
-                        }
-                      }
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFDBE2E7),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFDBE2E7),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                      child: Container(
+                        width: 90,
+                        height: 90,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: random_data.randomImageUrl(
+                            0,
+                            0,
                           ),
-                          child: CachedNetworkImage(
-                            imageUrl: valueOrDefault<String>(
-                              uploadedFileUrl,
-                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                            ),
-                            fit: BoxFit.fitWidth,
-                          ),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
