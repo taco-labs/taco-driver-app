@@ -37,57 +37,67 @@ class _EntryWidgetState extends State<EntryWidget> {
                   (apiResultyb1?.jsonBody ?? ''),
                 )
                 .toString());
-        if (FFAppState().isOnDuty) {
-          apiResultLatestCall = await TaxiCallGroup.getLatestTaxiCallCall.call(
-            driverId: FFAppState().driverId,
-            apiToken: FFAppState().apiToken,
-          );
-          if ((apiResultLatestCall?.succeeded ?? true)) {
-            setState(() => FFAppState().latestCallState =
-                TaxiCallGroup.getLatestTaxiCallCall
-                    .callCurrentState(
-                      (apiResultLatestCall?.jsonBody ?? ''),
-                    )
-                    .toString());
-            setState(() => FFAppState().callRequest =
-                (apiResultLatestCall?.jsonBody ?? ''));
-            if (FFAppState().latestCallState == 'DRIVER_TO_DEPARTURE') {
-              setState(() => FFAppState().isOnDrivingToDeparture = true);
-            } else {
-              if (FFAppState().latestCallState == 'DRIVER_TO_ARRIVAL') {
-                setState(() => FFAppState().isOnDrivingToArrival = true);
+        if (DriverInfoGroup.getDriverCall.isProfileImageUploaded(
+              (apiResultyb1?.jsonBody ?? ''),
+            ) &&
+            DriverInfoGroup.getDriverCall.isLicenseImageUploaded(
+              (apiResultyb1?.jsonBody ?? ''),
+            )) {
+          if (FFAppState().isOnDuty) {
+            apiResultLatestCall =
+                await TaxiCallGroup.getLatestTaxiCallCall.call(
+              driverId: FFAppState().driverId,
+              apiToken: FFAppState().apiToken,
+            );
+            if ((apiResultLatestCall?.succeeded ?? true)) {
+              setState(() => FFAppState().latestCallState =
+                  TaxiCallGroup.getLatestTaxiCallCall
+                      .callCurrentState(
+                        (apiResultLatestCall?.jsonBody ?? ''),
+                      )
+                      .toString());
+              setState(() => FFAppState().callRequest =
+                  (apiResultLatestCall?.jsonBody ?? ''));
+              if (FFAppState().latestCallState == 'DRIVER_TO_DEPARTURE') {
+                setState(() => FFAppState().isOnDrivingToDeparture = true);
               } else {
+                if (FFAppState().latestCallState == 'DRIVER_TO_ARRIVAL') {
+                  setState(() => FFAppState().isOnDrivingToArrival = true);
+                } else {
+                  setState(() => FFAppState().isOnCallWaiting = true);
+                }
+              }
+
+              context.goNamed('Home');
+            } else {
+              if ((apiResultLatestCall?.statusCode ?? 200) == 404) {
                 setState(() => FFAppState().isOnCallWaiting = true);
+
+                context.pushNamed('Home');
+              } else {
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: Text('오류'),
+                      content: Text('서버 오류가 발생하여 다시 실행해주세요'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: Text('확인'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                return;
               }
             }
-
-            context.goNamed('Home');
           } else {
-            if ((apiResultLatestCall?.statusCode ?? 200) == 404) {
-              setState(() => FFAppState().isOnCallWaiting = true);
-
-              context.pushNamed('Home');
-            } else {
-              await showDialog(
-                context: context,
-                builder: (alertDialogContext) {
-                  return AlertDialog(
-                    title: Text('오류'),
-                    content: Text('서버 오류가 발생하여 다시 실행해주세요'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(alertDialogContext),
-                        child: Text('확인'),
-                      ),
-                    ],
-                  );
-                },
-              );
-              return;
-            }
+            context.pushNamed('Home');
           }
         } else {
-          context.pushNamed('Home');
+          context.pushNamed('RegisterImages');
         }
       } else {
         context.goNamed('Login');

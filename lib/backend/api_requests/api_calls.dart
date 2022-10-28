@@ -150,6 +150,14 @@ class SMSVerificationAndSigninCall {
         response,
         r'''$.driver.downloadUrls.licenseImage''',
       );
+  dynamic isLicenseImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverLicenseImageUploaded''',
+      );
+  dynamic isProfileImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverProfileImageUploaded''',
+      );
 }
 
 /// End Signin  flow Group Code
@@ -377,6 +385,14 @@ class GetDriverCall {
   dynamic jj(dynamic response) => getJsonField(
         response,
         r'''$.downloadUrls.licenseImage''',
+      );
+  dynamic isLicenseImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driverLicenseImageUploaded''',
+      );
+  dynamic isProfileImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driverProfileImageUploaded''',
       );
 }
 
