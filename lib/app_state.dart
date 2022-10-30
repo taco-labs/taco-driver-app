@@ -62,6 +62,9 @@ class FFAppState {
   bool isOnCallViewing = false;
 
   bool isArrived = false;
+
+  String profileImagePath =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png';
 }
 
 LatLng? _latLngFromString(String? val) {

@@ -3,7 +3,6 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -127,10 +126,8 @@ class _TestWidgetState extends State<TestWidget> {
                           shape: BoxShape.circle,
                         ),
                         child: CachedNetworkImage(
-                          imageUrl: random_data.randomImageUrl(
-                            0,
-                            0,
-                          ),
+                          imageUrl:
+                              'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80',
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -181,6 +178,7 @@ class _TestWidgetState extends State<TestWidget> {
                   contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1,
+                maxLines: null,
               ),
             ),
             Padding(
@@ -225,6 +223,7 @@ class _TestWidgetState extends State<TestWidget> {
                   contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1,
+                maxLines: null,
               ),
             ),
             Padding(

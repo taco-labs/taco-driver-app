@@ -1,6 +1,8 @@
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/random_data_util.dart' as random_data;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -104,6 +106,35 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Color(0xFFDBE2E7),
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                  child: Container(
+                    width: 90,
+                    height: 90,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: random_data.randomImageUrl(
+                        0,
+                        0,
+                      ),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
               child: Form(

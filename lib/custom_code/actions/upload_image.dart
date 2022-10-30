@@ -9,25 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 
-Future<String> uploadImage(BuildContext context, String uploadUrl) async {
-  // Add your function code here!
+Future<bool> uploadImage(String uploadUrl) async {
+  bool succeeded = false;
   FilePickerResult? result = await FilePicker.platform.pickFiles();
   if (result != null) {
     PlatformFile file = result.files.first;
 
-    print(file.name);
-    print(file.bytes);
-
-    print(file.name);
-    print(file.size);
-
     http.Response response =
         await http.put(Uri.parse(uploadUrl), body: file.bytes);
-    print(response.statusCode);
-    print(response.toString());
 
-    return '';
-  } else {
-    return '';
+    if (response.statusCode == 200) {
+      succeeded = true;
+    } else {
+      debugPrint(
+          "error code ${response.statusCode} body ${response.body.toString()}");
+    }
   }
+
+  return succeeded;
 }
