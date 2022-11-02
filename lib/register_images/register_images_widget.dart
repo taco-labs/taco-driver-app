@@ -44,7 +44,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          '기사 회원 가입',
+          '추가 정보',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -65,6 +65,32 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFDBE2E7),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: FFAppState().profileImagePath,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                     child: FFButtonWidget(
@@ -114,12 +140,28 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             FlutterFlowTheme.of(context).subtitle2.override(
                                   fontFamily: 'Poppins',
                                   color: Colors.white,
+                                  fontSize: 18,
                                 ),
                         borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFFDBE2E7),
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: Image.network(
+                        'https://picsum.photos/seed/876/600',
+                        width: 240,
+                        height: 130,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -170,6 +212,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             FlutterFlowTheme.of(context).subtitle2.override(
                                   fontFamily: 'Poppins',
                                   color: Colors.white,
+                                  fontSize: 18,
                                 ),
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -241,32 +284,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFDBE2E7),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: FFAppState().profileImagePath,
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
                       ),
                     ),
                   ),

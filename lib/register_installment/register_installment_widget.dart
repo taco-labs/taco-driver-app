@@ -1,4 +1,5 @@
-import '../flutter_flow/flutter_flow_radio_button.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -21,24 +22,22 @@ class RegisterInstallmentWidget extends StatefulWidget {
 }
 
 class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
-  String? radioButtonValue;
-  TextEditingController? phoneNumberController;
-  TextEditingController? pinController;
+  ApiCallResponse? apiResultRegisterAccount;
+  String? dropDownValue;
+  TextEditingController? accountNumberController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    phoneNumberController = TextEditingController();
-    pinController = TextEditingController();
+    accountNumberController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
-    phoneNumberController?.dispose();
-    pinController?.dispose();
+    accountNumberController?.dispose();
     super.dispose();
   }
 
@@ -51,7 +50,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          '기사 회원 가입',
+          '정산 계좌 정보',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -69,184 +68,156 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFDBE2E7),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                    child: Container(
-                      width: 90,
-                      height: 90,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80',
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFDBE2E7),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Image.network(
-                          'https://picsum.photos/seed/688/600',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Form(
                     key: formKey,
                     autovalidateMode: AutovalidateMode.disabled,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                          child: FlutterFlowRadioButton(
-                            options: ['개인 택시', '법인 택시'].toList(),
-                            initialValue: '개인 택시',
-                            onChanged: (val) =>
-                                setState(() => radioButtonValue = val),
-                            optionHeight: 25,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: FlutterFlowDropDown(
+                              options: [
+                                '농협',
+                                '신한',
+                                'IBK기업',
+                                '하나',
+                                '우리',
+                                '국민',
+                                'SC제일',
+                                '대구',
+                                '부산',
+                                '광주',
+                                '새마을금고',
+                                '경남',
+                                '전북',
+                                '제주',
+                                '산업',
+                                '우체국',
+                                '신협',
+                                '수협',
+                                '씨티',
+                                '케이뱅크',
+                                '카카오뱅크',
+                                '토스뱅크',
+                                '산림조합',
+                                '저축은행',
+                                '대신증권',
+                                '메리츠증권',
+                                '미래에셋',
+                                '삼성증권',
+                                '신한증권',
+                                '유진투자',
+                                '유안타증권',
+                                'NH투자',
+                                '한국투자',
+                                'SK증권'
+                              ],
+                              onChanged: (val) =>
+                                  setState(() => dropDownValue = val),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 18,
+                                  ),
+                              hintText: '은행',
+                              fillColor: Colors.white,
+                              elevation: 2,
+                              borderColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              borderWidth: 2,
+                              borderRadius: 8,
+                              margin:
+                                  EdgeInsetsDirectional.fromSTEB(20, 4, 20, 4),
+                              hidesUnderline: true,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                            child: TextFormField(
+                              controller: accountNumberController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '계좌번호',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
                                       fontFamily: 'Poppins',
-                                      color: Colors.black,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 18,
                                     ),
-                            buttonPosition: RadioButtonPosition.left,
-                            direction: Axis.horizontal,
-                            radioButtonColor: Colors.blue,
-                            inactiveRadioButtonColor: Color(0x8A000000),
-                            toggleable: false,
-                            horizontalAlignment: WrapAlignment.start,
-                            verticalAlignment: WrapCrossAlignment.start,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                          child: TextFormField(
-                            controller: phoneNumberController,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: '택시운전 자격증번호',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText2,
-                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                borderRadius: BorderRadius.circular(8),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
                               ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 24, 20, 24),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
+                              keyboardType: TextInputType.number,
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return '계좌번호를 정확히 입력해주세요';
+                                }
+
+                                if (val.length < 11) {
+                                  return 'Requires at least 11 characters.';
+                                }
+                                if (val.length > 14) {
+                                  return 'Maximum 14 characters allowed, currently ${val.length}.';
+                                }
+                                if (!RegExp(r"^[0-9]*$").hasMatch(val)) {
+                                  return 'Invalid text';
+                                }
+                                return null;
+                              },
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
                           ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                          child: TextFormField(
-                            controller: pinController,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: '사업자등록번호 10자리',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText2,
-                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 24, 20, 24),
-                            ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -259,7 +230,56 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         return;
                       }
 
-                      context.pushNamed('Home');
+                      if (dropDownValue == null) {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('은행을 선택해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return;
+                      }
+
+                      apiResultRegisterAccount = await DriverInfoGroup
+                          .registerSettlementAccountCall
+                          .call(
+                        driverId: FFAppState().driverId,
+                        apiToken: FFAppState().apiToken,
+                        bank: dropDownValue,
+                        accountNumber: accountNumberController!.text,
+                      );
+                      if ((apiResultRegisterAccount?.succeeded ?? true)) {
+                        context.pushNamed('Home');
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+
+                      setState(() {});
                     },
                     text: '확인',
                     options: FFButtonOptions(

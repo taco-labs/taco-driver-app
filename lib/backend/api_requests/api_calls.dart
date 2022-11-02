@@ -368,11 +368,11 @@ class GetDriverCall {
         response,
         r'''$.uploadUrls''',
       );
-  dynamic ee(dynamic response) => getJsonField(
+  dynamic profileImageUploadUrl(dynamic response) => getJsonField(
         response,
         r'''$.uploadUrls.profileImage''',
       );
-  dynamic ff(dynamic response) => getJsonField(
+  dynamic licenseImageUploadUrl(dynamic response) => getJsonField(
         response,
         r'''$.uploadUrls.licenseImage''',
       );
@@ -380,11 +380,11 @@ class GetDriverCall {
         response,
         r'''$.downloadUrls''',
       );
-  dynamic hh(dynamic response) => getJsonField(
+  dynamic profileImageDownloadUrl(dynamic response) => getJsonField(
         response,
         r'''$.downloadUrls.profileImage''',
       );
-  dynamic jj(dynamic response) => getJsonField(
+  dynamic licenseImageDownloadUrl(dynamic response) => getJsonField(
         response,
         r'''$.downloadUrls.licenseImage''',
       );

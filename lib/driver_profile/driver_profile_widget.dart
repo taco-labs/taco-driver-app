@@ -1,7 +1,6 @@
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -125,9 +124,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                       shape: BoxShape.circle,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: random_data.randomImageUrl(
-                        0,
-                        0,
+                      imageUrl: valueOrDefault<String>(
+                        getJsonField(
+                          widget.driverInfo,
+                          r'''$.downloadUrls.profileImage''',
+                        ),
+                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
                       ),
                       fit: BoxFit.fitWidth,
                     ),

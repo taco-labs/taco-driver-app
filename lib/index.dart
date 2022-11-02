@@ -12,3 +12,4 @@ export 'ride_history/ride_history_widget.dart' show RideHistoryWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
 export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export 'test/test_widget.dart' show TestWidget;
+export 'test2/test2_widget.dart' show Test2Widget;
