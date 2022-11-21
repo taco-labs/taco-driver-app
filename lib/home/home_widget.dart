@@ -247,7 +247,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               setState(() => FFAppState().isOnDuty = true);
                               setState(
                                   () => FFAppState().isOnCallWaiting = true);
-                              await actions.startStreamCurrentLocation();
+                              await actions.startLocationService();
                             } else {
                               await showDialog(
                                 context: context,
@@ -304,7 +304,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             );
                             if ((apiResultkg1?.succeeded ?? true)) {
                               setState(() => FFAppState().isOnDuty = false);
-                              await actions.cancelStreamCurrentLocation();
+                              await actions.cancelLocationService();
                             } else {
                               await showDialog(
                                 context: context,

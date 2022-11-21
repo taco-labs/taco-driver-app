@@ -80,7 +80,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         children: [
                           Align(
                             alignment: AlignmentDirectional(-1, 0),
-                            child: FlutterFlowDropDown(
+                            child: FlutterFlowDropDown<String>(
                               options: [
                                 '농협',
                                 '신한',

@@ -40,6 +40,7 @@ class SMSVerificationRequestCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -65,6 +66,7 @@ class SMSVerificationAndSigninCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -215,6 +217,7 @@ class SignupCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -305,6 +308,7 @@ class GetDriverCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -430,6 +434,7 @@ class UpdateDriverCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -456,6 +461,7 @@ class UpdateOnDutyCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -484,6 +490,7 @@ class UpdateDriverLocationCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -512,6 +519,7 @@ class RegisterSettlementAccountCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -552,6 +560,7 @@ class GetSettlementAccountCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -601,6 +610,7 @@ class UpdateDriverSettlementAccountCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -620,6 +630,7 @@ class GetDriverImageUrlsCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -677,6 +688,7 @@ class DeleteDriverCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -695,6 +707,7 @@ class ActivateDriverCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -715,6 +728,7 @@ class ForceAcceptTaxiCallRequestCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -754,6 +768,7 @@ class GetLatestTaxiCallCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -890,6 +905,7 @@ class ListTaxiCallCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -920,6 +936,7 @@ class AcceptTaxiCallTicketCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -944,6 +961,7 @@ class RejectTaxiCallTicketCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -965,6 +983,7 @@ class TaxiCallDriverToArrivalCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -984,6 +1003,7 @@ class CancelTaxiCallRequestCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -1010,6 +1030,7 @@ class DoneTaxiCallCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -1025,6 +1046,7 @@ class GetUUIDCall {
       headers: {},
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 

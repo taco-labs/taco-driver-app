@@ -30,12 +30,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, _) => TestWidget(),
+      errorBuilder: (context, _) => EntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => TestWidget(),
+          builder: (context, _) => EntryWidget(),
           routes: [
             FFRoute(
               name: 'Entry',

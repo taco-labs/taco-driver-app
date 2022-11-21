@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/instant_timer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class Test2Widget extends StatefulWidget {
 }
 
 class _Test2WidgetState extends State<Test2Widget> {
+  InstantTimer? instantTimer;
   String? stateValue;
   TextEditingController? cityController;
   TextEditingController? yourNameController;
@@ -228,7 +230,7 @@ class _Test2WidgetState extends State<Test2Widget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
-              child: FlutterFlowDropDown(
+              child: FlutterFlowDropDown<String>(
                 initialOption: stateValue ??= 'State',
                 options: [
                   'State',
@@ -353,8 +355,29 @@ class _Test2WidgetState extends State<Test2Widget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    instantTimer = InstantTimer.periodic(
+                      duration: Duration(milliseconds: 1000),
+                      callback: (timer) async {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('ㅇ'),
+                              content: Text('ㅇㅇ'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      startImmediately: true,
+                    );
                   },
                   text: 'Save Changes',
                   options: FFButtonOptions(
