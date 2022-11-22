@@ -8,12 +8,10 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:background_locator_2/background_locator.dart';
 
-StreamSubscription<Position>? positionStream;
 const String kakaoAppKey = 'ad4db5aa94cc0675585a6203dd19747d';
 
 Future initDriverHome() async {

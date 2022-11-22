@@ -1528,7 +1528,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               setState(() => FFAppState().isOnDuty = true);
                               setState(
                                   () => FFAppState().isOnCallWaiting = true);
-                              await actions.startStreamCurrentLocation();
                             } else {
                               await showDialog(
                                 context: context,
@@ -1585,7 +1584,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                             );
                             if ((apiResultkg1?.succeeded ?? true)) {
                               setState(() => FFAppState().isOnDuty = false);
-                              await actions.cancelStreamCurrentLocation();
                             } else {
                               await showDialog(
                                 context: context,
