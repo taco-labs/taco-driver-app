@@ -236,7 +236,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         }
 
                                         if (val.length < 1) {
-                                          return 'Requires at least 1 characters.';
+                                          return '성을 정확히 입력해주세요';
                                         }
 
                                         return null;
@@ -312,7 +312,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         }
 
                                         if (val.length < 1) {
-                                          return 'Requires at least 1 characters.';
+                                          return '이름을 정확히 입력해주세요';
                                         }
 
                                         return null;
@@ -391,10 +391,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       }
 
                                       if (val.length < 6) {
-                                        return 'Requires at least 6 characters.';
+                                        return '앞 6자리를 정확히 입력해주세요';
                                       }
                                       if (val.length > 6) {
-                                        return 'Maximum 6 characters allowed, currently ${val.length}.';
+                                        return '앞 6자리를 정확히 입력해주세요';
                                       }
                                       if (!RegExp(
                                               r"^\d{2}[0-1]\d{1}[0-3]\d{1}$")
@@ -474,10 +474,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       }
 
                                       if (val.length < 1) {
-                                        return 'Requires at least 1 characters.';
+                                        return '뒤 1자리를 정확히 입력해주세요';
                                       }
                                       if (val.length > 1) {
-                                        return 'Maximum 1 characters allowed, currently ${val.length}.';
+                                        return '뒤 1자리를 정확히 입력해주세요';
                                       }
                                       if (!RegExp(r"[1-4]").hasMatch(val)) {
                                         return 'Invalid text';
@@ -613,10 +613,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 }
 
                                 if (val.length < 1) {
-                                  return 'Requires at least 1 characters.';
+                                  return '차량번호를 정확히 입력해주세요';
                                 }
                                 if (val.length > 8) {
-                                  return 'Maximum 8 characters allowed, currently ${val.length}.';
+                                  return '차량번호를 정확히 입력해주세요';
                                 }
                                 if (!RegExp(r"^\d{2,3}[가-힣]\d{4}$")
                                     .hasMatch(val)) {
@@ -686,10 +686,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 }
 
                                 if (val.length < 11) {
-                                  return 'Requires at least 11 characters.';
+                                  return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
                                 if (val.length > 11) {
-                                  return 'Maximum 11 characters allowed, currently ${val.length}.';
+                                  return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
                                 if (!RegExp(r"^\d{2}-[가-힣][가-힣]-\d{5}$")
                                     .hasMatch(val)) {
@@ -763,10 +763,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   }
 
                                   if (val.length < 10) {
-                                    return 'Requires at least 10 characters.';
+                                    return '사업자등록번호를 정확히 입력해주세요';
                                   }
                                   if (val.length > 10) {
-                                    return 'Maximum 10 characters allowed, currently ${val.length}.';
+                                    return '사업자등록번호를 정확히 입력해주세요';
                                   }
                                   if (!RegExp(r"^\d{10}$").hasMatch(val)) {
                                     return 'Invalid text';
