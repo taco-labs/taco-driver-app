@@ -16,9 +16,6 @@ class TestWidget extends StatefulWidget {
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
-
   TextEditingController? textController;
   var placePickerValue = FFPlace();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -86,23 +83,20 @@ class _TestWidgetState extends State<TestWidget> {
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                        child: InkWell(
-                          onTap: () async {},
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.96,
-                            height: 350,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 6,
-                                  color: Color(0x3A000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.96,
+                          height: 350,
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 6,
+                                color: Color(0x3A000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                       ),

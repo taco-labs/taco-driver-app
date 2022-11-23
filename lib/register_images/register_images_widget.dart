@@ -100,25 +100,24 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              apiResulttx0 = await DriverInfoGroup
-                                  .getDriverImageUrlsCall
-                                  .call(
-                                driverId: FFAppState().driverId,
+                              apiResulttx0 =
+                                  await DriverInfoGroup.getDriverCall.call(
                                 apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
                               );
                               if ((apiResulttx0?.succeeded ?? true)) {
                                 profileUploadSucceeded =
                                     await actions.uploadImage(
-                                  DriverInfoGroup.getDriverImageUrlsCall
-                                      .uploadProfileImageUrl(
+                                  DriverInfoGroup.getDriverCall
+                                      .profileImageUploadUrl(
                                         (apiResulttx0?.jsonBody ?? ''),
                                       )
                                       .toString(),
                                 );
                                 if (profileUploadSucceeded!) {
                                   setState(() => FFAppState().profileImagePath =
-                                          DriverInfoGroup.getDriverImageUrlsCall
-                                              .downloadProfileImageUrl(
+                                          DriverInfoGroup.getDriverCall
+                                              .profileImageDownloadUrl(
                                         (apiResulttx0?.jsonBody ?? ''),
                                       ));
                                 } else {
@@ -216,25 +215,24 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              apiResulttx1 = await DriverInfoGroup
-                                  .getDriverImageUrlsCall
-                                  .call(
-                                driverId: FFAppState().driverId,
+                              apiResulttx1 =
+                                  await DriverInfoGroup.getDriverCall.call(
                                 apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
                               );
                               if ((apiResulttx1?.succeeded ?? true)) {
                                 licenseUploadSucceeded =
                                     await actions.uploadImage(
-                                  DriverInfoGroup.getDriverImageUrlsCall
-                                      .uploadLicenseImageUrl(
+                                  DriverInfoGroup.getDriverCall
+                                      .licenseImageUploadUrl(
                                         (apiResulttx1?.jsonBody ?? ''),
                                       )
                                       .toString(),
                                 );
                                 if (profileUploadSucceeded!) {
                                   setState(() => FFAppState().licenseImagePath =
-                                          DriverInfoGroup.getDriverImageUrlsCall
-                                              .downloadLicenseImageUrl(
+                                          DriverInfoGroup.getDriverCall
+                                              .licenseImageDownloadUrl(
                                         (apiResulttx0?.jsonBody ?? ''),
                                       ));
                                 } else {
