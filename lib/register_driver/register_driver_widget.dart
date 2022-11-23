@@ -100,7 +100,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Form(
                     key: formKey,
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.disabled,
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -152,7 +152,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 24, 0, 24),
+                                    20, 24, 20, 24),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -203,7 +203,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -211,7 +212,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -222,7 +224,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .secondaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                20, 24, 0, 24),
+                                                20, 24, 20, 24),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
@@ -279,7 +281,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -287,7 +290,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -298,7 +302,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .secondaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                20, 24, 0, 24),
+                                                20, 24, 20, 24),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
@@ -360,14 +364,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -377,7 +383,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           .secondaryBackground,
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
-                                              10, 24, 10, 24),
+                                              20, 24, 20, 24),
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -400,7 +406,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       if (!RegExp(
                                               r"^\d{2}[0-1]\d{1}[0-3]\d{1}$")
                                           .hasMatch(val)) {
-                                        return 'Invalid text';
+                                        return '앞 6자리를 정확히 입력해주세요';
                                       }
                                       return null;
                                     },
@@ -443,14 +449,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -481,7 +489,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         return '뒤 1자리를 정확히 입력해주세요';
                                       }
                                       if (!RegExp(r"[1-4]").hasMatch(val)) {
-                                        return 'Invalid text';
+                                        return '뒤 1자리를 정확히 입력해주세요';
                                       }
                                       return null;
                                     },
@@ -584,14 +592,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -621,7 +631,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 }
                                 if (!RegExp(r"^\d{2,3}[가-힣]\d{4}$")
                                     .hasMatch(val)) {
-                                  return 'Invalid text';
+                                  return '차량번호를 정확히 입력해주세요';
                                 }
                                 return null;
                               },
@@ -657,14 +667,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -694,7 +706,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 }
                                 if (!RegExp(r"^\d{2}-[가-힣][가-힣]-\d{5}$")
                                     .hasMatch(val)) {
-                                  return 'Invalid text';
+                                  return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
                                 return null;
                               },
@@ -732,14 +744,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0x00000000),
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0x00000000),
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -770,7 +784,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     return '사업자등록번호를 정확히 입력해주세요';
                                   }
                                   if (!RegExp(r"^\d{10}$").hasMatch(val)) {
-                                    return 'Invalid text';
+                                    return '사업자등록번호를 정확히 입력해주세요';
                                   }
                                   return null;
                                 },
@@ -845,15 +859,21 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                       }
 
                       if (dropDownValue == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              '운행지역을 선택해주세요',
-                              style: TextStyle(),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor: Color(0x00000000),
-                          ),
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('운행지역을 선택해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                         return;
                       }
