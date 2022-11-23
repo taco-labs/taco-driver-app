@@ -101,7 +101,11 @@ class _LoginWidgetState extends State<LoginWidget>
                         child: Text(
                           '로그인 또는 기사 회원 가입을 위해 휴대폰번호를 인증해주세요',
                           maxLines: 2,
-                          style: FlutterFlowTheme.of(context).bodyText2,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText2.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
                         ).animateOnPageLoad(
                             animationsMap['textOnPageLoadAnimation']!),
                       ),
@@ -161,7 +165,10 @@ class _LoginWidgetState extends State<LoginWidget>
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                          ),
                       keyboardType: TextInputType.phone,
                     ),
                   ),
@@ -249,6 +256,7 @@ class _LoginWidgetState extends State<LoginWidget>
                           FlutterFlowTheme.of(context).subtitle2.override(
                                 fontFamily: 'Poppins',
                                 color: Colors.white,
+                                fontSize: 18,
                               ),
                       elevation: 3,
                       borderSide: BorderSide(

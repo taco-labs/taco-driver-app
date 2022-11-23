@@ -28,10 +28,11 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   StopWatchTimer? timerController;
   String? timerValue;
   int? timerMilliseconds;
-  ApiCallResponse? apiResultLatestCall;
+  ApiCallResponse? apiResultGetAccount;
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
+  ApiCallResponse? apiResultLatestCall;
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -151,7 +152,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                          ),
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                     ),
@@ -228,74 +232,124 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                   .isLicenseImageUploaded(
                                 (apiResultf8v?.jsonBody ?? ''),
                               )) {
-                            apiResultLatestCall =
-                                await TaxiCallGroup.getLatestTaxiCallCall.call(
+                            apiResultGetAccount = await DriverInfoGroup
+                                .getSettlementAccountCall
+                                .call(
                               driverId: FFAppState().driverId,
                               apiToken: FFAppState().apiToken,
                             );
-                            if ((apiResultLatestCall?.succeeded ?? true) ||
-                                ((apiResultLatestCall?.statusCode ?? 200) ==
-                                    404)) {
-                              setState(() => FFAppState().latestCallState =
-                                  TaxiCallGroup.getLatestTaxiCallCall
-                                      .callCurrentState(
-                                        (apiResultLatestCall?.jsonBody ?? ''),
-                                      )
-                                      .toString());
-                              setState(() => FFAppState().callRequest =
-                                  (apiResultLatestCall?.jsonBody ?? ''));
-                              if (FFAppState().latestCallState ==
-                                  'DRIVER_TO_DEPARTURE') {
-                                setState(() =>
-                                    FFAppState().isOnDrivingToDeparture = true);
-                              } else {
+                            if ((apiResultGetAccount?.succeeded ?? true)) {
+                              apiResultLatestCall = await TaxiCallGroup
+                                  .getLatestTaxiCallCall
+                                  .call(
+                                driverId: FFAppState().driverId,
+                                apiToken: FFAppState().apiToken,
+                              );
+                              if ((apiResultLatestCall?.succeeded ?? true) ||
+                                  ((apiResultLatestCall?.statusCode ?? 200) ==
+                                      404)) {
+                                setState(() => FFAppState().latestCallState =
+                                    TaxiCallGroup.getLatestTaxiCallCall
+                                        .callCurrentState(
+                                          (apiResultLatestCall?.jsonBody ?? ''),
+                                        )
+                                        .toString());
+                                setState(() => FFAppState().callRequest =
+                                    (apiResultLatestCall?.jsonBody ?? ''));
                                 if (FFAppState().latestCallState ==
-                                    'DRIVER_TO_ARRIVAL') {
-                                  setState(() =>
-                                      FFAppState().isOnDrivingToArrival = true);
+                                    'DRIVER_TO_DEPARTURE') {
+                                  setState(() => FFAppState()
+                                      .isOnDrivingToDeparture = true);
                                 } else {
-                                  setState(() =>
-                                      FFAppState().isOnCallWaiting = true);
+                                  if (FFAppState().latestCallState ==
+                                      'DRIVER_TO_ARRIVAL') {
+                                    setState(() => FFAppState()
+                                        .isOnDrivingToArrival = true);
+                                  } else {
+                                    setState(() =>
+                                        FFAppState().isOnCallWaiting = true);
+                                  }
                                 }
-                              }
 
-                              context.pushNamed('Home');
+                                context.pushNamed('Home');
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Get Latest Call'),
+                                      content: Text(getJsonField(
+                                        (apiResultLatestCall?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Get Latest Call'),
-                                    content: Text(getJsonField(
-                                      (apiResultLatestCall?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString()),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                              if ((apiResultGetAccount?.statusCode ?? 200) ==
+                                  404) {
+                                context.goNamed('RegisterInstallment');
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Get Settlement Account'),
+                                      content: Text(getJsonField(
+                                        (apiResultGetAccount?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
                           } else {
                             context.goNamed('RegisterImages');
@@ -402,6 +456,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           FlutterFlowTheme.of(context).subtitle2.override(
                                 fontFamily: 'Poppins',
                                 color: Colors.white,
+                                fontSize: 18,
                               ),
                       borderSide: BorderSide(
                         color: Colors.transparent,
@@ -441,6 +496,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.of(context).primaryColor,
+                          fontSize: 18,
                         ),
                     onEnded: () async {
                       timerController?.onExecute.add(
