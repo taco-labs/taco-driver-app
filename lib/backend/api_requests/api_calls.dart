@@ -358,19 +358,19 @@ class GetDriverCall {
         response,
         r'''$.birtyday''',
       );
-  dynamic aa(dynamic response) => getJsonField(
+  dynamic driverLicenseId(dynamic response) => getJsonField(
         response,
         r'''$.driverLicenseId''',
       );
-  dynamic bb(dynamic response) => getJsonField(
+  dynamic businessRegistrationNumber(dynamic response) => getJsonField(
         response,
         r'''$.companyRegistrationNumber''',
       );
-  dynamic cc(dynamic response) => getJsonField(
+  dynamic carNumber(dynamic response) => getJsonField(
         response,
         r'''$.carNumber''',
       );
-  dynamic dd(dynamic response) => getJsonField(
+  dynamic uploadUrls(dynamic response) => getJsonField(
         response,
         r'''$.uploadUrls''',
       );
@@ -382,7 +382,7 @@ class GetDriverCall {
         response,
         r'''$.uploadUrls.licenseImage''',
       );
-  dynamic gg(dynamic response) => getJsonField(
+  dynamic downloadUrls(dynamic response) => getJsonField(
         response,
         r'''$.downloadUrls''',
       );

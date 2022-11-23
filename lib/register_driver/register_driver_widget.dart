@@ -552,29 +552,31 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
                             child: FlutterFlowDropDown<String>(
                               options:
                                   functions.getSupportedServiceArea().toList(),
                               onChanged: (val) =>
                                   setState(() => dropDownValue = val),
-                              width: 180,
-                              height: 50,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
                                     fontFamily: 'Poppins',
-                                    color: Colors.black,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     fontSize: 18,
                                   ),
                               hintText: '운행지역',
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               elevation: 2,
-                              borderColor: Colors.transparent,
-                              borderWidth: 0,
-                              borderRadius: 0,
+                              borderColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              borderWidth: 2,
+                              borderRadius: 8,
                               margin:
-                                  EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                                  EdgeInsetsDirectional.fromSTEB(20, 4, 20, 4),
                               hidesUnderline: true,
                             ),
                           ),

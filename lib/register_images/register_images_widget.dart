@@ -23,10 +23,14 @@ class RegisterImagesWidget extends StatefulWidget {
 }
 
 class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
+  ApiCallResponse? apiResultUpdateDriver2;
   ApiCallResponse? apiResulttx0;
   bool? profileUploadSucceeded;
+  String? fcmToken2;
+  ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResulttx1;
   bool? licenseUploadSucceeded;
+  String? fcmToken;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -139,11 +143,82 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       .toString(),
                                 );
                                 if (profileUploadSucceeded!) {
-                                  setState(() => FFAppState().profileImagePath =
-                                          DriverInfoGroup.getDriverCall
-                                              .profileImageDownloadUrl(
-                                        (apiResulttx0?.jsonBody ?? ''),
-                                      ));
+                                  fcmToken2 = await actions.getFcmToken();
+                                  apiResultUpdateDriver2 = await DriverInfoGroup
+                                      .updateDriverCall
+                                      .call(
+                                    driverId: FFAppState().driverId,
+                                    apiToken: FFAppState().apiToken,
+                                    appOs: DriverInfoGroup.getDriverCall
+                                        .appOs(
+                                          (apiResulttx0?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                    appVersion: DriverInfoGroup.getDriverCall
+                                        .appVersion(
+                                          (apiResulttx0?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                    appFcmToken: fcmToken2,
+                                    profileImageUploaded: true,
+                                    licenseImageUploaded: DriverInfoGroup
+                                        .getDriverCall
+                                        .isLicenseImageUploaded(
+                                      (apiResulttx0?.jsonBody ?? ''),
+                                    ),
+                                    carNumber: DriverInfoGroup.getDriverCall
+                                        .carNumber(
+                                          (apiResulttx0?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                  );
+                                  if ((apiResultUpdateDriver2?.succeeded ??
+                                      true)) {
+                                    setState(() =>
+                                        FFAppState().profileImagePath =
+                                            DriverInfoGroup.getDriverCall
+                                                .profileImageDownloadUrl(
+                                          (apiResulttx0?.jsonBody ?? ''),
+                                        ));
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('오류'),
+                                          content:
+                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('확인'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('UpdateDriver'),
+                                          content: Text(getJsonField(
+                                            (apiResultUpdateDriver2?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -277,11 +352,82 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       .toString(),
                                 );
                                 if (profileUploadSucceeded!) {
-                                  setState(() => FFAppState().licenseImagePath =
-                                          DriverInfoGroup.getDriverCall
-                                              .licenseImageDownloadUrl(
-                                        (apiResulttx0?.jsonBody ?? ''),
-                                      ));
+                                  fcmToken = await actions.getFcmToken();
+                                  apiResultUpdateDriver = await DriverInfoGroup
+                                      .updateDriverCall
+                                      .call(
+                                    driverId: FFAppState().driverId,
+                                    apiToken: FFAppState().apiToken,
+                                    appOs: DriverInfoGroup.getDriverCall
+                                        .appOs(
+                                          (apiResulttx1?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                    appVersion: DriverInfoGroup.getDriverCall
+                                        .appVersion(
+                                          (apiResulttx1?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                    appFcmToken: fcmToken,
+                                    profileImageUploaded: DriverInfoGroup
+                                        .getDriverCall
+                                        .isProfileImageUploaded(
+                                      (apiResulttx1?.jsonBody ?? ''),
+                                    ),
+                                    licenseImageUploaded: true,
+                                    carNumber: DriverInfoGroup.getDriverCall
+                                        .carNumber(
+                                          (apiResulttx1?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                  );
+                                  if ((apiResultUpdateDriver2?.succeeded ??
+                                      true)) {
+                                    setState(() =>
+                                        FFAppState().licenseImagePath =
+                                            DriverInfoGroup.getDriverCall
+                                                .licenseImageDownloadUrl(
+                                          (apiResulttx1?.jsonBody ?? ''),
+                                        ));
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('오류'),
+                                          content:
+                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('확인'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('UpdateDriver'),
+                                          content: Text(getJsonField(
+                                            (apiResultUpdateDriver2?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 } else {
                                   await showDialog(
                                     context: context,

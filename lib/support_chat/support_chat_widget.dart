@@ -59,18 +59,20 @@ class _SupportChatWidgetState extends State<SupportChatWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              FlutterFlowWebView(
-                url: 'https://pp0ok.channel.io',
-                bypass: true,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1,
-                verticalScroll: false,
-                horizontalScroll: false,
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                FlutterFlowWebView(
+                  url: 'https://pp0ok.channel.io',
+                  bypass: true,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 1,
+                  verticalScroll: false,
+                  horizontalScroll: false,
+                ),
+              ],
+            ),
           ),
         ),
       ),
