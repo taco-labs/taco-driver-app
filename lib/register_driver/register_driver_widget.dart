@@ -787,6 +787,25 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 );
                               },
                             );
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Signup'),
+                                  content: Text(getJsonField(
+                                    (apiResultbos?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
                         } else {
                           await showDialog(
