@@ -1,9 +1,11 @@
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,6 +27,7 @@ class RegisterDriverWidget extends StatefulWidget {
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   ApiCallResponse? apiResultbos;
   String? getFcmTokenResult;
+  String? dropDownValue;
   String? radioButtonValue;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
@@ -151,7 +154,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 0, 24),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 17,
+                                  ),
                               keyboardType: TextInputType.phone,
                             ),
                           ),
@@ -217,7 +225,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                                 20, 24, 0, 24),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
                                       keyboardType: TextInputType.name,
                                     ),
                                   ),
@@ -278,7 +290,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                                 20, 24, 0, 24),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
                                       keyboardType: TextInputType.name,
                                     ),
                                   ),
@@ -341,8 +357,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           EdgeInsetsDirectional.fromSTEB(
                                               10, 24, 10, 24),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                        ),
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
@@ -402,8 +422,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           EdgeInsetsDirectional.fromSTEB(
                                               10, 24, 10, 24),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                        ),
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
@@ -436,6 +460,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   .override(
                                     fontFamily: 'Poppins',
                                     color: Colors.black,
+                                    fontSize: 18,
                                   ),
                               buttonPosition: RadioButtonPosition.left,
                               direction: Axis.horizontal,
@@ -444,6 +469,33 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               toggleable: false,
                               horizontalAlignment: WrapAlignment.start,
                               verticalAlignment: WrapCrossAlignment.start,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                            child: FlutterFlowDropDown<String>(
+                              options:
+                                  functions.getSupportedServiceArea().toList(),
+                              onChanged: (val) =>
+                                  setState(() => dropDownValue = val),
+                              width: 180,
+                              height: 50,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                              hintText: '운행지역',
+                              fillColor: Colors.white,
+                              elevation: 2,
+                              borderColor: Colors.transparent,
+                              borderWidth: 0,
+                              borderRadius: 0,
+                              margin:
+                                  EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                              hidesUnderline: true,
                             ),
                           ),
                           Padding(
@@ -494,7 +546,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
                             ),
                           ),
                           Padding(
@@ -545,61 +602,74 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                            child: TextFormField(
-                              controller: businessRegistrationNumberController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: '사업자등록번호 10자리',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
+                          if (radioButtonValue == '개인 택시')
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                              child: TextFormField(
+                                controller:
+                                    businessRegistrationNumberController,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: '사업자등록번호 10자리',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).bodyText2,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).bodyText2,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    width: 2,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2,
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          20, 24, 20, 24),
                                 ),
-                                filled: true,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 24, 20, 24),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                    ),
+                                keyboardType: TextInputType.number,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              keyboardType: TextInputType.number,
                             ),
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
@@ -608,7 +678,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 unselectedWidgetColor: Color(0xFF95A1AC),
                               ),
                               child: CheckboxListTile(
-                                value: termsofUseValue ??= false,
+                                value: termsofUseValue ??= true,
                                 onChanged: (newValue) async {
                                   setState(() => termsofUseValue = newValue!);
                                 },
@@ -633,7 +703,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 unselectedWidgetColor: Color(0xFF95A1AC),
                               ),
                               child: CheckboxListTile(
-                                value: privacyPolicyValue ??= false,
+                                value: privacyPolicyValue ??= true,
                                 onChanged: (newValue) async {
                                   setState(
                                       () => privacyPolicyValue = newValue!);
@@ -681,10 +751,17 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             appVersion: FFAppState().appVersion,
                             appFcmToken: getFcmTokenResult,
                             smsVerificationStateKey: widget.authSmsStateKey,
+                            driverType: radioButtonValue,
+                            driverLicenseId: licenseNumberController!.text,
+                            carNumber: carNumberController!.text,
+                            companyRegistrationNumber:
+                                businessRegistrationNumberController!.text,
+                            serviceRegion: dropDownValue,
                           );
                           if ((apiResultbos?.succeeded ?? true)) {
                             await requestPermission(locationPermission);
                             await requestPermission(notificationsPermission);
+                            await requestPermission(photoLibraryPermission);
                             setState(() =>
                                 FFAppState().apiToken = SignupGroup.signupCall
                                     .apiToken(

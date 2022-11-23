@@ -44,7 +44,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          '추가 정보',
+          '사진 등록',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -58,237 +58,251 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Align(
-            alignment: AlignmentDirectional(0, -1),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFDBE2E7),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: FFAppState().profileImagePath,
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        apiResulttx0 =
-                            await DriverInfoGroup.getDriverImageUrlsCall.call(
-                          driverId: FFAppState().driverId,
-                          apiToken: FFAppState().apiToken,
-                        );
-                        if ((apiResulttx0?.succeeded ?? true)) {
-                          profileUploadSucceeded = await actions.uploadImage(
-                            DriverInfoGroup.getDriverImageUrlsCall
-                                .uploadProfileImageUrl(
-                                  (apiResulttx0?.jsonBody ?? ''),
-                                )
-                                .toString(),
-                          );
-                          setState(() => FFAppState().profileImagePath =
-                              'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80');
-                        } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('오류'),
-                                content: Text((apiResulttx0?.statusCode ?? 200)
-                                    .toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      text: '프로필 사진 등록',
-                      options: FFButtonOptions(
-                        height: 60,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFDBE2E7),
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/876/600',
-                        width: 240,
-                        height: 130,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        apiResulttx1 =
-                            await DriverInfoGroup.getDriverImageUrlsCall.call(
-                          driverId: FFAppState().driverId,
-                          apiToken: FFAppState().apiToken,
-                        );
-                        if ((apiResulttx1?.succeeded ?? true)) {
-                          licenseUploadSucceeded = await actions.uploadImage(
-                            DriverInfoGroup.getDriverImageUrlsCall
-                                .uploadLicenseImageUrl(
-                                  (apiResulttx1?.jsonBody ?? ''),
-                                )
-                                .toString(),
-                          );
-                        } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('오류'),
-                                content: Text((apiResulttx1?.statusCode ?? 200)
-                                    .toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      text: '택시 등록증 사진 등록',
-                      options: FFButtonOptions(
-                        height: 60,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        if (profileUploadSucceeded! &&
-                            licenseUploadSucceeded!) {
-                          context.goNamed('RegisterInstallment');
-                        } else {
-                          if (profileUploadSucceeded!) {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('오류'),
-                                  content: Text('택시 면허증 사진을 업로드해주세요'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('오류'),
-                                  content: Text('프로필 사진을 업로드해주세요'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        }
-                      },
-                      text: '확인',
-                      options: FFButtonOptions(
-                        width: 270,
-                        height: 50,
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .subtitle1
-                            .override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0, -1),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFDBE2E7),
+                              shape: BoxShape.circle,
                             ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                              child: Container(
+                                width: 90,
+                                height: 90,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: FFAppState().profileImagePath,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              apiResulttx0 = await DriverInfoGroup
+                                  .getDriverImageUrlsCall
+                                  .call(
+                                driverId: FFAppState().driverId,
+                                apiToken: FFAppState().apiToken,
+                              );
+                              if ((apiResulttx0?.succeeded ?? true)) {
+                                profileUploadSucceeded =
+                                    await actions.uploadImage(
+                                  DriverInfoGroup.getDriverImageUrlsCall
+                                      .uploadProfileImageUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      )
+                                      .toString(),
+                                );
+                                setState(() => FFAppState().profileImagePath =
+                                    'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80');
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text(
+                                          (apiResulttx0?.statusCode ?? 200)
+                                              .toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+
+                              setState(() {});
+                            },
+                            text: '프로필 사진 등록',
+                            options: FFButtonOptions(
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFFDBE2E7),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Image.network(
+                              'https://picsum.photos/seed/876/600',
+                              width: 240,
+                              height: 130,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              apiResulttx1 = await DriverInfoGroup
+                                  .getDriverImageUrlsCall
+                                  .call(
+                                driverId: FFAppState().driverId,
+                                apiToken: FFAppState().apiToken,
+                              );
+                              if ((apiResulttx1?.succeeded ?? true)) {
+                                licenseUploadSucceeded =
+                                    await actions.uploadImage(
+                                  DriverInfoGroup.getDriverImageUrlsCall
+                                      .uploadLicenseImageUrl(
+                                        (apiResulttx1?.jsonBody ?? ''),
+                                      )
+                                      .toString(),
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text(
+                                          (apiResulttx1?.statusCode ?? 200)
+                                              .toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+
+                              setState(() {});
+                            },
+                            text: '택시 등록증 사진 등록',
+                            options: FFButtonOptions(
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      if (profileUploadSucceeded! && licenseUploadSucceeded!) {
+                        context.goNamed('RegisterInstallment');
+                      } else {
+                        if (profileUploadSucceeded!) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('오류'),
+                                content: Text('택시 면허증 사진을 업로드해주세요'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('오류'),
+                                content: Text('프로필 사진을 업로드해주세요'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      }
+                    },
+                    text: '확인',
+                    options: FFButtonOptions(
+                      width: 270,
+                      height: 50,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle1
+                          .override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

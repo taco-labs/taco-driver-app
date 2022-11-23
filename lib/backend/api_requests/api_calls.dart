@@ -189,6 +189,7 @@ class SignupCall {
     String? smsVerificationStateKey = '',
     String? carNumber = '',
     String? companyRegistrationNumber = '',
+    String? serviceRegion = '',
   }) {
     final body = '''
 {
@@ -204,7 +205,8 @@ class SignupCall {
   "driverLicenseId": "${driverLicenseId}",
   "smsVerificationStateKey": "${smsVerificationStateKey}",
   "carNumber": "${carNumber}",
-  "companyRegistrationNumber": "${companyRegistrationNumber}"
+  "companyRegistrationNumber": "${companyRegistrationNumber}",
+  "serviceRegion": "${serviceRegion}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Signup',
