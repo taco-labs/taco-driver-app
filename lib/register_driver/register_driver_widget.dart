@@ -842,10 +842,18 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                           !formKey.currentState!.validate()) {
                         return;
                       }
-                      if (radioButtonValue == null) {
-                        return;
-                      }
+
                       if (dropDownValue == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '운행지역을 선택해주세요',
+                              style: TextStyle(),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor: Color(0x00000000),
+                          ),
+                        );
                         return;
                       }
 
