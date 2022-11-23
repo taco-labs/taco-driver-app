@@ -610,7 +610,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   ),
                             ),
                           ),
-                          if (radioButtonValue == '개인 택시')
+                          if (radioButtonValue != '법인 택시')
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
