@@ -73,3 +73,17 @@ List<String> getSupportedServiceArea() {
 
   return supportedArea;
 }
+
+String toDriverType(String driverTypeInput) {
+  String driverType = 'UNKNOWN';
+  switch (driverTypeInput) {
+    case '개인 택시':
+      driverType = 'INDIVIDUAL';
+      break;
+    case '법인 택시':
+      driverType = 'COORPERATE';
+      break;
+  }
+
+  return driverType;
+}

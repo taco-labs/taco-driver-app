@@ -164,7 +164,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -172,7 +173,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   flex: 2,
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 5, 0),
+                                        0, 0, 5, 0),
                                     child: TextFormField(
                                       controller: lastNameController,
                                       autofocus: true,
@@ -251,7 +252,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   flex: 3,
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 0, 20, 0),
+                                        5, 0, 0, 0),
                                     child: TextFormField(
                                       controller: firstNameController,
                                       obscureText: false,
@@ -891,7 +892,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             appVersion: FFAppState().appVersion,
                             appFcmToken: getFcmTokenResult,
                             smsVerificationStateKey: widget.authSmsStateKey,
-                            driverType: radioButtonValue,
+                            driverType:
+                                functions.toDriverType(radioButtonValue!),
                             driverLicenseId: licenseNumberController!.text,
                             carNumber: carNumberController!.text,
                             companyRegistrationNumber:
