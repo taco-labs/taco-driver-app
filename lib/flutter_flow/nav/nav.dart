@@ -30,12 +30,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, _) => EntryWidget(),
+      errorBuilder: (context, _) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Color(0xFFFFEB62),
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/Original_on_Transparent.png',
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            )
+          : EntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => EntryWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Color(0xFFFFEB62),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/Original_on_Transparent.png',
+                        width: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                )
+              : EntryWidget(),
           routes: [
             FFRoute(
               name: 'Entry',
@@ -114,11 +140,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'test',
               path: 'test',
               builder: (context, params) => TestWidget(),
-            ),
-            FFRoute(
-              name: 'test2',
-              path: 'test2',
-              builder: (context, params) => Test2Widget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

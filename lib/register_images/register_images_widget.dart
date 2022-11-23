@@ -115,14 +115,52 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       )
                                       .toString(),
                                 );
-                                setState(() => FFAppState().profileImagePath =
-                                    'https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=630&q=80');
+                                if (profileUploadSucceeded!) {
+                                  setState(() => FFAppState().profileImagePath =
+                                          DriverInfoGroup.getDriverImageUrlsCall
+                                              .downloadProfileImageUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      ));
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                               } else {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
                                       title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('GetDriverImageUrl'),
                                       content: Text(
                                           (apiResulttx0?.statusCode ?? 200)
                                               .toString()),
@@ -167,7 +205,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               shape: BoxShape.rectangle,
                             ),
                             child: Image.network(
-                              'https://picsum.photos/seed/876/600',
+                              FFAppState().licenseImagePath,
                               width: 240,
                               height: 130,
                               fit: BoxFit.cover,
@@ -193,12 +231,52 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       )
                                       .toString(),
                                 );
+                                if (profileUploadSucceeded!) {
+                                  setState(() => FFAppState().licenseImagePath =
+                                          DriverInfoGroup.getDriverImageUrlsCall
+                                              .downloadLicenseImageUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      ));
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                               } else {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
                                       title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('GetDriverImageUrls'),
                                       content: Text(
                                           (apiResulttx1?.statusCode ?? 200)
                                               .toString()),

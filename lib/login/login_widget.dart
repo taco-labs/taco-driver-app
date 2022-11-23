@@ -100,6 +100,7 @@ class _LoginWidgetState extends State<LoginWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
                         child: Text(
                           '로그인 또는 기사 회원 가입을 위해 휴대폰번호를 인증해주세요',
+                          textAlign: TextAlign.center,
                           maxLines: 2,
                           style:
                               FlutterFlowTheme.of(context).bodyText2.override(
@@ -166,7 +167,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             fontFamily: 'Poppins',
                             fontSize: 18,
                           ),
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.center,
                       keyboardType: TextInputType.phone,
                     ),
                   ),

@@ -944,7 +944,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     )
                                     .toString());
 
-                            context.goNamed('RegisterInstallment');
+                            context.goNamed('RegisterImages');
                           } else {
                             await showDialog(
                               context: context,

@@ -29,9 +29,9 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   String? timerValue;
   int? timerMilliseconds;
   ApiCallResponse? apiResultGetAccount;
-  ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
+  ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultLatestCall;
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
@@ -62,7 +62,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -197,45 +197,46 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                   (apiResultf8v?.jsonBody ?? ''),
                                 )
                                 .toString());
-                        if (isAndroid ? true : false) {
-                          setState(() => FFAppState().appOs = 'AOS');
-                        } else {
-                          if (isiOS ? true : false) {
-                            setState(() => FFAppState().appOs = 'IOS');
-                          } else {
-                            if (isWeb ? true : false) {
-                              setState(() => FFAppState().appOs = 'WEB');
+                        if (SigninFlowGroup.sMSVerificationAndSigninCall
+                                .isProfileImageUploaded(
+                              (apiResultf8v?.jsonBody ?? ''),
+                            ) &&
+                            SigninFlowGroup.sMSVerificationAndSigninCall
+                                .isLicenseImageUploaded(
+                              (apiResultf8v?.jsonBody ?? ''),
+                            )) {
+                          apiResultGetAccount = await DriverInfoGroup
+                              .getSettlementAccountCall
+                              .call(
+                            driverId: FFAppState().driverId,
+                            apiToken: FFAppState().apiToken,
+                          );
+                          if ((apiResultGetAccount?.succeeded ?? true)) {
+                            if (isAndroid ? true : false) {
+                              setState(() => FFAppState().appOs = 'AOS');
                             } else {
-                              setState(() => FFAppState().appOs = 'UNKNOWN');
+                              if (isiOS ? true : false) {
+                                setState(() => FFAppState().appOs = 'IOS');
+                              } else {
+                                if (isWeb ? true : false) {
+                                  setState(() => FFAppState().appOs = 'WEB');
+                                } else {
+                                  setState(
+                                      () => FFAppState().appOs = 'UNKNOWN');
+                                }
+                              }
                             }
-                          }
-                        }
 
-                        fcmToken = await actions.getFcmToken();
-                        apiResultUpdateDriver =
-                            await DriverInfoGroup.updateDriverCall.call(
-                          driverId: FFAppState().driverId,
-                          apiToken: FFAppState().apiToken,
-                          appOs: FFAppState().appOs,
-                          appVersion: FFAppState().appVersion,
-                          appFcmToken: fcmToken,
-                        );
-                        if ((apiResultUpdateDriver?.succeeded ?? true)) {
-                          if (SigninFlowGroup.sMSVerificationAndSigninCall
-                                  .isProfileImageUploaded(
-                                (apiResultf8v?.jsonBody ?? ''),
-                              ) &&
-                              SigninFlowGroup.sMSVerificationAndSigninCall
-                                  .isLicenseImageUploaded(
-                                (apiResultf8v?.jsonBody ?? ''),
-                              )) {
-                            apiResultGetAccount = await DriverInfoGroup
-                                .getSettlementAccountCall
-                                .call(
+                            fcmToken = await actions.getFcmToken();
+                            apiResultUpdateDriver =
+                                await DriverInfoGroup.updateDriverCall.call(
                               driverId: FFAppState().driverId,
                               apiToken: FFAppState().apiToken,
+                              appOs: FFAppState().appOs,
+                              appVersion: FFAppState().appVersion,
+                              appFcmToken: fcmToken,
                             );
-                            if ((apiResultGetAccount?.succeeded ?? true)) {
+                            if ((apiResultUpdateDriver?.succeeded ?? true)) {
                               apiResultLatestCall = await TaxiCallGroup
                                   .getLatestTaxiCallCall
                                   .call(
@@ -307,86 +308,86 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                 );
                               }
                             } else {
-                              if ((apiResultGetAccount?.statusCode ?? 200) ==
-                                  404) {
-                                context.goNamed('RegisterInstallment');
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('오류'),
-                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Get Settlement Account'),
-                                      content: Text(getJsonField(
-                                        (apiResultGetAccount?.jsonBody ?? ''),
-                                        r'''$.message''',
-                                      ).toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('오류'),
+                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('Update Driver'),
+                                    content: Text(getJsonField(
+                                      (apiResultUpdateDriver?.jsonBody ?? ''),
+                                      r'''$.message''',
+                                    ).toString()),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             }
                           } else {
-                            context.goNamed('RegisterImages');
+                            if ((apiResultGetAccount?.statusCode ?? 200) ==
+                                404) {
+                              context.goNamed('RegisterInstallment');
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('오류'),
+                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('Get Settlement Account'),
+                                    content: Text(getJsonField(
+                                      (apiResultGetAccount?.jsonBody ?? ''),
+                                      r'''$.message''',
+                                    ).toString()),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
                           }
                         } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('오류'),
-                                content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('확인'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Update Driver'),
-                                content: Text(getJsonField(
-                                  (apiResultUpdateDriver?.jsonBody ?? ''),
-                                  r'''$.message''',
-                                ).toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          context.goNamed('RegisterImages');
                         }
                       } else {
                         if ((apiResultf8v?.statusCode ?? 200) == 404) {
