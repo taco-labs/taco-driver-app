@@ -92,12 +92,12 @@ class _LoginWidgetState extends State<LoginWidget>
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
                         child: Text(
                           '로그인 또는 기사 회원 가입을 위해 휴대폰번호를 인증해주세요',
                           textAlign: TextAlign.center,
@@ -110,8 +110,8 @@ class _LoginWidgetState extends State<LoginWidget>
                         ).animateOnPageLoad(
                             animationsMap['textOnPageLoadAnimation']!),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -173,7 +173,7 @@ class _LoginWidgetState extends State<LoginWidget>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       if (formKey.currentState == null ||

@@ -111,40 +111,50 @@ class _SettingWidgetState extends State<SettingWidget> {
                     ],
                   ),
                 ),
-                ListTile(
-                  title: Text(
-                    '회사소개',
-                    style: FlutterFlowTheme.of(context).title3.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                InkWell(
+                  onTap: () async {
+                    context.pushNamed('CompanyInfo');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      '회사소개',
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xFF303030),
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
                   ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Color(0xFF303030),
-                    size: 20,
-                  ),
-                  tileColor: Color(0xFFF5F5F5),
-                  dense: false,
                 ),
                 Divider(),
-                ListTile(
-                  title: Text(
-                    '약관 및 정책',
-                    style: FlutterFlowTheme.of(context).title3.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                InkWell(
+                  onTap: () async {
+                    context.pushNamed('Policy');
+                  },
+                  child: ListTile(
+                    title: Text(
+                      '약관 및 정책',
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xFF303030),
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
                   ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Color(0xFF303030),
-                    size: 20,
-                  ),
-                  tileColor: Color(0xFFF5F5F5),
-                  dense: false,
                 ),
                 Divider(),
                 Align(

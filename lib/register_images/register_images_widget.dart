@@ -1,11 +1,12 @@
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RegisterImagesWidget extends StatefulWidget {
   const RegisterImagesWidget({
@@ -81,16 +82,39 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                              child: Container(
-                                width: 90,
-                                height: 90,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: CachedNetworkImage(
-                                  imageUrl: FFAppState().profileImagePath,
-                                  fit: BoxFit.fitWidth,
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: FlutterFlowExpandedImageView(
+                                        image: Image.network(
+                                          FFAppState().profileImagePath,
+                                          fit: BoxFit.contain,
+                                        ),
+                                        allowRotation: false,
+                                        tag: FFAppState().profileImagePath,
+                                        useHeroAnimation: true,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Hero(
+                                  tag: FFAppState().profileImagePath,
+                                  transitionOnUserGestures: true,
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.network(
+                                      FFAppState().profileImagePath,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -203,11 +227,34 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.rectangle,
                             ),
-                            child: Image.network(
-                              FFAppState().licenseImagePath,
-                              width: 240,
-                              height: 130,
-                              fit: BoxFit.cover,
+                            child: InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: FlutterFlowExpandedImageView(
+                                      image: Image.network(
+                                        FFAppState().licenseImagePath,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      allowRotation: false,
+                                      tag: FFAppState().licenseImagePath,
+                                      useHeroAnimation: true,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: FFAppState().licenseImagePath,
+                                transitionOnUserGestures: true,
+                                child: Image.network(
+                                  FFAppState().licenseImagePath,
+                                  width: 240,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
                         ),

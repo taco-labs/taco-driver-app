@@ -127,14 +127,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => RideHistoryWidget(),
             ),
             FFRoute(
+              name: 'HomeCopy',
+              path: 'homeCopy',
+              builder: (context, params) => HomeCopyWidget(),
+            ),
+            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(),
             ),
             FFRoute(
-              name: 'HomeCopy',
-              path: 'homeCopy',
-              builder: (context, params) => HomeCopyWidget(),
+              name: 'CompanyInfo',
+              path: 'companyInfo',
+              builder: (context, params) => CompanyInfoWidget(),
+            ),
+            FFRoute(
+              name: 'Policy',
+              path: 'policy',
+              builder: (context, params) => PolicyWidget(),
+            ),
+            FFRoute(
+              name: 'TermsOfService',
+              path: 'termsOfService',
+              builder: (context, params) => TermsOfServiceWidget(),
+            ),
+            FFRoute(
+              name: 'PrivacyPolicy',
+              path: 'privacyPolicy',
+              builder: (context, params) => PrivacyPolicyWidget(),
+            ),
+            FFRoute(
+              name: 'SupportChat',
+              path: 'supportChat',
+              builder: (context, params) => SupportChatWidget(),
             ),
             FFRoute(
               name: 'test',

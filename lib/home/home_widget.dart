@@ -177,6 +177,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                 dense: false,
               ),
             ),
+            InkWell(
+              onTap: () async {
+                context.pushNamed('SupportChat');
+              },
+              child: ListTile(
+                title: Text(
+                  '고객센터',
+                  style: FlutterFlowTheme.of(context).title3.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
+                      ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF303030),
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
+              ),
+            ),
           ],
         ),
       ),
