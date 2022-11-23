@@ -112,63 +112,61 @@ class _LoginWidgetState extends State<LoginWidget>
                     ),
                   ],
                 ),
-                Form(
-                  key: formKey,
-                  autovalidateMode: AutovalidateMode.always,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: AutovalidateMode.always,
                     child: TextFormField(
                       controller: phoneNumberController,
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: '-를 제외한 휴대폰 번호를 입력하세요',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                        enabledBorder: UnderlineInputBorder(
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodyText2.override(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 18,
+                                ),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        errorBorder: UnderlineInputBorder(
+                        errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        focusedErrorBorder: UnderlineInputBorder(
+                        focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 18,
                           ),
+                      textAlign: TextAlign.start,
                       keyboardType: TextInputType.phone,
                     ),
                   ),

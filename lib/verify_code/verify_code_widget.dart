@@ -99,58 +99,55 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Form(
-                  key: formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
                     child: TextFormField(
                       controller: textController,
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: '숫자 6자리 입력',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                        enabledBorder: UnderlineInputBorder(
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodyText2.override(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 18,
+                                ),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        errorBorder: UnderlineInputBorder(
+                        errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        focusedErrorBorder: UnderlineInputBorder(
+                        focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2,
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',

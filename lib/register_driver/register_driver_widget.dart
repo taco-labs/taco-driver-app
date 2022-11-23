@@ -181,7 +181,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       decoration: InputDecoration(
                                         labelText: '성',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2,
                                         enabledBorder: OutlineInputBorder(
@@ -259,7 +263,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       decoration: InputDecoration(
                                         labelText: '이름',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2,
                                         enabledBorder: OutlineInputBorder(
@@ -344,7 +352,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     decoration: InputDecoration(
                                       labelText: '주민등록번호',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2,
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyText2,
                                       enabledBorder: OutlineInputBorder(
@@ -429,7 +441,11 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyText2,
                                       enabledBorder: OutlineInputBorder(
@@ -570,8 +586,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: '차량번호',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                    ),
                                 hintStyle:
                                     FlutterFlowTheme.of(context).bodyText2,
                                 enabledBorder: OutlineInputBorder(
@@ -645,8 +665,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: '택시운전 자격증번호',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                    ),
                                 hintStyle:
                                     FlutterFlowTheme.of(context).bodyText2,
                                 enabledBorder: OutlineInputBorder(
@@ -722,8 +746,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: '사업자등록번호 10자리',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18,
+                                      ),
                                   hintStyle:
                                       FlutterFlowTheme.of(context).bodyText2,
                                   enabledBorder: OutlineInputBorder(
@@ -906,6 +934,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             setState(() =>
                                 FFAppState().apiToken = SignupGroup.signupCall
                                     .apiToken(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
+                            setState(() =>
+                                FFAppState().driverId = SignupGroup.signupCall
+                                    .driverId(
                                       (apiResultbos?.jsonBody ?? ''),
                                     )
                                     .toString());
