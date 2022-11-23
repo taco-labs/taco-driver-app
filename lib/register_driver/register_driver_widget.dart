@@ -100,7 +100,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Form(
                     key: formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
+                    autovalidateMode: AutovalidateMode.always,
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -175,6 +175,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         20, 0, 5, 0),
                                     child: TextFormField(
                                       controller: lastNameController,
+                                      autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: '성',
