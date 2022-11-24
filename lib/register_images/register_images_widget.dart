@@ -1,12 +1,10 @@
 import '../backend/api_requests/api_calls.dart';
-import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 
 class RegisterImagesWidget extends StatefulWidget {
   const RegisterImagesWidget({
@@ -86,39 +84,16 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                              child: InkWell(
-                                onTap: () async {
-                                  await Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: FlutterFlowExpandedImageView(
-                                        image: Image.network(
-                                          FFAppState().profileImagePath,
-                                          fit: BoxFit.contain,
-                                        ),
-                                        allowRotation: false,
-                                        tag: FFAppState().profileImagePath,
-                                        useHeroAnimation: true,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Hero(
-                                  tag: FFAppState().profileImagePath,
-                                  transitionOnUserGestures: true,
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.network(
-                                      FFAppState().profileImagePath,
-                                      fit: BoxFit.fitWidth,
-                                    ),
-                                  ),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  FFAppState().profileImagePath,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -180,6 +155,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                                 .profileImageDownloadUrl(
                                           (apiResulttx0?.jsonBody ?? ''),
                                         ));
+
+                                    context.goNamed('RegisterImages');
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -278,7 +255,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             },
                             text: '프로필 사진 등록',
                             options: FFButtonOptions(
-                              height: 60,
+                              width: 230,
+                              height: 50,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
@@ -291,7 +269,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 color: Colors.transparent,
                                 width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(50),
                             ),
                           ),
                         ),
@@ -302,34 +280,11 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.rectangle,
                             ),
-                            child: InkWell(
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: FlutterFlowExpandedImageView(
-                                      image: Image.network(
-                                        FFAppState().licenseImagePath,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      allowRotation: false,
-                                      tag: FFAppState().licenseImagePath,
-                                      useHeroAnimation: true,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Hero(
-                                tag: FFAppState().licenseImagePath,
-                                transitionOnUserGestures: true,
-                                child: Image.network(
-                                  FFAppState().licenseImagePath,
-                                  width: 240,
-                                  height: 130,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                            child: Image.network(
+                              FFAppState().licenseImagePath,
+                              width: 240,
+                              height: 130,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -487,7 +442,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             },
                             text: '택시 등록증 사진 등록',
                             options: FFButtonOptions(
-                              height: 60,
+                              width: 230,
+                              height: 50,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
@@ -500,7 +456,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                 color: Colors.transparent,
                                 width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(50),
                             ),
                           ),
                         ),
@@ -509,7 +465,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       if (profileUploadSucceeded! && licenseUploadSucceeded!) {
@@ -554,7 +510,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                     },
                     text: '확인',
                     options: FFButtonOptions(
-                      width: 270,
+                      width: 230,
                       height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle: FlutterFlowTheme.of(context)
@@ -567,7 +523,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                         color: Colors.transparent,
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),

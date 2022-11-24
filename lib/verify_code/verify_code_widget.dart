@@ -447,8 +447,8 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                     },
                     text: '확인',
                     options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
+                      width: 230,
+                      height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(

@@ -262,6 +262,7 @@ class _LoginWidgetState extends State<LoginWidget>
                         color: Colors.transparent,
                         width: 1,
                       ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),

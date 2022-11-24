@@ -1025,7 +1025,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                     },
                     text: '확인',
                     options: FFButtonOptions(
-                      width: 270,
+                      width: 230,
                       height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle: FlutterFlowTheme.of(context)
@@ -1038,7 +1038,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                         color: Colors.transparent,
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),

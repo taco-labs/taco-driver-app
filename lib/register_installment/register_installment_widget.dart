@@ -302,7 +302,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                     },
                     text: '확인',
                     options: FFButtonOptions(
-                      width: 270,
+                      width: 230,
                       height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle: FlutterFlowTheme.of(context)
@@ -315,7 +315,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         color: Colors.transparent,
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
