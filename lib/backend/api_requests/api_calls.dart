@@ -353,6 +353,10 @@ class DriverInfoGroup {
       UpdateDriverSettlementAccountCall();
   static GetDriverImageUrlsCall getDriverImageUrlsCall =
       GetDriverImageUrlsCall();
+  static GetExpectetedSettlementCall getExpectetedSettlementCall =
+      GetExpectetedSettlementCall();
+  static ListDriverSettlementHistoryCall listDriverSettlementHistoryCall =
+      ListDriverSettlementHistoryCall();
 }
 
 class GetDriverCall {
@@ -724,6 +728,51 @@ class GetDriverImageUrlsCall {
         response,
         r'''$.downloadUrls.licenseImage''',
       );
+}
+
+class GetExpectetedSettlementCall {
+  Future<ApiCallResponse> call({
+    String? apiToken = '',
+    String? driverId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Expecteted Settlement',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}/driver/${driverId}/expected_settlement',
+      callType: ApiCallType.GET,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class ListDriverSettlementHistoryCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiToken = '',
+    String? pageToken = '',
+    int? count,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Driver Settlement History',
+      apiUrl: '${DriverInfoGroup.baseUrl}/driver/${driverId}/settlement',
+      callType: ApiCallType.GET,
+      headers: {
+        ...DriverInfoGroup.headers,
+      },
+      params: {
+        'pageToken': pageToken,
+        'count': count,
+      },
+      returnBody: true,
+      cache: false,
+    );
+  }
 }
 
 /// End Driver Info Group Code
