@@ -38,6 +38,33 @@ class _EntryWidgetState extends State<EntryWidget> {
                   (apiResultyb1?.jsonBody ?? ''),
                 )
                 .toString());
+        setState(
+            () => FFAppState().driverLastName = DriverInfoGroup.getDriverCall
+                .lastName(
+                  (apiResultyb1?.jsonBody ?? ''),
+                )
+                .toString());
+        setState(
+            () => FFAppState().serviceRegion = DriverInfoGroup.getDriverCall
+                .serviceRegion(
+                  (apiResultyb1?.jsonBody ?? ''),
+                )
+                .toString());
+        setState(() => FFAppState().carNumber = DriverInfoGroup.getDriverCall
+            .carNumber(
+              (apiResultyb1?.jsonBody ?? ''),
+            )
+            .toString());
+        setState(() =>
+            FFAppState().isActive = DriverInfoGroup.getDriverCall.isActive(
+              (apiResultyb1?.jsonBody ?? ''),
+            ));
+        setState(() =>
+            FFAppState().driverLicenseNumber = DriverInfoGroup.getDriverCall
+                .driverLicenseId(
+                  (apiResultyb1?.jsonBody ?? ''),
+                )
+                .toString());
         if (DriverInfoGroup.getDriverCall.isProfileImageUploaded(
               (apiResultyb1?.jsonBody ?? ''),
             ) &&

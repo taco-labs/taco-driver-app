@@ -945,6 +945,40 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       (apiResultbos?.jsonBody ?? ''),
                                     )
                                     .toString());
+                            setState(() => FFAppState().driverFirstName =
+                                SignupGroup.signupCall
+                                    .driverFirstName(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
+                            setState(() => FFAppState().driverLastName =
+                                SignupGroup.signupCall
+                                    .driverLastName(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
+                            setState(() => FFAppState().serviceRegion =
+                                SignupGroup.signupCall
+                                    .driverServiceRegion(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
+                            setState(() =>
+                                FFAppState().carNumber = SignupGroup.signupCall
+                                    .driverCarNumber(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
+                            setState(() => FFAppState().isActive =
+                                    SignupGroup.signupCall.driverIsActive(
+                                  (apiResultbos?.jsonBody ?? ''),
+                                ));
+                            setState(() => FFAppState().driverLicenseNumber =
+                                SignupGroup.signupCall
+                                    .driverLicenseId(
+                                      (apiResultbos?.jsonBody ?? ''),
+                                    )
+                                    .toString());
 
                             context.goNamed('RegisterImages');
                           } else {

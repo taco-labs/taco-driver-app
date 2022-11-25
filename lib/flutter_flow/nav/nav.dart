@@ -160,11 +160,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'SupportChat',
               path: 'supportChat',
               builder: (context, params) => SupportChatWidget(),
-            ),
-            FFRoute(
-              name: 'test',
-              path: 'test',
-              builder: (context, params) => TestWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

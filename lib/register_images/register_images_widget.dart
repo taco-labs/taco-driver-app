@@ -75,27 +75,51 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Container(
-                            width: 100,
-                            height: 100,
+                            width: 120,
+                            height: 120,
                             decoration: BoxDecoration(
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.circle,
                             ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  FFAppState().profileImagePath,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                            child: Stack(
+                              children: [
+                                if (FFAppState().profileImagePath == null ||
+                                    FFAppState().profileImagePath == '')
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        2, 2, 2, 2),
+                                    child: Container(
+                                      width: 120,
+                                      height: 120,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/Portrait_Placeholder.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                if (FFAppState().profileImagePath != null &&
+                                    FFAppState().profileImagePath != '')
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        2, 2, 2, 2),
+                                    child: Container(
+                                      width: 120,
+                                      height: 120,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.network(
+                                        FFAppState().profileImagePath,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         ),
@@ -255,7 +279,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             },
                             text: '프로필 사진 등록',
                             options: FFButtonOptions(
-                              width: 230,
+                              width: 150,
                               height: 50,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
@@ -280,11 +304,25 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.rectangle,
                             ),
-                            child: Image.network(
-                              FFAppState().licenseImagePath,
-                              width: 240,
-                              height: 130,
-                              fit: BoxFit.cover,
+                            child: Stack(
+                              children: [
+                                if (FFAppState().licenseImagePath == null ||
+                                    FFAppState().licenseImagePath == '')
+                                  Image.asset(
+                                    'assets/images/Square_Placeholder.png',
+                                    width: 240,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                  ),
+                                if (FFAppState().licenseImagePath != null &&
+                                    FFAppState().licenseImagePath != '')
+                                  Image.network(
+                                    FFAppState().licenseImagePath,
+                                    width: 240,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                  ),
+                              ],
                             ),
                           ),
                         ),
@@ -442,7 +480,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             },
                             text: '택시 등록증 사진 등록',
                             options: FFButtonOptions(
-                              width: 230,
+                              width: 190,
                               height: 50,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)

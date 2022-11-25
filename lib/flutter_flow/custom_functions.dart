@@ -87,3 +87,13 @@ String toDriverType(String driverTypeInput) {
 
   return driverType;
 }
+
+String toHumanFriendlyDistanceFromMeters(int meters) {
+  double distanceInKillometers = meters / 1000;
+
+  return '$distanceInKillometers km';
+}
+
+String toHumanFreindlyEtaFromNanoseconds(int nanoSeconds) {
+  return '${(nanoSeconds / 1000000000 / 60).toString()} 분';
+}

@@ -6,11 +6,13 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeCopyWidget extends StatefulWidget {
   const HomeCopyWidget({Key? key}) : super(key: key);
@@ -27,7 +29,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   ApiCallResponse? apiResultDriverToArrival;
   ApiCallResponse? apiResultj1q;
   ApiCallResponse? apiResultw8d;
+  ApiCallResponse? apiResultDoneTaxiCall;
   TextEditingController? taxiFareController;
+  TextEditingController? tollFareController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,12 +44,14 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
     });
 
     taxiFareController = TextEditingController();
+    tollFareController = TextEditingController(text: '0');
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
     taxiFareController?.dispose();
+    tollFareController?.dispose();
     super.dispose();
   }
 
@@ -195,279 +201,782 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              if (FFAppState().isOnDuty)
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10, 60, 10, 0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 250,
-                    child: Stack(
-                      children: [
-                        if (FFAppState().isOnCallWaiting)
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                            child: Container(
-                              width: double.infinity,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4,
-                                    color: Color(0x33000000),
-                                    offset: Offset(0, 2),
-                                  )
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 40, 0),
-                                    child: Text(
-                                      '콜 대기중입니다...',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 18,
-                                          ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 40,
-                                    height: 40,
-                                    child: custom_widgets.CallWaitingIndicator(
-                                      width: 40,
-                                      height: 40,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      strokeWidth: 2.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        if (FFAppState().isOnCallViewing)
-                          Container(
-                            decoration: BoxDecoration(
+                  child: Stack(
+                    children: [
+                      if (!FFAppState().isOnDuty ||
+                          FFAppState().isOnCallWaiting)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              borderRadius: BorderRadius.circular(24),
+                              width: 2,
                             ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 12, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '예상 운임',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${FFAppState().driverLastName}${FFAppState().driverFirstName}',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 16,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.requestBasePrice''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 0, 0, 0),
+                                        child: Text(
+                                          '기사님 안녕하세요',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
                                                     FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                        .secondaryText,
+                                                fontSize: 16,
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '호출료',
-                                                textAlign: TextAlign.center,
-                                                style:
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 0, 0, 0),
+                                        child: Text(
+                                          '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
                                                     FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                        .secondaryText,
+                                                fontSize: 16,
                                               ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 20, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        FFAppState().driverLicenseNumber,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 16,
                                             ),
-                                            Text(
-                                              getJsonField(
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 20, 0, 20),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        FFAppState().serviceRegion,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18,
+                                            ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 0, 0, 0),
+                                        child: Text(
+                                          FFAppState().carNumber,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 18,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (FFAppState().isOnCallWaiting)
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 40, 0),
+                                          child: Text(
+                                            '콜 대기중입니다...',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 18,
+                                                ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          height: 40,
+                                          child: custom_widgets
+                                              .CallWaitingIndicator(
+                                            width: 40,
+                                            height: 40,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            strokeWidth: 2.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      if (FFAppState().isOnDuty && FFAppState().isOnCallViewing)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 2,
+                            ),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '요청내역',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.tags''',
+                                            ).toString(),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            functions
+                                                .toHumanFriendlyDistanceFromMeters(
+                                                    getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.distance''',
+                                            )),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '/',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Text(
+                                          functions
+                                              .toHumanFreindlyEtaFromNanoseconds(
+                                                  getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.eta''',
+                                          )),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '예상 운임',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF101213),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.requestBasePrice''',
+                                            ).toString(),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF101213),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '호출료',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF101213),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.additionalPrice''',
+                                          ).toString(),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth3''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xFF101213),
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth3''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 40, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 10, 0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            apiResultw8d = await TaxiCallGroup
+                                                .rejectTaxiCallTicketCall
+                                                .call(
+                                              ticketId: getJsonField(
                                                 FFAppState().callRequest,
-                                                r'''$.additionalPrice''',
+                                                r'''$.taxiCallTicketId''',
                                               ).toString(),
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: Color(0xFF101213),
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                              apiToken: FFAppState().apiToken,
+                                            );
+                                            if ((apiResultw8d?.succeeded ??
+                                                true)) {
+                                              setState(() => FFAppState()
+                                                  .isOnCallViewing = false);
+                                              setState(() => FFAppState()
+                                                  .isOnCallWaiting = true);
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('오류'),
+                                                    content: Text(
+                                                        '서버 오류가 발생하여 다시 시도해주세요'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('확인'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('오류 코드'),
+                                                    content: Text((apiResultw8d
+                                                                ?.statusCode ??
+                                                            200)
+                                                        .toString()),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }
+
+                                            setState(() {});
+                                          },
+                                          text: '거절',
+                                          options: FFButtonOptions(
+                                            width: 100,
+                                            height: 60,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
                                             ),
-                                          ],
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.departureAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10, 0, 0, 0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            apiResultj1q = await TaxiCallGroup
+                                                .acceptTaxiCallTicketCall
+                                                .call(
+                                              ticketId: getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.taxiCallTicketId''',
+                                              ).toString(),
+                                              apiToken: FFAppState().apiToken,
+                                            );
+                                            if ((apiResultj1q?.succeeded ??
+                                                true)) {
+                                              setState(() =>
+                                                  FFAppState().latestCallState =
+                                                      'DRIVER_TO_DEPARTURE');
+                                              setState(() => FFAppState()
+                                                  .isOnCallViewing = false);
+                                              setState(() => FFAppState()
+                                                      .isOnDrivingToDeparture =
+                                                  true);
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('콜 수락 실패'),
+                                                    content: Text((apiResultj1q
+                                                                ?.statusCode ??
+                                                            200)
+                                                        .toString()),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        Text('AcceptTaxiCall'),
+                                                    content: Text(getJsonField(
+                                                      (apiResultj1q?.jsonBody ??
+                                                          ''),
+                                                      r'''$.message''',
+                                                    ).toString()),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }
+
+                                            setState(() {});
+                                          },
+                                          text: '콜 수락',
+                                          options: FFButtonOptions(
+                                            width: 140,
+                                            height: 60,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
                                             ),
-                                          ],
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: Color(0xFF101213),
-                                      size: 30,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 10, 0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                apiResultw8d =
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      if (FFAppState().isOnDuty &&
+                          FFAppState().isOnDrivingToDeparture)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 2,
+                            ),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 10, 0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              var confirmDialogResponse =
+                                                  await showDialog<bool>(
+                                                        context: context,
+                                                        builder:
+                                                            (alertDialogContext) {
+                                                          return AlertDialog(
+                                                            title: Text('주의'),
+                                                            content: Text(
+                                                                '콜 수락을 취소하시겠습니까? 이유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        false),
+                                                                child:
+                                                                    Text('유지'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        true),
+                                                                child:
+                                                                    Text('취소'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      ) ??
+                                                      false;
+                                              if (confirmDialogResponse) {
+                                                apiResultCancelCall =
                                                     await TaxiCallGroup
-                                                        .rejectTaxiCallTicketCall
+                                                        .cancelTaxiCallRequestCall
                                                         .call(
-                                                  ticketId: getJsonField(
+                                                  taxiCallRequestId:
+                                                      getJsonField(
                                                     FFAppState().callRequest,
-                                                    r'''$.taxiCallTicketId''',
+                                                    r'''$.taxiCallRequestId''',
                                                   ).toString(),
                                                   apiToken:
                                                       FFAppState().apiToken,
                                                 );
-                                                if ((apiResultw8d?.succeeded ??
+                                                if ((apiResultCancelCall
+                                                        ?.succeeded ??
                                                     true)) {
                                                   setState(() => FFAppState()
-                                                      .isOnCallViewing = false);
+                                                          .isOnDrivingToDeparture =
+                                                      false);
                                                   setState(() => FFAppState()
                                                       .isOnCallWaiting = true);
                                                 } else {
@@ -496,10 +1005,13 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         (alertDialogContext) {
                                                       return AlertDialog(
                                                         title: Text('오류 코드'),
-                                                        content: Text((apiResultw8d
-                                                                    ?.statusCode ??
-                                                                200)
-                                                            .toString()),
+                                                        content:
+                                                            Text(getJsonField(
+                                                          (apiResultCancelCall
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.message''',
+                                                        ).toString()),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>
@@ -512,322 +1024,384 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     },
                                                   );
                                                 }
+                                              }
 
-                                                setState(() {});
-                                              },
-                                              text: '거절',
-                                              options: FFButtonOptions(
-                                                width: 100,
-                                                height: 60,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 20,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                              setState(() {});
+                                            },
+                                            text: '취소',
+                                            options: FFButtonOptions(
+                                              width: 80,
+                                              height: 60,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
                                               ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 0, 0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                apiResultj1q =
-                                                    await TaxiCallGroup
-                                                        .acceptTaxiCallTicketCall
-                                                        .call(
-                                                  ticketId: getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.taxiCallTicketId''',
-                                                  ).toString(),
-                                                  apiToken:
-                                                      FFAppState().apiToken,
-                                                );
-                                                if ((apiResultj1q?.succeeded ??
-                                                    true)) {
-                                                  setState(() => FFAppState()
-                                                              .latestCallState =
-                                                          getJsonField(
-                                                        FFAppState()
-                                                            .callRequest,
-                                                        r'''$.taxiCallState''',
-                                                      ).toString());
-                                                  setState(() => FFAppState()
-                                                      .isOnCallViewing = false);
-                                                  setState(() => FFAppState()
-                                                          .isOnDrivingToDeparture =
-                                                      true);
-                                                } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('콜 수락 실패'),
-                                                        content: Text((apiResultj1q
-                                                                    ?.statusCode ??
-                                                                200)
-                                                            .toString()),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                }
-
-                                                setState(() {});
-                                              },
-                                              text: '콜 수락',
-                                              options: FFButtonOptions(
-                                                width: 140,
-                                                height: 60,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 20,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (FFAppState().isOnDrivingToDeparture)
-                          Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 12, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '예상 운임',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 10, 0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              await launchUrl(Uri(
+                                                scheme: 'tel',
+                                                path: getJsonField(
                                                   FFAppState().callRequest,
-                                                  r'''$.requestBasePrice''',
+                                                  r'''$.userPhone''',
                                                 ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
+                                              ));
+                                            },
+                                            text: '',
+                                            icon: Icon(
+                                              Icons.phone,
+                                              size: 15,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '호출료',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                            options: FFButtonOptions(
+                                              width: 60,
+                                              height: 60,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
                                               ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                             ),
-                                            Text(
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 10, 0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              await launchUrl(Uri(
+                                                scheme: 'sms',
+                                                path: getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.userPhone''',
+                                                ).toString(),
+                                              ));
+                                            },
+                                            text: '',
+                                            icon: Icon(
+                                              Icons.message,
+                                              size: 15,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 60,
+                                              height: 60,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            await actions.launchKakaoNavi(
                                               getJsonField(
                                                 FFAppState().callRequest,
-                                                r'''$.additionalPrice''',
-                                              ).toString(),
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: Color(0xFF101213),
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.departureAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                                r'''$.departureLatitude''',
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: Color(0xFF101213),
-                                      size: 30,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureLongitude''',
                                               ),
+                                              '출발지',
+                                            );
+                                          },
+                                          text: '길안내',
+                                          options: FFButtonOptions(
+                                            width: 100,
+                                            height: 60,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
                                             ),
-                                          ],
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 0),
-                                      child: FFButtonWidget(
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '요청내역',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.tags''',
+                                            ).toString(),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth3''',
+                                          ).toString()} ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalMainAddressNo''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                                    FFAppState().callRequest,
+                                                    r'''$.arrivalSubAddressNo''',
+                                                  ) !=
+                                                  null
+                                              ? '-${getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.arrivalSubAddressNo''',
+                                                ).toString()}'
+                                              : ' ',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xFF101213),
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth3''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 40, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      FFButtonWidget(
                                         onPressed: () async {
-                                          await actions.launchKakaoNavi(
-                                            37.4927431676548,
-                                            127.013867969161,
-                                            '출발지',
+                                          apiResultDriverToArrival =
+                                              await TaxiCallGroup
+                                                  .taxiCallDriverToArrivalCall
+                                                  .call(
+                                            taxiCallRequestId: getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.taxiCallRequestId''',
+                                            ).toString(),
+                                            apiToken: FFAppState().apiToken,
                                           );
-                                          setState(() => FFAppState()
-                                              .isOnDrivingToDeparture = false);
-                                          setState(() => FFAppState()
-                                              .isOnDrivingToArrival = true);
+                                          if ((apiResultDriverToArrival
+                                                  ?.succeeded ??
+                                              true)) {
+                                            setState(() =>
+                                                FFAppState().latestCallState =
+                                                    'DRIVER_TO_ARRIVAL');
+                                            setState(() => FFAppState()
+                                                    .isOnDrivingToDeparture =
+                                                false);
+                                            setState(() => FFAppState()
+                                                .isOnDrivingToArrival = true);
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('오류'),
+                                                  content: Text(
+                                                      '서버 오류가 발생하여 다시 시도해주세요'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('확인'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('에러코드'),
+                                                  content: Text(getJsonField(
+                                                    (apiResultDriverToArrival
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.message''',
+                                                  ).toString()),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
+
+                                          setState(() {});
                                         },
-                                        text: '출발지 이동',
+                                        text: '손님 탐승 완료',
                                         options: FFButtonOptions(
-                                          width: 120,
+                                          width: 300,
                                           height: 60,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
@@ -837,7 +1411,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
-                                                    fontSize: 20,
+                                                    fontSize: 18,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -847,490 +1421,346 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               BorderRadius.circular(8),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                        if (FFAppState().isOnDrivingToArrival)
-                          Container(
-                            decoration: BoxDecoration(
+                        ),
+                      if (FFAppState().isOnDuty &&
+                          FFAppState().isOnDrivingToArrival)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              borderRadius: BorderRadius.circular(24),
+                              width: 2,
                             ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 12, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '예상 운임',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.requestBasePrice''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '호출료',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                            ),
-                                            Text(
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            await actions.launchKakaoNavi(
                                               getJsonField(
                                                 FFAppState().callRequest,
-                                                r'''$.additionalPrice''',
-                                              ).toString(),
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
+                                                r'''$.arrivalLatitude''',
+                                              ),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalLongitude''',
+                                              ),
+                                              '목적지',
+                                            );
+                                          },
+                                          text: '목적지 길안내',
+                                          options: FFButtonOptions(
+                                            width: 150,
+                                            height: 60,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '요청내역',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.tags''',
+                                            ).toString(),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 10, 0, 0),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureAdressRegionDepth3''',
+                                          ).toString()} ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureMainAddressNo''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                                    FFAppState().callRequest,
+                                                    r'''$.departureSubAddressNo''',
+                                                  ) !=
+                                                  null
+                                              ? '-${getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.departureSubAddressNo''',
+                                                ).toString()}'
+                                              : ' ',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xFF101213),
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth2''',
+                                          ).toString()}  ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalAdressRegionDepth3''',
+                                          ).toString()} ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalMainAddressNo''',
+                                          ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                                    FFAppState().callRequest,
+                                                    r'''$.arrivalSubAddressNo''',
+                                                  ) !=
+                                                  null
+                                              ? '-${getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.arrivalSubAddressNo''',
+                                                ).toString()}'
+                                              : ' ',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 40, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          setState(() => FFAppState()
+                                              .isOnDrivingToArrival = false);
+                                          setState(() =>
+                                              FFAppState().isArrived = true);
+                                        },
+                                        text: '목적지 도착',
+                                        options: FFButtonOptions(
+                                          width: 300,
+                                          height: 60,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: Color(0xFF101213),
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 18,
                                                   ),
-                                            ),
-                                          ],
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.departureAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: Color(0xFF101213),
-                                      size: 30,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalAdressRegionDepth3''',
-                                                ).toString(),
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 0),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      if (FFAppState().isOnDuty && FFAppState().isArrived)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 2,
+                            ),
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 10, 0, 10),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
                                       child: Row(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 10, 0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                var confirmDialogResponse =
-                                                    await showDialog<bool>(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: Text('주의'),
-                                                              content: Text(
-                                                                  '콜 수락을 취소하시겠습니까?'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          false),
-                                                                  child: Text(
-                                                                      '유지'),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          true),
-                                                                  child: Text(
-                                                                      '취소'),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        ) ??
-                                                        false;
-                                                if (confirmDialogResponse) {
-                                                  apiResultCancelCall =
-                                                      await TaxiCallGroup
-                                                          .cancelTaxiCallRequestCall
-                                                          .call(
-                                                    taxiCallRequestId:
-                                                        getJsonField(
-                                                      FFAppState().callRequest,
-                                                      r'''$.taxiCallRequestId''',
-                                                    ).toString(),
-                                                    apiToken:
-                                                        FFAppState().apiToken,
-                                                  );
-                                                  if ((apiResultCancelCall
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    setState(() => FFAppState()
-                                                            .isOnDrivingToDeparture =
-                                                        false);
-                                                    setState(() => FFAppState()
-                                                            .isOnCallWaiting =
-                                                        true);
-                                                  } else {
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text('오류'),
-                                                          content: Text(
-                                                              '서버 오류가 발생하여 다시 시도해주세요'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: Text('확인'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text('오류 코드'),
-                                                          content: Text(
-                                                              (apiResultCancelCall
-                                                                          ?.statusCode ??
-                                                                      200)
-                                                                  .toString()),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: Text('Ok'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  }
-                                                }
-
-                                                setState(() {});
-                                              },
-                                              text: '취소',
-                                              options: FFButtonOptions(
-                                                width: 100,
-                                                height: 60,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 20,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 0, 0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                apiResultDriverToArrival =
-                                                    await TaxiCallGroup
-                                                        .taxiCallDriverToArrivalCall
-                                                        .call(
-                                                  taxiCallRequestId:
-                                                      getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.taxiCallRequestId''',
-                                                  ).toString(),
-                                                  apiToken:
-                                                      FFAppState().apiToken,
-                                                );
-                                                if ((apiResultDriverToArrival
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  await actions.launchKakaoNavi(
-                                                    37.4927431676548,
-                                                    127.013867969161,
-                                                    '목적지',
-                                                  );
-                                                  setState(() => FFAppState()
-                                                          .isOnDrivingToArrival =
-                                                      false);
-                                                  setState(() => FFAppState()
-                                                      .isArrived = true);
-                                                } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('오류'),
-                                                        content: Text(
-                                                            '서버 오류가 발생하여 다시 시도해주세요'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('확인'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('에러코드'),
-                                                        content: Text(
-                                                            (apiResultDriverToArrival
-                                                                        ?.statusCode ??
-                                                                    200)
-                                                                .toString()),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                }
-
-                                                setState(() {});
-                                              },
-                                              text: '운행 시작',
-                                              options: FFButtonOptions(
-                                                width: 140,
-                                                height: 60,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.white,
-                                                          fontSize: 20,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (FFAppState().isArrived)
-                          Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 12, 0, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                '호출료',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color:
-                                                              Color(0xFF101213),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                            ),
-                                            Text(
-                                              getJsonField(
-                                                FFAppState().callRequest,
-                                                r'''$.additionalPrice''',
-                                              ).toString(),
+                                                    0, 0, 5, 0),
+                                            child: Text(
+                                              '정산예정 호출료',
                                               textAlign: TextAlign.center,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -1338,132 +1768,298 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   .override(
                                                     fontFamily: 'Outfit',
                                                     color: Color(0xFF101213),
-                                                    fontSize: 20,
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 10, 0, 0),
-                                      child: Form(
-                                        key: formKey,
-                                        autovalidateMode:
-                                            AutovalidateMode.disabled,
-                                        child: TextFormField(
-                                          controller: taxiFareController,
-                                          autofocus: true,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: '운임',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 18,
-                                                    ),
-                                            hintText: '최종 미터기 실 운임 입력',
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            errorBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedErrorBorder:
-                                                UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            filled: true,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 20,
-                                              ),
-                                          textAlign: TextAlign.center,
-                                          keyboardType: TextInputType.number,
-                                        ),
+                                          Text(
+                                            getJsonField(
+                                              FFAppState().callRequest,
+                                              r'''$.additionalPrice''',
+                                            ).toString(),
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Color(0xFF101213),
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 31, 0, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          if (formKey.currentState == null ||
-                                              !formKey.currentState!
-                                                  .validate()) {
-                                            return;
-                                          }
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 10, 0, 0),
+                                    child: Form(
+                                      key: formKey,
+                                      autovalidateMode:
+                                          AutovalidateMode.disabled,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          TextFormField(
+                                            controller: taxiFareController,
+                                            autofocus: true,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: '운임',
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 18,
+                                                      ),
+                                              hintText: '최종 미터기 실 운임 입력',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              errorBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedErrorBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 20,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                            keyboardType: TextInputType.number,
+                                            validator: (val) {
+                                              if (val == null || val.isEmpty) {
+                                                return '운임을 정확히 입력해주세요';
+                                              }
 
-                                          await TaxiCallGroup
-                                              .getLatestTaxiCallCall
-                                              .call();
+                                              if (val.length < 1) {
+                                                return '운임을 정확히 입력해주세요';
+                                              }
+
+                                              return null;
+                                            },
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 5, 0, 10),
+                                            child: TextFormField(
+                                              controller: tollFareController,
+                                              autofocus: true,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                labelText: '통행료',
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 18,
+                                                        ),
+                                                hintText: '통행료 입력',
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 20,
+                                                      ),
+                                              textAlign: TextAlign.center,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              validator: (val) {
+                                                if (val == null ||
+                                                    val.isEmpty) {
+                                                  return '통행료를 정확히 입력해주세요';
+                                                }
+
+                                                if (val.length < 1) {
+                                                  return '통행료를 정확히 입력해주세요';
+                                                }
+
+                                                return null;
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 31, 0, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        if (formKey.currentState == null ||
+                                            !formKey.currentState!.validate()) {
+                                          return;
+                                        }
+
+                                        apiResultDoneTaxiCall =
+                                            await TaxiCallGroup.doneTaxiCallCall
+                                                .call(
+                                          taxiCallRequestId: getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.taxiCallRequestId''',
+                                          ).toString(),
+                                          basePrice: int.parse(
+                                              taxiFareController!.text),
+                                          apiToken: FFAppState().apiToken,
+                                        );
+                                        if ((apiResultDoneTaxiCall?.succeeded ??
+                                            true)) {
+                                          setState(() =>
+                                              FFAppState().latestCallState =
+                                                  'TAXI_CALL_DONE');
                                           setState(() =>
                                               FFAppState().isArrived = false);
                                           setState(() => FFAppState()
                                               .isOnCallWaiting = true);
+                                        } else {
                                           await showDialog(
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: Text('안내'),
-                                                content:
-                                                    Text('운임과 호출료를 함께 결제 받으세요'),
+                                                title: Text('오류'),
+                                                content: Text(
+                                                    '서버 오류가 발생하여 다시 시도해주세요'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
@@ -1475,159 +2071,228 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               );
                                             },
                                           );
-                                        },
-                                        text: '운행 종료',
-                                        options: FFButtonOptions(
-                                          width: 120,
-                                          height: 60,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
-                                                    fontSize: 20,
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('에러코드'),
+                                                content: Text(getJsonField(
+                                                  (apiResultDoneTaxiCall
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.message''',
+                                                ).toString()),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
                                                   ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        }
+
+                                        setState(() {});
+                                      },
+                                      text: '운행 종료',
+                                      options: FFButtonOptions(
+                                        width: 300,
+                                        height: 60,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
                                         ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                     ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                  child: Stack(
+                    children: [
+                      if (FFAppState().isActive && !FFAppState().isOnDuty)
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              await requestPermission(locationPermission);
+                              apiResult438 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: true,
+                              );
+                              if ((apiResult438?.succeeded ?? true)) {
+                                setState(() => FFAppState().isOnDuty = true);
+                                setState(
+                                    () => FFAppState().isOnCallWaiting = true);
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+
+                              setState(() {});
+                            },
+                            text: '콜 받기',
+                            options: FFButtonOptions(
+                              width: 150,
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      if (FFAppState().isOnDuty &&
+                          !FFAppState().isOnDrivingToDeparture &&
+                          !FFAppState().isOnDrivingToArrival &&
+                          !FFAppState().isArrived &&
+                          FFAppState().isActive)
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              apiResultkg1 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: false,
+                              );
+                              if ((apiResultkg1?.succeeded ?? true)) {
+                                setState(() => FFAppState().isOnDuty = false);
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+
+                              setState(() {});
+                            },
+                            text: '콜 멈추기',
+                            options: FFButtonOptions(
+                              width: 150,
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      if (!FFAppState().isActive)
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                width: 2,
+                              ),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 15, 0, 15),
+                                child: Text(
+                                  '등록해주신 정보로 승인 심사중입니다',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18,
+                                      ),
                                 ),
                               ),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
                 ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                child: Stack(
-                  children: [
-                    if (!FFAppState().isOnDuty)
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await requestPermission(locationPermission);
-                            apiResult438 =
-                                await DriverInfoGroup.updateOnDutyCall.call(
-                              apiToken: FFAppState().apiToken,
-                              driverId: FFAppState().driverId,
-                              onDuty: true,
-                            );
-                            if ((apiResult438?.succeeded ?? true)) {
-                              setState(() => FFAppState().isOnDuty = true);
-                              setState(
-                                  () => FFAppState().isOnCallWaiting = true);
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-
-                            setState(() {});
-                          },
-                          text: '콜 받기',
-                          options: FFButtonOptions(
-                            width: 150,
-                            height: 60,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
-                    if (FFAppState().isOnDuty &&
-                        !FFAppState().isOnDrivingToDeparture &&
-                        !FFAppState().isOnDrivingToArrival &&
-                        !FFAppState().isArrived)
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            apiResultkg1 =
-                                await DriverInfoGroup.updateOnDutyCall.call(
-                              apiToken: FFAppState().apiToken,
-                              driverId: FFAppState().driverId,
-                              onDuty: false,
-                            );
-                            if ((apiResultkg1?.succeeded ?? true)) {
-                              setState(() => FFAppState().isOnDuty = false);
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-
-                            setState(() {});
-                          },
-                          text: '콜 멈추기',
-                          options: FFButtonOptions(
-                            width: 150,
-                            height: 60,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

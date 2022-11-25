@@ -197,6 +197,35 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                   (apiResultf8v?.jsonBody ?? ''),
                                 )
                                 .toString());
+                        setState(() => FFAppState().driverLastName =
+                            SigninFlowGroup.sMSVerificationAndSigninCall
+                                .driverLastName(
+                                  (apiResultf8v?.jsonBody ?? ''),
+                                )
+                                .toString());
+                        setState(() => FFAppState().serviceRegion =
+                            SigninFlowGroup.sMSVerificationAndSigninCall
+                                .driverServiceRegion(
+                                  (apiResultf8v?.jsonBody ?? ''),
+                                )
+                                .toString());
+                        setState(() => FFAppState().carNumber =
+                            SigninFlowGroup.sMSVerificationAndSigninCall
+                                .driverCarNumber(
+                                  (apiResultf8v?.jsonBody ?? ''),
+                                )
+                                .toString());
+                        setState(() => FFAppState().isActive = SigninFlowGroup
+                                .sMSVerificationAndSigninCall
+                                .driverIsActive(
+                              (apiResultf8v?.jsonBody ?? ''),
+                            ));
+                        setState(() => FFAppState().driverLicenseNumber =
+                            SigninFlowGroup.sMSVerificationAndSigninCall
+                                .driverLicenseId(
+                                  (apiResultf8v?.jsonBody ?? ''),
+                                )
+                                .toString());
                         if (SigninFlowGroup.sMSVerificationAndSigninCall
                                 .isProfileImageUploaded(
                               (apiResultf8v?.jsonBody ?? ''),

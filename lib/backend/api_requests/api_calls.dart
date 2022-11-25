@@ -162,6 +162,14 @@ class SMSVerificationAndSigninCall {
         response,
         r'''$.driver.driverProfileImageUploaded''',
       );
+  dynamic driverBirthday(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.birthday''',
+      );
+  dynamic driverServiceRegion(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.serviceRegion''',
+      );
 }
 
 /// End Signin  flow Group Code
@@ -271,6 +279,58 @@ class SignupCall {
         response,
         r'''$.driver.onDuty''',
       );
+  dynamic driverBirthday(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.birthday''',
+      );
+  dynamic driverLicenseId(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverLicenseId''',
+      );
+  dynamic driverBusinessRegistrationNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.companyRegistrationNumber''',
+      );
+  dynamic driverCarNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.carNumber''',
+      );
+  dynamic driverServiceRegion(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.serviceRegion''',
+      );
+  dynamic driverIsLicenseImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverLicenseImageUploaded''',
+      );
+  dynamic driverIsProfileImageUploaded(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.driverProfileImageUploaded''',
+      );
+  dynamic driverUploadUrls(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls''',
+      );
+  dynamic driverUploadUrlProfile(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls.profileImage''',
+      );
+  dynamic driverUploadUrlLicense(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.uploadUrls.licenseImage''',
+      );
+  dynamic driverDownloadUrls(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls''',
+      );
+  dynamic driverDownloadUrlProfile(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls.profileImage''',
+      );
+  dynamic driverDownloadUrlLicense(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.downloadUrls.licenseImage''',
+      );
 }
 
 /// End Signup Group Code
@@ -354,10 +414,6 @@ class GetDriverCall {
         response,
         r'''$.onDuty''',
       );
-  dynamic birthday(dynamic response) => getJsonField(
-        response,
-        r'''$.birtyday''',
-      );
   dynamic driverLicenseId(dynamic response) => getJsonField(
         response,
         r'''$.driverLicenseId''',
@@ -401,6 +457,14 @@ class GetDriverCall {
   dynamic isProfileImageUploaded(dynamic response) => getJsonField(
         response,
         r'''$.driverProfileImageUploaded''',
+      );
+  dynamic birthday(dynamic response) => getJsonField(
+        response,
+        r'''$.birthday''',
+      );
+  dynamic serviceRegion(dynamic response) => getJsonField(
+        response,
+        r'''$.serviceRegion''',
       );
 }
 

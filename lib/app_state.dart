@@ -66,6 +66,16 @@ class FFAppState {
   String profileImagePath = '';
 
   String licenseImagePath = '';
+
+  String driverLastName = '';
+
+  String serviceRegion = '';
+
+  String carNumber = '';
+
+  bool isActive = false;
+
+  String driverLicenseNumber = '';
 }
 
 LatLng? _latLngFromString(String? val) {
