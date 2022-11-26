@@ -215,6 +215,13 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,

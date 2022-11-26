@@ -229,10 +229,10 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              if (FFAppState().isOnDuty)
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 1,
@@ -241,7 +241,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                     height: MediaQuery.of(context).size.height * 1,
                   ),
                 ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
