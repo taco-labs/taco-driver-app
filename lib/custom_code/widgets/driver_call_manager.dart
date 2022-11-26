@@ -22,6 +22,13 @@ import '../../flutter_flow/custom_functions.dart'
 import 'package:url_launcher/url_launcher.dart';
 import '../../flutter_flow/permissions_util.dart';
 
+const String NotificationCategory_Taxicall = "Taxicall";
+const String NotificationCategory_Payment = "Payment";
+const String NotificationCategory_Driver = "Driver";
+
+const String TaxiCallStateRequested = "TAXI_CALL_REQUESTED";
+const String TaxiCallStateUserCancelled = "USER_CANCELLED";
+
 class DriverCallManager extends StatefulWidget {
   const DriverCallManager({
     Key? key,
