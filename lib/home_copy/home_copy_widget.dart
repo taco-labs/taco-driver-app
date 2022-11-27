@@ -2171,6 +2171,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 setState(() => FFAppState().isOnDuty = true);
                                 setState(
                                     () => FFAppState().isOnCallWaiting = true);
+                                await actions.startLocationService();
                               } else {
                                 await showDialog(
                                   context: context,
@@ -2229,6 +2230,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               );
                               if ((apiResultkg1?.succeeded ?? true)) {
                                 setState(() => FFAppState().isOnDuty = false);
+                                setState(
+                                    () => FFAppState().isOnCallWaiting = true);
+                                await actions.cancelLocationService();
                               } else {
                                 await showDialog(
                                   context: context,
@@ -2241,6 +2245,25 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
                                           child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('UpdateOnDuty'),
+                                      content: Text(getJsonField(
+                                        (apiResultkg1?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
                                         ),
                                       ],
                                     );
