@@ -168,6 +168,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 bank: params.getParam('bank', ParamType.String),
                 accountNumber:
                     params.getParam('accountNumber', ParamType.String),
+                expectedAmount:
+                    params.getParam('expectedAmount', ParamType.int),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

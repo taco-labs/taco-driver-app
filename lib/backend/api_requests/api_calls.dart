@@ -748,6 +748,15 @@ class GetExpectetedSettlementCall {
       cache: false,
     );
   }
+
+  dynamic driverId(dynamic response) => getJsonField(
+        response,
+        r'''$.driverId''',
+      );
+  dynamic expectedAmount(dynamic response) => getJsonField(
+        response,
+        r'''$.expectedAmount''',
+      );
 }
 
 class ListDriverSettlementHistoryCall {

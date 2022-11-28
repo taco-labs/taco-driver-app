@@ -16,6 +16,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  ApiCallResponse? apiResultd22;
   ApiCallResponse? apiResultqz6;
   ApiCallResponse? apiResulttx8;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -145,27 +146,77 @@ class _HomeWidgetState extends State<HomeWidget> {
                   apiToken: FFAppState().apiToken,
                 );
                 if ((apiResultqz6?.succeeded ?? true)) {
-                  context.pushNamed(
-                    'SettlementInfo',
-                    queryParams: {
-                      'bank': serializeParam(
-                        DriverInfoGroup.getSettlementAccountCall
-                            .bank(
-                              (apiResultqz6?.jsonBody ?? ''),
-                            )
-                            .toString(),
-                        ParamType.String,
-                      ),
-                      'accountNumber': serializeParam(
-                        DriverInfoGroup.getSettlementAccountCall
-                            .accountNumber(
-                              (apiResultqz6?.jsonBody ?? ''),
-                            )
-                            .toString(),
-                        ParamType.String,
-                      ),
-                    }.withoutNulls,
+                  apiResultd22 =
+                      await DriverInfoGroup.getExpectetedSettlementCall.call(
+                    apiToken: FFAppState().apiToken,
+                    driverId: FFAppState().driverId,
                   );
+                  if ((apiResultd22?.succeeded ?? true)) {
+                    context.pushNamed(
+                      'SettlementInfo',
+                      queryParams: {
+                        'bank': serializeParam(
+                          DriverInfoGroup.getSettlementAccountCall
+                              .bank(
+                                (apiResultqz6?.jsonBody ?? ''),
+                              )
+                              .toString(),
+                          ParamType.String,
+                        ),
+                        'accountNumber': serializeParam(
+                          DriverInfoGroup.getSettlementAccountCall
+                              .accountNumber(
+                                (apiResultqz6?.jsonBody ?? ''),
+                              )
+                              .toString(),
+                          ParamType.String,
+                        ),
+                        'expectedAmount': serializeParam(
+                          DriverInfoGroup.getExpectetedSettlementCall
+                              .expectedAmount(
+                            (apiResultd22?.jsonBody ?? ''),
+                          ),
+                          ParamType.int,
+                        ),
+                      }.withoutNulls,
+                    );
+                  } else {
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('오류'),
+                          content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('확인'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('GetExpectedAmount'),
+                          content: Text(getJsonField(
+                            (apiResultd22?.jsonBody ?? ''),
+                            r'''$.message''',
+                          ).toString()),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 } else {
                   await showDialog(
                     context: context,

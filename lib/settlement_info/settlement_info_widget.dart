@@ -11,10 +11,12 @@ class SettlementInfoWidget extends StatefulWidget {
     Key? key,
     this.bank,
     this.accountNumber,
+    this.expectedAmount,
   }) : super(key: key);
 
   final String? bank;
   final String? accountNumber;
+  final int? expectedAmount;
 
   @override
   _SettlementInfoWidgetState createState() => _SettlementInfoWidgetState();
@@ -48,6 +50,10 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
               ),
               Text(
                 widget.accountNumber!,
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+              Text(
+                'Hello World',
                 style: FlutterFlowTheme.of(context).bodyText1,
               ),
               FutureBuilder<ApiCallResponse>(
