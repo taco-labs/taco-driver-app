@@ -282,81 +282,92 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                       .toString(),
                             );
                             if ((apiResultUpdateDriver?.succeeded ?? true)) {
-                              apiResultLatestCall = await TaxiCallGroup
-                                  .getLatestTaxiCallCall
-                                  .call(
-                                driverId: FFAppState().driverId,
-                                apiToken: FFAppState().apiToken,
-                              );
-                              if ((apiResultLatestCall?.succeeded ?? true)) {
-                                setState(() => FFAppState().latestCallState =
-                                    TaxiCallGroup.getLatestTaxiCallCall
-                                        .callCurrentState(
-                                          (apiResultLatestCall?.jsonBody ?? ''),
-                                        )
-                                        .toString());
-                                setState(() => FFAppState().callRequest =
-                                    (apiResultLatestCall?.jsonBody ?? ''));
-                                if (FFAppState().latestCallState ==
-                                    'DRIVER_TO_DEPARTURE') {
-                                  setState(() => FFAppState()
-                                      .isOnDrivingToDeparture = true);
-                                } else {
+                              if (SigninFlowGroup.sMSVerificationAndSigninCall
+                                  .driverIsOnDuty(
+                                (apiResultf8v?.jsonBody ?? ''),
+                              )) {
+                                apiResultLatestCall = await TaxiCallGroup
+                                    .getLatestTaxiCallCall
+                                    .call(
+                                  driverId: FFAppState().driverId,
+                                  apiToken: FFAppState().apiToken,
+                                );
+                                if ((apiResultLatestCall?.succeeded ?? true)) {
+                                  setState(() => FFAppState().latestCallState =
+                                      TaxiCallGroup.getLatestTaxiCallCall
+                                          .callCurrentState(
+                                            (apiResultLatestCall?.jsonBody ??
+                                                ''),
+                                          )
+                                          .toString());
+                                  setState(() => FFAppState().callRequest =
+                                      (apiResultLatestCall?.jsonBody ?? ''));
                                   if (FFAppState().latestCallState ==
-                                      'DRIVER_TO_ARRIVAL') {
+                                      'DRIVER_TO_DEPARTURE') {
                                     setState(() => FFAppState()
-                                        .isOnDrivingToArrival = true);
+                                        .isOnDrivingToDeparture = true);
                                   } else {
-                                    setState(() =>
-                                        FFAppState().isOnCallWaiting = true);
+                                    if (FFAppState().latestCallState ==
+                                        'DRIVER_TO_ARRIVAL') {
+                                      setState(() => FFAppState()
+                                          .isOnDrivingToArrival = true);
+                                    } else {
+                                      setState(() =>
+                                          FFAppState().isOnCallWaiting = true);
+                                    }
                                   }
-                                }
-
-                                context.pushNamed('Home');
-                              } else {
-                                if ((apiResultLatestCall?.statusCode ?? 200) ==
-                                    404) {
-                                  setState(() =>
-                                      FFAppState().isOnCallWaiting = true);
 
                                   context.goNamed('Home');
                                 } else {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('오류'),
-                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('확인'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Get Latest Call'),
-                                        content: Text(getJsonField(
-                                          (apiResultLatestCall?.jsonBody ?? ''),
-                                          r'''$.message''',
-                                        ).toString()),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                  if ((apiResultLatestCall?.statusCode ??
+                                          200) ==
+                                      404) {
+                                    setState(() =>
+                                        FFAppState().isOnCallWaiting = true);
+
+                                    context.goNamed('Home');
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('오류'),
+                                          content:
+                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('확인'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Get Latest Call'),
+                                          content: Text(getJsonField(
+                                            (apiResultLatestCall?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
+                              } else {
+                                context.goNamed('Home');
                               }
                             } else {
                               await showDialog(

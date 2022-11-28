@@ -107,7 +107,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                 if ((apiResultLatestCall?.statusCode ?? 200) == 404) {
                   setState(() => FFAppState().isOnCallWaiting = true);
 
-                  context.pushNamed('Home');
+                  context.goNamed('Home');
                 } else {
                   await showDialog(
                     context: context,
@@ -146,7 +146,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                 }
               }
             } else {
-              context.pushNamed('Home');
+              context.goNamed('Home');
             }
           } else {
             if ((apiResultGetAccount?.statusCode ?? 200) == 404) {

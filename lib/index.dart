@@ -10,11 +10,15 @@ export 'register_installment/register_installment_widget.dart'
 export 'driver_profile/driver_profile_widget.dart' show DriverProfileWidget;
 export 'ride_history/ride_history_widget.dart' show RideHistoryWidget;
 export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
+export 'register_installment_copy/register_installment_copy_widget.dart'
+    show RegisterInstallmentCopyWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
 export 'company_info/company_info_widget.dart' show CompanyInfoWidget;
 export 'policy/policy_widget.dart' show PolicyWidget;
 export 'terms_of_service/terms_of_service_widget.dart'
     show TermsOfServiceWidget;
 export 'privacy_policy/privacy_policy_widget.dart' show PrivacyPolicyWidget;
-export 'support_chat/support_chat_widget.dart' show SupportChatWidget;
 export 'settlement_info/settlement_info_widget.dart' show SettlementInfoWidget;
+export 'settlemen_history/settlemen_history_widget.dart'
+    show SettlemenHistoryWidget;
+export 'support_chat/support_chat_widget.dart' show SupportChatWidget;

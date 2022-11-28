@@ -132,6 +132,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomeCopyWidget(),
             ),
             FFRoute(
+              name: 'RegisterInstallmentCopy',
+              path: 'registerInstallmentCopy',
+              builder: (context, params) => RegisterInstallmentCopyWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                authSmsStateKey:
+                    params.getParam('authSmsStateKey', ParamType.String),
+              ),
+            ),
+            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(),
@@ -157,20 +166,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
-              name: 'SupportChat',
-              path: 'supportChat',
-              builder: (context, params) => SupportChatWidget(),
-            ),
-            FFRoute(
               name: 'SettlementInfo',
               path: 'settlementInfo',
               builder: (context, params) => SettlementInfoWidget(
+                bankCode: params.getParam('bankCode', ParamType.String),
+                accountNumber:
+                    params.getParam('accountNumber', ParamType.String),
+                expectedAmount:
+                    params.getParam('expectedAmount', ParamType.int),
+              ),
+            ),
+            FFRoute(
+              name: 'SettlemenHistory',
+              path: 'settlemenHistory',
+              builder: (context, params) => SettlemenHistoryWidget(
                 bank: params.getParam('bank', ParamType.String),
                 accountNumber:
                     params.getParam('accountNumber', ParamType.String),
                 expectedAmount:
                     params.getParam('expectedAmount', ParamType.int),
               ),
+            ),
+            FFRoute(
+              name: 'SupportChat',
+              path: 'supportChat',
+              builder: (context, params) => SupportChatWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

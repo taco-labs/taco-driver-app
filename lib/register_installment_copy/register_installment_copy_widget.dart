@@ -3,12 +3,11 @@ import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterInstallmentWidget extends StatefulWidget {
-  const RegisterInstallmentWidget({
+class RegisterInstallmentCopyWidget extends StatefulWidget {
+  const RegisterInstallmentCopyWidget({
     Key? key,
     this.phoneNumber,
     this.authSmsStateKey,
@@ -18,13 +17,14 @@ class RegisterInstallmentWidget extends StatefulWidget {
   final String? authSmsStateKey;
 
   @override
-  _RegisterInstallmentWidgetState createState() =>
-      _RegisterInstallmentWidgetState();
+  _RegisterInstallmentCopyWidgetState createState() =>
+      _RegisterInstallmentCopyWidgetState();
 }
 
-class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
+class _RegisterInstallmentCopyWidgetState
+    extends State<RegisterInstallmentCopyWidget> {
   ApiCallResponse? apiResultRegisterAccount;
-  String? bankCodeValue;
+  String? dropDownValue;
   TextEditingController? accountNumberController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -82,13 +82,101 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                           Align(
                             alignment: AlignmentDirectional(-1, 0),
                             child: FlutterFlowDropDown<String>(
-                              initialOption: bankCodeValue ??= '',
-                              options:
-                                  functions.getBankCodesOrNames(true).toList(),
-                              optionLabels:
-                                  functions.getBankCodesOrNames(false).toList(),
+                              initialOption: dropDownValue ??= '',
+                              options: [
+                                '002',
+                                '003',
+                                '004',
+                                '007',
+                                '011',
+                                '020',
+                                '023',
+                                '027',
+                                '031',
+                                '032',
+                                '034',
+                                '035',
+                                '037',
+                                '039',
+                                '081',
+                                '088',
+                                '089',
+                                '090',
+                                '092',
+                                '007',
+                                '012',
+                                '045',
+                                '048',
+                                '050',
+                                '064',
+                                '071',
+                                '218',
+                                '238',
+                                '240',
+                                '243',
+                                '247',
+                                '261',
+                                '262',
+                                '263',
+                                '264',
+                                '265',
+                                '266',
+                                '267',
+                                '269',
+                                '271',
+                                '278',
+                                '279',
+                                '280',
+                                '287'
+                              ],
+                              optionLabels: [
+                                'KDB산업은행',
+                                'IBK기업은행',
+                                'KB국민은행',
+                                '수협은행(수협중앙회)',
+                                'NH농협은행',
+                                '우리은행',
+                                'SC제일은행',
+                                '한국씨티은행',
+                                '대구은행',
+                                '부산은행',
+                                '광주은행',
+                                '제주은행',
+                                '전북은행',
+                                '경남은행',
+                                '하나은행',
+                                '신한은행',
+                                '케이뱅크',
+                                '카카오뱅크',
+                                '토스뱅크',
+                                '수협중앙회',
+                                '농협중앙회(단위농축협)',
+                                '새마을금고중앙회',
+                                '신협중앙회',
+                                '저축은행중앙회',
+                                '산림조합중앙회',
+                                '우정사업본부(우체국)',
+                                'KB증권',
+                                '미래에셋대우',
+                                '삼성증권',
+                                '한국투자증권',
+                                'NH투자증권',
+                                '교보증권',
+                                '하이투자증권',
+                                '현대차증권',
+                                '키움증권',
+                                '이베스트투자증권',
+                                'SK증권',
+                                '대신증권',
+                                '한화투자증권',
+                                '토스증권',
+                                '신한금융투자',
+                                'DB금융투자',
+                                '유진투자증권',
+                                '메리츠증권'
+                              ],
                               onChanged: (val) =>
-                                  setState(() => bankCodeValue = val),
+                                  setState(() => dropDownValue = val),
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -168,22 +256,6 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                     fontSize: 18,
                                   ),
                               keyboardType: TextInputType.number,
-                              validator: (val) {
-                                if (val == null || val.isEmpty) {
-                                  return '계좌번호를 정확히 입력해주세요';
-                                }
-
-                                if (val.length < 11) {
-                                  return '계좌번호를 정확히 입력해주세요';
-                                }
-                                if (val.length > 14) {
-                                  return '계좌번호를 정확히 입력해주세요';
-                                }
-                                if (!RegExp(r"^[0-9]*$").hasMatch(val)) {
-                                  return '계좌번호를 정확히 입력해주세요';
-                                }
-                                return null;
-                              },
                             ),
                           ),
                         ],
@@ -225,7 +297,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                           .call(
                         driverId: FFAppState().driverId,
                         apiToken: FFAppState().apiToken,
-                        bank: bankCodeValue,
+                        bank: dropDownValue,
                         accountNumber: accountNumberController!.text,
                       );
                       if ((apiResultRegisterAccount?.succeeded ?? true)) {

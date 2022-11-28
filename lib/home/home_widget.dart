@@ -155,14 +155,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                     context.pushNamed(
                       'SettlementInfo',
                       queryParams: {
-                        'bank': serializeParam(
-                          DriverInfoGroup.getSettlementAccountCall
-                              .bank(
-                                (apiResultqz6?.jsonBody ?? ''),
-                              )
-                              .toString(),
-                          ParamType.String,
-                        ),
                         'accountNumber': serializeParam(
                           DriverInfoGroup.getSettlementAccountCall
                               .accountNumber(
@@ -177,6 +169,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                             (apiResultd22?.jsonBody ?? ''),
                           ),
                           ParamType.int,
+                        ),
+                        'bankCode': serializeParam(
+                          DriverInfoGroup.getSettlementAccountCall
+                              .bank(
+                                (apiResultqz6?.jsonBody ?? ''),
+                              )
+                              .toString(),
+                          ParamType.String,
                         ),
                       }.withoutNulls,
                     );
