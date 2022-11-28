@@ -2231,7 +2231,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               if ((apiResultkg1?.succeeded ?? true)) {
                                 setState(() => FFAppState().isOnDuty = false);
                                 setState(
-                                    () => FFAppState().isOnCallWaiting = true);
+                                    () => FFAppState().isOnCallWaiting = false);
                                 await actions.cancelLocationService();
                               } else {
                                 await showDialog(

@@ -16,6 +16,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  ApiCallResponse? apiResultqz6;
   ApiCallResponse? apiResulttx8;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -136,21 +137,89 @@ class _HomeWidgetState extends State<HomeWidget> {
                 dense: false,
               ),
             ),
-            ListTile(
-              title: Text(
-                '정산관리',
-                style: FlutterFlowTheme.of(context).title3.override(
-                      fontFamily: 'Poppins',
-                      fontSize: 18,
-                    ),
+            InkWell(
+              onTap: () async {
+                apiResultqz6 =
+                    await DriverInfoGroup.getSettlementAccountCall.call(
+                  driverId: FFAppState().driverId,
+                  apiToken: FFAppState().apiToken,
+                );
+                if ((apiResultqz6?.succeeded ?? true)) {
+                  context.pushNamed(
+                    'SettlementInfo',
+                    queryParams: {
+                      'bank': serializeParam(
+                        DriverInfoGroup.getSettlementAccountCall
+                            .bank(
+                              (apiResultqz6?.jsonBody ?? ''),
+                            )
+                            .toString(),
+                        ParamType.String,
+                      ),
+                      'accountNumber': serializeParam(
+                        DriverInfoGroup.getSettlementAccountCall
+                            .accountNumber(
+                              (apiResultqz6?.jsonBody ?? ''),
+                            )
+                            .toString(),
+                        ParamType.String,
+                      ),
+                    }.withoutNulls,
+                  );
+                } else {
+                  await showDialog(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: Text('오류'),
+                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(alertDialogContext),
+                            child: Text('확인'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  await showDialog(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: Text('GetSettment'),
+                        content: Text(getJsonField(
+                          (apiResultqz6?.jsonBody ?? ''),
+                          r'''$.message''',
+                        ).toString()),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(alertDialogContext),
+                            child: Text('Ok'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+
+                setState(() {});
+              },
+              child: ListTile(
+                title: Text(
+                  '정산관리',
+                  style: FlutterFlowTheme.of(context).title3.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 18,
+                      ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF303030),
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
               ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
             ),
             InkWell(
               onTap: () async {

@@ -634,23 +634,23 @@ class GetSettlementAccountCall {
     );
   }
 
-  dynamic aa(dynamic response) => getJsonField(
+  dynamic driverId(dynamic response) => getJsonField(
         response,
         r'''$.driverId''',
       );
-  dynamic bb(dynamic response) => getJsonField(
+  dynamic bank(dynamic response) => getJsonField(
         response,
         r'''$.bank''',
       );
-  dynamic cc(dynamic response) => getJsonField(
+  dynamic accountNumber(dynamic response) => getJsonField(
         response,
         r'''$.accountNumber''',
       );
-  dynamic dd(dynamic response) => getJsonField(
+  dynamic createTime(dynamic response) => getJsonField(
         response,
         r'''$.createTime''',
       );
-  dynamic ee(dynamic response) => getJsonField(
+  dynamic updateTime(dynamic response) => getJsonField(
         response,
         r'''$.updateTime''',
       );
@@ -773,6 +773,31 @@ class ListDriverSettlementHistoryCall {
       cache: false,
     );
   }
+
+  dynamic histories(dynamic response) => getJsonField(
+        response,
+        r'''$.histories''',
+      );
+  dynamic historyDriverId(dynamic response) => getJsonField(
+        response,
+        r'''$.histories[:].driverId''',
+      );
+  dynamic historyPeriodStart(dynamic response) => getJsonField(
+        response,
+        r'''$.histories[:].settlementPeriodStart''',
+      );
+  dynamic historyPeriodEnd(dynamic response) => getJsonField(
+        response,
+        r'''$.histories[:].settlementPeriodEnd''',
+      );
+  dynamic historyCreateTime(dynamic response) => getJsonField(
+        response,
+        r'''$.histories[:].createTime''',
+      );
+  dynamic historyAmount(dynamic response) => getJsonField(
+        response,
+        r'''$.histories[:].amount''',
+      );
 }
 
 /// End Driver Info Group Code
@@ -1128,10 +1153,12 @@ class DoneTaxiCallCall {
     String? taxiCallRequestId = '',
     int? basePrice,
     String? apiToken = '',
+    int? tollFee,
   }) {
     final body = '''
 {
-  "basePrice": ${basePrice}
+  "basePrice": ${basePrice},
+  "tollFee": ${tollFee}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Done taxi call',

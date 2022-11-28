@@ -17,3 +17,4 @@ export 'terms_of_service/terms_of_service_widget.dart'
     show TermsOfServiceWidget;
 export 'privacy_policy/privacy_policy_widget.dart' show PrivacyPolicyWidget;
 export 'support_chat/support_chat_widget.dart' show SupportChatWidget;
+export 'settlement_info/settlement_info_widget.dart' show SettlementInfoWidget;

@@ -160,6 +160,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'SupportChat',
               path: 'supportChat',
               builder: (context, params) => SupportChatWidget(),
+            ),
+            FFRoute(
+              name: 'SettlementInfo',
+              path: 'settlementInfo',
+              builder: (context, params) => SettlementInfoWidget(
+                bank: params.getParam('bank', ParamType.String),
+                accountNumber:
+                    params.getParam('accountNumber', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
