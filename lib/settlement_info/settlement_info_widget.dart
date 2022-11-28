@@ -52,9 +52,21 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                 widget.accountNumber!,
                 style: FlutterFlowTheme.of(context).bodyText1,
               ),
-              Text(
-                'Hello World',
-                style: FlutterFlowTheme.of(context).bodyText1,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    valueOrDefault<String>(
+                      widget.expectedAmount?.toString(),
+                      '0',
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                  ),
+                  Text(
+                    '적립 타코',
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                  ),
+                ],
               ),
               FutureBuilder<ApiCallResponse>(
                 future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
