@@ -274,15 +274,16 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 10, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5, 0, 0, 0),
-                                        child: Text(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
                                           '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                          maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -293,8 +294,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontSize: 16,
                                               ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Divider(),

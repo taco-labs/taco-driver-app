@@ -737,8 +737,7 @@ class GetExpectetedSettlementCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Expecteted Settlement',
-      apiUrl:
-          '${DriverInfoGroup.baseUrl}/driver/${driverId}/expected_settlement',
+      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/expected_settlement',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -760,7 +759,7 @@ class ListDriverSettlementHistoryCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'List Driver Settlement History',
-      apiUrl: '${DriverInfoGroup.baseUrl}/driver/${driverId}/settlement',
+      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/settlement',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
