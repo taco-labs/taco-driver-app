@@ -179,8 +179,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                                 .profileImageDownloadUrl(
                                           (apiResulttx0?.jsonBody ?? ''),
                                         ));
-
-                                    context.goNamed('RegisterImages');
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -344,7 +342,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       )
                                       .toString(),
                                 );
-                                if (profileUploadSucceeded!) {
+                                if (licenseUploadSucceeded!) {
                                   fcmToken = await actions.getFcmToken();
                                   apiResultUpdateDriver = await DriverInfoGroup
                                       .updateDriverCall

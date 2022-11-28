@@ -764,6 +764,7 @@ class ListDriverSettlementHistoryCall {
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {
         'pageToken': pageToken,
