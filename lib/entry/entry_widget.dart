@@ -1,6 +1,7 @@
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,18 +85,23 @@ class _EntryWidgetState extends State<EntryWidget> {
                 apiToken: FFAppState().apiToken,
               );
               if ((apiResultLatestCall?.succeeded ?? true)) {
-                setState(() => FFAppState().latestCallState =
-                    TaxiCallGroup.getLatestTaxiCallCall
+                setState(() => FFAppState().callRequest =
+                    functions.toCallRequestFromApiResponse(
+                        (apiResultLatestCall?.jsonBody ?? '')));
+                if (TaxiCallGroup.getLatestTaxiCallCall
                         .callCurrentState(
                           (apiResultLatestCall?.jsonBody ?? ''),
                         )
-                        .toString());
-                setState(() => FFAppState().callRequest =
-                    (apiResultLatestCall?.jsonBody ?? ''));
-                if (FFAppState().latestCallState == 'DRIVER_TO_DEPARTURE') {
+                        .toString() ==
+                    'DRIVER_TO_DEPARTURE') {
                   setState(() => FFAppState().isOnDrivingToDeparture = true);
                 } else {
-                  if (FFAppState().latestCallState == 'DRIVER_TO_ARRIVAL') {
+                  if (TaxiCallGroup.getLatestTaxiCallCall
+                          .callCurrentState(
+                            (apiResultLatestCall?.jsonBody ?? ''),
+                          )
+                          .toString() ==
+                      'DRIVER_TO_ARRIVAL') {
                     setState(() => FFAppState().isOnDrivingToArrival = true);
                   } else {
                     setState(() => FFAppState().isOnCallWaiting = true);

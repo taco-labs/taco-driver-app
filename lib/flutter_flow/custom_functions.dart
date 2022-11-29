@@ -218,3 +218,41 @@ String toAddressNo(
 double toDoubleFromString(String floatNumberString) {
   return double.parse(floatNumberString);
 }
+
+dynamic toCallRequestFromApiResponse(dynamic apiResponse) {
+  dynamic callRequest = {
+    "taxiCallRequestId": apiResponse["id"],
+    "taxiCallState": apiResponse["currentState"],
+    "additionalPrice": apiResponse["additionalPrice"].toString(),
+    "departureLatitude":
+        apiResponse["departure"]["point"]["latitude"].toString(),
+    "departureLongitude":
+        apiResponse["departure"]["point"]["longitude"].toString(),
+    "departureAddressRegionDepth1": apiResponse["departure"]["address"]
+        ["regionDepth1"],
+    "departureAddressRegionDepth2": apiResponse["departure"]["address"]
+        ["regionDepth2"],
+    "departureAddressRegionDepth3": apiResponse["departure"]["address"]
+        ["regionDepth3"],
+    "departureMainAddressNo": apiResponse["departure"]["address"]
+        ["mainAddressNo"],
+    "departureSubAddressNo": apiResponse["departure"]["address"]
+        ["subAddressNo"],
+    "arrivalLatitude": apiResponse["arrival"]["point"]["latitude"].toString(),
+    "arrivalLongitude": apiResponse["arrival"]["point"]["longitude"].toString(),
+    "arrivalAddressRegionDepth1": apiResponse["arrival"]["address"]
+        ["regionDepth1"],
+    "arrivalAddressRegionDepth2": apiResponse["arrival"]["address"]
+        ["regionDepth2"],
+    "arrivalAddressRegionDepth3": apiResponse["arrival"]["address"]
+        ["regionDepth3"],
+    "arrivalMainAddressNo": apiResponse["arrival"]["address"]["mainAddressNo"],
+    "arrivalSubAddressNo": apiResponse["arrival"]["address"]["subAddressNo"],
+    "userId": apiResponse["userId"],
+    "userPhone": apiResponse["userPhone"],
+    "tags": apiResponse["tags"].join(','),
+    "userTag": apiResponse["userTag"],
+  };
+
+  return callRequest;
+}

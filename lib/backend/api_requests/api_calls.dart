@@ -1034,29 +1034,99 @@ class GetLatestTaxiCallCall {
         response,
         r'''$.departure.address.subAddressNo''',
       );
-  dynamic aa(dynamic response) => getJsonField(
+  dynamic taxiCallRequestId(dynamic response) => getJsonField(
         response,
         r'''$.id''',
       );
-  dynamic bb(dynamic response) => getJsonField(
+  dynamic userId(dynamic response) => getJsonField(
         response,
         r'''$.userId''',
       );
-  dynamic cc(dynamic response) => getJsonField(
+  dynamic driverId(dynamic response) => getJsonField(
         response,
         r'''$.driverId''',
       );
-  dynamic dd(dynamic response) => getJsonField(
+  dynamic requestMinAdditionalPrice(dynamic response) => getJsonField(
         response,
         r'''$.requestMinAdditionalPrice''',
       );
-  dynamic ee(dynamic response) => getJsonField(
+  dynamic createTime(dynamic response) => getJsonField(
         response,
         r'''$.createTime''',
       );
-  dynamic ff(dynamic response) => getJsonField(
+  dynamic updateTime(dynamic response) => getJsonField(
         response,
         r'''$.updateTime''',
+      );
+  dynamic arrivalServiceRegion(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address.serviceRegion''',
+      );
+  dynamic paymentInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.payment''',
+      );
+  dynamic paymentId(dynamic response) => getJsonField(
+        response,
+        r'''$.payment.paymentId''',
+      );
+  dynamic paymentCardCompany(dynamic response) => getJsonField(
+        response,
+        r'''$.payment.company''',
+      );
+  dynamic paymentCardNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.payment.cardNumber''',
+      );
+  dynamic arrivalPointInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.point''',
+      );
+  dynamic dryrun(dynamic response) => getJsonField(
+        response,
+        r'''$.dryrun''',
+      );
+  dynamic departureInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.departure''',
+      );
+  dynamic departureAddressInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address''',
+      );
+  dynamic departurePointInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.point''',
+      );
+  dynamic departureServiceRegion(dynamic response) => getJsonField(
+        response,
+        r'''$.departure.address.serviceRegion''',
+      );
+  dynamic arrivalInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival''',
+      );
+  dynamic arrivalAddressInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.arrival.address''',
+      );
+  dynamic tollFee(dynamic response) => getJsonField(
+        response,
+        r'''$.tollFee''',
+      );
+  dynamic paths(dynamic response) => getJsonField(
+        response,
+        r'''$.path''',
+        true,
+      );
+  dynamic tags(dynamic response) => getJsonField(
+        response,
+        r'''$.tags''',
+        true,
+      );
+  dynamic userTag(dynamic response) => getJsonField(
+        response,
+        r'''$.userTag''',
       );
 }
 

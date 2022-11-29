@@ -45,8 +45,6 @@ class FFAppState {
     prefs.setString('ff_driverId', _value);
   }
 
-  String latestCallState = '';
-
   bool isOnDuty = false;
 
   String driverFirstName = '';

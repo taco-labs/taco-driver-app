@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_timer.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -293,21 +294,26 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                   apiToken: FFAppState().apiToken,
                                 );
                                 if ((apiResultLatestCall?.succeeded ?? true)) {
-                                  setState(() => FFAppState().latestCallState =
-                                      TaxiCallGroup.getLatestTaxiCallCall
+                                  setState(() => FFAppState().callRequest =
+                                      functions.toCallRequestFromApiResponse(
+                                          (apiResultLatestCall?.jsonBody ??
+                                              '')));
+                                  if (TaxiCallGroup.getLatestTaxiCallCall
                                           .callCurrentState(
                                             (apiResultLatestCall?.jsonBody ??
                                                 ''),
                                           )
-                                          .toString());
-                                  setState(() => FFAppState().callRequest =
-                                      (apiResultLatestCall?.jsonBody ?? ''));
-                                  if (FFAppState().latestCallState ==
+                                          .toString() ==
                                       'DRIVER_TO_DEPARTURE') {
                                     setState(() => FFAppState()
                                         .isOnDrivingToDeparture = true);
                                   } else {
-                                    if (FFAppState().latestCallState ==
+                                    if (TaxiCallGroup.getLatestTaxiCallCall
+                                            .callCurrentState(
+                                              (apiResultLatestCall?.jsonBody ??
+                                                  ''),
+                                            )
+                                            .toString() ==
                                         'DRIVER_TO_ARRIVAL') {
                                       setState(() => FFAppState()
                                           .isOnDrivingToArrival = true);

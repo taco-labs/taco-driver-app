@@ -872,9 +872,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             );
                                             if ((apiResultj1q?.succeeded ??
                                                 true)) {
-                                              setState(() =>
-                                                  FFAppState().latestCallState =
-                                                      'DRIVER_TO_DEPARTURE');
                                               setState(() => FFAppState()
                                                   .isOnCallViewing = false);
                                               setState(() => FFAppState()
@@ -1456,9 +1453,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           if ((apiResultDriverToArrival
                                                   ?.succeeded ??
                                               true)) {
-                                            setState(() =>
-                                                FFAppState().latestCallState =
-                                                    'DRIVER_TO_ARRIVAL');
                                             setState(() => FFAppState()
                                                     .isOnDrivingToDeparture =
                                                 false);
@@ -1565,7 +1559,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 5, 0, 0),
+                                      0, 10, 0, 0),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
@@ -2190,9 +2184,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               );
                                             },
                                           );
-                                          setState(() =>
-                                              FFAppState().latestCallState =
-                                                  'TAXI_CALL_DONE');
                                           setState(() =>
                                               FFAppState().isArrived = false);
                                           setState(() => FFAppState()
