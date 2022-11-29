@@ -9,8 +9,8 @@ export 'register_installment/register_installment_widget.dart'
     show RegisterInstallmentWidget;
 export 'driver_profile/driver_profile_widget.dart' show DriverProfileWidget;
 export 'ride_history/ride_history_widget.dart' show RideHistoryWidget;
-export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
+export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export 'company_info/company_info_widget.dart' show CompanyInfoWidget;
 export 'policy/policy_widget.dart' show PolicyWidget;
 export 'terms_of_service/terms_of_service_widget.dart'

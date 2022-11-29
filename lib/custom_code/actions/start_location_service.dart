@@ -92,10 +92,11 @@ Future startLocationService() async {
           client: LocationClient.google,
           androidNotificationSettings: AndroidNotificationSettings(
               notificationChannelName: 'Location tracking',
-              notificationTitle: 'Start Location Tracking',
-              notificationMsg: 'Track location in background',
-              notificationBigMsg:
-                  'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
+              notificationTitle: '타코 실행중',
+              notificationMsg: '정확한 배차를 위해서 택시의 현위치를 전송합니다',
+              notificationBigMsg: '',
+              /*notificationBigMsg:
+                  'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',*/
               notificationIconColor: Colors.grey,
               notificationTapCallback:
                   LocationCallbackHandler.notificationCallback)));

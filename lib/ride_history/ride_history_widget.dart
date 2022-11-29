@@ -239,18 +239,22 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                                         fontSize: 14,
                                                       ),
                                                 ),
-                                                Text(
-                                                  '통행료 ${getJsonField(
-                                                    rideHistoriesItem,
-                                                    r'''$.tollFee''',
-                                                  ).toString()}원',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 14,
-                                                      ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 5, 0, 5),
+                                                  child: Text(
+                                                    '통행료 ${getJsonField(
+                                                      rideHistoriesItem,
+                                                      r'''$.tollFee''',
+                                                    ).toString()}원',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
+                                                  ),
                                                 ),
                                                 Text(
                                                   '적립타코 ${getJsonField(

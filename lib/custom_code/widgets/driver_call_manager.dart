@@ -78,11 +78,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
   void _handleMessage(RemoteMessage message) async {
     dynamic data = message.data;
-    debugPrint(
-      'Message received ${data.toString()}',
-    );
+    debugPrint('Data received ${data.toString()}');
 
-    switch (message.category) {
+    switch (data['category']) {
       case NotificationCategory_Driver:
         setState(() {
           FFAppState().isActive = true;
@@ -110,11 +108,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
               );
             },
           );
+
           setState(() {
             FFAppState().callRequest = null;
             FFAppState().isOnCallWaiting = true;
             FFAppState().isOnCallViewing = false;
-            FFAppState().isOnCallWaiting = false;
             FFAppState().isOnDrivingToArrival = false;
             FFAppState().isOnDrivingToDeparture = false;
             FFAppState().isArrived = false;
@@ -129,11 +127,23 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     super.initState();
 
     setupInteractedMessage();
+
+    taxiFareController = TextEditingController();
+    tollFareController = TextEditingController(text: '0');
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    debugPrint(
+        'driverId ${FFAppState().driverId} apiToken ${FFAppState().apiToken}');
+  }
+
+  @override
+  void dispose() {
+    taxiFareController?.dispose();
+    tollFareController?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('isActive ${FFAppState().isActive}');
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -146,6 +156,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                   Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x33000000),
+                          offset: Offset(0, 2),
+                        )
+                      ],
                       border: Border.all(
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         width: 2,
@@ -195,15 +212,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 0, 0, 0),
-                                  child: Text(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
                                     '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                    maxLines: 2,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
@@ -213,8 +230,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           fontSize: 16,
                                         ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           Divider(),
@@ -357,28 +374,49 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      getJsonField(
-                                        FFAppState().callRequest,
-                                        r'''$.tags''',
-                                      ).toString(),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
+                                  Text(
+                                    getJsonField(
+                                      FFAppState().callRequest,
+                                      r'''$.tags''',
+                                    ).toString(),
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getJsonField(
+                                    FFAppState().callRequest,
+                                    r'''$.tags''',
+                                  ).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -397,8 +435,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           .toHumanFriendlyDistanceFromMeters(
                                               getJsonField(
                                         FFAppState().callRequest,
-                                        r'''$.distance''',
-                                      )),
+                                        r'''$.toArrivalDistance''',
+                                      ).toString()),
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -432,8 +470,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     functions.toHumanFreindlyEtaFromNanoseconds(
                                         getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.eta''',
-                                    )),
+                                      r'''$.toArrivalETA''',
+                                    ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -496,7 +534,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 5, 0),
                                     child: Text(
-                                      '호출료',
+                                      '타코',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -539,11 +577,31 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth2''',
+                                      r'''$.departureAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth3''',
-                                    ).toString()}',
+                                      r'''$.departureAddressRegionDepth3''',
+                                    ).toString()} ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: Color(0xFF101213),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
+                                  Text(
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -575,11 +633,31 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth2''',
+                                      r'''$.arrivalAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth3''',
-                                    ).toString()}',
+                                      r'''$.arrivalAddressRegionDepth3''',
+                                    ).toString()} ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: Color(0xFF101213),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
+                                  Text(
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -643,11 +721,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: Text('오류 코드'),
-                                              content: Text(
-                                                  (apiResultw8d?.statusCode ??
-                                                          200)
-                                                      .toString()),
+                                              title: Text('RejectTaxiCall'),
+                                              content: Text(getJsonField(
+                                                (apiResultw8d?.jsonBody ?? ''),
+                                                r'''$.message''',
+                                              ).toString()),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
@@ -699,9 +777,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         apiToken: FFAppState().apiToken,
                                       );
                                       if ((apiResultj1q?.succeeded ?? true)) {
-                                        setState(() =>
-                                            FFAppState().latestCallState =
-                                                'DRIVER_TO_DEPARTURE');
                                         setState(() => FFAppState()
                                             .isOnCallViewing = false);
                                         setState(() => FFAppState()
@@ -945,7 +1020,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       text: '',
                                       icon: Icon(
                                         Icons.phone,
-                                        size: 15,
+                                        size: 25,
                                       ),
                                       options: FFButtonOptions(
                                         width: 60,
@@ -983,7 +1058,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       text: '',
                                       icon: Icon(
                                         Icons.message,
-                                        size: 15,
+                                        size: 25,
                                       ),
                                       options: FFButtonOptions(
                                         width: 60,
@@ -1008,14 +1083,16 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       await actions.launchKakaoNavi(
-                                        getJsonField(
+                                        functions
+                                            .toDoubleFromString(getJsonField(
                                           FFAppState().callRequest,
                                           r'''$.departureLatitude''',
-                                        ),
-                                        getJsonField(
+                                        ).toString()),
+                                        functions
+                                            .toDoubleFromString(getJsonField(
                                           FFAppState().callRequest,
                                           r'''$.departureLongitude''',
-                                        ),
+                                        ).toString()),
                                         '출발지',
                                       );
                                     },
@@ -1069,28 +1146,49 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      getJsonField(
-                                        FFAppState().callRequest,
-                                        r'''$.tags''',
-                                      ).toString(),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
+                                  Text(
+                                    getJsonField(
+                                      FFAppState().callRequest,
+                                      r'''$.tags''',
+                                    ).toString(),
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getJsonField(
+                                    FFAppState().callRequest,
+                                    r'''$.userTag''',
+                                  ).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -1105,14 +1203,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth2''',
+                                      r'''$.departureAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth3''',
-                                    ).toString()} ${getJsonField(
-                                      FFAppState().callRequest,
-                                      r'''$.arrivalMainAddressNo''',
-                                    ).toString()}',
+                                      r'''$.departureAddressRegionDepth3''',
+                                    ).toString()} ',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1124,16 +1219,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         ),
                                   ),
                                   Text(
-                                    getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.arrivalSubAddressNo''',
-                                            ) !=
-                                            null
-                                        ? '-${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.arrivalSubAddressNo''',
-                                          ).toString()}'
-                                        : ' ',
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1165,11 +1259,31 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth2''',
+                                      r'''$.arrivalAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth3''',
-                                    ).toString()}',
+                                      r'''$.arrivalAddressRegionDepth3''',
+                                    ).toString()} ',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: Color(0xFF101213),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
+                                  Text(
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1205,9 +1319,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     );
                                     if ((apiResultDriverToArrival?.succeeded ??
                                         true)) {
-                                      setState(() =>
-                                          FFAppState().latestCallState =
-                                              'DRIVER_TO_ARRIVAL');
                                       setState(() => FFAppState()
                                           .isOnDrivingToDeparture = false);
                                       setState(() => FFAppState()
@@ -1305,7 +1416,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -1315,21 +1427,23 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       await actions.launchKakaoNavi(
-                                        getJsonField(
+                                        functions
+                                            .toDoubleFromString(getJsonField(
                                           FFAppState().callRequest,
                                           r'''$.arrivalLatitude''',
-                                        ),
-                                        getJsonField(
+                                        ).toString()),
+                                        functions
+                                            .toDoubleFromString(getJsonField(
                                           FFAppState().callRequest,
                                           r'''$.arrivalLongitude''',
-                                        ),
+                                        ).toString()),
                                         '목적지',
                                       );
                                     },
                                     text: '목적지 길안내',
                                     options: FFButtonOptions(
                                       width: 150,
-                                      height: 60,
+                                      height: 50,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -1376,28 +1490,49 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      getJsonField(
-                                        FFAppState().callRequest,
-                                        r'''$.tags''',
-                                      ).toString(),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
+                                  Text(
+                                    getJsonField(
+                                      FFAppState().callRequest,
+                                      r'''$.tags''',
+                                    ).toString(),
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getJsonField(
+                                    FFAppState().callRequest,
+                                    r'''$.userTag''',
+                                  ).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -1412,14 +1547,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth2''',
+                                      r'''$.departureAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.departureAdressRegionDepth3''',
-                                    ).toString()} ${getJsonField(
-                                      FFAppState().callRequest,
-                                      r'''$.departureMainAddressNo''',
-                                    ).toString()}',
+                                      r'''$.departureAddressRegionDepth3''',
+                                    ).toString()} ',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1431,16 +1563,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         ),
                                   ),
                                   Text(
-                                    getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.departureSubAddressNo''',
-                                            ) !=
-                                            null
-                                        ? '-${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.departureSubAddressNo''',
-                                          ).toString()}'
-                                        : ' ',
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.departureMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1472,14 +1603,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   Text(
                                     '${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth2''',
+                                      r'''$.arrivalAddressRegionDepth2''',
                                     ).toString()}  ${getJsonField(
                                       FFAppState().callRequest,
-                                      r'''$.arrivalAdressRegionDepth3''',
-                                    ).toString()} ${getJsonField(
-                                      FFAppState().callRequest,
-                                      r'''$.arrivalMainAddressNo''',
-                                    ).toString()}',
+                                      r'''$.arrivalAddressRegionDepth3''',
+                                    ).toString()} ',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1491,16 +1619,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         ),
                                   ),
                                   Text(
-                                    getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.arrivalSubAddressNo''',
-                                            ) !=
-                                            null
-                                        ? '-${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.arrivalSubAddressNo''',
-                                          ).toString()}'
-                                        : ' ',
+                                    functions.toAddressNo(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalSubAddressNo''',
+                                        ).toString(),
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.arrivalMainAddressNo''',
+                                        ).toString()),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1593,7 +1720,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 5, 0),
                                       child: Text(
-                                        '정산예정 호출료',
+                                        '적립 타코',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .title1
@@ -1830,6 +1957,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     return;
                                   }
 
+                                  debugPrint(
+                                      'taxiFare ${taxiFareController!.text}');
                                   apiResultDoneTaxiCall =
                                       await TaxiCallGroup.doneTaxiCallCall.call(
                                     taxiCallRequestId: getJsonField(
@@ -1839,6 +1968,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     basePrice:
                                         int.parse(taxiFareController!.text),
                                     apiToken: FFAppState().apiToken,
+                                    tollFee:
+                                        int.parse(tollFareController!.text),
                                   );
                                   if ((apiResultDoneTaxiCall?.succeeded ??
                                       true)) {
@@ -1859,8 +1990,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         );
                                       },
                                     );
-                                    setState(() => FFAppState()
-                                        .latestCallState = 'TAXI_CALL_DONE');
                                     setState(
                                         () => FFAppState().isArrived = false);
                                     setState(() =>
@@ -1955,6 +2084,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
                           setState(() => FFAppState().isOnCallWaiting = true);
+                          await actions.startLocationService();
                         } else {
                           await showDialog(
                             context: context,
@@ -2012,6 +2142,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
+                          setState(() => FFAppState().isOnCallWaiting = false);
+                          await actions.cancelLocationService();
                         } else {
                           await showDialog(
                             context: context,
@@ -2024,6 +2156,25 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
                                     child: Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('UpdateOnDuty'),
+                                content: Text(getJsonField(
+                                  (apiResultkg1?.jsonBody ?? ''),
+                                  r'''$.message''',
+                                ).toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
                                   ),
                                 ],
                               );

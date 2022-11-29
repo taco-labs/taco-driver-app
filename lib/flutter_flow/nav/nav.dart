@@ -127,14 +127,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => RideHistoryWidget(),
             ),
             FFRoute(
-              name: 'HomeCopy',
-              path: 'homeCopy',
-              builder: (context, params) => HomeCopyWidget(),
-            ),
-            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(),
+            ),
+            FFRoute(
+              name: 'HomeCopy',
+              path: 'homeCopy',
+              builder: (context, params) => HomeCopyWidget(),
             ),
             FFRoute(
               name: 'CompanyInfo',

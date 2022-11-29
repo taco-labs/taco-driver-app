@@ -393,7 +393,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                             ),
                           ),
                         ),
-                      if (FFAppState().isOnDuty && FFAppState().isOnCallViewing)
+                      if (FFAppState().isOnCallViewing)
                         Container(
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
@@ -981,7 +981,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 5, 0, 0),
+                                      0, 10, 0, 0),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
