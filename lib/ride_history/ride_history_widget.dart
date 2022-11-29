@@ -144,16 +144,16 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           4, 4, 4, 4),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            flex: 7,
+                                            child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(8, 8, 8, 8),
                                               child: Column(
@@ -216,7 +216,10 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                                 ],
                                               ),
                                             ),
-                                            Column(
+                                          ),
+                                          Expanded(
+                                            flex: 3,
+                                            child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
@@ -264,8 +267,8 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
