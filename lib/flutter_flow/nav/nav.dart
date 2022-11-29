@@ -132,15 +132,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomeCopyWidget(),
             ),
             FFRoute(
-              name: 'RegisterInstallmentCopy',
-              path: 'registerInstallmentCopy',
-              builder: (context, params) => RegisterInstallmentCopyWidget(
-                phoneNumber: params.getParam('phoneNumber', ParamType.String),
-                authSmsStateKey:
-                    params.getParam('authSmsStateKey', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(),

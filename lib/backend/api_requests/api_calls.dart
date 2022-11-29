@@ -683,6 +683,27 @@ class UpdateDriverSettlementAccountCall {
       cache: false,
     );
   }
+
+  dynamic driverId(dynamic response) => getJsonField(
+        response,
+        r'''$.driverId''',
+      );
+  dynamic bankCode(dynamic response) => getJsonField(
+        response,
+        r'''$.bank''',
+      );
+  dynamic accountNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.accountNumber''',
+      );
+  dynamic createTime(dynamic response) => getJsonField(
+        response,
+        r'''$.createTime''',
+      );
+  dynamic updateTime(dynamic response) => getJsonField(
+        response,
+        r'''$.updateTime''',
+      );
 }
 
 class GetDriverImageUrlsCall {

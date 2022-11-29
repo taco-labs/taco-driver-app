@@ -88,14 +88,16 @@ String toDriverType(String driverTypeInput) {
   return driverType;
 }
 
-String toHumanFriendlyDistanceFromMeters(int meters) {
-  double distanceInKillometers = meters / 1000;
+String toHumanFriendlyDistanceFromMeters(String meters) {
+  double distanceInKillometers = int.parse(meters) / 1000;
 
   return '$distanceInKillometers km';
 }
 
-String toHumanFreindlyEtaFromNanoseconds(int nanoSeconds) {
-  return '${(nanoSeconds / 1000000000 / 60).toString()} 분';
+String toHumanFreindlyEtaFromNanoseconds(String nanoSeconds) {
+  int minutes = (int.parse(nanoSeconds) / 1000000000 / 60).toInt();
+
+  return '${minutes.toString()} 분';
 }
 
 String toBankNameFromCode(String bankCode) {

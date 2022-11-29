@@ -491,8 +491,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 .toHumanFriendlyDistanceFromMeters(
                                                     getJsonField(
                                               FFAppState().callRequest,
-                                              r'''$.distance''',
-                                            )),
+                                              r'''$.toArrivalDistance''',
+                                            ).toString()),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1
@@ -530,8 +530,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               .toHumanFreindlyEtaFromNanoseconds(
                                                   getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.eta''',
-                                          )),
+                                            r'''$.toArrivalETA''',
+                                          ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
