@@ -669,7 +669,31 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.departureAddressRegionDepth3''',
+                                          ).toString()} ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.departureMainAddressNo''',
                                           ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                                    FFAppState().callRequest,
+                                                    r'''$.departureSubAddressNo''',
+                                                  ) !=
+                                                  null
+                                              ? '-${getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.departureSubAddressNo''',
+                                                ).toString()}'
+                                              : ' ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -706,7 +730,31 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalAddressRegionDepth3''',
+                                          ).toString()} ${getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.arrivalMainAddressNo''',
                                           ).toString()}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          getJsonField(
+                                                    FFAppState().callRequest,
+                                                    r'''$.arrivalSubAddressNo''',
+                                                  ) !=
+                                                  null
+                                              ? '-${getJsonField(
+                                                  FFAppState().callRequest,
+                                                  r'''$.arrivalSubAddressNo''',
+                                                ).toString()}'
+                                              : ' ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
