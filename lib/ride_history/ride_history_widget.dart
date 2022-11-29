@@ -83,6 +83,7 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                         ..complete(TaxiCallGroup.listTaxiCallCall.call(
                           driverId: FFAppState().driverId,
                           apiToken: FFAppState().apiToken,
+                          count: 10,
                         )))
                       .future,
                   builder: (context, snapshot) {
