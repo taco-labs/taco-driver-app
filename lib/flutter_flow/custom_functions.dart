@@ -203,3 +203,14 @@ List<String> getBankCodesOrNames(bool needBankCodes) {
 
   return bankMap.values.toList();
 }
+
+String toAddressNo(
+  String subAddressNo,
+  String mainAddressNo,
+) {
+  if (subAddressNo.isEmpty) {
+    return mainAddressNo;
+  }
+
+  return '$mainAddressNo-$subAddressNo';
+}

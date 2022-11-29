@@ -1097,7 +1097,7 @@ class AcceptTaxiCallTicketCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Accept Taxi Call Ticket',
-      apiUrl: '${TaxiCallGroup.baseUrl}/ticket/${ticketId}',
+      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/ticket/${ticketId}',
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1123,7 +1123,7 @@ class RejectTaxiCallTicketCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Reject Taxi Call Ticket',
-      apiUrl: '${TaxiCallGroup.baseUrl}/ticket/${ticketId}',
+      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/ticket/${ticketId}',
       callType: ApiCallType.DELETE,
       headers: {
         ...TaxiCallGroup.headers,

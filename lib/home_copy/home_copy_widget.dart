@@ -669,10 +669,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.departureAddressRegionDepth3''',
-                                          ).toString()} ${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.departureMainAddressNo''',
-                                          ).toString()}',
+                                          ).toString()} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -684,16 +681,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                         ),
                                         Text(
-                                          getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.departureSubAddressNo''',
-                                                  ) !=
-                                                  null
-                                              ? '-${getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.departureSubAddressNo''',
-                                                ).toString()}'
-                                              : ' ',
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -730,10 +726,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalAddressRegionDepth3''',
-                                          ).toString()} ${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.arrivalMainAddressNo''',
-                                          ).toString()}',
+                                          ).toString()} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -745,16 +738,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                         ),
                                         Text(
-                                          getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.arrivalSubAddressNo''',
-                                                  ) !=
-                                                  null
-                                              ? '-${getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalSubAddressNo''',
-                                                ).toString()}'
-                                              : ' ',
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -819,11 +811,13 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('오류 코드'),
-                                                    content: Text((apiResultw8d
-                                                                ?.statusCode ??
-                                                            200)
-                                                        .toString()),
+                                                    title:
+                                                        Text('RejectTaxiCall'),
+                                                    content: Text(getJsonField(
+                                                      (apiResultw8d?.jsonBody ??
+                                                          ''),
+                                                      r'''$.message''',
+                                                    ).toString()),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1346,10 +1340,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.departureAddressRegionDepth3''',
-                                          ).toString()} ${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.arrivalMainAddressNo''',
-                                          ).toString()}',
+                                          ).toString()} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1361,16 +1352,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                         ),
                                         Text(
-                                          getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.arrivalSubAddressNo''',
-                                                  ) !=
-                                                  null
-                                              ? '-${getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalSubAddressNo''',
-                                                ).toString()}'
-                                              : ' ',
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1407,7 +1397,27 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalAddressRegionDepth3''',
-                                          ).toString()}',
+                                          ).toString()} ',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Color(0xFF101213),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1694,10 +1704,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.departureAddressRegionDepth3''',
-                                          ).toString()} ${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.departureMainAddressNo''',
-                                          ).toString()}',
+                                          ).toString()} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1709,16 +1716,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                         ),
                                         Text(
-                                          getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.departureSubAddressNo''',
-                                                  ) !=
-                                                  null
-                                              ? '-${getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.departureSubAddressNo''',
-                                                ).toString()}'
-                                              : ' ',
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.departureMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1755,10 +1761,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalAddressRegionDepth3''',
-                                          ).toString()} ${getJsonField(
-                                            FFAppState().callRequest,
-                                            r'''$.arrivalMainAddressNo''',
-                                          ).toString()}',
+                                          ).toString()} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1770,16 +1773,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                         ),
                                         Text(
-                                          getJsonField(
-                                                    FFAppState().callRequest,
-                                                    r'''$.arrivalSubAddressNo''',
-                                                  ) !=
-                                                  null
-                                              ? '-${getJsonField(
-                                                  FFAppState().callRequest,
-                                                  r'''$.arrivalSubAddressNo''',
-                                                ).toString()}'
-                                              : ' ',
+                                          functions.toAddressNo(
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalSubAddressNo''',
+                                              ).toString(),
+                                              getJsonField(
+                                                FFAppState().callRequest,
+                                                r'''$.arrivalMainAddressNo''',
+                                              ).toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
