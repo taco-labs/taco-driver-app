@@ -1,11 +1,8 @@
 import '../backend/api_requests/api_calls.dart';
-import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -15,29 +12,7 @@ class LoginWidget extends StatefulWidget {
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget>
-    with TickerProviderStateMixin {
-  final animationsMap = {
-    'textOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0, 70),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+class _LoginWidgetState extends State<LoginWidget> {
   ApiCallResponse? apiResultUuid;
   ApiCallResponse? apiResultfwz;
   TextEditingController? phoneNumberController;
@@ -47,13 +22,6 @@ class _LoginWidgetState extends State<LoginWidget>
   @override
   void initState() {
     super.initState();
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
-
     phoneNumberController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -107,8 +75,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                     fontFamily: 'Poppins',
                                     fontSize: 18,
                                   ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation']!),
+                        ),
                       ),
                     ],
                   ),
@@ -161,7 +128,7 @@ class _LoginWidgetState extends State<LoginWidget>
                         ),
                         filled: true,
                         fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
+                            FlutterFlowTheme.of(context).primaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',

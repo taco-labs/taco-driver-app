@@ -147,7 +147,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                         ),
                         filled: true,
                         fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
+                            FlutterFlowTheme.of(context).primaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
@@ -453,7 +453,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                         }
                       } else {
                         if ((apiResultf8v?.statusCode ?? 200) == 404) {
-                          context.pushNamed(
+                          context.goNamed(
                             'RegisterDriver',
                             queryParams: {
                               'phoneNumber': serializeParam(

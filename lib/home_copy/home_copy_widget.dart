@@ -446,30 +446,51 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
-                                          child: Text(
-                                            getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.tags''',
-                                            ).toString(),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                                        Text(
+                                          getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.tags''',
+                                          ).toString(),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                         ),
                                       ],
                                     ),
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.tags''',
+                                        ).toString(),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Padding(
@@ -600,7 +621,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 5, 0),
                                           child: Text(
-                                            '호출료',
+                                            '타코',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1
@@ -644,10 +665,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth2''',
+                                            r'''$.departureAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth3''',
+                                            r'''$.departureAddressRegionDepth3''',
                                           ).toString()}',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -681,10 +702,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth2''',
+                                            r'''$.arrivalAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth3''',
+                                            r'''$.arrivalAddressRegionDepth3''',
                                           ).toString()}',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -1213,30 +1234,51 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
-                                          child: Text(
-                                            getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.tags''',
-                                            ).toString(),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                                        Text(
+                                          getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.tags''',
+                                          ).toString(),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                         ),
                                       ],
                                     ),
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.userTag''',
+                                        ).toString(),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Padding(
@@ -1252,10 +1294,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth2''',
+                                            r'''$.departureAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth3''',
+                                            r'''$.departureAddressRegionDepth3''',
                                           ).toString()} ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalMainAddressNo''',
@@ -1313,10 +1355,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth2''',
+                                            r'''$.arrivalAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth3''',
+                                            r'''$.arrivalAddressRegionDepth3''',
                                           ).toString()}',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -1540,30 +1582,51 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
-                                          child: Text(
-                                            getJsonField(
-                                              FFAppState().callRequest,
-                                              r'''$.tags''',
-                                            ).toString(),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                                        Text(
+                                          getJsonField(
+                                            FFAppState().callRequest,
+                                            r'''$.tags''',
+                                          ).toString(),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                         ),
                                       ],
                                     ),
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        getJsonField(
+                                          FFAppState().callRequest,
+                                          r'''$.userTag''',
+                                        ).toString(),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Padding(
@@ -1579,10 +1642,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth2''',
+                                            r'''$.departureAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.departureAdressRegionDepth3''',
+                                            r'''$.departureAddressRegionDepth3''',
                                           ).toString()} ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.departureMainAddressNo''',
@@ -1640,10 +1703,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           '${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth2''',
+                                            r'''$.arrivalAddressRegionDepth2''',
                                           ).toString()}  ${getJsonField(
                                             FFAppState().callRequest,
-                                            r'''$.arrivalAdressRegionDepth3''',
+                                            r'''$.arrivalAddressRegionDepth3''',
                                           ).toString()} ${getJsonField(
                                             FFAppState().callRequest,
                                             r'''$.arrivalMainAddressNo''',
@@ -1768,7 +1831,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 0, 5, 0),
                                             child: Text(
-                                              '정산예정 호출료',
+                                              '적립 타코',
                                               textAlign: TextAlign.center,
                                               style: FlutterFlowTheme.of(
                                                       context)

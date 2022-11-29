@@ -229,7 +229,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         accountNumber: accountNumberController!.text,
                       );
                       if ((apiResultRegisterAccount?.succeeded ?? true)) {
-                        context.pushNamed('Home');
+                        context.goNamed('Home');
                       } else {
                         await showDialog(
                           context: context,

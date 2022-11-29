@@ -27,6 +27,9 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
+      if (FFAppState().isOnDuty) {
+        await actions.startLocationService();
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
