@@ -214,3 +214,7 @@ String toAddressNo(
 
   return '$mainAddressNo-$subAddressNo';
 }
+
+double toDoubleFromString(String floatNumberString) {
+  return double.parse(floatNumberString);
+}

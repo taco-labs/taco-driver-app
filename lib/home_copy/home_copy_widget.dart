@@ -1140,7 +1140,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             text: '',
                                             icon: Icon(
                                               Icons.phone,
-                                              size: 15,
+                                              size: 25,
                                             ),
                                             options: FFButtonOptions(
                                               width: 60,
@@ -1182,7 +1182,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             text: '',
                                             icon: Icon(
                                               Icons.message,
-                                              size: 15,
+                                              size: 25,
                                             ),
                                             options: FFButtonOptions(
                                               width: 60,
@@ -1210,14 +1210,16 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         FFButtonWidget(
                                           onPressed: () async {
                                             await actions.launchKakaoNavi(
-                                              getJsonField(
+                                              functions.toDoubleFromString(
+                                                  getJsonField(
                                                 FFAppState().callRequest,
                                                 r'''$.departureLatitude''',
-                                              ),
-                                              getJsonField(
+                                              ).toString()),
+                                              functions.toDoubleFromString(
+                                                  getJsonField(
                                                 FFAppState().callRequest,
                                                 r'''$.departureLongitude''',
-                                              ),
+                                              ).toString()),
                                               '출발지',
                                             );
                                           },
@@ -1574,21 +1576,23 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         FFButtonWidget(
                                           onPressed: () async {
                                             await actions.launchKakaoNavi(
-                                              getJsonField(
+                                              functions.toDoubleFromString(
+                                                  getJsonField(
                                                 FFAppState().callRequest,
                                                 r'''$.arrivalLatitude''',
-                                              ),
-                                              getJsonField(
+                                              ).toString()),
+                                              functions.toDoubleFromString(
+                                                  getJsonField(
                                                 FFAppState().callRequest,
                                                 r'''$.arrivalLongitude''',
-                                              ),
+                                              ).toString()),
                                               '목적지',
                                             );
                                           },
                                           text: '목적지 길안내',
                                           options: FFButtonOptions(
                                             width: 150,
-                                            height: 60,
+                                            height: 50,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             textStyle:
@@ -2163,6 +2167,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           basePrice: int.parse(
                                               taxiFareController!.text),
                                           apiToken: FFAppState().apiToken,
+                                          tollFee: int.parse(
+                                              tollFareController!.text),
                                         );
                                         if ((apiResultDoneTaxiCall?.succeeded ??
                                             true)) {
