@@ -1134,6 +1134,8 @@ class ListTaxiCallCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
     String? apiToken = '',
+    int? count,
+    String? pageToken = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'List Taxi Call',
@@ -1143,7 +1145,10 @@ class ListTaxiCallCall {
         ...TaxiCallGroup.headers,
         'Authorization': 'Bearer ${apiToken}',
       },
-      params: {},
+      params: {
+        'pageToken': pageToken,
+        'count': count,
+      },
       returnBody: true,
       cache: false,
     );
@@ -1157,6 +1162,226 @@ class ListTaxiCallCall {
   dynamic pageToken(dynamic response) => getJsonField(
         response,
         r'''$.pageToken''',
+      );
+  dynamic dryruns(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].dryrun''',
+        true,
+      );
+  dynamic distances(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].distance''',
+        true,
+      );
+  dynamic etas(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].eta''',
+        true,
+      );
+  dynamic paths(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].path''',
+        true,
+      );
+  dynamic callRequestIds(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].id''',
+        true,
+      );
+  dynamic userIds(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].userId''',
+        true,
+      );
+  dynamic driverIds(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].driverId''',
+        true,
+      );
+  dynamic departures(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure''',
+        true,
+      );
+  dynamic aa(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address''',
+        true,
+      );
+  dynamic bb(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.addressName''',
+        true,
+      );
+  dynamic cc(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.regionDepth1''',
+        true,
+      );
+  dynamic dd(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.regionDepth2''',
+        true,
+      );
+  dynamic ee(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.regionDepth3''',
+        true,
+      );
+  dynamic ff(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.mainAddressNo''',
+        true,
+      );
+  dynamic gg(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.address.serviceRegion''',
+        true,
+      );
+  dynamic hh(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.point''',
+        true,
+      );
+  dynamic ii(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.point.latitude''',
+        true,
+      );
+  dynamic jj(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].departure.point.longitude''',
+        true,
+      );
+  dynamic aa1(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival''',
+        true,
+      );
+  dynamic aa2(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address''',
+        true,
+      );
+  dynamic aa3(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.addressName''',
+        true,
+      );
+  dynamic aa4(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.regionDepth1''',
+        true,
+      );
+  dynamic aa5(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.regionDepth2''',
+        true,
+      );
+  dynamic aa6(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.regionDepth3''',
+        true,
+      );
+  dynamic aa7(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.mainAddressNo''',
+        true,
+      );
+  dynamic aa8(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.subAddressNo''',
+        true,
+      );
+  dynamic aa9(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.address.serviceRegion''',
+        true,
+      );
+  dynamic aa112(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.point''',
+        true,
+      );
+  dynamic aa23(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.point.latitude''',
+        true,
+      );
+  dynamic bb1(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].arrival.point.longitude''',
+        true,
+      );
+  dynamic bb2(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].tags''',
+        true,
+      );
+  dynamic bb3(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].payment''',
+        true,
+      );
+  dynamic bb4(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].payment.paymentId''',
+        true,
+      );
+  dynamic bb6(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].payment.company''',
+        true,
+      );
+  dynamic cc1(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].payment.cardNumber''',
+        true,
+      );
+  dynamic cc2(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].requestBasePrice''',
+        true,
+      );
+  dynamic cc4(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].requestMinAdditionalPrice''',
+        true,
+      );
+  dynamic cc5(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].requestMaxAdditionalPrice''',
+        true,
+      );
+  dynamic cc6(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].basePrice''',
+        true,
+      );
+  dynamic dd1(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].tollFee''',
+        true,
+      );
+  dynamic dd2(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].additionalPrice''',
+        true,
+      );
+  dynamic dd3(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].currentState''',
+        true,
+      );
+  dynamic dd5(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].createTime''',
+        true,
+      );
+  dynamic dd6(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].updateTime''',
+        true,
       );
 }
 

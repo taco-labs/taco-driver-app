@@ -167,20 +167,42 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                                   ).toString()),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle2,
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 14,
+                                                      ),
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 8, 0, 0),
+                                                      .fromSTEB(0, 5, 0, 0),
                                                   child: Text(
                                                     getJsonField(
                                                       rideHistoriesItem,
-                                                      r'''$.payment.cardNumber''',
+                                                      r'''$.departure.address.addressName''',
                                                     ).toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText2,
                                                   ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(50, 0, 0, 0),
+                                                  child: Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    color: Colors.black,
+                                                    size: 24,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  getJsonField(
+                                                    rideHistoriesItem,
+                                                    r'''$.arrival.address.addressName''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2,
                                                 ),
                                               ],
                                             ),
@@ -188,111 +210,50 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '운임',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 14,
-                                                              ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5, 0, 0, 0),
-                                                      child: Text(
-                                                        getJsonField(
-                                                          rideHistoriesItem,
-                                                          r'''$.basePrice''',
-                                                        ).toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 14,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 12, 0),
-                                                      child: Text(
-                                                        '원',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 14,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                              Text(
+                                                '운임 ${getJsonField(
+                                                  rideHistoriesItem,
+                                                  r'''$.basePrice''',
+                                                ).toString()}원',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
+                                              ),
+                                              Text(
+                                                '통행료 ${getJsonField(
+                                                  rideHistoriesItem,
+                                                  r'''$.tollFee''',
+                                                ).toString()}원',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
+                                              ),
+                                              Text(
+                                                '적립타코 ${getJsonField(
+                                                  rideHistoriesItem,
+                                                  r'''$.addtionalPrice''',
+                                                ).toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 14,
+                                                        ),
                                               ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    '수수료',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 14,
-                                                        ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                3, 0, 0, 0),
-                                                    child: Text(
-                                                      getJsonField(
-                                                        rideHistoriesItem,
-                                                        r'''$.additionalPrice''',
-                                                      ).toString(),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                fontSize: 14,
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .lineThrough,
-                                                              ),
-                                                    ),
-                                                  ),
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
