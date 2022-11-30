@@ -326,7 +326,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       ),
                     ),
                   ),
-                if (FFAppState().isOnDuty && FFAppState().isOnCallViewing)
+                if (FFAppState().isOnCallViewing)
                   Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -692,6 +692,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           r'''$.taxiCallTicketId''',
                                         ).toString(),
                                         apiToken: FFAppState().apiToken,
+                                        apiEndpointTarget:
+                                            FFAppState().apiEndpointTarget,
                                       );
                                       if ((apiResultw8d?.succeeded ?? true)) {
                                         setState(() => FFAppState()
@@ -775,6 +777,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           r'''$.taxiCallTicketId''',
                                         ).toString(),
                                         apiToken: FFAppState().apiToken,
+                                        apiEndpointTarget:
+                                            FFAppState().apiEndpointTarget,
                                       );
                                       if ((apiResultj1q?.succeeded ?? true)) {
                                         setState(() => FFAppState()
@@ -878,7 +882,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -898,7 +903,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     return AlertDialog(
                                                       title: Text('주의'),
                                                       content: Text(
-                                                          '콜 수락을 취소하시겠습니까? 이유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                          '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
@@ -929,6 +934,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               r'''$.taxiCallRequestId''',
                                             ).toString(),
                                             apiToken: FFAppState().apiToken,
+                                            apiEndpointTarget:
+                                                FFAppState().apiEndpointTarget,
                                           );
                                           if ((apiResultCancelCall?.succeeded ??
                                               true)) {
@@ -1316,6 +1323,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         r'''$.taxiCallRequestId''',
                                       ).toString(),
                                       apiToken: FFAppState().apiToken,
+                                      apiEndpointTarget:
+                                          FFAppState().apiEndpointTarget,
                                     );
                                     if ((apiResultDriverToArrival?.succeeded ??
                                         true)) {
@@ -1957,8 +1966,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     return;
                                   }
 
-                                  debugPrint(
-                                      'taxiFare ${taxiFareController!.text}');
                                   apiResultDoneTaxiCall =
                                       await TaxiCallGroup.doneTaxiCallCall.call(
                                     taxiCallRequestId: getJsonField(
@@ -1970,6 +1977,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     apiToken: FFAppState().apiToken,
                                     tollFee:
                                         int.parse(tollFareController!.text),
+                                    apiEndpointTarget:
+                                        FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultDoneTaxiCall?.succeeded ??
                                       true)) {
@@ -2080,6 +2089,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           apiToken: FFAppState().apiToken,
                           driverId: FFAppState().driverId,
                           onDuty: true,
+                          apiEndpointTarget: FFAppState().apiEndpointTarget,
                         );
                         if ((apiResult438?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = true);
@@ -2139,6 +2149,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           apiToken: FFAppState().apiToken,
                           driverId: FFAppState().driverId,
                           onDuty: false,
+                          apiEndpointTarget: FFAppState().apiEndpointTarget,
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           setState(() => FFAppState().isOnDuty = false);
