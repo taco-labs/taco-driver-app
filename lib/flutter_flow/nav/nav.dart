@@ -168,9 +168,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'SettlemenHistory',
-              path: 'settlemenHistory',
-              builder: (context, params) => SettlemenHistoryWidget(
+              name: 'SettlementHistory',
+              path: 'settlementHistory',
+              builder: (context, params) => SettlementHistoryWidget(
                 bank: params.getParam('bank', ParamType.String),
                 accountNumber:
                     params.getParam('accountNumber', ParamType.String),

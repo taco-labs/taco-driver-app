@@ -190,7 +190,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      context.pushNamed('SettlemenHistory');
+                      context.pushNamed('SettlementHistory');
                     },
                     child: ListTile(
                       title: Text(
