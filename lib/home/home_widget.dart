@@ -72,6 +72,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 apiResulttx8 = await DriverInfoGroup.getDriverCall.call(
                   apiToken: FFAppState().apiToken,
                   driverId: FFAppState().driverId,
+                  apiEndpointTarget: FFAppState().apiEndpointTarget,
                 );
                 if ((apiResulttx8?.succeeded ?? true)) {
                   context.pushNamed(
@@ -147,12 +148,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                     await DriverInfoGroup.getSettlementAccountCall.call(
                   driverId: FFAppState().driverId,
                   apiToken: FFAppState().apiToken,
+                  apiEndpointTarget: FFAppState().apiEndpointTarget,
                 );
                 if ((apiResultqz6?.succeeded ?? true)) {
                   apiResultd22 =
                       await DriverInfoGroup.getExpectetedSettlementCall.call(
                     apiToken: FFAppState().apiToken,
                     driverId: FFAppState().driverId,
+                    apiEndpointTarget: FFAppState().apiEndpointTarget,
                   );
                   if ((apiResultd22?.succeeded ?? true)) {
                     context.pushNamed(
