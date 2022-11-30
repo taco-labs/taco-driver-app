@@ -27,6 +27,7 @@ class _EntryWidgetState extends State<EntryWidget> {
       apiResultyb1 = await DriverInfoGroup.getDriverCall.call(
         apiToken: FFAppState().apiToken,
         driverId: FFAppState().driverId,
+        apiEndpointTarget: FFAppState().apiEndpointTarget,
       );
       if ((apiResultyb1?.succeeded ?? true)) {
         setState(() =>
@@ -76,6 +77,7 @@ class _EntryWidgetState extends State<EntryWidget> {
               await DriverInfoGroup.getSettlementAccountCall.call(
             driverId: FFAppState().driverId,
             apiToken: FFAppState().apiToken,
+            apiEndpointTarget: FFAppState().apiEndpointTarget,
           );
           if ((apiResultGetAccount?.succeeded ?? true)) {
             if (FFAppState().isOnDuty) {
@@ -83,6 +85,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                   await TaxiCallGroup.getLatestTaxiCallCall.call(
                 driverId: FFAppState().driverId,
                 apiToken: FFAppState().apiToken,
+                apiEndpointTarget: FFAppState().apiEndpointTarget,
               );
               if ((apiResultLatestCall?.succeeded ?? true)) {
                 setState(() => FFAppState().callRequest =

@@ -173,6 +173,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           .call(
                         stateKey: widget.authSmsStateKey,
                         verificationCode: textController!.text,
+                        apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResultf8v?.succeeded ?? true)) {
                         setState(() => FFAppState().apiToken =
@@ -240,6 +241,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                               .call(
                             driverId: FFAppState().driverId,
                             apiToken: FFAppState().apiToken,
+                            apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResultGetAccount?.succeeded ?? true)) {
                             if (isAndroid ? true : false) {
@@ -281,6 +283,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                         (apiResultf8v?.jsonBody ?? ''),
                                       )
                                       .toString(),
+                              apiEndpointTarget: FFAppState().apiEndpointTarget,
                             );
                             if ((apiResultUpdateDriver?.succeeded ?? true)) {
                               if (SigninFlowGroup.sMSVerificationAndSigninCall
@@ -292,6 +295,8 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                     .call(
                                   driverId: FFAppState().driverId,
                                   apiToken: FFAppState().apiToken,
+                                  apiEndpointTarget:
+                                      FFAppState().apiEndpointTarget,
                                 );
                                 if ((apiResultLatestCall?.succeeded ?? true)) {
                                   setState(() => FFAppState().callRequest =

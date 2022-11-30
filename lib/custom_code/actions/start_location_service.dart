@@ -42,6 +42,7 @@ class LocationServiceRepository {
       apiToken: FFAppState().apiToken,
       latitude: locationDto.latitude,
       longitude: locationDto.longitude,
+      apiEndpointTarget: FFAppState().apiEndpointTarget,
     );
 
     if (apiResult.succeeded == false) {

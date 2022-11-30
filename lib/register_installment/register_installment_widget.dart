@@ -227,6 +227,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         apiToken: FFAppState().apiToken,
                         bank: bankCodeValue,
                         accountNumber: accountNumberController!.text,
+                        apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResultRegisterAccount?.succeeded ?? true)) {
                         context.goNamed('Home');

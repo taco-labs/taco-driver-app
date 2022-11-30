@@ -157,6 +157,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           stateKey: GetUUIDCall.uuid(
                             (apiResultUuid?.jsonBody ?? ''),
                           ).toString(),
+                          apiEndpointTarget: FFAppState().apiEndpointTarget,
                         );
                         if ((apiResultfwz?.succeeded ?? true)) {
                           context.pushNamed(

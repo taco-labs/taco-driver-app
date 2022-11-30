@@ -781,6 +781,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 r'''$.taxiCallTicketId''',
                                               ).toString(),
                                               apiToken: FFAppState().apiToken,
+                                              apiEndpointTarget: FFAppState()
+                                                  .apiEndpointTarget,
                                             );
                                             if ((apiResultw8d?.succeeded ??
                                                 true)) {
@@ -869,6 +871,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 r'''$.taxiCallTicketId''',
                                               ).toString(),
                                               apiToken: FFAppState().apiToken,
+                                              apiEndpointTarget: FFAppState()
+                                                  .apiEndpointTarget,
                                             );
                                             if ((apiResultj1q?.succeeded ??
                                                 true)) {
@@ -1003,7 +1007,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           return AlertDialog(
                                                             title: Text('주의'),
                                                             content: Text(
-                                                                '콜 수락을 취소하시겠습니까? 이유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                                '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
                                                             actions: [
                                                               TextButton(
                                                                 onPressed: () =>
@@ -1038,6 +1042,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   ).toString(),
                                                   apiToken:
                                                       FFAppState().apiToken,
+                                                  apiEndpointTarget:
+                                                      FFAppState()
+                                                          .apiEndpointTarget,
                                                 );
                                                 if ((apiResultCancelCall
                                                         ?.succeeded ??
@@ -1449,6 +1456,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               r'''$.taxiCallRequestId''',
                                             ).toString(),
                                             apiToken: FFAppState().apiToken,
+                                            apiEndpointTarget:
+                                                FFAppState().apiEndpointTarget,
                                           );
                                           if ((apiResultDriverToArrival
                                                   ?.succeeded ??
@@ -2163,6 +2172,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           apiToken: FFAppState().apiToken,
                                           tollFee: int.parse(
                                               tollFareController!.text),
+                                          apiEndpointTarget:
+                                              FFAppState().apiEndpointTarget,
                                         );
                                         if ((apiResultDoneTaxiCall?.succeeded ??
                                             true)) {
@@ -2277,6 +2288,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 apiToken: FFAppState().apiToken,
                                 driverId: FFAppState().driverId,
                                 onDuty: true,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
                               if ((apiResult438?.succeeded ?? true)) {
                                 setState(() => FFAppState().isOnDuty = true);
@@ -2338,6 +2351,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 apiToken: FFAppState().apiToken,
                                 driverId: FFAppState().driverId,
                                 onDuty: false,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
                               if ((apiResultkg1?.succeeded ?? true)) {
                                 setState(() => FFAppState().isOnDuty = false);

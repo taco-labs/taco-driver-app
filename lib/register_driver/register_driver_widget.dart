@@ -928,6 +928,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             companyRegistrationNumber:
                                 businessRegistrationNumberController!.text,
                             serviceRegion: dropDownValue,
+                            apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResultbos?.succeeded ?? true)) {
                             await requestPermission(locationPermission);

@@ -258,6 +258,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       apiResult9ee =
                           await BackofficeGroup.deleteDriverCall.call(
                         driverId: FFAppState().driverId,
+                        apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResult9ee?.succeeded ?? true)) {
                         setState(() => FFAppState().apiToken = '');

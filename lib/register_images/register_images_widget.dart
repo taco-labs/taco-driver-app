@@ -131,6 +131,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   await DriverInfoGroup.getDriverCall.call(
                                 apiToken: FFAppState().apiToken,
                                 driverId: FFAppState().driverId,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
                               if ((apiResulttx0?.succeeded ?? true)) {
                                 profileUploadSucceeded =
@@ -170,6 +172,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                           (apiResulttx0?.jsonBody ?? ''),
                                         )
                                         .toString(),
+                                    apiEndpointTarget:
+                                        FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
@@ -332,6 +336,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   await DriverInfoGroup.getDriverCall.call(
                                 apiToken: FFAppState().apiToken,
                                 driverId: FFAppState().driverId,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
                               if ((apiResulttx1?.succeeded ?? true)) {
                                 licenseUploadSucceeded =
@@ -371,6 +377,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                           (apiResulttx1?.jsonBody ?? ''),
                                         )
                                         .toString(),
+                                    apiEndpointTarget:
+                                        FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {

@@ -84,6 +84,7 @@ class _RideHistoryWidgetState extends State<RideHistoryWidget> {
                           driverId: FFAppState().driverId,
                           apiToken: FFAppState().apiToken,
                           count: 10,
+                          apiEndpointTarget: FFAppState().apiEndpointTarget,
                         )))
                       .future,
                   builder: (context, snapshot) {

@@ -93,6 +93,7 @@ class _SettlemenHistoryWidgetState extends State<SettlemenHistoryWidget> {
                         driverId: FFAppState().driverId,
                         apiToken: FFAppState().apiToken,
                         count: 10,
+                        apiEndpointTarget: FFAppState().apiEndpointTarget,
                       )))
                     .future,
                 builder: (context, snapshot) {

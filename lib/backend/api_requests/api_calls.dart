@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Signin  flow Group Code
 
 class SigninFlowGroup {
-  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver/signin';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static SMSVerificationRequestCall sMSVerificationRequestCall =
       SMSVerificationRequestCall();
@@ -23,6 +23,7 @@ class SMSVerificationRequestCall {
   Future<ApiCallResponse> call({
     String? stateKey = '',
     String? phone = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -31,7 +32,8 @@ class SMSVerificationRequestCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'SMS verification request',
-      apiUrl: '${SigninFlowGroup.baseUrl}/sms/request',
+      apiUrl:
+          '${SigninFlowGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/signin/sms/request',
       callType: ApiCallType.POST,
       headers: {
         ...SigninFlowGroup.headers,
@@ -49,6 +51,7 @@ class SMSVerificationAndSigninCall {
   Future<ApiCallResponse> call({
     String? stateKey = '',
     String? verificationCode = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -57,7 +60,8 @@ class SMSVerificationAndSigninCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'SMS Verification and signin',
-      apiUrl: '${SigninFlowGroup.baseUrl}/sms/verify',
+      apiUrl:
+          '${SigninFlowGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/signin/sms/verify',
       callType: ApiCallType.POST,
       headers: {
         ...SigninFlowGroup.headers,
@@ -177,7 +181,7 @@ class SMSVerificationAndSigninCall {
 /// Start Signup Group Code
 
 class SignupGroup {
-  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static SignupCall signupCall = SignupCall();
 }
@@ -198,6 +202,7 @@ class SignupCall {
     String? carNumber = '',
     String? companyRegistrationNumber = '',
     String? serviceRegion = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -218,7 +223,8 @@ class SignupCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Signup',
-      apiUrl: '${SignupGroup.baseUrl}/signup',
+      apiUrl:
+          '${SignupGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/signup',
       callType: ApiCallType.POST,
       headers: {
         ...SignupGroup.headers,
@@ -338,7 +344,7 @@ class SignupCall {
 /// Start Driver Info Group Code
 
 class DriverInfoGroup {
-  static String baseUrl = 'https://driver.dev.api.taco-labs.com/driver';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static GetDriverCall getDriverCall = GetDriverCall();
   static UpdateDriverCall updateDriverCall = UpdateDriverCall();
@@ -363,10 +369,12 @@ class GetDriverCall {
   Future<ApiCallResponse> call({
     String? apiToken = '',
     String? driverId = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Driver',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -482,6 +490,7 @@ class UpdateDriverCall {
     bool? profileImageUploaded,
     bool? licenseImageUploaded,
     String? carNumber = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -494,7 +503,8 @@ class UpdateDriverCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Driver',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
@@ -514,6 +524,7 @@ class UpdateOnDutyCall {
     String? apiToken = '',
     String? driverId = '',
     bool? onDuty,
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -521,7 +532,8 @@ class UpdateOnDutyCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update on duty',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/on_duty',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/on_duty',
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
@@ -542,6 +554,7 @@ class UpdateDriverLocationCall {
     String? apiToken = '',
     double? latitude,
     double? longitude,
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -550,7 +563,8 @@ class UpdateDriverLocationCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update driver location',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/location',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/location',
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
@@ -571,6 +585,7 @@ class RegisterSettlementAccountCall {
     String? apiToken = '',
     String? bank = '',
     String? accountNumber = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -579,7 +594,8 @@ class RegisterSettlementAccountCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Register settlement account',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/settlement_account',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/settlement_account',
       callType: ApiCallType.POST,
       headers: {
         ...DriverInfoGroup.headers,
@@ -619,10 +635,12 @@ class GetSettlementAccountCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Settlement account',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/settlement_account',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/settlement_account',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -662,6 +680,7 @@ class UpdateDriverSettlementAccountCall {
     String? apiToken = '',
     String? bank = '',
     String? accountNumber = '',
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -670,7 +689,8 @@ class UpdateDriverSettlementAccountCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update driver settlement account',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/settlement_account',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/settlement_account',
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
@@ -710,10 +730,12 @@ class GetDriverImageUrlsCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Driver Image Urls',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/image_urls',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/image_urls',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -755,10 +777,12 @@ class GetExpectetedSettlementCall {
   Future<ApiCallResponse> call({
     String? apiToken = '',
     String? driverId = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Expecteted Settlement',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/expected_settlement',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/expected_settlement',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -786,10 +810,12 @@ class ListDriverSettlementHistoryCall {
     String? apiToken = '',
     String? pageToken = '',
     int? count,
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'List Driver Settlement History',
-      apiUrl: '${DriverInfoGroup.baseUrl}/${driverId}/settlement',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/settlement',
       callType: ApiCallType.GET,
       headers: {
         ...DriverInfoGroup.headers,
@@ -835,7 +861,7 @@ class ListDriverSettlementHistoryCall {
 /// Start Backoffice Group Code
 
 class BackofficeGroup {
-  static String baseUrl = 'https://backoffice.dev.api.taco-labs.com/driver';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {
     'Authorization': 'Bearer backoffice_secret_dev',
   };
@@ -848,10 +874,12 @@ class BackofficeGroup {
 class DeleteDriverCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Delete Driver',
-      apiUrl: '${BackofficeGroup.baseUrl}/${driverId}',
+      apiUrl:
+          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
       callType: ApiCallType.DELETE,
       headers: {
         ...BackofficeGroup.headers,
@@ -866,10 +894,12 @@ class DeleteDriverCall {
 class ActivateDriverCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Activate Driver',
-      apiUrl: '${BackofficeGroup.baseUrl}/${driverId}/activate',
+      apiUrl:
+          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/activate',
       callType: ApiCallType.PUT,
       headers: {
         ...BackofficeGroup.headers,
@@ -886,11 +916,12 @@ class ForceAcceptTaxiCallRequestCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
     String? taxiCallRequestId = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Force Accept Taxi Call Request',
       apiUrl:
-          '${BackofficeGroup.baseUrl}/${driverId}/force_accept/${taxiCallRequestId}',
+          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/force_accept/${taxiCallRequestId}',
       callType: ApiCallType.PUT,
       headers: {
         ...BackofficeGroup.headers,
@@ -908,7 +939,7 @@ class ForceAcceptTaxiCallRequestCall {
 /// Start Taxi Call Group Code
 
 class TaxiCallGroup {
-  static String baseUrl = 'https://driver.dev.api.taco-labs.com';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static GetLatestTaxiCallCall getLatestTaxiCallCall = GetLatestTaxiCallCall();
   static ListTaxiCallCall listTaxiCallCall = ListTaxiCallCall();
@@ -927,10 +958,12 @@ class GetLatestTaxiCallCall {
   Future<ApiCallResponse> call({
     String? driverId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Latest Taxi Call',
-      apiUrl: '${TaxiCallGroup.baseUrl}/driver/${driverId}/taxicall_latest',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/taxicall_latest',
       callType: ApiCallType.GET,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1136,10 +1169,12 @@ class ListTaxiCallCall {
     String? apiToken = '',
     int? count,
     String? pageToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'List Taxi Call',
-      apiUrl: '${TaxiCallGroup.baseUrl}/driver/${driverId}/taxicall',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/taxicall',
       callType: ApiCallType.GET,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1389,10 +1424,12 @@ class AcceptTaxiCallTicketCall {
   Future<ApiCallResponse> call({
     String? ticketId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Accept Taxi Call Ticket',
-      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/ticket/${ticketId}',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/taxicall/ticket/${ticketId}',
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1415,10 +1452,12 @@ class RejectTaxiCallTicketCall {
   Future<ApiCallResponse> call({
     String? ticketId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Reject Taxi Call Ticket',
-      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/ticket/${ticketId}',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/taxicall/ticket/${ticketId}',
       callType: ApiCallType.DELETE,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1435,11 +1474,12 @@ class TaxiCallDriverToArrivalCall {
   Future<ApiCallResponse> call({
     String? taxiCallRequestId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Taxi Call Driver To Arrival',
       apiUrl:
-          '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}/to_arrival',
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/taxicall/${taxiCallRequestId}/to_arrival',
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1457,10 +1497,12 @@ class CancelTaxiCallRequestCall {
   Future<ApiCallResponse> call({
     String? taxiCallRequestId = '',
     String? apiToken = '',
+    String? apiEndpointTarget = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Cancel Taxi Call Request',
-      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/taxicall/${taxiCallRequestId}',
       callType: ApiCallType.DELETE,
       headers: {
         ...TaxiCallGroup.headers,
@@ -1479,6 +1521,7 @@ class DoneTaxiCallCall {
     int? basePrice,
     String? apiToken = '',
     int? tollFee,
+    String? apiEndpointTarget = '',
   }) {
     final body = '''
 {
@@ -1487,7 +1530,8 @@ class DoneTaxiCallCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Done taxi call',
-      apiUrl: '${TaxiCallGroup.baseUrl}/taxicall/${taxiCallRequestId}/done',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/taxicall/${taxiCallRequestId}/done',
       callType: ApiCallType.PUT,
       headers: {
         ...TaxiCallGroup.headers,
