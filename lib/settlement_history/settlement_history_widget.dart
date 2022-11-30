@@ -7,8 +7,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SettlemenHistoryWidget extends StatefulWidget {
-  const SettlemenHistoryWidget({
+class SettlementHistoryWidget extends StatefulWidget {
+  const SettlementHistoryWidget({
     Key? key,
     this.bank,
     this.accountNumber,
@@ -20,10 +20,11 @@ class SettlemenHistoryWidget extends StatefulWidget {
   final int? expectedAmount;
 
   @override
-  _SettlemenHistoryWidgetState createState() => _SettlemenHistoryWidgetState();
+  _SettlementHistoryWidgetState createState() =>
+      _SettlementHistoryWidgetState();
 }
 
-class _SettlemenHistoryWidgetState extends State<SettlemenHistoryWidget> {
+class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
   Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
