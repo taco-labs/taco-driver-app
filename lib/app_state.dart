@@ -75,7 +75,7 @@ class FFAppState {
 
   String driverLicenseNumber = '';
 
-  String apiEndpointTarget = 'dev';
+  String apiEndpointTarget = 'prod';
 }
 
 LatLng? _latLngFromString(String? val) {
