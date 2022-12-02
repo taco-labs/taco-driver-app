@@ -105,12 +105,17 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                           apiToken: FFAppState().apiToken,
                           count: 10,
                           apiEndpointTarget: FFAppState().apiEndpointTarget,
-                          pageToken: getJsonField(
-                            (nextPageMarker.lastResponse ??
-                                    ApiCallResponse({}, {}, 200))
-                                .jsonBody,
-                            r'''$.pageToken''',
-                          ).toString(),
+                          pageToken: (nextPageMarker.lastResponse ??
+                                          ApiCallResponse({}, {}, 200))
+                                      .jsonBody !=
+                                  null
+                              ? getJsonField(
+                                  (nextPageMarker.lastResponse ??
+                                          ApiCallResponse({}, {}, 200))
+                                      .jsonBody,
+                                  r'''$.pageToken''',
+                                ).toString()
+                              : ' ',
                         )
                             .then((listViewListTaxiCallResponse) {
                           final pageItems = TaxiCallGroup.listTaxiCallCall
@@ -256,7 +261,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                             functions.toHumanFreindlyCallState(
                                                 getJsonField(
                                               rideHistoriesItem,
-                                              r'''$.callState''',
+                                              r'''$.currentState''',
                                             ).toString()),
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1
@@ -289,6 +294,16 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                         ),
                                                   ),
                                                 ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 5),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
                                                 Text(
                                                   '통행료 ${getJsonField(
                                                     rideHistoriesItem,
