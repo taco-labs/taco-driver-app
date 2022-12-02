@@ -123,7 +123,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('RideHistory');
+                context.pushNamed('DriveHistory');
               },
               child: ListTile(
                 title: Text(

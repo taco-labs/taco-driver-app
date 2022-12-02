@@ -256,3 +256,17 @@ dynamic toCallRequestFromApiResponse(dynamic apiResponse) {
 
   return callRequest;
 }
+
+String toHumanFreindlyCallState(String callState) {
+  String state = '';
+  switch (callState) {
+    case 'USER_CANCELLED':
+      state = '승객취소';
+      break;
+    case 'DRIVER_CANCELLED':
+      state = '취소';
+      break;
+  }
+
+  return state;
+}

@@ -110,7 +110,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('RideHistory');
+                context.pushNamed('DriveHistory');
               },
               child: ListTile(
                 title: Text(

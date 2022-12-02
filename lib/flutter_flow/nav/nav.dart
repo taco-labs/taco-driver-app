@@ -122,11 +122,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'RideHistory',
-              path: 'rideHistory',
-              builder: (context, params) => RideHistoryWidget(),
-            ),
-            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(),
@@ -182,6 +177,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'SupportChat',
               path: 'supportChat',
               builder: (context, params) => SupportChatWidget(),
+            ),
+            FFRoute(
+              name: 'DriveHistory',
+              path: 'driveHistory',
+              builder: (context, params) => DriveHistoryWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

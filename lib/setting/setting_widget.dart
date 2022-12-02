@@ -256,7 +256,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         false;
                     if (confirmDialogResponse) {
                       apiResult9ee =
-                          await BackofficeGroup.deleteDriverCall.call(
+                          await BackofficeDevGroup.deleteDriverCall.call(
                         driverId: FFAppState().driverId,
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );

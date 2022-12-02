@@ -203,6 +203,7 @@ class SignupCall {
     String? companyRegistrationNumber = '',
     String? serviceRegion = '',
     String? apiEndpointTarget = '',
+    String? companyName = '',
   }) {
     final body = '''
 {
@@ -363,6 +364,8 @@ class DriverInfoGroup {
       GetExpectetedSettlementCall();
   static ListDriverSettlementHistoryCall listDriverSettlementHistoryCall =
       ListDriverSettlementHistoryCall();
+  static RequestDriverSettlementCall requestDriverSettlementCall =
+      RequestDriverSettlementCall();
 }
 
 class GetDriverCall {
@@ -856,11 +859,34 @@ class ListDriverSettlementHistoryCall {
       );
 }
 
+class RequestDriverSettlementCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiToken = '',
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Request Driver Settlement',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/settlement_requeset',
+      callType: ApiCallType.POST,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
 /// End Driver Info Group Code
 
-/// Start Backoffice Group Code
+/// Start Backoffice Dev Group Code
 
-class BackofficeGroup {
+class BackofficeDevGroup {
   static String baseUrl = 'https://';
   static Map<String, String> headers = {
     'Authorization': 'Bearer backoffice_secret_dev',
@@ -879,10 +905,10 @@ class DeleteDriverCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Delete Driver',
       apiUrl:
-          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
+          '${BackofficeDevGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
       callType: ApiCallType.DELETE,
       headers: {
-        ...BackofficeGroup.headers,
+        ...BackofficeDevGroup.headers,
       },
       params: {},
       returnBody: true,
@@ -899,10 +925,10 @@ class ActivateDriverCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Activate Driver',
       apiUrl:
-          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/activate',
+          '${BackofficeDevGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/activate',
       callType: ApiCallType.PUT,
       headers: {
-        ...BackofficeGroup.headers,
+        ...BackofficeDevGroup.headers,
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -921,10 +947,10 @@ class ForceAcceptTaxiCallRequestCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Force Accept Taxi Call Request',
       apiUrl:
-          '${BackofficeGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/force_accept/${taxiCallRequestId}',
+          '${BackofficeDevGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/force_accept/${taxiCallRequestId}',
       callType: ApiCallType.PUT,
       headers: {
-        ...BackofficeGroup.headers,
+        ...BackofficeDevGroup.headers,
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -934,7 +960,86 @@ class ForceAcceptTaxiCallRequestCall {
   }
 }
 
-/// End Backoffice Group Code
+/// End Backoffice Dev Group Code
+
+/// Start Backoffice Prod Group Code
+
+class BackofficeProdGroup {
+  static String baseUrl = 'https://';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer hpS4#QZmt6pHYLmG',
+  };
+  static DeleteDriverCopyCall deleteDriverCopyCall = DeleteDriverCopyCall();
+  static ActivateDriverCopyCall activateDriverCopyCall =
+      ActivateDriverCopyCall();
+  static ForceAcceptTaxiCallRequestCopyCall forceAcceptTaxiCallRequestCopyCall =
+      ForceAcceptTaxiCallRequestCopyCall();
+}
+
+class DeleteDriverCopyCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Delete Driver Copy',
+      apiUrl:
+          '${BackofficeProdGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...BackofficeProdGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class ActivateDriverCopyCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Activate Driver Copy',
+      apiUrl:
+          '${BackofficeProdGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/activate',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...BackofficeProdGroup.headers,
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+class ForceAcceptTaxiCallRequestCopyCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? taxiCallRequestId = '',
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Force Accept Taxi Call Request Copy',
+      apiUrl:
+          '${BackofficeProdGroup.baseUrl}backoffice.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/force_accept/${taxiCallRequestId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...BackofficeProdGroup.headers,
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
+/// End Backoffice Prod Group Code
 
 /// Start Taxi Call Group Code
 
