@@ -169,13 +169,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                               .toString(),
                           ParamType.String,
                         ),
-                        'expectedAmount': serializeParam(
-                          DriverInfoGroup.getExpectetedSettlementCall
-                              .expectedAmount(
-                            (apiResultd22?.jsonBody ?? ''),
-                          ),
-                          ParamType.int,
-                        ),
                         'bankCode': serializeParam(
                           DriverInfoGroup.getSettlementAccountCall
                               .bank(
@@ -183,6 +176,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                               )
                               .toString(),
                           ParamType.String,
+                        ),
+                        'totalAmount': serializeParam(
+                          DriverInfoGroup.getExpectetedSettlementCall
+                              .totalAmount(
+                            (apiResultd22?.jsonBody ?? ''),
+                          ),
+                          ParamType.int,
+                        ),
+                        'requestableAmount': serializeParam(
+                          DriverInfoGroup.getExpectetedSettlementCall
+                              .requestableAmount(
+                            (apiResultd22?.jsonBody ?? ''),
+                          ),
+                          ParamType.int,
                         ),
                       }.withoutNulls,
                     );

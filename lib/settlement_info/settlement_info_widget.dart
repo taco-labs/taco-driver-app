@@ -11,12 +11,14 @@ class SettlementInfoWidget extends StatefulWidget {
     Key? key,
     this.bankCode,
     this.accountNumber,
-    this.expectedAmount,
+    this.totalAmount,
+    this.requestableAmount,
   }) : super(key: key);
 
   final String? bankCode;
   final String? accountNumber;
-  final int? expectedAmount;
+  final int? totalAmount;
+  final int? requestableAmount;
 
   @override
   _SettlementInfoWidgetState createState() => _SettlementInfoWidgetState();
@@ -170,7 +172,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
                         child: Text(
                           valueOrDefault<String>(
-                            widget.expectedAmount?.toString(),
+                            widget.totalAmount?.toString(),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -211,7 +213,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
                         child: Text(
                           valueOrDefault<String>(
-                            widget.expectedAmount?.toString(),
+                            widget.requestableAmount?.toString(),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)

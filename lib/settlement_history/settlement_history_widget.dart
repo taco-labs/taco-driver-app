@@ -6,6 +6,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class SettlementHistoryWidget extends StatefulWidget {
   const SettlementHistoryWidget({
@@ -25,7 +26,7 @@ class SettlementHistoryWidget extends StatefulWidget {
 }
 
 class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
-  Completer<ApiCallResponse>? _apiRequestCompleter;
+  PagingController<ApiPagingParams, dynamic>? _pagingController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -87,20 +88,78 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                   ],
                 ),
               ),
-              FutureBuilder<ApiCallResponse>(
-                future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                      ..complete(
-                          DriverInfoGroup.listDriverSettlementHistoryCall.call(
+              RefreshIndicator(
+                onRefresh: () async {
+                  setState(() => _pagingController?.refresh());
+                  await waitForOnePage();
+                },
+                child: PagedListView<ApiPagingParams, dynamic>(
+                  pagingController: () {
+                    if (_pagingController != null) {
+                      return _pagingController!;
+                    }
+
+                    _pagingController = PagingController(
+                      firstPageKey: ApiPagingParams(
+                        nextPageNumber: 0,
+                        numItems: 0,
+                        lastResponse: null,
+                      ),
+                    );
+                    _pagingController!.addPageRequestListener((nextPageMarker) {
+                      DriverInfoGroup.listDriverSettlementHistoryCall
+                          .call(
                         driverId: FFAppState().driverId,
                         apiToken: FFAppState().apiToken,
                         count: 10,
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
-                      )))
-                    .future,
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
+                        pageToken: getJsonField(
+                                  (nextPageMarker.lastResponse ??
+                                          ApiCallResponse({}, {}, 200))
+                                      .jsonBody,
+                                  r'''$.pageToken''',
+                                ) !=
+                                null
+                            ? getJsonField(
+                                (nextPageMarker.lastResponse ??
+                                        ApiCallResponse({}, {}, 200))
+                                    .jsonBody,
+                                r'''$.pageToken''',
+                              ).toString()
+                            : FFAppState().emptyString,
+                      )
+                          .then((listViewListDriverSettlementHistoryResponse) {
+                        final pageItems =
+                            DriverInfoGroup.listDriverSettlementHistoryCall
+                                .histories(
+                                  listViewListDriverSettlementHistoryResponse
+                                      .jsonBody,
+                                )
+                                .toList() as List;
+                        final newNumItems =
+                            nextPageMarker.numItems + pageItems.length;
+                        _pagingController!.appendPage(
+                          pageItems,
+                          (pageItems.length > 0)
+                              ? ApiPagingParams(
+                                  nextPageNumber:
+                                      nextPageMarker.nextPageNumber + 1,
+                                  numItems: newNumItems,
+                                  lastResponse:
+                                      listViewListDriverSettlementHistoryResponse,
+                                )
+                              : null,
+                        );
+                      });
+                    });
+                    return _pagingController!;
+                  }(),
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                    // Customize what your widget looks like when it's loading the first page.
+                    firstPageProgressIndicatorBuilder: (_) => Center(
                       child: SizedBox(
                         width: 50,
                         height: 50,
@@ -108,171 +167,177 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                         ),
                       ),
-                    );
-                  }
-                  final listViewListDriverSettlementHistoryResponse =
-                      snapshot.data!;
-                  return Builder(
-                    builder: (context) {
-                      final settlementHistory =
-                          DriverInfoGroup.listDriverSettlementHistoryCall
-                              .histories(
-                                listViewListDriverSettlementHistoryResponse
-                                    .jsonBody,
+                    ),
+
+                    itemBuilder: (context, _, settlementHistoryIndex) {
+                      final settlementHistoryItem =
+                          _pagingController!.itemList![settlementHistoryIndex];
+                      return Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 7,
+                                color: Color(0x2E000000),
+                                offset: Offset(0, 4),
                               )
-                              .toList();
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          setState(() => _apiRequestCompleter = null);
-                          await waitForApiRequestCompleter();
-                        },
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: settlementHistory.length,
-                          itemBuilder: (context, settlementHistoryIndex) {
-                            final settlementHistoryItem =
-                                settlementHistory[settlementHistoryIndex];
-                            return Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 7,
-                                      color: Color(0x2E000000),
-                                      offset: Offset(0, 4),
-                                    )
+                            ],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Text(
+                                        '입금일시',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                    Text(
+                                      functions.toTimeSeconds(getJsonField(
+                                        settlementHistoryItem,
+                                        r'''$.createTime''',
+                                      ).toString()),
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
                                   ],
-                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      4, 4, 4, 4),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 8, 8, 8),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              functions
-                                                  .toTimeSeconds(getJsonField(
-                                                settlementHistoryItem,
-                                                r'''$.createTime''',
-                                              ).toString()),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2,
+                                      Text(
+                                        getJsonField(
+                                          settlementHistoryItem,
+                                          r'''$.settlementPeriodStart''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 8, 0, 0),
-                                              child: Text(
-                                                getJsonField(
-                                                  settlementHistoryItem,
-                                                  r'''$.settlementPeriodStart''',
-                                                ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 8, 8),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 2),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                5, 0, 0, 0),
-                                                    child: Text(
-                                                      getJsonField(
-                                                        settlementHistoryItem,
-                                                        r'''$.amount''',
-                                                      ).toString(),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 16,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '원',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 14,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Text(
-                                              getJsonField(
-                                                settlementHistoryItem,
-                                                r'''$.settlementPeriodEnd''',
-                                              ).toString(),
-                                              style:
+                                      Text(
+                                        ' - ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                      Text(
+                                        getJsonField(
+                                          settlementHistoryItem,
+                                          r'''$.settlementPeriodEnd''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 14,
-                                                      ),
+                                                      .secondaryText,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                          ],
-                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        '은행 계좌 정보',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        getJsonField(
+                                          settlementHistoryItem,
+                                          r'''$.amount''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                      Text(
+                                        '원',
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
-                  );
-                },
+                  ),
+                ),
               ),
             ],
           ),
@@ -281,7 +346,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
     );
   }
 
-  Future waitForApiRequestCompleter({
+  Future waitForOnePage({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {
@@ -289,7 +354,8 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
     while (true) {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
+      final requestComplete =
+          (_pagingController?.nextPageKey?.nextPageNumber ?? 0) > 0;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

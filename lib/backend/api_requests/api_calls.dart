@@ -801,9 +801,13 @@ class GetExpectetedSettlementCall {
         response,
         r'''$.driverId''',
       );
-  dynamic expectedAmount(dynamic response) => getJsonField(
+  dynamic totalAmount(dynamic response) => getJsonField(
         response,
-        r'''$.expectedAmount''',
+        r'''$.totalAmount''',
+      );
+  dynamic requestableAmount(dynamic response) => getJsonField(
+        response,
+        r'''$.requestableAmount''',
       );
 }
 

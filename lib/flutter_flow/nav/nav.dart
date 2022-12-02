@@ -158,8 +158,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 bankCode: params.getParam('bankCode', ParamType.String),
                 accountNumber:
                     params.getParam('accountNumber', ParamType.String),
-                expectedAmount:
-                    params.getParam('expectedAmount', ParamType.int),
+                totalAmount: params.getParam('totalAmount', ParamType.int),
+                requestableAmount:
+                    params.getParam('requestableAmount', ParamType.int),
               ),
             ),
             FFRoute(
