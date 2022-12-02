@@ -287,6 +287,10 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                       .subtitle1
                                                       .override(
                                                         fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
                                                         fontSize: 14,
                                                       ),
                                             ),
