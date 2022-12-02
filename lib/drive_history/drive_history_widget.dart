@@ -105,9 +105,12 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                           apiToken: FFAppState().apiToken,
                           count: 10,
                           apiEndpointTarget: FFAppState().apiEndpointTarget,
-                          pageToken: (nextPageMarker.lastResponse ??
-                                          ApiCallResponse({}, {}, 200))
-                                      .jsonBody !=
+                          pageToken: getJsonField(
+                                    (nextPageMarker.lastResponse ??
+                                            ApiCallResponse({}, {}, 200))
+                                        .jsonBody,
+                                    r'''$.pageToken''',
+                                  ) !=
                                   null
                               ? getJsonField(
                                   (nextPageMarker.lastResponse ??
@@ -115,7 +118,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                       .jsonBody,
                                   r'''$.pageToken''',
                                 ).toString()
-                              : ' ',
+                              : FFAppState().emptyString,
                         )
                             .then((listViewListTaxiCallResponse) {
                           final pageItems = TaxiCallGroup.listTaxiCallCall
