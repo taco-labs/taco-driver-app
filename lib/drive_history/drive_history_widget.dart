@@ -191,7 +191,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                      flex: 7,
+                                      flex: 6,
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8, 8, 8, 8),
@@ -214,11 +214,13 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                       ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 5, 0, 0),
+                                                  .fromSTEB(0, 10, 0, 0),
                                               child: Text(
                                                 getJsonField(
                                                   rideHistoriesItem,
@@ -226,7 +228,12 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                 ).toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
                                               ),
                                             ),
                                             Padding(
@@ -245,45 +252,51 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                               ).toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2,
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 3,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            functions.toHumanFreindlyCallState(
-                                                getJsonField(
-                                              rideHistoriesItem,
-                                              r'''$.currentState''',
-                                            ).toString()),
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 14,
-                                                ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 5, 0, 5),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 5, 0),
-                                                  child: Text(
+                                      flex: 4,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 8, 8, 8),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              functions
+                                                  .toHumanFreindlyCallState(
+                                                      getJsonField(
+                                                rideHistoriesItem,
+                                                r'''$.currentState''',
+                                              ).toString()),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 14,
+                                                      ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 10, 0, 2),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
                                                     '운임 ${getJsonField(
                                                       rideHistoriesItem,
                                                       r'''$.basePrice''',
@@ -293,43 +306,48 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                         .subtitle1
                                                         .override(
                                                           fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                         ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 5),
-                                            child: Row(
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 2),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    '통행료 ${getJsonField(
+                                                      rideHistoriesItem,
+                                                      r'''$.tollFee''',
+                                                    ).toString()}원',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  '통행료 ${getJsonField(
-                                                    rideHistoriesItem,
-                                                    r'''$.tollFee''',
-                                                  ).toString()}원',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 14,
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 5, 0),
-                                                child: Text(
                                                   '적립타코 ${getJsonField(
                                                     rideHistoriesItem,
                                                     r'''$.additionalPrice''',
@@ -339,13 +357,19 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                       .subtitle1
                                                       .override(
                                                         fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                       ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
