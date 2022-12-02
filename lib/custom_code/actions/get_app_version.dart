@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:package_info_plus/package_info_plus.dart';
+
 Future<String> getAppVersion() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
