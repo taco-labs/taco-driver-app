@@ -26,7 +26,9 @@ class RegisterDriverWidget extends StatefulWidget {
 
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   ApiCallResponse? apiResultbos;
+  String? appVersion;
   String? getFcmTokenResult;
+  String? osType;
   String? dropDownValue;
   String? radioButtonValue;
   TextEditingController? birthDateController;
@@ -982,14 +984,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                       if (termsofUseValue!) {
                         if (privacyPolicyValue!) {
                           getFcmTokenResult = await actions.getFcmToken();
+                          appVersion = await actions.getAppVersion();
+                          osType = await actions.getPlatformCode();
                           apiResultbos = await SignupGroup.signupCall.call(
                             firstName: firstNameController!.text,
                             lastName: lastNameController!.text,
                             birthday: birthDateController!.text,
                             gender: genderCodeController!.text,
                             phone: phoneNumberController!.text,
-                            appOs: FFAppState().appOs,
-                            appVersion: FFAppState().appVersion,
+                            appOs: osType,
+                            appVersion: appVersion,
                             appFcmToken: getFcmTokenResult,
                             smsVerificationStateKey: widget.authSmsStateKey,
                             driverType:

@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingWidget extends StatefulWidget {
-  const SettingWidget({Key? key}) : super(key: key);
+  const SettingWidget({
+    Key? key,
+    this.appVersion,
+  }) : super(key: key);
+
+  final String? appVersion;
 
   @override
   _SettingWidgetState createState() => _SettingWidgetState();
@@ -98,7 +103,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 5),
                           child: Text(
-                            FFAppState().appVersion,
+                            widget.appVersion!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',

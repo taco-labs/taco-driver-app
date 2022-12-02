@@ -124,7 +124,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Setting',
               path: 'setting',
-              builder: (context, params) => SettingWidget(),
+              builder: (context, params) => SettingWidget(
+                appVersion: params.getParam('appVersion', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'HomeCopy',

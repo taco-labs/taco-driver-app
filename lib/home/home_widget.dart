@@ -19,6 +19,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResultd22;
   ApiCallResponse? apiResultqz6;
   ApiCallResponse? apiResulttx8;
+  String? appVersion;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -287,7 +288,19 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('Setting');
+                appVersion = await actions.getAppVersion();
+
+                context.pushNamed(
+                  'Setting',
+                  queryParams: {
+                    'appVersion': serializeParam(
+                      appVersion,
+                      ParamType.String,
+                    ),
+                  }.withoutNulls,
+                );
+
+                setState(() {});
               },
               child: ListTile(
                 title: Text(

@@ -32,6 +32,8 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   ApiCallResponse? apiResultGetAccount;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
+  String? osType;
+  String? appVersion;
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultLatestCall;
   TextEditingController? textController;
@@ -244,28 +246,15 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResultGetAccount?.succeeded ?? true)) {
-                            if (isAndroid ? true : false) {
-                              setState(() => FFAppState().appOs = 'AOS');
-                            } else {
-                              if (isiOS ? true : false) {
-                                setState(() => FFAppState().appOs = 'IOS');
-                              } else {
-                                if (isWeb ? true : false) {
-                                  setState(() => FFAppState().appOs = 'WEB');
-                                } else {
-                                  setState(
-                                      () => FFAppState().appOs = 'UNKNOWN');
-                                }
-                              }
-                            }
-
                             fcmToken = await actions.getFcmToken();
+                            osType = await actions.getPlatformCode();
+                            appVersion = await actions.getAppVersion();
                             apiResultUpdateDriver =
                                 await DriverInfoGroup.updateDriverCall.call(
                               driverId: FFAppState().driverId,
                               apiToken: FFAppState().apiToken,
-                              appOs: FFAppState().appOs,
-                              appVersion: FFAppState().appVersion,
+                              appOs: osType,
+                              appVersion: appVersion,
                               appFcmToken: fcmToken,
                               profileImageUploaded: SigninFlowGroup
                                   .sMSVerificationAndSigninCall

@@ -16,7 +16,6 @@ class FFAppState {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _apiToken = prefs.getString('ff_apiToken') ?? _apiToken;
-    _appOs = prefs.getString('ff_appOs') ?? _appOs;
     _driverId = prefs.getString('ff_driverId') ?? _driverId;
   }
 
@@ -28,15 +27,6 @@ class FFAppState {
     _apiToken = _value;
     prefs.setString('ff_apiToken', _value);
   }
-
-  String _appOs = '';
-  String get appOs => _appOs;
-  set appOs(String _value) {
-    _appOs = _value;
-    prefs.setString('ff_appOs', _value);
-  }
-
-  String appVersion = '0.1';
 
   String _driverId = '';
   String get driverId => _driverId;
