@@ -52,6 +52,7 @@ class LocationServiceRepository {
   }
 }
 
+@pragma('vm:entry-point')
 class LocationCallbackHandler {
   @pragma('vm:entry-point')
   static Future<void> initCallback(Map<dynamic, dynamic> params) async {
