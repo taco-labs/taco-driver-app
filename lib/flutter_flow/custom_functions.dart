@@ -38,6 +38,20 @@ bool isCompletedCallRequest(String currentState) {
   return completed;
 }
 
+bool isCancelledCallRequest(String currentState) {
+  bool cancelled = false;
+  switch (currentState) {
+    case "USER_CANCELLED":
+    case "DRIVER_CANCELLED":
+      {
+        cancelled = true;
+      }
+      break;
+  }
+
+  return cancelled;
+}
+
 List<String> getSupportedServiceArea() {
   List<String> supportedArea = [
     '서울',
@@ -269,4 +283,8 @@ String toHumanFreindlyCallState(String callState) {
   }
 
   return state;
+}
+
+String getEmptyString() {
+  return '';
 }

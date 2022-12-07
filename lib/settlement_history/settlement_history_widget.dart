@@ -126,7 +126,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                     .jsonBody,
                                 r'''$.pageToken''',
                               ).toString()
-                            : FFAppState().emptyString,
+                            : functions.getEmptyString(),
                       )
                           .then((listViewListDriverSettlementHistoryResponse) {
                         final pageItems =

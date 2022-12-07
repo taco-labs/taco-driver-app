@@ -476,7 +476,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                       Text(
                                         getJsonField(
                                           FFAppState().callRequest,
-                                          r'''$.tags''',
+                                          r'''$.userTag''',
                                         ).toString(),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
@@ -2199,6 +2199,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               FFAppState().isArrived = false);
                                           setState(() => FFAppState()
                                               .isOnCallWaiting = true);
+                                          setState(() {
+                                            tollFareController?.clear();
+                                            taxiFareController?.clear();
+                                          });
                                         } else {
                                           await showDialog(
                                             context: context,
