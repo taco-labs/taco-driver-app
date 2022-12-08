@@ -99,7 +99,7 @@ Future startLocationService() async {
           androidNotificationSettings: AndroidNotificationSettings(
               notificationChannelName: 'Location tracking',
               notificationTitle: '타코 실행중',
-              notificationMsg: '정확한 배차를 위해서 택시의 현위치를 전송합니다',
+              notificationMsg: '정확한 배차를 위해서 현위치를 사용합니다',
               notificationBigMsg: '',
               /*notificationBigMsg:
                   'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',*/

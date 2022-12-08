@@ -432,7 +432,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 5, 0),
                                           child: Text(
-                                            '요청내역',
+                                            '승객요청사항',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1
@@ -459,7 +459,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
@@ -486,7 +486,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
