@@ -21,6 +21,8 @@ import '../../flutter_flow/custom_functions.dart'
     as functions; // Imports custom functions
 import 'package:url_launcher/url_launcher.dart';
 import '../../flutter_flow/permissions_util.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 const String NotificationCategory_Taxicall = "Taxicall";
 const String NotificationCategory_Payment = "Payment";
@@ -28,6 +30,33 @@ const String NotificationCategory_Driver = "Driver";
 
 const String TaxiCallStateRequested = "TAXI_CALL_REQUESTED";
 const String TaxiCallStateUserCancelled = "USER_CANCELLED";
+
+class LocalNotification {
+  LocalNotification._();
+
+  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  static initialize() async {
+    AndroidInitializationSettings androidInitializationSettings =
+    const AndroidInitializationSettings('drawable/ic_notification');
+
+    InitializationSettings initializationSettings =
+    InitializationSettings(android: androidInitializationSettings);
+
+    const AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
+      'taco_driver_channel_id', // 임의의 id
+      'Taco Driver Channel', // 설정에 보일 채널명
+      description: 'Taco Driver Channel', // 설정에 보일 채널 설명
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(androidNotificationChannel);
+  }
+}
 
 class DriverCallManager extends StatefulWidget {
   const DriverCallManager({
@@ -127,6 +156,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     super.initState();
 
     setupInteractedMessage();
+    LocalNotification.initialize();
 
     taxiFareController = TextEditingController();
     tollFareController = TextEditingController(text: '0');
