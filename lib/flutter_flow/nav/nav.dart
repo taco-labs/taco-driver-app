@@ -168,13 +168,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'SettlementHistory',
               path: 'settlementHistory',
-              builder: (context, params) => SettlementHistoryWidget(
-                bank: params.getParam('bank', ParamType.String),
-                accountNumber:
-                    params.getParam('accountNumber', ParamType.String),
-                expectedAmount:
-                    params.getParam('expectedAmount', ParamType.int),
-              ),
+              builder: (context, params) => SettlementHistoryWidget(),
             ),
             FFRoute(
               name: 'SupportChat',

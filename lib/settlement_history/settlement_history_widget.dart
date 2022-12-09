@@ -10,16 +10,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 class SettlementHistoryWidget extends StatefulWidget {
-  const SettlementHistoryWidget({
-    Key? key,
-    this.bank,
-    this.accountNumber,
-    this.expectedAmount,
-  }) : super(key: key);
-
-  final String? bank;
-  final String? accountNumber;
-  final int? expectedAmount;
+  const SettlementHistoryWidget({Key? key}) : super(key: key);
 
   @override
   _SettlementHistoryWidgetState createState() =>
@@ -239,7 +230,13 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        '은행 계좌 정보',
+                                        '${functions.toBankNameFromCode(getJsonField(
+                                          settlementHistoryItem,
+                                          r'''$.bank''',
+                                        ).toString())} ${getJsonField(
+                                          settlementHistoryItem,
+                                          r'''$.accountNumber''',
+                                        ).toString()}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
