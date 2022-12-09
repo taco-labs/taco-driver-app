@@ -1607,6 +1607,7 @@ class CancelTaxiCallRequestCall {
     String? taxiCallRequestId = '',
     String? apiToken = '',
     String? apiEndpointTarget = '',
+    bool? confirmCancel,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Cancel Taxi Call Request',
@@ -1698,5 +1699,14 @@ String _serializeList(List? list) {
     return json.encode(list);
   } catch (_) {
     return '[]';
+  }
+}
+
+String _serializeJson(dynamic jsonVar) {
+  jsonVar ??= {};
+  try {
+    return json.encode(jsonVar);
+  } catch (_) {
+    return '{}';
   }
 }

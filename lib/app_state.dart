@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
 
-class FFAppState {
+class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
 
   factory FFAppState() {
@@ -24,6 +25,8 @@ class FFAppState {
   String _apiToken = '';
   String get apiToken => _apiToken;
   set apiToken(String _value) {
+    notifyListeners();
+
     _apiToken = _value;
     prefs.setString('ff_apiToken', _value);
   }
@@ -31,41 +34,571 @@ class FFAppState {
   String _driverId = '';
   String get driverId => _driverId;
   set driverId(String _value) {
+    notifyListeners();
+
     _driverId = _value;
     prefs.setString('ff_driverId', _value);
   }
 
-  bool isOnDuty = false;
+  String _driverFirstName = '';
+  String get driverFirstName => _driverFirstName;
+  set driverFirstName(String _value) {
+    notifyListeners();
 
-  String driverFirstName = '';
+    _driverFirstName = _value;
+  }
 
-  dynamic callRequest;
+  bool _isOnDrivingToDeparture = false;
+  bool get isOnDrivingToDeparture => _isOnDrivingToDeparture;
+  set isOnDrivingToDeparture(bool _value) {
+    notifyListeners();
 
-  bool isOnDrivingToDeparture = false;
+    _isOnDrivingToDeparture = _value;
+  }
 
-  bool isOnDrivingToArrival = false;
+  bool _isOnDrivingToArrival = false;
+  bool get isOnDrivingToArrival => _isOnDrivingToArrival;
+  set isOnDrivingToArrival(bool _value) {
+    notifyListeners();
 
-  bool isOnCallWaiting = false;
+    _isOnDrivingToArrival = _value;
+  }
 
-  bool isOnCallViewing = false;
+  bool _isOnCallWaiting = false;
+  bool get isOnCallWaiting => _isOnCallWaiting;
+  set isOnCallWaiting(bool _value) {
+    notifyListeners();
 
-  bool isArrived = false;
+    _isOnCallWaiting = _value;
+  }
 
-  String profileImagePath = '';
+  bool _isOnCallViewing = false;
+  bool get isOnCallViewing => _isOnCallViewing;
+  set isOnCallViewing(bool _value) {
+    notifyListeners();
 
-  String licenseImagePath = '';
+    _isOnCallViewing = _value;
+  }
 
-  String driverLastName = '';
+  bool _isArrived = false;
+  bool get isArrived => _isArrived;
+  set isArrived(bool _value) {
+    notifyListeners();
 
-  String serviceRegion = '';
+    _isArrived = _value;
+  }
 
-  String carNumber = '';
+  String _driverLastName = '';
+  String get driverLastName => _driverLastName;
+  set driverLastName(String _value) {
+    notifyListeners();
 
-  bool isActive = false;
+    _driverLastName = _value;
+  }
 
-  String driverLicenseNumber = '';
+  String _driverLicenseNumber = '';
+  String get driverLicenseNumber => _driverLicenseNumber;
+  set driverLicenseNumber(String _value) {
+    notifyListeners();
 
-  String apiEndpointTarget = 'dev';
+    _driverLicenseNumber = _value;
+  }
+
+  String _apiEndpointTarget = 'dev';
+  String get apiEndpointTarget => _apiEndpointTarget;
+  set apiEndpointTarget(String _value) {
+    notifyListeners();
+
+    _apiEndpointTarget = _value;
+  }
+
+  String _driverBirthday = '';
+  String get driverBirthday => _driverBirthday;
+  set driverBirthday(String _value) {
+    notifyListeners();
+
+    _driverBirthday = _value;
+  }
+
+  String _driverPhoneNumber = '';
+  String get driverPhoneNumber => _driverPhoneNumber;
+  set driverPhoneNumber(String _value) {
+    notifyListeners();
+
+    _driverPhoneNumber = _value;
+  }
+
+  String _driverGenderCode = '';
+  String get driverGenderCode => _driverGenderCode;
+  set driverGenderCode(String _value) {
+    notifyListeners();
+
+    _driverGenderCode = _value;
+  }
+
+  String _driverType = '';
+  String get driverType => _driverType;
+  set driverType(String _value) {
+    notifyListeners();
+
+    _driverType = _value;
+  }
+
+  bool _driverIsOnDuty = false;
+  bool get driverIsOnDuty => _driverIsOnDuty;
+  set driverIsOnDuty(bool _value) {
+    notifyListeners();
+
+    _driverIsOnDuty = _value;
+  }
+
+  bool _driverIsActivated = false;
+  bool get driverIsActivated => _driverIsActivated;
+  set driverIsActivated(bool _value) {
+    notifyListeners();
+
+    _driverIsActivated = _value;
+  }
+
+  String _driverCompanyRegistrationNumber = '';
+  String get driverCompanyRegistrationNumber =>
+      _driverCompanyRegistrationNumber;
+  set driverCompanyRegistrationNumber(String _value) {
+    notifyListeners();
+
+    _driverCompanyRegistrationNumber = _value;
+  }
+
+  String _driverCompanyName = '';
+  String get driverCompanyName => _driverCompanyName;
+  set driverCompanyName(String _value) {
+    notifyListeners();
+
+    _driverCompanyName = _value;
+  }
+
+  String _driverCarNumber = '';
+  String get driverCarNumber => _driverCarNumber;
+  set driverCarNumber(String _value) {
+    notifyListeners();
+
+    _driverCarNumber = _value;
+  }
+
+  String _driverServiceRegion = '';
+  String get driverServiceRegion => _driverServiceRegion;
+  set driverServiceRegion(String _value) {
+    notifyListeners();
+
+    _driverServiceRegion = _value;
+  }
+
+  bool _driverLicenseImageUploaded = false;
+  bool get driverLicenseImageUploaded => _driverLicenseImageUploaded;
+  set driverLicenseImageUploaded(bool _value) {
+    notifyListeners();
+
+    _driverLicenseImageUploaded = _value;
+  }
+
+  bool _driverProfileImageUploaded = false;
+  bool get driverProfileImageUploaded => _driverProfileImageUploaded;
+  set driverProfileImageUploaded(bool _value) {
+    notifyListeners();
+
+    _driverProfileImageUploaded = _value;
+  }
+
+  String _driverProfileImageUploadUrl = '';
+  String get driverProfileImageUploadUrl => _driverProfileImageUploadUrl;
+  set driverProfileImageUploadUrl(String _value) {
+    notifyListeners();
+
+    _driverProfileImageUploadUrl = _value;
+  }
+
+  String _driverLicenseImageUploadUrl = '';
+  String get driverLicenseImageUploadUrl => _driverLicenseImageUploadUrl;
+  set driverLicenseImageUploadUrl(String _value) {
+    notifyListeners();
+
+    _driverLicenseImageUploadUrl = _value;
+  }
+
+  String _driverBankAccountNumber = '';
+  String get driverBankAccountNumber => _driverBankAccountNumber;
+  set driverBankAccountNumber(String _value) {
+    notifyListeners();
+
+    _driverBankAccountNumber = _value;
+  }
+
+  String _driverBankCode = '';
+  String get driverBankCode => _driverBankCode;
+  set driverBankCode(String _value) {
+    notifyListeners();
+
+    _driverBankCode = _value;
+  }
+
+  String _errCode = '';
+  String get errCode => _errCode;
+  set errCode(String _value) {
+    notifyListeners();
+
+    _errCode = _value;
+  }
+
+  String _callId = '';
+  String get callId => _callId;
+  set callId(String _value) {
+    notifyListeners();
+
+    _callId = _value;
+  }
+
+  String _callState = '';
+  String get callState => _callState;
+  set callState(String _value) {
+    notifyListeners();
+
+    _callState = _value;
+  }
+
+  DateTime? _callCreateTime;
+  DateTime? get callCreateTime => _callCreateTime;
+  set callCreateTime(DateTime? _value) {
+    notifyListeners();
+    if (_value == null) {
+      return;
+    }
+    _callCreateTime = _value;
+  }
+
+  DateTime? _callUpdateTime;
+  DateTime? get callUpdateTime => _callUpdateTime;
+  set callUpdateTime(DateTime? _value) {
+    notifyListeners();
+    if (_value == null) {
+      return;
+    }
+    _callUpdateTime = _value;
+  }
+
+  String _callUserId = '';
+  String get callUserId => _callUserId;
+  set callUserId(String _value) {
+    notifyListeners();
+
+    _callUserId = _value;
+  }
+
+  String _callUserPhone = '';
+  String get callUserPhone => _callUserPhone;
+  set callUserPhone(String _value) {
+    notifyListeners();
+
+    _callUserPhone = _value;
+  }
+
+  List<String> _callTags = [];
+  List<String> get callTags => _callTags;
+  set callTags(List<String> _value) {
+    notifyListeners();
+
+    _callTags = _value;
+  }
+
+  void addToCallTags(String _value) {
+    notifyListeners();
+    _callTags.add(_value);
+  }
+
+  void removeFromCallTags(String _value) {
+    notifyListeners();
+    _callTags.remove(_value);
+  }
+
+  String _callUserTag = '';
+  String get callUserTag => _callUserTag;
+  set callUserTag(String _value) {
+    notifyListeners();
+
+    _callUserTag = _value;
+  }
+
+  LatLng? _callDepartureCoordinate;
+  LatLng? get callDepartureCoordinate => _callDepartureCoordinate;
+  set callDepartureCoordinate(LatLng? _value) {
+    notifyListeners();
+    if (_value == null) {
+      return;
+    }
+    _callDepartureCoordinate = _value;
+  }
+
+  String _callDepartureName = '';
+  String get callDepartureName => _callDepartureName;
+  set callDepartureName(String _value) {
+    notifyListeners();
+
+    _callDepartureName = _value;
+  }
+
+  LatLng? _callArrivalCoordinate;
+  LatLng? get callArrivalCoordinate => _callArrivalCoordinate;
+  set callArrivalCoordinate(LatLng? _value) {
+    notifyListeners();
+    if (_value == null) {
+      return;
+    }
+    _callArrivalCoordinate = _value;
+  }
+
+  String _callArrivalName = '';
+  String get callArrivalName => _callArrivalName;
+  set callArrivalName(String _value) {
+    notifyListeners();
+
+    _callArrivalName = _value;
+  }
+
+  int _callToArrivalDistance = 0;
+  int get callToArrivalDistance => _callToArrivalDistance;
+  set callToArrivalDistance(int _value) {
+    notifyListeners();
+
+    _callToArrivalDistance = _value;
+  }
+
+  int _callToArrivalEtaNanoSec = 0;
+  int get callToArrivalEtaNanoSec => _callToArrivalEtaNanoSec;
+  set callToArrivalEtaNanoSec(int _value) {
+    notifyListeners();
+
+    _callToArrivalEtaNanoSec = _value;
+  }
+
+  List<dynamic> _callToArrivalRouteLatitudes = [];
+  List<dynamic> get callToArrivalRouteLatitudes => _callToArrivalRouteLatitudes;
+  set callToArrivalRouteLatitudes(List<dynamic> _value) {
+    notifyListeners();
+
+    _callToArrivalRouteLatitudes = _value;
+  }
+
+  void addToCallToArrivalRouteLatitudes(dynamic _value) {
+    notifyListeners();
+    _callToArrivalRouteLatitudes.add(_value);
+  }
+
+  void removeFromCallToArrivalRouteLatitudes(dynamic _value) {
+    notifyListeners();
+    _callToArrivalRouteLatitudes.remove(_value);
+  }
+
+  List<dynamic> _callToArrivalRouteLongitudes = [];
+  List<dynamic> get callToArrivalRouteLongitudes =>
+      _callToArrivalRouteLongitudes;
+  set callToArrivalRouteLongitudes(List<dynamic> _value) {
+    notifyListeners();
+
+    _callToArrivalRouteLongitudes = _value;
+  }
+
+  void addToCallToArrivalRouteLongitudes(dynamic _value) {
+    notifyListeners();
+    _callToArrivalRouteLongitudes.add(_value);
+  }
+
+  void removeFromCallToArrivalRouteLongitudes(dynamic _value) {
+    notifyListeners();
+    _callToArrivalRouteLongitudes.remove(_value);
+  }
+
+  int _callToDepartureDistance = 0;
+  int get callToDepartureDistance => _callToDepartureDistance;
+  set callToDepartureDistance(int _value) {
+    notifyListeners();
+
+    _callToDepartureDistance = _value;
+  }
+
+  int _callToDepartureEtaNanoSec = 0;
+  int get callToDepartureEtaNanoSec => _callToDepartureEtaNanoSec;
+  set callToDepartureEtaNanoSec(int _value) {
+    notifyListeners();
+
+    _callToDepartureEtaNanoSec = _value;
+  }
+
+  List<dynamic> _callToDepartureRouteLatitudes = [];
+  List<dynamic> get callToDepartureRouteLatitudes =>
+      _callToDepartureRouteLatitudes;
+  set callToDepartureRouteLatitudes(List<dynamic> _value) {
+    notifyListeners();
+
+    _callToDepartureRouteLatitudes = _value;
+  }
+
+  void addToCallToDepartureRouteLatitudes(dynamic _value) {
+    notifyListeners();
+    _callToDepartureRouteLatitudes.add(_value);
+  }
+
+  void removeFromCallToDepartureRouteLatitudes(dynamic _value) {
+    notifyListeners();
+    _callToDepartureRouteLatitudes.remove(_value);
+  }
+
+  List<dynamic> _callToDepartureRouteLongitudes = [];
+  List<dynamic> get callToDepartureRouteLongitudes =>
+      _callToDepartureRouteLongitudes;
+  set callToDepartureRouteLongitudes(List<dynamic> _value) {
+    notifyListeners();
+
+    _callToDepartureRouteLongitudes = _value;
+  }
+
+  void addToCallToDepartureRouteLongitudes(dynamic _value) {
+    notifyListeners();
+    _callToDepartureRouteLongitudes.add(_value);
+  }
+
+  void removeFromCallToDepartureRouteLongitudes(dynamic _value) {
+    notifyListeners();
+    _callToDepartureRouteLongitudes.remove(_value);
+  }
+
+  int _callBasePrice = 0;
+  int get callBasePrice => _callBasePrice;
+  set callBasePrice(int _value) {
+    notifyListeners();
+
+    _callBasePrice = _value;
+  }
+
+  int _callMinAdditionalPrice = 0;
+  int get callMinAdditionalPrice => _callMinAdditionalPrice;
+  set callMinAdditionalPrice(int _value) {
+    notifyListeners();
+
+    _callMinAdditionalPrice = _value;
+  }
+
+  int _callMaxAdditionalPrice = 0;
+  int get callMaxAdditionalPrice => _callMaxAdditionalPrice;
+  set callMaxAdditionalPrice(int _value) {
+    notifyListeners();
+
+    _callMaxAdditionalPrice = _value;
+  }
+
+  int _callAdditionalPrice = 0;
+  int get callAdditionalPrice => _callAdditionalPrice;
+  set callAdditionalPrice(int _value) {
+    notifyListeners();
+
+    _callAdditionalPrice = _value;
+  }
+
+  String _driverProfileImageDownloadUrl = '';
+  String get driverProfileImageDownloadUrl => _driverProfileImageDownloadUrl;
+  set driverProfileImageDownloadUrl(String _value) {
+    notifyListeners();
+
+    _driverProfileImageDownloadUrl = _value;
+  }
+
+  String _driverLicenseImageDownloadUrl = '';
+  String get driverLicenseImageDownloadUrl => _driverLicenseImageDownloadUrl;
+  set driverLicenseImageDownloadUrl(String _value) {
+    notifyListeners();
+
+    _driverLicenseImageDownloadUrl = _value;
+  }
+
+  String _callTagsConcat = '';
+  String get callTagsConcat => _callTagsConcat;
+  set callTagsConcat(String _value) {
+    notifyListeners();
+
+    _callTagsConcat = _value;
+  }
+
+  String _callDeaprtureAddressRegionDepth2 = '';
+  String get callDeaprtureAddressRegionDepth2 =>
+      _callDeaprtureAddressRegionDepth2;
+  set callDeaprtureAddressRegionDepth2(String _value) {
+    notifyListeners();
+
+    _callDeaprtureAddressRegionDepth2 = _value;
+  }
+
+  String _callDeaprtureAddressRegionDepth3 = '';
+  String get callDeaprtureAddressRegionDepth3 =>
+      _callDeaprtureAddressRegionDepth3;
+  set callDeaprtureAddressRegionDepth3(String _value) {
+    notifyListeners();
+
+    _callDeaprtureAddressRegionDepth3 = _value;
+  }
+
+  String _callDeaprtureAddressMainNo = '';
+  String get callDeaprtureAddressMainNo => _callDeaprtureAddressMainNo;
+  set callDeaprtureAddressMainNo(String _value) {
+    notifyListeners();
+
+    _callDeaprtureAddressMainNo = _value;
+  }
+
+  String _callDeaprtureAddressSubNo = '';
+  String get callDeaprtureAddressSubNo => _callDeaprtureAddressSubNo;
+  set callDeaprtureAddressSubNo(String _value) {
+    notifyListeners();
+
+    _callDeaprtureAddressSubNo = _value;
+  }
+
+  String _callArrivalAddressRegionDepth2 = '';
+  String get callArrivalAddressRegionDepth2 => _callArrivalAddressRegionDepth2;
+  set callArrivalAddressRegionDepth2(String _value) {
+    notifyListeners();
+
+    _callArrivalAddressRegionDepth2 = _value;
+  }
+
+  String _callArrivalAddressRegionDepth3 = '';
+  String get callArrivalAddressRegionDepth3 => _callArrivalAddressRegionDepth3;
+  set callArrivalAddressRegionDepth3(String _value) {
+    notifyListeners();
+
+    _callArrivalAddressRegionDepth3 = _value;
+  }
+
+  String _callArrivalAddressMainNo = '';
+  String get callArrivalAddressMainNo => _callArrivalAddressMainNo;
+  set callArrivalAddressMainNo(String _value) {
+    notifyListeners();
+
+    _callArrivalAddressMainNo = _value;
+  }
+
+  String _callArrivalAddressSubNo = '';
+  String get callArrivalAddressSubNo => _callArrivalAddressSubNo;
+  set callArrivalAddressSubNo(String _value) {
+    notifyListeners();
+
+    _callArrivalAddressSubNo = _value;
+  }
+
+  String _callTicketId = '';
+  String get callTicketId => _callTicketId;
+  set callTicketId(String _value) {
+    notifyListeners();
+
+    _callTicketId = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

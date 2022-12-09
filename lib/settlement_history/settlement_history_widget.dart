@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:provider/provider.dart';
 
 class SettlementHistoryWidget extends StatefulWidget {
   const SettlementHistoryWidget({
@@ -38,6 +39,8 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -228,47 +231,6 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                           ),
                                     ),
                                   ],
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        getJsonField(
-                                          settlementHistoryItem,
-                                          r'''$.settlementPeriodStart''',
-                                        ).toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                      Text(
-                                        ' - ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                      Text(
-                                        getJsonField(
-                                          settlementHistoryItem,
-                                          r'''$.settlementPeriodEnd''',
-                                        ).toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(

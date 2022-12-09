@@ -64,14 +64,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : EntryWidget(),
           routes: [
             FFRoute(
-              name: 'Entry',
-              path: 'entry',
-              builder: (context, params) => EntryWidget(),
-            ),
-            FFRoute(
               name: 'Login',
               path: 'login',
               builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'Entry',
+              path: 'entry',
+              builder: (context, params) => EntryWidget(),
             ),
             FFRoute(
               name: 'VerifyCode',

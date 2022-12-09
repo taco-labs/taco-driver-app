@@ -1,10 +1,11 @@
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EntryWidget extends StatefulWidget {
   const EntryWidget({Key? key}) : super(key: key);
@@ -30,49 +31,11 @@ class _EntryWidgetState extends State<EntryWidget> {
         apiEndpointTarget: FFAppState().apiEndpointTarget,
       );
       if ((apiResultyb1?.succeeded ?? true)) {
-        setState(() =>
-            FFAppState().isOnDuty = DriverInfoGroup.getDriverCall.isOnDuty(
-              (apiResultyb1?.jsonBody ?? ''),
-            ));
-        setState(
-            () => FFAppState().driverFirstName = DriverInfoGroup.getDriverCall
-                .firstName(
-                  (apiResultyb1?.jsonBody ?? ''),
-                )
-                .toString());
-        setState(
-            () => FFAppState().driverLastName = DriverInfoGroup.getDriverCall
-                .lastName(
-                  (apiResultyb1?.jsonBody ?? ''),
-                )
-                .toString());
-        setState(
-            () => FFAppState().serviceRegion = DriverInfoGroup.getDriverCall
-                .serviceRegion(
-                  (apiResultyb1?.jsonBody ?? ''),
-                )
-                .toString());
-        setState(() => FFAppState().carNumber = DriverInfoGroup.getDriverCall
-            .carNumber(
-              (apiResultyb1?.jsonBody ?? ''),
-            )
-            .toString());
-        setState(() =>
-            FFAppState().isActive = DriverInfoGroup.getDriverCall.isActive(
-              (apiResultyb1?.jsonBody ?? ''),
-            ));
-        setState(() =>
-            FFAppState().driverLicenseNumber = DriverInfoGroup.getDriverCall
-                .driverLicenseId(
-                  (apiResultyb1?.jsonBody ?? ''),
-                )
-                .toString());
-        if (DriverInfoGroup.getDriverCall.isProfileImageUploaded(
-              (apiResultyb1?.jsonBody ?? ''),
-            ) &&
-            DriverInfoGroup.getDriverCall.isLicenseImageUploaded(
-              (apiResultyb1?.jsonBody ?? ''),
-            )) {
+        await actions.fromDriverGetApiResponse(
+          (apiResultyb1?.jsonBody ?? ''),
+        );
+        if (FFAppState().driverProfileImageUploaded &&
+            FFAppState().driverLicenseImageUploaded) {
           apiResultGetAccount =
               await DriverInfoGroup.getSettlementAccountCall.call(
             driverId: FFAppState().driverId,
@@ -80,7 +43,10 @@ class _EntryWidgetState extends State<EntryWidget> {
             apiEndpointTarget: FFAppState().apiEndpointTarget,
           );
           if ((apiResultGetAccount?.succeeded ?? true)) {
-            if (FFAppState().isOnDuty) {
+            await actions.fromGetSettlementAccountApiResponse(
+              (apiResultGetAccount?.jsonBody ?? ''),
+            );
+            if (FFAppState().driverIsOnDuty) {
               apiResultLatestCall =
                   await TaxiCallGroup.getLatestTaxiCallCall.call(
                 driverId: FFAppState().driverId,
@@ -88,33 +54,37 @@ class _EntryWidgetState extends State<EntryWidget> {
                 apiEndpointTarget: FFAppState().apiEndpointTarget,
               );
               if ((apiResultLatestCall?.succeeded ?? true)) {
-                setState(() => FFAppState().callRequest =
-                    functions.toCallRequestFromApiResponse(
-                        (apiResultLatestCall?.jsonBody ?? '')));
-                if (TaxiCallGroup.getLatestTaxiCallCall
-                        .callCurrentState(
-                          (apiResultLatestCall?.jsonBody ?? ''),
-                        )
-                        .toString() ==
-                    'DRIVER_TO_DEPARTURE') {
-                  setState(() => FFAppState().isOnDrivingToDeparture = true);
+                await actions.fromGetLatestCallApiResponse(
+                  (apiResultLatestCall?.jsonBody ?? ''),
+                );
+                if (FFAppState().callState == 'DRIVER_TO_DEPARTURE') {
+                  setState(() {
+                    FFAppState().isOnDrivingToDeparture = true;
+                  });
                 } else {
-                  if (TaxiCallGroup.getLatestTaxiCallCall
-                          .callCurrentState(
-                            (apiResultLatestCall?.jsonBody ?? ''),
-                          )
-                          .toString() ==
-                      'DRIVER_TO_ARRIVAL') {
-                    setState(() => FFAppState().isOnDrivingToArrival = true);
+                  if (FFAppState().callState == 'DRIVER_TO_ARRIVAL') {
+                    setState(() {
+                      FFAppState().isOnDrivingToArrival = true;
+                    });
                   } else {
-                    setState(() => FFAppState().isOnCallWaiting = true);
+                    setState(() {
+                      FFAppState().isOnCallWaiting = true;
+                    });
                   }
                 }
 
                 context.goNamed('Home');
               } else {
-                if ((apiResultLatestCall?.statusCode ?? 200) == 404) {
-                  setState(() => FFAppState().isOnCallWaiting = true);
+                setState(() {
+                  FFAppState().errCode = getJsonField(
+                    (apiResultLatestCall?.jsonBody ?? ''),
+                    r'''$.errCode''',
+                  ).toString();
+                });
+                if (FFAppState().errCode == 'ERR_NOT_FOUND') {
+                  setState(() {
+                    FFAppState().isOnCallWaiting = true;
+                  });
 
                   context.goNamed('Home');
                 } else {
@@ -158,7 +128,13 @@ class _EntryWidgetState extends State<EntryWidget> {
               context.goNamed('Home');
             }
           } else {
-            if ((apiResultGetAccount?.statusCode ?? 200) == 404) {
+            setState(() {
+              FFAppState().errCode = getJsonField(
+                (apiResultGetAccount?.jsonBody ?? ''),
+                r'''$.errCode''',
+              ).toString();
+            });
+            if (FFAppState().errCode == 'ERR_NOT_FOUND') {
               context.goNamed('RegisterInstallment');
             } else {
               await showDialog(
@@ -210,6 +186,8 @@ class _EntryWidgetState extends State<EntryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFFFFEB62),

@@ -7,6 +7,7 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
-      if (FFAppState().isOnDuty) {
+      if (FFAppState().driverIsOnDuty) {
         await actions.startLocationService();
       }
     });
@@ -38,6 +39,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -375,20 +378,18 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 1,
+                child: custom_widgets.DriverCallManager(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 1,
-                  child: custom_widgets.DriverCallManager(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 1,
-                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

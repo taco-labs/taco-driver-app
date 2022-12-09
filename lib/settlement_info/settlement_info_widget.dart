@@ -4,8 +4,10 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettlementInfoWidget extends StatefulWidget {
   const SettlementInfoWidget({
@@ -38,6 +40,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -246,53 +250,56 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                                         TextButton(
                                           onPressed: () => Navigator.pop(
                                               alertDialogContext, true),
-                                          child: Text('진행'),
+                                          child: Text('요청'),
                                         ),
                                       ],
                                     );
                                   },
                                 ) ??
                                 false;
-                            apiResulta0z = await DriverInfoGroup
-                                .requestDriverSettlementCall
-                                .call(
-                              driverId: FFAppState().driverId,
-                              apiToken: FFAppState().apiToken,
-                              apiEndpointTarget: FFAppState().apiEndpointTarget,
-                            );
-                            if ((apiResulta0z?.succeeded ?? true)) {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    content: Text('정산 요청이 정상적으로 전달되었습니다'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
+                            if (confirmDialogResponse) {
+                              apiResulta0z = await DriverInfoGroup
+                                  .requestDriverSettlementCall
+                                  .call(
+                                driverId: FFAppState().driverId,
+                                apiToken: FFAppState().apiToken,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                              if ((apiResulta0z?.succeeded ?? true)) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text('정산이 정상적으로 요청되었습니다'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
 
                             setState(() {});

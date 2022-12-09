@@ -9,6 +9,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class RegisterDriverWidget extends StatefulWidget {
   const RegisterDriverWidget({
@@ -76,6 +77,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -1007,55 +1010,12 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             companyName: taxiCompanyNameController!.text,
                           );
                           if ((apiResultbos?.succeeded ?? true)) {
+                            await actions.fromDriverSignApiResponse(
+                              (apiResultbos?.jsonBody ?? ''),
+                            );
                             await requestPermission(locationPermission);
                             await requestPermission(notificationsPermission);
                             await requestPermission(photoLibraryPermission);
-                            setState(() =>
-                                FFAppState().apiToken = SignupGroup.signupCall
-                                    .apiToken(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() =>
-                                FFAppState().driverId = SignupGroup.signupCall
-                                    .driverId(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().driverFirstName =
-                                SignupGroup.signupCall
-                                    .driverFirstName(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().driverLastName =
-                                SignupGroup.signupCall
-                                    .driverLastName(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().serviceRegion =
-                                SignupGroup.signupCall
-                                    .driverServiceRegion(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() =>
-                                FFAppState().carNumber = SignupGroup.signupCall
-                                    .driverCarNumber(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().isActive =
-                                    SignupGroup.signupCall.driverIsActive(
-                                  (apiResultbos?.jsonBody ?? ''),
-                                ));
-                            setState(() => FFAppState().driverLicenseNumber =
-                                SignupGroup.signupCall
-                                    .driverLicenseId(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
 
                             context.goNamed('RegisterImages');
                           } else {

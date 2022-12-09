@@ -2,8 +2,10 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettingWidget extends StatefulWidget {
   const SettingWidget({
@@ -30,6 +32,8 @@ class _SettingWidgetState extends State<SettingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -213,10 +217,10 @@ class _SettingWidgetState extends State<SettingWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      setState(() => FFAppState().apiToken = '');
-                      setState(() => FFAppState().driverId = '');
-                      setState(() => FFAppState().isOnDuty = false);
-                      setState(() => FFAppState().callRequest = null);
+                      setState(() {
+                        FFAppState().apiToken = '';
+                        FFAppState().driverId = '';
+                      });
 
                       context.goNamed('Login');
                     },
@@ -266,10 +270,10 @@ class _SettingWidgetState extends State<SettingWidget> {
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResult9ee?.succeeded ?? true)) {
-                        setState(() => FFAppState().apiToken = '');
-                        setState(() => FFAppState().driverId = '');
-                        setState(() => FFAppState().callRequest = null);
-                        setState(() => FFAppState().isOnDuty = false);
+                        setState(() {
+                          FFAppState().apiToken = '';
+                          FFAppState().driverId = '';
+                        });
 
                         context.goNamed('Login');
                       } else {

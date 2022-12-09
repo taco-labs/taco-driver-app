@@ -1,6 +1,6 @@
 // Export pages
-export 'entry/entry_widget.dart' show EntryWidget;
 export 'login/login_widget.dart' show LoginWidget;
+export 'entry/entry_widget.dart' show EntryWidget;
 export 'verify_code/verify_code_widget.dart' show VerifyCodeWidget;
 export 'register_driver/register_driver_widget.dart' show RegisterDriverWidget;
 export 'register_images/register_images_widget.dart' show RegisterImagesWidget;

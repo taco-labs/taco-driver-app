@@ -1,0 +1,82 @@
+// Automatic FlutterFlow imports
+import '../../backend/backend.dart';
+import '../../flutter_flow/flutter_flow_theme.dart';
+import '../../flutter_flow/flutter_flow_util.dart';
+import 'index.dart'; // Imports other custom actions
+import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+Future fromGetLatestCallApiResponse(dynamic apiResponse) async {
+  dynamic departureInfo = apiResponse['departure'];
+  dynamic departurePointInfo = departureInfo['point'];
+  dynamic departureAddressInfo = departureInfo['address'];
+  dynamic arrivalInfo = apiResponse['arrival'];
+  dynamic arrivalPointInfo = arrivalInfo['point'];
+  dynamic arrivalAddressInfo = arrivalInfo['address'];
+
+  // Call identifier
+  FFAppState().callId = apiResponse['id'];
+
+  // Call state
+  FFAppState().callState = apiResponse['currentState'];
+  FFAppState().callCreateTime = DateTime.parse(apiResponse['createTime']);
+  FFAppState().callUpdateTime = DateTime.parse(apiResponse['updateTime']);
+
+  // Driver
+  FFAppState().callUserId = apiResponse['userId'];
+  FFAppState().callUserPhone = apiResponse['driverPhone'];
+
+  // User requirements
+  FFAppState().callTags.clear();
+  for (dynamic tag in apiResponse['tags']) {
+    FFAppState().callTags.add(tag.toString());
+  }
+  FFAppState().callUserTag = apiResponse['userTag'];
+
+  // Location
+  FFAppState().callDepartureCoordinate =
+      LatLng(departurePointInfo['latitude'], departurePointInfo['longitude']);
+  if (departureAddressInfo['buildingName'].isEmpty) {
+    FFAppState().callDepartureName = departureAddressInfo['addressName'];
+  } else {
+    FFAppState().callDepartureName = departureAddressInfo['buildingName'];
+  }
+  FFAppState().callArrivalCoordinate =
+      LatLng(arrivalPointInfo['latitude'], arrivalPointInfo['longitude']);
+  if (arrivalAddressInfo['buildingName'].isEmpty) {
+    FFAppState().callArrivalName = arrivalAddressInfo['addressName'];
+  } else {
+    FFAppState().callArrivalName = arrivalAddressInfo['buildingName'];
+  }
+
+  // Distance from departure to arrival in meters
+  List<dynamic> toArrivalRoute = apiResponse['toArrivalPath'];
+  List<dynamic> toDepartureRoute = apiResponse['toDeparturePath'];
+  FFAppState().callToArrivalDistance = apiResponse['toArrivalDistance'];
+  FFAppState().callToArrivalEtaNanoSec = apiResponse['toArrivalEta'];
+  FFAppState().callToArrivalRouteLatitudes.clear();
+  FFAppState().callToArrivalRouteLongitudes.clear();
+  for (dynamic point in toArrivalRoute) {
+    FFAppState().callToArrivalRouteLatitudes.add(point['latitude']);
+    FFAppState().callToArrivalRouteLongitudes.add(point['longitude']);
+  }
+  FFAppState().callToDepartureDistance = apiResponse['toDepartureDistance'];
+  FFAppState().callToDepartureEtaNanoSec = apiResponse['toDepartureEta'];
+  FFAppState().callToDepartureRouteLatitudes.clear();
+  FFAppState().callToDepartureRouteLongitudes.clear();
+  for (dynamic point in toDepartureRoute) {
+    FFAppState().callToDepartureRouteLatitudes.add(point['latitude']);
+    FFAppState().callToDepartureRouteLongitudes.add(point['longitude']);
+  }
+
+  // Taxi fares
+  FFAppState().callBasePrice = apiResponse['requestBasePrice'];
+  // TODO: set user specified min, max
+  FFAppState().callMinAdditionalPrice =
+      apiResponse['requestMinAdditionalPrice'];
+  FFAppState().callMaxAdditionalPrice =
+      apiResponse['requestMaxAdditionalPrice'];
+  FFAppState().callAdditionalPrice = apiResponse['additionalPrice'];
+}
