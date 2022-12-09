@@ -213,8 +213,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(10, 60, 10, 0),
                   child: Stack(
                     children: [
-                      if (FFAppState().driverIsOnDuty ||
-                          FFAppState().isOnCallWaiting)
+                      if (!FFAppState().isOnCallViewing &&
+                          !FFAppState().isOnDrivingToDeparture &&
+                          !FFAppState().isOnDrivingToArrival &&
+                          !FFAppState().isArrived)
                         Container(
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
