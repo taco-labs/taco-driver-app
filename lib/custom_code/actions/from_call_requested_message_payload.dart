@@ -26,8 +26,9 @@ Future fromCallRequestedMessagePayload(dynamic payload) async {
   FFAppState().callUserTag = payload['userTag'];
 
   // Location
-  FFAppState().callDepartureCoordinate =
-      LatLng(payload['departureLatitude'], payload['departureLongitude']);
+  FFAppState().callDepartureCoordinate = LatLng(
+      double.parse(payload['departureLatitude']),
+      double.parse(payload['departureLongitude']));
   if (payload['departureBuildingName'].isEmpty) {
     FFAppState().callDepartureName = '';
   } else {
@@ -40,8 +41,9 @@ Future fromCallRequestedMessagePayload(dynamic payload) async {
   FFAppState().callDepartureAddressMainNo = payload['departureMainAddressNo'];
   FFAppState().callDepartureAddressSubNo = payload['departureSubAddressNo'];
 
-  FFAppState().callArrivalCoordinate =
-      LatLng(payload['arrivalLatitude'], payload['arrivalLongitude']);
+  FFAppState().callArrivalCoordinate = LatLng(
+      double.parse(payload['arrivalLatitude']),
+      double.parse(payload['arrivalLongitude']));
   if (payload['arrivalBuildingName'].isEmpty) {
     FFAppState().callArrivalName = '';
   } else {
