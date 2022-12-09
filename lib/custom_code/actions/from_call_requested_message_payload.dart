@@ -22,11 +22,7 @@ Future fromCallRequestedMessagePayload(dynamic payload) async {
   FFAppState().callUserPhone = payload['userPhone'];
 
   // Rider requirements
-  FFAppState().callTags.clear();
-  for (dynamic tag in payload['tags']) {
-    FFAppState().callTags.add(tag.toString());
-  }
-  FFAppState().callTagsConcat = FFAppState().callTags.join(' ');
+  FFAppState().callTagsConcat = payload['tags'];
   FFAppState().callUserTag = payload['userTag'];
 
   // Location
