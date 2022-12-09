@@ -26,7 +26,7 @@ Future fromGetLatestCallApiResponse(dynamic apiResponse) async {
 
   // Driver
   FFAppState().callUserId = apiResponse['userId'];
-  FFAppState().callUserPhone = apiResponse['driverPhone'];
+  FFAppState().callUserPhone = apiResponse['userPhone'];
 
   // User requirements
   FFAppState().callTags.clear();

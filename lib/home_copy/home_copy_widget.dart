@@ -777,7 +777,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${FFAppState().callDeaprtureAddressRegionDepth2}  ${FFAppState().callDeaprtureAddressRegionDepth3} ',
+                                          '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -793,9 +793,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           functions.toAddressNo(
                                               FFAppState()
-                                                  .callDeaprtureAddressSubNo,
+                                                  .callDepartureAddressSubNo,
                                               FFAppState()
-                                                  .callDeaprtureAddressMainNo),
+                                                  .callDepartureAddressMainNo),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -804,6 +804,26 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFAppState().callDepartureName !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .callDepartureName !=
+                                                      ''
+                                              ? '(${FFAppState().callDepartureName})'
+                                              : '',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -855,6 +875,26 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFAppState().callArrivalName !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .callArrivalName !=
+                                                      ''
+                                              ? '(${FFAppState().callArrivalName})'
+                                              : '',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -1426,7 +1466,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${FFAppState().callDeaprtureAddressRegionDepth2}  ${FFAppState().callDeaprtureAddressRegionDepth3} ',
+                                          '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1442,9 +1482,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           functions.toAddressNo(
                                               FFAppState()
-                                                  .callDeaprtureAddressSubNo,
+                                                  .callDepartureAddressSubNo,
                                               FFAppState()
-                                                  .callDeaprtureAddressMainNo),
+                                                  .callDepartureAddressMainNo),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1808,7 +1848,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${FFAppState().callDeaprtureAddressRegionDepth2}  ${FFAppState().callDeaprtureAddressRegionDepth3} ',
+                                          '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1824,9 +1864,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         Text(
                                           functions.toAddressNo(
                                               FFAppState()
-                                                  .callDeaprtureAddressSubNo,
+                                                  .callDepartureAddressSubNo,
                                               FFAppState()
-                                                  .callDeaprtureAddressMainNo),
+                                                  .callDepartureAddressMainNo),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1

@@ -526,40 +526,6 @@ class FFAppState extends ChangeNotifier {
     _callTagsConcat = _value;
   }
 
-  String _callDeaprtureAddressRegionDepth2 = '';
-  String get callDeaprtureAddressRegionDepth2 =>
-      _callDeaprtureAddressRegionDepth2;
-  set callDeaprtureAddressRegionDepth2(String _value) {
-    notifyListeners();
-
-    _callDeaprtureAddressRegionDepth2 = _value;
-  }
-
-  String _callDeaprtureAddressRegionDepth3 = '';
-  String get callDeaprtureAddressRegionDepth3 =>
-      _callDeaprtureAddressRegionDepth3;
-  set callDeaprtureAddressRegionDepth3(String _value) {
-    notifyListeners();
-
-    _callDeaprtureAddressRegionDepth3 = _value;
-  }
-
-  String _callDeaprtureAddressMainNo = '';
-  String get callDeaprtureAddressMainNo => _callDeaprtureAddressMainNo;
-  set callDeaprtureAddressMainNo(String _value) {
-    notifyListeners();
-
-    _callDeaprtureAddressMainNo = _value;
-  }
-
-  String _callDeaprtureAddressSubNo = '';
-  String get callDeaprtureAddressSubNo => _callDeaprtureAddressSubNo;
-  set callDeaprtureAddressSubNo(String _value) {
-    notifyListeners();
-
-    _callDeaprtureAddressSubNo = _value;
-  }
-
   String _callArrivalAddressRegionDepth2 = '';
   String get callArrivalAddressRegionDepth2 => _callArrivalAddressRegionDepth2;
   set callArrivalAddressRegionDepth2(String _value) {
@@ -598,6 +564,40 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
 
     _callTicketId = _value;
+  }
+
+  String _callDepartureAddressRegionDepth2 = '';
+  String get callDepartureAddressRegionDepth2 =>
+      _callDepartureAddressRegionDepth2;
+  set callDepartureAddressRegionDepth2(String _value) {
+    notifyListeners();
+
+    _callDepartureAddressRegionDepth2 = _value;
+  }
+
+  String _callDepartureAddressRegionDepth3 = '';
+  String get callDepartureAddressRegionDepth3 =>
+      _callDepartureAddressRegionDepth3;
+  set callDepartureAddressRegionDepth3(String _value) {
+    notifyListeners();
+
+    _callDepartureAddressRegionDepth3 = _value;
+  }
+
+  String _callDepartureAddressMainNo = '';
+  String get callDepartureAddressMainNo => _callDepartureAddressMainNo;
+  set callDepartureAddressMainNo(String _value) {
+    notifyListeners();
+
+    _callDepartureAddressMainNo = _value;
+  }
+
+  String _callDepartureAddressSubNo = '';
+  String get callDepartureAddressSubNo => _callDepartureAddressSubNo;
+  set callDepartureAddressSubNo(String _value) {
+    notifyListeners();
+
+    _callDepartureAddressSubNo = _value;
   }
 }
 

@@ -12,3 +12,5 @@ export 'from_get_settlement_account_api_response.dart'
     show fromGetSettlementAccountApiResponse;
 export 'from_get_latest_call_api_response.dart'
     show fromGetLatestCallApiResponse;
+export 'from_call_requested_message_payload.dart'
+    show fromCallRequestedMessagePayload;
