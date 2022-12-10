@@ -27,6 +27,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
     with TickerProviderStateMixin {
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResultkg1;
+  ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
   ApiCallResponse? apiResultDriverToArrival;
   ApiCallResponse? apiResultj1q;
@@ -1196,57 +1197,137 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   0, 0, 10, 0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              var confirmDialogResponse =
-                                                  await showDialog<bool>(
+                                              apiResultCancelCall =
+                                                  await TaxiCallGroup
+                                                      .cancelTaxiCallRequestCall
+                                                      .call(
+                                                taxiCallRequestId:
+                                                    FFAppState().callId,
+                                                apiToken: FFAppState().apiToken,
+                                                apiEndpointTarget: FFAppState()
+                                                    .apiEndpointTarget,
+                                                confirmCancel: false,
+                                              );
+                                              if ((apiResultCancelCall
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                await actions.setCallState(
+                                                  'TAXI_CALL_WAITING',
+                                                );
+                                              } else {
+                                                setState(() {
+                                                  FFAppState().errCode =
+                                                      getJsonField(
+                                                    (apiResultCancelCall
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.errCode''',
+                                                  ).toString();
+                                                });
+                                                if (FFAppState().errCode ==
+                                                    'ERR_NEED_CONFIRMATION') {
+                                                  var confirmDialogResponse =
+                                                      await showDialog<bool>(
+                                                            context: context,
+                                                            builder:
+                                                                (alertDialogContext) {
+                                                              return AlertDialog(
+                                                                title:
+                                                                    Text('주의'),
+                                                                content: Text(
+                                                                    '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                                actions: [
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            false),
+                                                                    child: Text(
+                                                                        '유지'),
+                                                                  ),
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            true),
+                                                                    child: Text(
+                                                                        '취소'),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          ) ??
+                                                          false;
+                                                  if (confirmDialogResponse) {
+                                                    apiResultCancelCall2 =
+                                                        await TaxiCallGroup
+                                                            .cancelTaxiCallRequestCall
+                                                            .call(
+                                                      taxiCallRequestId:
+                                                          FFAppState().callId,
+                                                      apiToken:
+                                                          FFAppState().apiToken,
+                                                      apiEndpointTarget:
+                                                          FFAppState()
+                                                              .apiEndpointTarget,
+                                                      confirmCancel: true,
+                                                    );
+                                                    if ((apiResultCancelCall2
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      await actions
+                                                          .setCallState(
+                                                        'TAXI_CALL_WAITING',
+                                                      );
+                                                    } else {
+                                                      await showDialog(
                                                         context: context,
                                                         builder:
                                                             (alertDialogContext) {
                                                           return AlertDialog(
-                                                            title: Text('주의'),
+                                                            title: Text('오류'),
                                                             content: Text(
-                                                                '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                                '서버 오류가 발생하여 다시 시도해주세요'),
                                                             actions: [
                                                               TextButton(
                                                                 onPressed: () =>
                                                                     Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        false),
+                                                                        alertDialogContext),
                                                                 child:
-                                                                    Text('유지'),
-                                                              ),
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        true),
-                                                                child:
-                                                                    Text('취소'),
+                                                                    Text('확인'),
                                                               ),
                                                             ],
                                                           );
                                                         },
-                                                      ) ??
-                                                      false;
-                                              if (confirmDialogResponse) {
-                                                apiResultCancelCall =
-                                                    await TaxiCallGroup
-                                                        .cancelTaxiCallRequestCall
-                                                        .call(
-                                                  taxiCallRequestId:
-                                                      FFAppState().callId,
-                                                  apiToken:
-                                                      FFAppState().apiToken,
-                                                  apiEndpointTarget:
-                                                      FFAppState()
-                                                          .apiEndpointTarget,
-                                                  confirmCancel: true,
-                                                );
-                                                if ((apiResultCancelCall
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  await actions.setCallState(
-                                                    'TAXI_CALL_WAITING',
-                                                  );
+                                                      );
+                                                      await showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (alertDialogContext) {
+                                                          return AlertDialog(
+                                                            title:
+                                                                Text('오류 코드'),
+                                                            content: Text(
+                                                                getJsonField(
+                                                              (apiResultCancelCall2
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.errCode''',
+                                                            ).toString()),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext),
+                                                                child:
+                                                                    Text('Ok'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    }
+                                                  }
                                                 } else {
                                                   await showDialog(
                                                     context: context,
