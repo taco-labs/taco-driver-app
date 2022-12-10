@@ -940,8 +940,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   r'''$.errCode''',
                                                 ).toString();
                                               });
-                                              if (FFAppState().errCode ==
-                                                  'ERR_INVALID') {
+                                              if ((FFAppState().errCode ==
+                                                      'ERR_NOT_FOUND') ||
+                                                  (FFAppState().errCode ==
+                                                      'ERR_INVALID')) {
                                                 await actions.setCallState(
                                                   'TAXI_CALL_WAITING',
                                                 );
@@ -1046,8 +1048,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   r'''$.errCode''',
                                                 ).toString();
                                               });
-                                              if (FFAppState().errCode ==
-                                                  'ERR_INVALID') {
+                                              if ((FFAppState().errCode ==
+                                                      'ERR_NOT_FOUND') ||
+                                                  (FFAppState().errCode ==
+                                                      'ERR_INVALID')) {
                                                 await showDialog(
                                                   context: context,
                                                   builder:
