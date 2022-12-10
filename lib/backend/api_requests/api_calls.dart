@@ -1618,7 +1618,9 @@ class CancelTaxiCallRequestCall {
         ...TaxiCallGroup.headers,
         'Authorization': 'Bearer ${apiToken}',
       },
-      params: {},
+      params: {
+        'confirmCancel': confirmCancel,
+      },
       returnBody: true,
       cache: false,
     );
