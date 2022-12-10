@@ -530,7 +530,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             functions
                                                 .toHumanFriendlyDistanceFromMeters(
                                                     FFAppState()
-                                                        .callToArrivalDistance
+                                                        .callToDepartureDistance
                                                         .toString()),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
@@ -568,7 +568,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           functions
                                               .toHumanFreindlyEtaFromNanoseconds(
                                                   FFAppState()
-                                                      .callToArrivalEtaNanoSec
+                                                      .callToDepartureEtaNanoSec
                                                       .toString()),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -928,53 +928,69 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             );
                                             if ((apiResultw8d?.succeeded ??
                                                 true)) {
-                                              setState(() {
-                                                FFAppState().isOnCallViewing =
-                                                    false;
-                                                FFAppState().isOnCallWaiting =
-                                                    true;
-                                              });
+                                              await actions.setCallState(
+                                                'TAXI_CALL_WAITING',
+                                              );
                                             } else {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('오류'),
-                                                    content: Text(
-                                                        '서버 오류가 발생하여 다시 시도해주세요'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('확인'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title:
-                                                        Text('RejectTaxiCall'),
-                                                    content: Text(getJsonField(
-                                                      (apiResultw8d?.jsonBody ??
-                                                          ''),
-                                                      r'''$.message''',
-                                                    ).toString()),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
+                                              setState(() {
+                                                FFAppState().errCode =
+                                                    getJsonField(
+                                                  (apiResultw8d?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
+                                              });
+                                              if (FFAppState().errCode ==
+                                                  'ERR_INVALID') {
+                                                await actions.setCallState(
+                                                  'TAXI_CALL_WAITING',
+                                                );
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('오류'),
+                                                      content: Text(
+                                                          '서버 오류가 발생하여 다시 시도해주세요'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('확인'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'RejectTaxiCall'),
+                                                      content:
+                                                          Text(getJsonField(
+                                                        (apiResultw8d
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.message''',
+                                                      ).toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
                                             }
 
                                             setState(() {});
@@ -1018,56 +1034,90 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             );
                                             if ((apiResultj1q?.succeeded ??
                                                 true)) {
-                                              setState(() {
-                                                FFAppState().isOnCallViewing =
-                                                    false;
-                                                FFAppState()
-                                                        .isOnDrivingToDeparture =
-                                                    true;
-                                              });
+                                              await actions.setCallState(
+                                                'DRIVER_TO_DEPARTURE',
+                                              );
                                             } else {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('콜 수락 실패'),
-                                                    content: Text((apiResultj1q
-                                                                ?.statusCode ??
-                                                            200)
-                                                        .toString()),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title:
-                                                        Text('AcceptTaxiCall'),
-                                                    content: Text(getJsonField(
-                                                      (apiResultj1q?.jsonBody ??
-                                                          ''),
-                                                      r'''$.message''',
-                                                    ).toString()),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
+                                              setState(() {
+                                                FFAppState().errCode =
+                                                    getJsonField(
+                                                  (apiResultj1q?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
+                                              });
+                                              if (FFAppState().errCode ==
+                                                  'ERR_INVALID') {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('오류'),
+                                                      content:
+                                                          Text('만료된 콜 요청입니다'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('확인'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                await actions.setCallState(
+                                                  'TAXI_CALL_WAITING',
+                                                );
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('콜 수락 실패'),
+                                                      content: Text((apiResultj1q
+                                                                  ?.statusCode ??
+                                                              200)
+                                                          .toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'AcceptTaxiCall'),
+                                                      content:
+                                                          Text(getJsonField(
+                                                        (apiResultj1q
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.message''',
+                                                      ).toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
                                             }
 
                                             setState(() {});
@@ -1189,13 +1239,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 if ((apiResultCancelCall
                                                         ?.succeeded ??
                                                     true)) {
-                                                  setState(() {
-                                                    FFAppState()
-                                                            .isOnDrivingToDeparture =
-                                                        false;
-                                                    FFAppState()
-                                                        .isOnCallWaiting = true;
-                                                  });
+                                                  await actions.setCallState(
+                                                    'TAXI_CALL_WAITING',
+                                                  );
                                                 } else {
                                                   await showDialog(
                                                     context: context,
@@ -1426,7 +1472,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
@@ -1450,7 +1496,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
@@ -1616,13 +1662,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           if ((apiResultDriverToArrival
                                                   ?.succeeded ??
                                               true)) {
-                                            setState(() {
-                                              FFAppState()
-                                                      .isOnDrivingToDeparture =
-                                                  false;
-                                              FFAppState()
-                                                  .isOnDrivingToArrival = true;
-                                            });
+                                            await actions.setCallState(
+                                              'DRIVER_TO_ARRIVAL',
+                                            );
                                           } else {
                                             await showDialog(
                                               context: context,
@@ -1808,7 +1850,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
@@ -1832,7 +1874,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
@@ -1850,7 +1892,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
+                                          '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1985,11 +2027,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     children: [
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          setState(() {
-                                            FFAppState().isOnDrivingToArrival =
-                                                false;
-                                            FFAppState().isArrived = true;
-                                          });
+                                          await actions.setCallState(
+                                            'ARRIVED',
+                                          );
                                         },
                                         text: '목적지 도착',
                                         options: FFButtonOptions(
@@ -2374,10 +2414,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             tollFareController?.clear();
                                             taxiFareController?.clear();
                                           });
-                                          setState(() {
-                                            FFAppState().isArrived = false;
-                                            FFAppState().isOnCallWaiting = true;
-                                          });
+                                          await actions.setCallState(
+                                            'TAXI_CALL_WAITING',
+                                          );
                                         } else {
                                           await showDialog(
                                             context: context,
@@ -2473,9 +2512,11 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               );
                               if ((apiResult438?.succeeded ?? true)) {
                                 setState(() {
-                                  FFAppState().isOnCallWaiting = true;
                                   FFAppState().driverIsOnDuty = true;
                                 });
+                                await actions.setCallState(
+                                  'TAXI_CALL_WAITING',
+                                );
                                 await actions.startLocationService();
                               } else {
                                 await showDialog(
@@ -2537,9 +2578,11 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               );
                               if ((apiResultkg1?.succeeded ?? true)) {
                                 setState(() {
-                                  FFAppState().isOnCallWaiting = false;
                                   FFAppState().driverIsOnDuty = false;
                                 });
+                                await actions.setCallState(
+                                  'NONE',
+                                );
                                 await actions.cancelLocationService();
                               } else {
                                 await showDialog(

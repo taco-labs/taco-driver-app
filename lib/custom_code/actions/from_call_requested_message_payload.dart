@@ -12,6 +12,7 @@ Future fromCallRequestedMessagePayload(dynamic payload) async {
   // Call identifier
   FFAppState().callId = payload['taxiCallRequestId'];
   FFAppState().callTicketId = payload['taxiCallTicketId'];
+  FFAppState().callTicketAttempt = int.parse(payload['ticketAttempt']);
 
   // Call state
   FFAppState().callState = payload['taxiCallState'];

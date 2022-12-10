@@ -58,18 +58,18 @@ class _EntryWidgetState extends State<EntryWidget> {
                   (apiResultLatestCall?.jsonBody ?? ''),
                 );
                 if (FFAppState().callState == 'DRIVER_TO_DEPARTURE') {
-                  setState(() {
-                    FFAppState().isOnDrivingToDeparture = true;
-                  });
+                  await actions.setCallState(
+                    'DRIVER_TO_DEPARTURE',
+                  );
                 } else {
                   if (FFAppState().callState == 'DRIVER_TO_ARRIVAL') {
-                    setState(() {
-                      FFAppState().isOnDrivingToArrival = true;
-                    });
+                    await actions.setCallState(
+                      'DRIVER_TO_ARRIVAL',
+                    );
                   } else {
-                    setState(() {
-                      FFAppState().isOnCallWaiting = true;
-                    });
+                    await actions.setCallState(
+                      'TAXI_CALL_WAITING',
+                    );
                   }
                 }
 
@@ -82,9 +82,9 @@ class _EntryWidgetState extends State<EntryWidget> {
                   ).toString();
                 });
                 if (FFAppState().errCode == 'ERR_NOT_FOUND') {
-                  setState(() {
-                    FFAppState().isOnCallWaiting = true;
-                  });
+                  await actions.setCallState(
+                    'TAXI_CALL_WAITING',
+                  );
 
                   context.goNamed('Home');
                 } else {

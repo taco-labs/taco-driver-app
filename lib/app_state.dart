@@ -599,6 +599,14 @@ class FFAppState extends ChangeNotifier {
 
     _callDepartureAddressSubNo = _value;
   }
+
+  int _callTicketAttempt = 0;
+  int get callTicketAttempt => _callTicketAttempt;
+  set callTicketAttempt(int _value) {
+    notifyListeners();
+
+    _callTicketAttempt = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
