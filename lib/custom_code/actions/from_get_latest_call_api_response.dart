@@ -29,27 +29,39 @@ Future fromGetLatestCallApiResponse(dynamic apiResponse) async {
   FFAppState().callUserPhone = apiResponse['userPhone'];
 
   // User requirements
-  FFAppState().callTags.clear();
-  for (dynamic tag in apiResponse['tags']) {
-    FFAppState().callTags.add(tag.toString());
-  }
+  FFAppState().callTags = List<String>.from(apiResponse['tags']);
+  FFAppState().callTagsConcat = FFAppState().callTags.join(",");
   FFAppState().callUserTag = apiResponse['userTag'];
 
   // Location
   FFAppState().callDepartureCoordinate =
       LatLng(departurePointInfo['latitude'], departurePointInfo['longitude']);
   if (departureAddressInfo['buildingName'].isEmpty) {
-    FFAppState().callDepartureName = departureAddressInfo['addressName'];
+    FFAppState().callDepartureName = '';
   } else {
     FFAppState().callDepartureName = departureAddressInfo['buildingName'];
   }
+  FFAppState().callDepartureAddressRegionDepth2 =
+      departureAddressInfo['regionDepth2'];
+  FFAppState().callDepartureAddressRegionDepth3 =
+      departureAddressInfo['regionDepth3'];
+  FFAppState().callDepartureAddressMainNo =
+      departureAddressInfo['mainAddressNo'];
+  FFAppState().callDepartureAddressSubNo = departureAddressInfo['subAddressNo'];
+
   FFAppState().callArrivalCoordinate =
       LatLng(arrivalPointInfo['latitude'], arrivalPointInfo['longitude']);
   if (arrivalAddressInfo['buildingName'].isEmpty) {
-    FFAppState().callArrivalName = arrivalAddressInfo['addressName'];
+    FFAppState().callArrivalName = '';
   } else {
     FFAppState().callArrivalName = arrivalAddressInfo['buildingName'];
   }
+  FFAppState().callArrivalAddressRegionDepth2 =
+      arrivalAddressInfo['regionDepth2'];
+  FFAppState().callArrivalAddressRegionDepth3 =
+      arrivalAddressInfo['regionDepth3'];
+  FFAppState().callArrivalAddressMainNo = arrivalAddressInfo['mainAddressNo'];
+  FFAppState().callArrivalAddressSubNo = arrivalAddressInfo['subAddressNo'];
 
   // Distance from departure to arrival in meters
   List<dynamic> toArrivalRoute = apiResponse['toArrivalPath'];
