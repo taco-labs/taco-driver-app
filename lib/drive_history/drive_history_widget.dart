@@ -409,6 +409,52 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                         ),
                                                       ],
                                                     ),
+                                                  if (functions
+                                                      .isCancelledCallRequest(
+                                                          getJsonField(
+                                                    rideHistoriesItem,
+                                                    r'''$.currentState''',
+                                                  ).toString()))
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 2),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Text(
+                                                                '적립타코 ${getJsonField(
+                                                                  rideHistoriesItem,
+                                                                  r'''$.cancelPenaltyPrice''',
+                                                                ).toString()}개',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                 ],
                                               ),
                                             ),
