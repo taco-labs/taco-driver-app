@@ -1061,6 +1061,8 @@ class TaxiCallGroup {
   static CancelTaxiCallRequestCall cancelTaxiCallRequestCall =
       CancelTaxiCallRequestCall();
   static DoneTaxiCallCall doneTaxiCallCall = DoneTaxiCallCall();
+  static GetLatestTaxiCallTicketCall getLatestTaxiCallTicketCall =
+      GetLatestTaxiCallTicketCall();
 }
 
 class GetLatestTaxiCallCall {
@@ -1656,6 +1658,128 @@ class DoneTaxiCallCall {
       cache: false,
     );
   }
+}
+
+class GetLatestTaxiCallTicketCall {
+  Future<ApiCallResponse> call({
+    String? driverId = '',
+    String? apiEndpointTarget = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Latest  Taxi Call Ticket',
+      apiUrl:
+          '${TaxiCallGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/ticket_latest',
+      callType: ApiCallType.GET,
+      headers: {
+        ...TaxiCallGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      returnBody: true,
+      cache: false,
+    );
+  }
+
+  dynamic callRequestId(dynamic response) => getJsonField(
+        response,
+        r'''$.taxiCallRequestId''',
+      );
+  dynamic callState(dynamic response) => getJsonField(
+        response,
+        r'''$.taxiCallState''',
+      );
+  dynamic callTicketId(dynamic response) => getJsonField(
+        response,
+        r'''$.taxiCallTicketId''',
+      );
+  dynamic callTicketAttempt(dynamic response) => getJsonField(
+        response,
+        r'''$.ticketAttempt''',
+      );
+  dynamic callBasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.requestBasePrice''',
+      );
+  dynamic callAdditionalPrice(dynamic response) => getJsonField(
+        response,
+        r'''$.additionalPrice''',
+      );
+  dynamic toDepartureInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture''',
+      );
+  dynamic toDepartureEta(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.eta''',
+      );
+  dynamic toDepartureBasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.price''',
+      );
+  dynamic toDepartureDistance(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.distance''',
+      );
+  dynamic toDeparturePathInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.path''',
+        true,
+      );
+  dynamic toDepartureLatitudes(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.path[:].latitude''',
+        true,
+      );
+  dynamic toDepartureLongitudes(dynamic response) => getJsonField(
+        response,
+        r'''$.toDeparture.path[:].longitude''',
+        true,
+      );
+  dynamic toArrivalInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival''',
+      );
+  dynamic toArrivalEta(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.eta''',
+      );
+  dynamic toArrivalBasePrice(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.price''',
+      );
+  dynamic toArrivalDistance(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.distance''',
+      );
+  dynamic toArrivalPathInfo(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.path''',
+        true,
+      );
+  dynamic toArrivalLatitudes(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.path[:].latitude''',
+        true,
+      );
+  dynamic toArrivalLongitudes(dynamic response) => getJsonField(
+        response,
+        r'''$.toArrival.path[:].longitude''',
+        true,
+      );
+  dynamic tags(dynamic response) => getJsonField(
+        response,
+        r'''$.tags''',
+        true,
+      );
+  dynamic updateTime(dynamic response) => getJsonField(
+        response,
+        r'''$.updateTime''',
+      );
+  dynamic userTag(dynamic response) => getJsonField(
+        response,
+        r'''$.userTag''',
+      );
 }
 
 /// End Taxi Call Group Code
