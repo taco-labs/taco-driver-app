@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class RegisterImagesWidget extends StatefulWidget {
   const RegisterImagesWidget({
@@ -40,6 +41,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -83,8 +86,12 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             ),
                             child: Stack(
                               children: [
-                                if (FFAppState().profileImagePath == null ||
-                                    FFAppState().profileImagePath == '')
+                                if (FFAppState()
+                                            .driverProfileImageDownloadUrl ==
+                                        null ||
+                                    FFAppState()
+                                            .driverProfileImageDownloadUrl ==
+                                        '')
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         2, 2, 2, 2),
@@ -101,8 +108,12 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       ),
                                     ),
                                   ),
-                                if (FFAppState().profileImagePath != null &&
-                                    FFAppState().profileImagePath != '')
+                                if (FFAppState()
+                                            .driverProfileImageDownloadUrl !=
+                                        null &&
+                                    FFAppState()
+                                            .driverProfileImageDownloadUrl !=
+                                        '')
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         2, 2, 2, 2),
@@ -114,7 +125,8 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.network(
-                                        FFAppState().profileImagePath,
+                                        FFAppState()
+                                            .driverProfileImageDownloadUrl,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -167,22 +179,20 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         .isLicenseImageUploaded(
                                       (apiResulttx0?.jsonBody ?? ''),
                                     ),
-                                    carNumber: DriverInfoGroup.getDriverCall
-                                        .carNumber(
-                                          (apiResulttx0?.jsonBody ?? ''),
-                                        )
-                                        .toString(),
+                                    carNumber: FFAppState().driverCarNumber,
                                     apiEndpointTarget:
                                         FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    setState(() =>
-                                        FFAppState().profileImagePath =
-                                            DriverInfoGroup.getDriverCall
-                                                .profileImageDownloadUrl(
-                                          (apiResulttx0?.jsonBody ?? ''),
-                                        ));
+                                    setState(() {
+                                      FFAppState()
+                                              .driverProfileImageDownloadUrl =
+                                          DriverInfoGroup.getDriverCall
+                                              .profileImageDownloadUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      );
+                                    });
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -308,18 +318,26 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             ),
                             child: Stack(
                               children: [
-                                if (FFAppState().licenseImagePath == null ||
-                                    FFAppState().licenseImagePath == '')
+                                if (FFAppState()
+                                            .driverLicenseImageDownloadUrl ==
+                                        null ||
+                                    FFAppState()
+                                            .driverLicenseImageDownloadUrl ==
+                                        '')
                                   Image.asset(
                                     'assets/images/Square_Placeholder.png',
                                     width: 240,
                                     height: 150,
                                     fit: BoxFit.cover,
                                   ),
-                                if (FFAppState().licenseImagePath != null &&
-                                    FFAppState().licenseImagePath != '')
+                                if (FFAppState()
+                                            .driverLicenseImageDownloadUrl !=
+                                        null &&
+                                    FFAppState()
+                                            .driverLicenseImageDownloadUrl !=
+                                        '')
                                   Image.network(
-                                    FFAppState().licenseImagePath,
+                                    FFAppState().driverLicenseImageDownloadUrl,
                                     width: 240,
                                     height: 150,
                                     fit: BoxFit.cover,
@@ -372,22 +390,20 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                       (apiResulttx1?.jsonBody ?? ''),
                                     ),
                                     licenseImageUploaded: true,
-                                    carNumber: DriverInfoGroup.getDriverCall
-                                        .carNumber(
-                                          (apiResulttx1?.jsonBody ?? ''),
-                                        )
-                                        .toString(),
+                                    carNumber: FFAppState().driverCarNumber,
                                     apiEndpointTarget:
                                         FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    setState(() =>
-                                        FFAppState().licenseImagePath =
-                                            DriverInfoGroup.getDriverCall
-                                                .licenseImageDownloadUrl(
-                                          (apiResulttx1?.jsonBody ?? ''),
-                                        ));
+                                    setState(() {
+                                      FFAppState()
+                                              .driverLicenseImageDownloadUrl =
+                                          DriverInfoGroup.getDriverCall
+                                              .licenseImageDownloadUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      );
+                                    });
                                   } else {
                                     await showDialog(
                                       context: context,

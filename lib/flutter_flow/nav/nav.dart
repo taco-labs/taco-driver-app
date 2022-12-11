@@ -64,14 +64,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : EntryWidget(),
           routes: [
             FFRoute(
-              name: 'Entry',
-              path: 'entry',
-              builder: (context, params) => EntryWidget(),
-            ),
-            FFRoute(
               name: 'Login',
               path: 'login',
               builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'Entry',
+              path: 'entry',
+              builder: (context, params) => EntryWidget(),
             ),
             FFRoute(
               name: 'VerifyCode',
@@ -122,14 +122,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'RideHistory',
-              path: 'rideHistory',
-              builder: (context, params) => RideHistoryWidget(),
-            ),
-            FFRoute(
               name: 'Setting',
               path: 'setting',
-              builder: (context, params) => SettingWidget(),
+              builder: (context, params) => SettingWidget(
+                appVersion: params.getParam('appVersion', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'HomeCopy',
@@ -163,25 +160,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 bankCode: params.getParam('bankCode', ParamType.String),
                 accountNumber:
                     params.getParam('accountNumber', ParamType.String),
-                expectedAmount:
-                    params.getParam('expectedAmount', ParamType.int),
+                totalAmount: params.getParam('totalAmount', ParamType.int),
+                requestableAmount:
+                    params.getParam('requestableAmount', ParamType.int),
               ),
             ),
             FFRoute(
               name: 'SettlementHistory',
               path: 'settlementHistory',
-              builder: (context, params) => SettlementHistoryWidget(
-                bank: params.getParam('bank', ParamType.String),
-                accountNumber:
-                    params.getParam('accountNumber', ParamType.String),
-                expectedAmount:
-                    params.getParam('expectedAmount', ParamType.int),
-              ),
+              builder: (context, params) => SettlementHistoryWidget(),
             ),
             FFRoute(
               name: 'SupportChat',
               path: 'supportChat',
               builder: (context, params) => SupportChatWidget(),
+            ),
+            FFRoute(
+              name: 'DriveHistory',
+              path: 'driveHistory',
+              builder: (context, params) => DriveHistoryWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -36,6 +37,20 @@ bool isCompletedCallRequest(String currentState) {
   }
 
   return completed;
+}
+
+bool isCancelledCallRequest(String currentState) {
+  bool cancelled = false;
+  switch (currentState) {
+    case "USER_CANCELLED":
+    case "DRIVER_CANCELLED":
+      {
+        cancelled = true;
+      }
+      break;
+  }
+
+  return cancelled;
 }
 
 List<String> getSupportedServiceArea() {
@@ -255,4 +270,22 @@ dynamic toCallRequestFromApiResponse(dynamic apiResponse) {
   };
 
   return callRequest;
+}
+
+String toHumanFreindlyCallState(String callState) {
+  String state = '';
+  switch (callState) {
+    case 'USER_CANCELLED':
+      state = '승객취소';
+      break;
+    case 'DRIVER_CANCELLED':
+      state = '취소';
+      break;
+  }
+
+  return state;
+}
+
+String getEmptyString() {
+  return '';
 }

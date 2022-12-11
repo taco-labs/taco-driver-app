@@ -5,11 +5,11 @@ import '../flutter_flow/flutter_flow_timer.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class VerifyCodeWidget extends StatefulWidget {
   const VerifyCodeWidget({
@@ -32,6 +32,8 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   ApiCallResponse? apiResultGetAccount;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
+  String? osType;
+  String? appVersion;
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultLatestCall;
   TextEditingController? textController;
@@ -61,6 +63,8 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -176,66 +180,11 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResultf8v?.succeeded ?? true)) {
-                        setState(() => FFAppState().apiToken =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .apiToken(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().driverId =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverId(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().isOnDuty = SigninFlowGroup
-                                .sMSVerificationAndSigninCall
-                                .driverIsOnDuty(
-                              (apiResultf8v?.jsonBody ?? ''),
-                            ));
-                        setState(() => FFAppState().driverFirstName =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverFirstName(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().driverLastName =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverLastName(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().serviceRegion =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverServiceRegion(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().carNumber =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverCarNumber(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        setState(() => FFAppState().isActive = SigninFlowGroup
-                                .sMSVerificationAndSigninCall
-                                .driverIsActive(
-                              (apiResultf8v?.jsonBody ?? ''),
-                            ));
-                        setState(() => FFAppState().driverLicenseNumber =
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .driverLicenseId(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                )
-                                .toString());
-                        if (SigninFlowGroup.sMSVerificationAndSigninCall
-                                .isProfileImageUploaded(
-                              (apiResultf8v?.jsonBody ?? ''),
-                            ) &&
-                            SigninFlowGroup.sMSVerificationAndSigninCall
-                                .isLicenseImageUploaded(
-                              (apiResultf8v?.jsonBody ?? ''),
-                            )) {
+                        await actions.fromDriverSignApiResponse(
+                          (apiResultf8v?.jsonBody ?? ''),
+                        );
+                        if (FFAppState().driverProfileImageUploaded &&
+                            FFAppState().driverLicenseImageUploaded) {
                           apiResultGetAccount = await DriverInfoGroup
                               .getSettlementAccountCall
                               .call(
@@ -244,52 +193,28 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResultGetAccount?.succeeded ?? true)) {
-                            if (isAndroid ? true : false) {
-                              setState(() => FFAppState().appOs = 'AOS');
-                            } else {
-                              if (isiOS ? true : false) {
-                                setState(() => FFAppState().appOs = 'IOS');
-                              } else {
-                                if (isWeb ? true : false) {
-                                  setState(() => FFAppState().appOs = 'WEB');
-                                } else {
-                                  setState(
-                                      () => FFAppState().appOs = 'UNKNOWN');
-                                }
-                              }
-                            }
-
+                            await actions.fromGetSettlementAccountApiResponse(
+                              (apiResultGetAccount?.jsonBody ?? ''),
+                            );
                             fcmToken = await actions.getFcmToken();
+                            osType = await actions.getPlatformCode();
+                            appVersion = await actions.getAppVersion();
                             apiResultUpdateDriver =
                                 await DriverInfoGroup.updateDriverCall.call(
                               driverId: FFAppState().driverId,
                               apiToken: FFAppState().apiToken,
-                              appOs: FFAppState().appOs,
-                              appVersion: FFAppState().appVersion,
+                              appOs: osType,
+                              appVersion: appVersion,
                               appFcmToken: fcmToken,
-                              profileImageUploaded: SigninFlowGroup
-                                  .sMSVerificationAndSigninCall
-                                  .isProfileImageUploaded(
-                                (apiResultf8v?.jsonBody ?? ''),
-                              ),
-                              licenseImageUploaded: SigninFlowGroup
-                                  .sMSVerificationAndSigninCall
-                                  .isLicenseImageUploaded(
-                                (apiResultf8v?.jsonBody ?? ''),
-                              ),
-                              carNumber:
-                                  SigninFlowGroup.sMSVerificationAndSigninCall
-                                      .driverCarNumber(
-                                        (apiResultf8v?.jsonBody ?? ''),
-                                      )
-                                      .toString(),
+                              profileImageUploaded:
+                                  FFAppState().driverProfileImageUploaded,
+                              licenseImageUploaded:
+                                  FFAppState().driverLicenseImageUploaded,
+                              carNumber: FFAppState().driverCarNumber,
                               apiEndpointTarget: FFAppState().apiEndpointTarget,
                             );
                             if ((apiResultUpdateDriver?.succeeded ?? true)) {
-                              if (SigninFlowGroup.sMSVerificationAndSigninCall
-                                  .driverIsOnDuty(
-                                (apiResultf8v?.jsonBody ?? ''),
-                              )) {
+                              if (FFAppState().driverIsOnDuty) {
                                 apiResultLatestCall = await TaxiCallGroup
                                     .getLatestTaxiCallCall
                                     .call(
@@ -299,42 +224,39 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                       FFAppState().apiEndpointTarget,
                                 );
                                 if ((apiResultLatestCall?.succeeded ?? true)) {
-                                  setState(() => FFAppState().callRequest =
-                                      functions.toCallRequestFromApiResponse(
-                                          (apiResultLatestCall?.jsonBody ??
-                                              '')));
-                                  if (TaxiCallGroup.getLatestTaxiCallCall
-                                          .callCurrentState(
-                                            (apiResultLatestCall?.jsonBody ??
-                                                ''),
-                                          )
-                                          .toString() ==
+                                  await actions.fromGetLatestCallApiResponse(
+                                    (apiResultLatestCall?.jsonBody ?? ''),
+                                  );
+                                  if (FFAppState().callState ==
                                       'DRIVER_TO_DEPARTURE') {
-                                    setState(() => FFAppState()
-                                        .isOnDrivingToDeparture = true);
+                                    await actions.setCallState(
+                                      'DRIVER_TO_DEPARTURE',
+                                    );
                                   } else {
-                                    if (TaxiCallGroup.getLatestTaxiCallCall
-                                            .callCurrentState(
-                                              (apiResultLatestCall?.jsonBody ??
-                                                  ''),
-                                            )
-                                            .toString() ==
+                                    if (FFAppState().callState ==
                                         'DRIVER_TO_ARRIVAL') {
-                                      setState(() => FFAppState()
-                                          .isOnDrivingToArrival = true);
+                                      await actions.setCallState(
+                                        'DRIVER_TO_ARRIVAL',
+                                      );
                                     } else {
-                                      setState(() =>
-                                          FFAppState().isOnCallWaiting = true);
+                                      await actions.setCallState(
+                                        'TAXI_CALL_WAITING',
+                                      );
                                     }
                                   }
 
                                   context.goNamed('Home');
                                 } else {
-                                  if ((apiResultLatestCall?.statusCode ??
-                                          200) ==
-                                      404) {
-                                    setState(() =>
-                                        FFAppState().isOnCallWaiting = true);
+                                  setState(() {
+                                    FFAppState().errCode = getJsonField(
+                                      (apiResultLatestCall?.jsonBody ?? ''),
+                                      r'''$.errCode''',
+                                    ).toString();
+                                  });
+                                  if (FFAppState().errCode == 'ERR_NOT_FOUND') {
+                                    await actions.setCallState(
+                                      'TAXI_CALL_WAITING',
+                                    );
 
                                     context.goNamed('Home');
                                   } else {
@@ -463,7 +385,13 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           context.goNamed('RegisterImages');
                         }
                       } else {
-                        if ((apiResultf8v?.statusCode ?? 200) == 404) {
+                        setState(() {
+                          FFAppState().errCode = getJsonField(
+                            (apiResultf8v?.jsonBody ?? ''),
+                            r'''$.errCode''',
+                          ).toString();
+                        });
+                        if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                           context.goNamed(
                             'RegisterDriver',
                             queryParams: {

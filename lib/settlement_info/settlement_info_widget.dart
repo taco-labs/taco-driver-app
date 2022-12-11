@@ -1,27 +1,34 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettlementInfoWidget extends StatefulWidget {
   const SettlementInfoWidget({
     Key? key,
     this.bankCode,
     this.accountNumber,
-    this.expectedAmount,
+    this.totalAmount,
+    this.requestableAmount,
   }) : super(key: key);
 
   final String? bankCode;
   final String? accountNumber;
-  final int? expectedAmount;
+  final int? totalAmount;
+  final int? requestableAmount;
 
   @override
   _SettlementInfoWidgetState createState() => _SettlementInfoWidgetState();
 }
 
 class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
+  ApiCallResponse? apiResulta0z;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -33,6 +40,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -151,7 +160,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                     child: Text(
-                      '적립 타코 개수',
+                      '총 적립 타코 개수',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).primaryText,
@@ -169,7 +178,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
                         child: Text(
                           valueOrDefault<String>(
-                            widget.expectedAmount?.toString(),
+                            widget.totalAmount?.toString(),
                             '0',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -182,6 +191,135 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                               ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Divider(),
+                Align(
+                  alignment: AlignmentDirectional(-0.9, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Text(
+                      '정산 가능 타코 개수',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            fontSize: 16,
+                          ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                        child: Text(
+                          valueOrDefault<String>(
+                            widget.requestableAmount?.toString(),
+                            '0',
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 14,
+                              ),
+                        ),
+                      ),
+                      if (widget.requestableAmount! > 0)
+                        FFButtonWidget(
+                          onPressed: () async {
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content:
+                                          Text('등록된 계좌로 정산요청을 진행 하시겠습니까? '),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('취소'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('요청'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              apiResulta0z = await DriverInfoGroup
+                                  .requestDriverSettlementCall
+                                  .call(
+                                driverId: FFAppState().driverId,
+                                apiToken: FFAppState().apiToken,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
+                              );
+                              if ((apiResulta0z?.succeeded ?? true)) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text('정산이 정상적으로 요청되었습니다'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            }
+
+                            setState(() {});
+                          },
+                          text: '정산요청',
+                          options: FFButtonOptions(
+                            height: 50,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                     ],
                   ),
                 ),

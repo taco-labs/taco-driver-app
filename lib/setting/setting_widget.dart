@@ -2,11 +2,18 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettingWidget extends StatefulWidget {
-  const SettingWidget({Key? key}) : super(key: key);
+  const SettingWidget({
+    Key? key,
+    this.appVersion,
+  }) : super(key: key);
+
+  final String? appVersion;
 
   @override
   _SettingWidgetState createState() => _SettingWidgetState();
@@ -25,6 +32,8 @@ class _SettingWidgetState extends State<SettingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -98,7 +107,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 5),
                           child: Text(
-                            FFAppState().appVersion,
+                            widget.appVersion!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -208,10 +217,10 @@ class _SettingWidgetState extends State<SettingWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      setState(() => FFAppState().apiToken = '');
-                      setState(() => FFAppState().driverId = '');
-                      setState(() => FFAppState().isOnDuty = false);
-                      setState(() => FFAppState().callRequest = null);
+                      setState(() {
+                        FFAppState().apiToken = '';
+                        FFAppState().driverId = '';
+                      });
 
                       context.goNamed('Login');
                     },
@@ -256,15 +265,15 @@ class _SettingWidgetState extends State<SettingWidget> {
                         false;
                     if (confirmDialogResponse) {
                       apiResult9ee =
-                          await BackofficeGroup.deleteDriverCall.call(
+                          await BackofficeDevGroup.deleteDriverCall.call(
                         driverId: FFAppState().driverId,
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResult9ee?.succeeded ?? true)) {
-                        setState(() => FFAppState().apiToken = '');
-                        setState(() => FFAppState().driverId = '');
-                        setState(() => FFAppState().callRequest = null);
-                        setState(() => FFAppState().isOnDuty = false);
+                        setState(() {
+                          FFAppState().apiToken = '';
+                          FFAppState().driverId = '';
+                        });
 
                         context.goNamed('Login');
                       } else {

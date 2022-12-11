@@ -9,6 +9,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class RegisterDriverWidget extends StatefulWidget {
   const RegisterDriverWidget({
@@ -26,7 +27,9 @@ class RegisterDriverWidget extends StatefulWidget {
 
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   ApiCallResponse? apiResultbos;
+  String? appVersion;
   String? getFcmTokenResult;
+  String? osType;
   String? dropDownValue;
   String? radioButtonValue;
   TextEditingController? birthDateController;
@@ -37,6 +40,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? carNumberController;
   TextEditingController? licenseNumberController;
   TextEditingController? businessRegistrationNumberController;
+  TextEditingController? taxiCompanyNameController;
   bool? termsofUseValue;
   bool? privacyPolicyValue;
   final formKey = GlobalKey<FormState>();
@@ -53,6 +57,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     carNumberController = TextEditingController();
     licenseNumberController = TextEditingController();
     businessRegistrationNumberController = TextEditingController();
+    taxiCompanyNameController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -66,11 +71,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     carNumberController?.dispose();
     licenseNumberController?.dispose();
     businessRegistrationNumberController?.dispose();
+    taxiCompanyNameController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -738,88 +746,156 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               },
                             ),
                           ),
-                          if (radioButtonValue != '법인 택시')
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                              child: TextFormField(
-                                controller:
-                                    businessRegistrationNumberController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: '사업자등록번호 10자리',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18,
+                          Stack(
+                            children: [
+                              if (radioButtonValue != '법인 택시')
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20, 0, 20, 10),
+                                  child: TextFormField(
+                                    controller:
+                                        businessRegistrationNumberController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: '사업자등록번호 10자리',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      width: 2,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20, 24, 20, 24),
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20, 24, 20, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                    ),
-                                keyboardType: TextInputType.number,
-                                validator: (val) {
-                                  if (val == null || val.isEmpty) {
-                                    return '사업자등록번호를 정확히 입력해주세요';
-                                  }
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                        ),
+                                    keyboardType: TextInputType.number,
+                                    validator: (val) {
+                                      if (val == null || val.isEmpty) {
+                                        return '사업자등록번호를 정확히 입력해주세요';
+                                      }
 
-                                  if (val.length < 10) {
-                                    return '사업자등록번호를 정확히 입력해주세요';
-                                  }
-                                  if (val.length > 10) {
-                                    return '사업자등록번호를 정확히 입력해주세요';
-                                  }
-                                  if (!RegExp(r"^\d{10}$").hasMatch(val)) {
-                                    return '사업자등록번호를 정확히 입력해주세요';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
+                                      if (val.length < 10) {
+                                        return '사업자등록번호를 정확히 입력해주세요';
+                                      }
+                                      if (val.length > 10) {
+                                        return '사업자등록번호를 정확히 입력해주세요';
+                                      }
+                                      if (!RegExp(r"^\d{10}$").hasMatch(val)) {
+                                        return '사업자등록번호를 정확히 입력해주세요';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              if (radioButtonValue == '법인 택시')
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20, 0, 20, 10),
+                                  child: TextFormField(
+                                    controller: taxiCompanyNameController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: '소속',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20, 24, 20, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                        ),
+                                  ),
+                                ),
+                            ],
+                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
@@ -911,14 +987,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                       if (termsofUseValue!) {
                         if (privacyPolicyValue!) {
                           getFcmTokenResult = await actions.getFcmToken();
+                          appVersion = await actions.getAppVersion();
+                          osType = await actions.getPlatformCode();
                           apiResultbos = await SignupGroup.signupCall.call(
                             firstName: firstNameController!.text,
                             lastName: lastNameController!.text,
                             birthday: birthDateController!.text,
                             gender: genderCodeController!.text,
                             phone: phoneNumberController!.text,
-                            appOs: FFAppState().appOs,
-                            appVersion: FFAppState().appVersion,
+                            appOs: osType,
+                            appVersion: appVersion,
                             appFcmToken: getFcmTokenResult,
                             smsVerificationStateKey: widget.authSmsStateKey,
                             driverType:
@@ -929,57 +1007,15 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 businessRegistrationNumberController!.text,
                             serviceRegion: dropDownValue,
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
+                            companyName: taxiCompanyNameController!.text,
                           );
                           if ((apiResultbos?.succeeded ?? true)) {
+                            await actions.fromDriverSignApiResponse(
+                              (apiResultbos?.jsonBody ?? ''),
+                            );
                             await requestPermission(locationPermission);
                             await requestPermission(notificationsPermission);
                             await requestPermission(photoLibraryPermission);
-                            setState(() =>
-                                FFAppState().apiToken = SignupGroup.signupCall
-                                    .apiToken(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() =>
-                                FFAppState().driverId = SignupGroup.signupCall
-                                    .driverId(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().driverFirstName =
-                                SignupGroup.signupCall
-                                    .driverFirstName(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().driverLastName =
-                                SignupGroup.signupCall
-                                    .driverLastName(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().serviceRegion =
-                                SignupGroup.signupCall
-                                    .driverServiceRegion(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() =>
-                                FFAppState().carNumber = SignupGroup.signupCall
-                                    .driverCarNumber(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
-                            setState(() => FFAppState().isActive =
-                                    SignupGroup.signupCall.driverIsActive(
-                                  (apiResultbos?.jsonBody ?? ''),
-                                ));
-                            setState(() => FFAppState().driverLicenseNumber =
-                                SignupGroup.signupCall
-                                    .driverLicenseId(
-                                      (apiResultbos?.jsonBody ?? ''),
-                                    )
-                                    .toString());
 
                             context.goNamed('RegisterImages');
                           } else {

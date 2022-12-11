@@ -7,6 +7,7 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResultd22;
   ApiCallResponse? apiResultqz6;
   ApiCallResponse? apiResulttx8;
+  String? appVersion;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,7 +29,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
-      if (FFAppState().isOnDuty) {
+      if (FFAppState().driverIsOnDuty) {
         await actions.startLocationService();
       }
     });
@@ -37,6 +39,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -123,7 +127,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('RideHistory');
+                context.pushNamed('DriveHistory');
               },
               child: ListTile(
                 title: Text(
@@ -169,13 +173,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                               .toString(),
                           ParamType.String,
                         ),
-                        'expectedAmount': serializeParam(
-                          DriverInfoGroup.getExpectetedSettlementCall
-                              .expectedAmount(
-                            (apiResultd22?.jsonBody ?? ''),
-                          ),
-                          ParamType.int,
-                        ),
                         'bankCode': serializeParam(
                           DriverInfoGroup.getSettlementAccountCall
                               .bank(
@@ -183,6 +180,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                               )
                               .toString(),
                           ParamType.String,
+                        ),
+                        'totalAmount': serializeParam(
+                          DriverInfoGroup.getExpectetedSettlementCall
+                              .totalAmount(
+                            (apiResultd22?.jsonBody ?? ''),
+                          ),
+                          ParamType.int,
+                        ),
+                        'requestableAmount': serializeParam(
+                          DriverInfoGroup.getExpectetedSettlementCall
+                              .requestableAmount(
+                            (apiResultd22?.jsonBody ?? ''),
+                          ),
+                          ParamType.int,
                         ),
                       }.withoutNulls,
                     );
@@ -280,7 +291,19 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                context.pushNamed('Setting');
+                appVersion = await actions.getAppVersion();
+
+                context.pushNamed(
+                  'Setting',
+                  queryParams: {
+                    'appVersion': serializeParam(
+                      appVersion,
+                      ParamType.String,
+                    ),
+                  }.withoutNulls,
+                );
+
+                setState(() {});
               },
               child: ListTile(
                 title: Text(
