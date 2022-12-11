@@ -36,6 +36,20 @@ class _HomeWidgetState extends State<HomeWidget> {
           await actions.startLocationService();
         }
       } else {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              content: Text('길찾기 기능 사용을 위해서 네비게이션 앱을 설치해주세요'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          },
+        );
         await actions.installKakaoNavi();
       }
     });
