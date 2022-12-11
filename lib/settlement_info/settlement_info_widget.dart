@@ -239,8 +239,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      content:
-                                          Text('등록된 계좌로 정산요청을 진행 하시겠습니까? '),
+                                      content: Text('등록된 계좌로 정산을 요청 하시겠습니까? '),
                                       actions: [
                                         TextButton(
                                           onPressed: () => Navigator.pop(

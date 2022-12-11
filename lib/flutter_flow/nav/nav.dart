@@ -179,6 +179,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'DriveHistory',
               path: 'driveHistory',
               builder: (context, params) => DriveHistoryWidget(),
+            ),
+            FFRoute(
+              name: 'SettingCopy',
+              path: 'settingCopy',
+              builder: (context, params) => SettingCopyWidget(
+                appVersion: params.getParam('appVersion', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
