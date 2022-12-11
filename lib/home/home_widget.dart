@@ -21,6 +21,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResultqz6;
   ApiCallResponse? apiResulttx8;
   String? appVersion;
+  bool? isInstalled;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,8 +30,13 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
-      if (FFAppState().driverIsOnDuty) {
-        await actions.startLocationService();
+      isInstalled = await actions.isKakaoNaviInstalled();
+      if (isInstalled!) {
+        if (FFAppState().driverIsOnDuty) {
+          await actions.startLocationService();
+        }
+      } else {
+        await actions.installKakaoNavi();
       }
     });
 

@@ -170,6 +170,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 );
                 actions.setCallState('TAXI_CALL_REQUESTED');
               });
+            } else {
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
             }
           }
         } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
@@ -221,9 +225,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 );
                 actions.setCallState('TAXI_CALL_REQUESTED');
               });
+            } else {
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
             }
           }
-          ;
         } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
           await showDialog(
             context: context,
