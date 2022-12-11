@@ -73,11 +73,13 @@ class DriverCallManager extends StatefulWidget {
 class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResultkg1;
+  ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
   ApiCallResponse? apiResultDriverToArrival;
   ApiCallResponse? apiResultj1q;
   ApiCallResponse? apiResultw8d;
   ApiCallResponse? apiResultDoneTaxiCall;
+  ApiCallResponse? apiResultyb9;
   TextEditingController? taxiFareController;
   TextEditingController? tollFareController;
   final formKey = GlobalKey<FormState>();
@@ -92,12 +94,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     // If the message also contains a data property with a "type" of "chat",
     // navigate to a chat screen
     if (initialMessage != null) {
-      _handleMessage(initialMessage);
+      _handleInitialMessage(initialMessage);
     }
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
 
     // foreground handler
     FirebaseMessaging.onMessage.listen(_handleMessage);
@@ -105,7 +107,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
   void _handleMessage(RemoteMessage message) async {
     dynamic data = message.data;
-    debugPrint('Data received ${data.toString()}');
+    debugPrint('FG Data received ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -119,6 +121,109 @@ class _DriverCallManagerState extends State<DriverCallManager> {
             actions.fromCallRequestedMessagePayload(message.data);
             actions.setCallState('TAXI_CALL_REQUESTED');
           });
+        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('확인'),
+                  ),
+                ],
+              );
+            },
+          );
+
+          setState(() {
+            actions.setCallState('TAXI_CALL_WAITING');
+          });
+        }
+        break;
+    }
+  }
+
+  void _handleInitialMessage(RemoteMessage message) async {
+    dynamic data = message.data;
+    debugPrint('Initial Data received ${data.toString()}');
+
+    switch (data['category']) {
+      case NotificationCategory_Driver:
+        setState(() {
+          FFAppState().driverIsActivated = true;
+        });
+        break;
+      case NotificationCategory_Taxicall:
+        if (data['taxiCallState'] == TaxiCallStateRequested) {
+          if (FFAppState().driverIsOnDuty) {
+            apiResultyb9 = await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
+              apiToken: FFAppState().apiToken,
+              driverId: FFAppState().driverId,
+              apiEndpointTarget: FFAppState().apiEndpointTarget,
+            );
+            if ((apiResultyb9?.succeeded ?? true)) {
+              setState(() {
+                actions.fromGetLatestCallTicketlApiResponse(
+                  (apiResultyb9?.jsonBody ?? ''),
+                );
+                actions.setCallState('TAXI_CALL_REQUESTED');
+              });
+            }
+          }
+        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('확인'),
+                  ),
+                ],
+              );
+            },
+          );
+
+          setState(() {
+            actions.setCallState('TAXI_CALL_WAITING');
+          });
+        }
+        break;
+    }
+  }
+
+  void _handleBackgroundMessage(RemoteMessage message) async {
+    dynamic data = message.data;
+    debugPrint('BG Data received ${data.toString()}');
+
+    switch (data['category']) {
+      case NotificationCategory_Driver:
+        setState(() {
+          FFAppState().driverIsActivated = true;
+        });
+        break;
+      case NotificationCategory_Taxicall:
+        if (data['taxiCallState'] == TaxiCallStateRequested) {
+          if (FFAppState().driverIsOnDuty) {
+            apiResultyb9 = await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
+              apiToken: FFAppState().apiToken,
+              driverId: FFAppState().driverId,
+              apiEndpointTarget: FFAppState().apiEndpointTarget,
+            );
+            if ((apiResultyb9?.succeeded ?? true)) {
+              setState(() {
+                actions.fromGetLatestCallTicketlApiResponse(
+                  (apiResultyb9?.jsonBody ?? ''),
+                );
+                actions.setCallState('TAXI_CALL_REQUESTED');
+              });
+            }
+          }
+          ;
         } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
           await showDialog(
             context: context,
@@ -1063,52 +1168,125 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         0, 0, 10, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
+                                        apiResultCancelCall =
+                                            await TaxiCallGroup
+                                                .cancelTaxiCallRequestCall
+                                                .call(
+                                          taxiCallRequestId:
+                                              FFAppState().callId,
+                                          apiToken: FFAppState().apiToken,
+                                          apiEndpointTarget:
+                                              FFAppState().apiEndpointTarget,
+                                          confirmCancel: false,
+                                        );
+                                        if ((apiResultCancelCall?.succeeded ??
+                                            true)) {
+                                          await actions.setCallState(
+                                            'TAXI_CALL_WAITING',
+                                          );
+                                        } else {
+                                          setState(() {
+                                            FFAppState().errCode = getJsonField(
+                                              (apiResultCancelCall?.jsonBody ??
+                                                  ''),
+                                              r'''$.errCode''',
+                                            ).toString();
+                                          });
+                                          if (FFAppState().errCode ==
+                                              'ERR_NEED_CONFIRMATION') {
+                                            var confirmDialogResponse =
+                                                await showDialog<bool>(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('주의'),
+                                                          content: Text(
+                                                              '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      false),
+                                                              child: Text('유지'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      true),
+                                                              child: Text('취소'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ) ??
+                                                    false;
+                                            if (confirmDialogResponse) {
+                                              apiResultCancelCall2 =
+                                                  await TaxiCallGroup
+                                                      .cancelTaxiCallRequestCall
+                                                      .call(
+                                                taxiCallRequestId:
+                                                    FFAppState().callId,
+                                                apiToken: FFAppState().apiToken,
+                                                apiEndpointTarget: FFAppState()
+                                                    .apiEndpointTarget,
+                                                confirmCancel: true,
+                                              );
+                                              if ((apiResultCancelCall2
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                await actions.setCallState(
+                                                  'TAXI_CALL_WAITING',
+                                                );
+                                              } else {
+                                                await showDialog(
                                                   context: context,
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
-                                                      title: Text('주의'),
+                                                      title: Text('오류'),
                                                       content: Text(
-                                                          '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                          '서버 오류가 발생하여 다시 시도해주세요'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
                                                               Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('유지'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('취소'),
+                                                                  alertDialogContext),
+                                                          child: Text('확인'),
                                                         ),
                                                       ],
                                                     );
                                                   },
-                                                ) ??
-                                                false;
-                                        if (confirmDialogResponse) {
-                                          apiResultCancelCall =
-                                              await TaxiCallGroup
-                                                  .cancelTaxiCallRequestCall
-                                                  .call(
-                                            taxiCallRequestId:
-                                                FFAppState().callId,
-                                            apiToken: FFAppState().apiToken,
-                                            apiEndpointTarget:
-                                                FFAppState().apiEndpointTarget,
-                                            confirmCancel: true,
-                                          );
-                                          if ((apiResultCancelCall?.succeeded ??
-                                              true)) {
-                                            await actions.setCallState(
-                                              'TAXI_CALL_WAITING',
-                                            );
+                                                );
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('오류 코드'),
+                                                      content:
+                                                          Text(getJsonField(
+                                                        (apiResultCancelCall2
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.errCode''',
+                                                      ).toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                            }
                                           } else {
                                             await showDialog(
                                               context: context,
