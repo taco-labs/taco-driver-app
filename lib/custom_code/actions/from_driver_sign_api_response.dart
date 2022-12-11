@@ -12,6 +12,7 @@ Future fromDriverSignApiResponse(dynamic apiResponse) async {
   dynamic driverInfo = apiResponse['driver'];
 
   FFAppState().apiToken = apiResponse['token'];
+  FFAppState().driverId = driverInfo['id'];
   FFAppState().driverType = driverInfo['driverType'];
   FFAppState().driverFirstName = driverInfo['firstName'];
   FFAppState().driverLastName = driverInfo['lastName'];
