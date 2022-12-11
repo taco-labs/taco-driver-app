@@ -17,3 +17,5 @@ export 'from_get_latest_call_ticketl_api_response.dart'
 export 'from_call_requested_message_payload.dart'
     show fromCallRequestedMessagePayload;
 export 'set_call_state.dart' show setCallState;
+export 'is_kakao_navi_installed.dart' show isKakaoNaviInstalled;
+export 'install_kakao_navi.dart' show installKakaoNavi;
