@@ -251,25 +251,6 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                             );
                           },
                         );
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('RegisterSettlementAccount'),
-                              content: Text(getJsonField(
-                                (apiResultRegisterAccount?.jsonBody ?? ''),
-                                r'''$.message''',
-                              ).toString()),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
                       }
 
                       setState(() {});
