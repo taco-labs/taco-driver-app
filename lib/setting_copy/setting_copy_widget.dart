@@ -1,3 +1,4 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class SettingWidget extends StatefulWidget {
-  const SettingWidget({
+class SettingCopyWidget extends StatefulWidget {
+  const SettingCopyWidget({
     Key? key,
     this.appVersion,
   }) : super(key: key);
@@ -15,10 +16,11 @@ class SettingWidget extends StatefulWidget {
   final String? appVersion;
 
   @override
-  _SettingWidgetState createState() => _SettingWidgetState();
+  _SettingCopyWidgetState createState() => _SettingCopyWidgetState();
 }
 
-class _SettingWidgetState extends State<SettingWidget> {
+class _SettingCopyWidgetState extends State<SettingCopyWidget> {
+  ApiCallResponse? apiResult9ee;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -169,6 +171,40 @@ class _SettingWidgetState extends State<SettingWidget> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                     child: Text(
+                      '알림',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                  child: ListTile(
+                    title: Text(
+                      '알림설정',
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xFF303030),
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
+                  ),
+                ),
+                Divider(),
+                Align(
+                  alignment: AlignmentDirectional(-0.9, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Text(
                       '계정',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
@@ -200,6 +236,79 @@ class _SettingWidgetState extends State<SettingWidget> {
                       tileColor: Color(0xFFF5F5F5),
                       dense: false,
                     ),
+                  ),
+                ),
+                Divider(),
+                InkWell(
+                  onTap: () async {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('탈퇴'),
+                              content: Text('회원 탈퇴를 진행하시겠습니까?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('취소'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      apiResult9ee =
+                          await BackofficeDevGroup.deleteDriverCall.call(
+                        driverId: FFAppState().driverId,
+                        apiEndpointTarget: FFAppState().apiEndpointTarget,
+                      );
+                      if ((apiResult9ee?.succeeded ?? true)) {
+                        setState(() {
+                          FFAppState().apiToken = '';
+                          FFAppState().driverId = '';
+                        });
+
+                        context.goNamed('Login');
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    }
+
+                    setState(() {});
+                  },
+                  child: ListTile(
+                    title: Text(
+                      '탈퇴하기',
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
                   ),
                 ),
                 Divider(),

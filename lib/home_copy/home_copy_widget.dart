@@ -968,31 +968,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     );
                                                   },
                                                 );
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'RejectTaxiCall'),
-                                                      content:
-                                                          Text(getJsonField(
-                                                        (apiResultw8d
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.message''',
-                                                      ).toString()),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
                                               }
                                             }
 
@@ -1086,31 +1061,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                                   ?.statusCode ??
                                                               200)
                                                           .toString()),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'AcceptTaxiCall'),
-                                                      content:
-                                                          Text(getJsonField(
-                                                        (apiResultj1q
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.message''',
-                                                      ).toString()),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
@@ -1300,32 +1250,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           );
                                                         },
                                                       );
-                                                      await showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (alertDialogContext) {
-                                                          return AlertDialog(
-                                                            title:
-                                                                Text('오류 코드'),
-                                                            content: Text(
-                                                                getJsonField(
-                                                              (apiResultCancelCall2
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.errCode''',
-                                                            ).toString()),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext),
-                                                                child:
-                                                                    Text('Ok'),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      );
                                                     }
                                                   }
                                                 } else {
@@ -1343,30 +1267,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                                 Navigator.pop(
                                                                     alertDialogContext),
                                                             child: Text('확인'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('오류 코드'),
-                                                        content:
-                                                            Text(getJsonField(
-                                                          (apiResultCancelCall
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.message''',
-                                                        ).toString()),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
                                                           ),
                                                         ],
                                                       );
@@ -1765,28 +1665,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           Navigator.pop(
                                                               alertDialogContext),
                                                       child: Text('확인'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('에러코드'),
-                                                  content: Text(getJsonField(
-                                                    (apiResultDriverToArrival
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$.message''',
-                                                  ).toString()),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
                                                     ),
                                                   ],
                                                 );
@@ -2522,28 +2400,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               );
                                             },
                                           );
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('에러코드'),
-                                                content: Text(getJsonField(
-                                                  (apiResultDoneTaxiCall
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString()),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
                                         }
 
                                         setState(() {});
@@ -2682,25 +2538,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
                                           child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('UpdateOnDuty'),
-                                      content: Text(getJsonField(
-                                        (apiResultkg1?.jsonBody ?? ''),
-                                        r'''$.message''',
-                                      ).toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
                                         ),
                                       ],
                                     );

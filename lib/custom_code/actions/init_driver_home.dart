@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:background_locator_2/background_locator.dart';
+import 'package:kakao_flutter_sdk_navi/kakao_flutter_sdk_navi.dart';
 
 const String kakaoAppKey = 'ad4db5aa94cc0675585a6203dd19747d';
 
@@ -19,4 +20,8 @@ Future initDriverHome() async {
     nativeAppKey: '$kakaoAppKey',
   );
   await BackgroundLocator.initialize();
+
+  if (await NaviApi.instance.isKakaoNaviInstalled() == false) {
+    launchBrowserTab(Uri.parse(NaviApi.webNaviInstall));
+  }
 }
