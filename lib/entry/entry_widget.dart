@@ -24,6 +24,7 @@ class _EntryWidgetState extends State<EntryWidget> {
   void initState() {
     super.initState();
     // On page load action.
+    debugPrint('driverId ${FFAppState().driverId} apiToken ${FFAppState().apiToken}');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       apiResultyb1 = await DriverInfoGroup.getDriverCall.call(
         apiToken: FFAppState().apiToken,
