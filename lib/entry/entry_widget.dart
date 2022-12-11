@@ -103,24 +103,6 @@ class _EntryWidgetState extends State<EntryWidget> {
                       );
                     },
                   );
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('GetLatestCall'),
-                        content: Text(getJsonField(
-                          (apiResultLatestCall?.jsonBody ?? ''),
-                          r'''$.message''',
-                        ).toString()),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
                   return;
                 }
               }
@@ -147,24 +129,6 @@ class _EntryWidgetState extends State<EntryWidget> {
                       TextButton(
                         onPressed: () => Navigator.pop(alertDialogContext),
                         child: Text('확인'),
-                      ),
-                    ],
-                  );
-                },
-              );
-              await showDialog(
-                context: context,
-                builder: (alertDialogContext) {
-                  return AlertDialog(
-                    title: Text('GetSettlementAccount'),
-                    content: Text(getJsonField(
-                      (apiResultGetAccount?.jsonBody ?? ''),
-                      r'''$.message''',
-                    ).toString()),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(alertDialogContext),
-                        child: Text('Ok'),
                       ),
                     ],
                   );

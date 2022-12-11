@@ -209,26 +209,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         );
                                       },
                                     );
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('UpdateDriver'),
-                                          content: Text(getJsonField(
-                                            (apiResultUpdateDriver2?.jsonBody ??
-                                                ''),
-                                            r'''$.message''',
-                                          ).toString()),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                   }
                                 } else {
                                   await showDialog(
@@ -260,24 +240,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
                                           child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('GetDriverImageUrl'),
-                                      content: Text(
-                                          (apiResulttx0?.statusCode ?? 200)
-                                              .toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
                                         ),
                                       ],
                                     );
@@ -421,26 +383,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         );
                                       },
                                     );
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('UpdateDriver'),
-                                          content: Text(getJsonField(
-                                            (apiResultUpdateDriver2?.jsonBody ??
-                                                ''),
-                                            r'''$.message''',
-                                          ).toString()),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                   }
                                 } else {
                                   await showDialog(
@@ -472,24 +414,6 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
                                           child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('GetDriverImageUrls'),
-                                      content: Text(
-                                          (apiResulttx1?.statusCode ?? 200)
-                                              .toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
                                         ),
                                       ],
                                     );

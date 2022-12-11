@@ -277,26 +277,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                         );
                                       },
                                     );
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Get Latest Call'),
-                                          content: Text(getJsonField(
-                                            (apiResultLatestCall?.jsonBody ??
-                                                ''),
-                                            r'''$.message''',
-                                          ).toString()),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                   }
                                 }
                               } else {
@@ -319,25 +299,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                   );
                                 },
                               );
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Update Driver'),
-                                    content: Text(getJsonField(
-                                      (apiResultUpdateDriver?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString()),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
                             }
                           } else {
                             if ((apiResultGetAccount?.statusCode ?? 200) ==
@@ -355,25 +316,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
                                         child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Get Settlement Account'),
-                                    content: Text(getJsonField(
-                                      (apiResultGetAccount?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString()),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
                                       ),
                                     ],
                                   );
@@ -417,25 +359,6 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
                                     child: Text('확인'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('SMS signin'),
-                                content: Text(getJsonField(
-                                  (apiResultf8v?.jsonBody ?? ''),
-                                  r'''$.message''',
-                                ).toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
                                   ),
                                 ],
                               );
