@@ -41,8 +41,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? licenseNumberController;
   TextEditingController? businessRegistrationNumberController;
   TextEditingController? taxiCompanyNameController;
-  bool? termsofUseValue;
-  bool? privacyPolicyValue;
+  bool? termsCheckboxValue;
+  bool? privacyCheckboxValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -413,24 +413,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           fontSize: 18,
                                         ),
                                     keyboardType: TextInputType.number,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return '앞 6자리를 정확히 입력해주세요';
-                                      }
-
-                                      if (val.length < 6) {
-                                        return '앞 6자리를 정확히 입력해주세요';
-                                      }
-                                      if (val.length > 6) {
-                                        return '앞 6자리를 정확히 입력해주세요';
-                                      }
-                                      if (!RegExp(
-                                              r"^\d{2}[0-1]\d{1}[0-3]\d{1}$")
-                                          .hasMatch(val)) {
-                                        return '앞 6자리를 정확히 입력해주세요';
-                                      }
-                                      return null;
-                                    },
                                   ),
                                 ),
                                 Expanded(
@@ -502,22 +484,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           fontSize: 18,
                                         ),
                                     keyboardType: TextInputType.number,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return '뒤 1자리를 정확히 입력해주세요';
-                                      }
-
-                                      if (val.length < 1) {
-                                        return '뒤 1자리를 정확히 입력해주세요';
-                                      }
-                                      if (val.length > 1) {
-                                        return '뒤 1자리를 정확히 입력해주세요';
-                                      }
-                                      if (!RegExp(r"[1-4]").hasMatch(val)) {
-                                        return '뒤 1자리를 정확히 입력해주세요';
-                                      }
-                                      return null;
-                                    },
                                   ),
                                 ),
                                 Expanded(
@@ -899,53 +865,119 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                            child: Theme(
-                              data: ThemeData(
-                                unselectedWidgetColor: Color(0xFF95A1AC),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              child: CheckboxListTile(
-                                value: termsofUseValue ??= true,
-                                onChanged: (newValue) async {
-                                  setState(() => termsofUseValue = newValue!);
-                                },
-                                title: Text(
-                                  '이용약관 동의 (필수)',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 5, 10, 5),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        context.pushNamed('TermsOfService');
+                                      },
+                                      child: Text(
+                                        '이용약관 동의 (필수)',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      ),
+                                    ),
+                                    Theme(
+                                      data: ThemeData(
+                                        checkboxTheme: CheckboxThemeData(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                          ),
+                                        ),
+                                        unselectedWidgetColor:
+                                            Color(0xFFF5F5F5),
+                                      ),
+                                      child: Checkbox(
+                                        value: termsCheckboxValue ??= true,
+                                        onChanged: (newValue) async {
+                                          setState(() =>
+                                              termsCheckboxValue = newValue!);
+                                        },
+                                        activeColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                tileColor: Color(0xFFF5F5F5),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                dense: false,
-                                controlAffinity:
-                                    ListTileControlAffinity.trailing,
                               ),
                             ),
                           ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                            child: Theme(
-                              data: ThemeData(
-                                unselectedWidgetColor: Color(0xFF95A1AC),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              child: CheckboxListTile(
-                                value: privacyPolicyValue ??= true,
-                                onChanged: (newValue) async {
-                                  setState(
-                                      () => privacyPolicyValue = newValue!);
-                                },
-                                title: Text(
-                                  '개인정보처리방침 동의 (필수)',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                tileColor: Color(0xFFF5F5F5),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                dense: false,
-                                controlAffinity:
-                                    ListTileControlAffinity.trailing,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 5, 10, 5),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        context.pushNamed('PrivacyPolicy');
+                                      },
+                                      child: Text(
+                                        '개인정보처리방침 동의 (필수)',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      ),
+                                    ),
+                                    Theme(
+                                      data: ThemeData(
+                                        checkboxTheme: CheckboxThemeData(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                          ),
+                                        ),
+                                        unselectedWidgetColor:
+                                            Color(0xFFF5F5F5),
+                                      ),
+                                      child: Checkbox(
+                                        value: privacyCheckboxValue ??= true,
+                                        onChanged: (newValue) async {
+                                          setState(() =>
+                                              privacyCheckboxValue = newValue!);
+                                        },
+                                        activeColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -984,8 +1016,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                         return;
                       }
 
-                      if (termsofUseValue!) {
-                        if (privacyPolicyValue!) {
+                      if (termsCheckboxValue!) {
+                        if (privacyCheckboxValue!) {
                           getFcmTokenResult = await actions.getFcmToken();
                           appVersion = await actions.getAppVersion();
                           osType = await actions.getPlatformCode();

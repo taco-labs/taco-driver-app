@@ -84,54 +84,52 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.circle,
                             ),
-                            child: Stack(
-                              children: [
-                                if (FFAppState()
-                                            .driverProfileImageDownloadUrl ==
-                                        null ||
-                                    FFAppState()
-                                            .driverProfileImageDownloadUrl ==
-                                        '')
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        2, 2, 2, 2),
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/Portrait_Placeholder.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                if (FFAppState()
-                                            .driverProfileImageDownloadUrl !=
-                                        null &&
-                                    FFAppState()
-                                            .driverProfileImageDownloadUrl !=
-                                        '')
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        2, 2, 2, 2),
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        FFAppState()
-                                            .driverProfileImageDownloadUrl,
-                                        fit: BoxFit.cover,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 1,
+                              child: Stack(
+                                children: [
+                                  if (profileUploadSucceeded == null)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          2, 2, 2, 2),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.width,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/Portrait_Placeholder.png',
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                              ],
+                                  if (profileUploadSucceeded != null)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          2, 2, 2, 2),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.width,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          FFAppState()
+                                              .driverProfileImageDownloadUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -312,37 +310,38 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Container(
+                            width: 240,
+                            height: 150,
                             decoration: BoxDecoration(
                               color: Color(0xFFDBE2E7),
                               shape: BoxShape.rectangle,
                             ),
-                            child: Stack(
-                              children: [
-                                if (FFAppState()
-                                            .driverLicenseImageDownloadUrl ==
-                                        null ||
-                                    FFAppState()
-                                            .driverLicenseImageDownloadUrl ==
-                                        '')
-                                  Image.asset(
-                                    'assets/images/Square_Placeholder.png',
-                                    width: 240,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                                if (FFAppState()
-                                            .driverLicenseImageDownloadUrl !=
-                                        null &&
-                                    FFAppState()
-                                            .driverLicenseImageDownloadUrl !=
-                                        '')
-                                  Image.network(
-                                    FFAppState().driverLicenseImageDownloadUrl,
-                                    width: 240,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                              ],
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 1,
+                              child: Stack(
+                                children: [
+                                  if (licenseUploadSucceeded == null)
+                                    Image.asset(
+                                      'assets/images/Square_Placeholder.png',
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              1,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  if (licenseUploadSucceeded != null)
+                                    Image.network(
+                                      FFAppState()
+                                          .driverLicenseImageDownloadUrl,
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              1,
+                                      fit: BoxFit.cover,
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
