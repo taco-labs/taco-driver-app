@@ -728,7 +728,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 5, 0),
                                     child: Text(
-                                      '예상 운임',
+                                      '예상운임 ${FFAppState().callBasePrice.toString()}원',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -741,11 +741,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      FFAppState().callBasePrice.toString(),
+                                  if (FFAppState().callAdditionalPrice > 0)
+                                    Text(
+                                      '타코 ${FFAppState().callAdditionalPrice.toString()}개',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -757,37 +755,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '타코',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Text(
-                                    FFAppState().callAdditionalPrice.toString(),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -1952,20 +1919,38 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 5, 0),
-                                      child: Text(
-                                        '적립 타코',
+                            if (FFAppState().callAdditionalPrice > 0)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 10, 0, 10),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 5, 0),
+                                        child: Text(
+                                          '적립 타코',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ),
+                                      Text(
+                                        FFAppState()
+                                            .callAdditionalPrice
+                                            .toString(),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .title1
@@ -1978,26 +1963,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
-                                    ),
-                                    Text(
-                                      FFAppState()
-                                          .callAdditionalPrice
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
