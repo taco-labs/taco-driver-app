@@ -35,7 +35,7 @@ class LocalNotification {
 
   static initialize() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('drawable/ic_notification');
+        const AndroidInitializationSettings('mipmap/ic_launcher');
 
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
