@@ -31,11 +31,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
       isInstalled = await actions.isKakaoNaviInstalled();
-      if (isInstalled!) {
-        if (FFAppState().driverIsOnDuty) {
-          await actions.startLocationService();
-        }
-      } else {
+      if (!isInstalled!) {
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
@@ -51,6 +47,9 @@ class _HomeWidgetState extends State<HomeWidget> {
           },
         );
         await actions.installKakaoNavi();
+      }
+      if (FFAppState().driverIsOnDuty) {
+        await actions.startLocationService();
       }
     });
 
