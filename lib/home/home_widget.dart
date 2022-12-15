@@ -19,7 +19,6 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResultd22;
   ApiCallResponse? apiResultqz6;
-  ApiCallResponse? apiResulttx8;
   String? appVersion;
   bool? isInstalled;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -92,40 +91,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                apiResulttx8 = await DriverInfoGroup.getDriverCall.call(
-                  apiToken: FFAppState().apiToken,
-                  driverId: FFAppState().driverId,
-                  apiEndpointTarget: FFAppState().apiEndpointTarget,
-                );
-                if ((apiResulttx8?.succeeded ?? true)) {
-                  context.pushNamed(
-                    'DriverProfile',
-                    queryParams: {
-                      'driverInfo': serializeParam(
-                        (apiResulttx8?.jsonBody ?? ''),
-                        ParamType.JSON,
-                      ),
-                    }.withoutNulls,
-                  );
-                } else {
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('오류'),
-                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('확인'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-
-                setState(() {});
+                context.pushNamed('DriverProfile');
               },
               child: ListTile(
                 title: Text(
