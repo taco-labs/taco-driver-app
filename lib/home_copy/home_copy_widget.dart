@@ -471,29 +471,32 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     ),
                                   ),
                                 ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FFAppState().callUserTag,
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ],
+                                if (FFAppState().callUserTag != null &&
+                                    FFAppState().callUserTag != '')
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFAppState().callUserTag,
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 5, 0, 0),
@@ -509,7 +512,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 5, 0),
                                           child: Text(
-                                            '출발지까지',
+                                            '출발지까지 약',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1
@@ -546,57 +549,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
-                                          child: Text(
-                                            '/',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                        Text(
-                                          functions
-                                              .toHumanFreindlyEtaFromNanoseconds(
-                                                  FFAppState()
-                                                      .callToDepartureEtaNanoSec
-                                                      .toString()),
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 5, 0, 0),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -972,8 +924,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             );
                                             if ((apiResultj1q?.succeeded ??
                                                 true)) {
-                                              await actions.setCallState(
-                                                'DRIVER_TO_DEPARTURE',
+                                              await actions
+                                                  .fromGetLatestCallApiResponse(
+                                                (apiResultj1q?.jsonBody ?? ''),
                                               );
                                             } else {
                                               setState(() {
@@ -1426,29 +1379,32 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     ),
                                   ),
                                 ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FFAppState().callUserTag,
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ],
+                                if (FFAppState().callUserTag != null &&
+                                    FFAppState().callUserTag != '')
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFAppState().callUserTag,
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 10, 0, 0),
@@ -1711,7 +1667,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           },
                                           text: '목적지 길안내',
                                           options: FFButtonOptions(
-                                            width: 150,
+                                            width: 130,
                                             height: 50,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
@@ -1782,29 +1738,32 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     ),
                                   ),
                                 ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FFAppState().callUserTag,
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ],
+                                if (FFAppState().callUserTag != null &&
+                                    FFAppState().callUserTag != '')
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFAppState().callUserTag,
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 10, 0, 0),
@@ -2026,7 +1985,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 5, 0),
                                               child: Text(
-                                                '적립 타코',
+                                                '적립 타코 ${FFAppState().callAdditionalPrice.toString()}개',
                                                 textAlign: TextAlign.center,
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -2043,9 +2002,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               ),
                                             ),
                                             Text(
-                                              FFAppState()
-                                                  .callAdditionalPrice
-                                                  .toString(),
+                                              '(추천인 추가 적립 ${FFAppState().driverAdditionalRewardPrice.toString()}개)',
                                               textAlign: TextAlign.center,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -2180,7 +2137,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     0, 5, 0, 10),
                                             child: TextFormField(
                                               controller: tollFareController,
-                                              autofocus: true,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: '통행료',

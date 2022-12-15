@@ -607,6 +607,22 @@ class FFAppState extends ChangeNotifier {
 
     _callTicketAttempt = _value;
   }
+
+  String _driverReferralCode = '';
+  String get driverReferralCode => _driverReferralCode;
+  set driverReferralCode(String _value) {
+    notifyListeners();
+
+    _driverReferralCode = _value;
+  }
+
+  int _driverAdditionalRewardPrice = 0;
+  int get driverAdditionalRewardPrice => _driverAdditionalRewardPrice;
+  set driverAdditionalRewardPrice(int _value) {
+    notifyListeners();
+
+    _driverAdditionalRewardPrice = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

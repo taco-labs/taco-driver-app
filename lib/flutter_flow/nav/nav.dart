@@ -117,9 +117,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'DriverProfile',
               path: 'driverProfile',
-              builder: (context, params) => DriverProfileWidget(
-                driverInfo: params.getParam('driverInfo', ParamType.JSON),
-              ),
+              builder: (context, params) => DriverProfileWidget(),
             ),
             FFRoute(
               name: 'Setting',

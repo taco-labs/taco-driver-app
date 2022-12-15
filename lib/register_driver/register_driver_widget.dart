@@ -34,6 +34,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   String? radioButtonValue;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
+
+  late bool genderCodeVisibility;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? phoneNumberController;
@@ -51,6 +53,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     super.initState();
     birthDateController = TextEditingController();
     genderCodeController = TextEditingController();
+    genderCodeVisibility = false;
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
     phoneNumberController = TextEditingController(text: widget.phoneNumber);
@@ -358,7 +361,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     controller: birthDateController,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: '주민등록번호',
+                                      labelText: '주민번호 앞자리',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
@@ -413,6 +416,24 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           fontSize: 18,
                                         ),
                                     keyboardType: TextInputType.number,
+                                    validator: (val) {
+                                      if (val == null || val.isEmpty) {
+                                        return '주민번호 앞자리를 정확히 입력해주세요';
+                                      }
+
+                                      if (val.length < 6) {
+                                        return '주민번호 앞자리를 정확히 입력해주세요';
+                                      }
+                                      if (val.length > 6) {
+                                        return '주민번호 앞자리를 정확히 입력해주세요';
+                                      }
+                                      if (!RegExp(
+                                              r"^\d{2}[0-1]\d{1}[0-3]\d{1}$")
+                                          .hasMatch(val)) {
+                                        return '주민번호 앞자리를 정확히 입력해주세요';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                                 Expanded(
@@ -425,15 +446,18 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 1,
+                                  flex: 5,
                                   child: TextFormField(
                                     controller: genderCodeController,
-                                    obscureText: false,
+                                    obscureText: !genderCodeVisibility,
                                     decoration: InputDecoration(
+                                      labelText: '주민번호 뒷자리',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Poppins',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
                                             fontSize: 18,
                                           ),
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -476,6 +500,21 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               10, 24, 10, 24),
+                                      suffixIcon: InkWell(
+                                        onTap: () => setState(
+                                          () => genderCodeVisibility =
+                                              !genderCodeVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          genderCodeVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          color: Color(0xFF757575),
+                                          size: 20,
+                                        ),
+                                      ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -484,19 +523,23 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           fontSize: 18,
                                         ),
                                     keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 4,
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 0, 0),
-                                    child: Text(
-                                      '* * * * * *',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
+                                    validator: (val) {
+                                      if (val == null || val.isEmpty) {
+                                        return '주민번호 뒷자리를 정확히 입력해주세요';
+                                      }
+
+                                      if (val.length < 7) {
+                                        return '주민번호 뒷자리를 정확히 입력해주세요';
+                                      }
+                                      if (val.length > 7) {
+                                        return '주민번호 뒷자리를 정확히 입력해주세요';
+                                      }
+                                      if (!RegExp(r"[1-4]\d{6}")
+                                          .hasMatch(val)) {
+                                        return '주민번호 뒷자리를 정확히 입력해주세요';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ],
@@ -1025,7 +1068,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             firstName: firstNameController!.text,
                             lastName: lastNameController!.text,
                             birthday: birthDateController!.text,
-                            gender: genderCodeController!.text,
+                            gender: functions
+                                .getGenderCode(genderCodeController!.text),
                             phone: phoneNumberController!.text,
                             appOs: osType,
                             appVersion: appVersion,
@@ -1040,6 +1084,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             serviceRegion: dropDownValue,
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                             companyName: taxiCompanyNameController!.text,
+                            residentRegistrationNumber:
+                                '${birthDateController!.text}${genderCodeController!.text}',
                           );
                           if ((apiResultbos?.succeeded ?? true)) {
                             await actions.fromDriverSignApiResponse(

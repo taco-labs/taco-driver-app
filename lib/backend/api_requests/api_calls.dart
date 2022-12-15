@@ -483,6 +483,10 @@ class GetDriverCall {
         response,
         r'''$.serviceRegion''',
       );
+  dynamic referralCode(dynamic response) => getJsonField(
+        response,
+        r'''$.referralCode''',
+      );
 }
 
 class UpdateDriverCall {
@@ -1558,6 +1562,10 @@ class AcceptTaxiCallTicketCall {
   dynamic callCurrentState(dynamic response) => getJsonField(
         response,
         r'''$.currentState''',
+      );
+  dynamic driverAdditionalRewardPrice(dynamic response) => getJsonField(
+        response,
+        r'''$.driverAdditionalRewardPrice''',
       );
 }
 

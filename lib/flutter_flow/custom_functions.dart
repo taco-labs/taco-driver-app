@@ -289,3 +289,7 @@ String toHumanFreindlyCallState(String callState) {
 String getEmptyString() {
   return '';
 }
+
+String getGenderCode(String input) {
+  return input.characters.first;
+}

@@ -7,12 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class DriverProfileWidget extends StatefulWidget {
-  const DriverProfileWidget({
-    Key? key,
-    this.driverInfo,
-  }) : super(key: key);
-
-  final dynamic driverInfo;
+  const DriverProfileWidget({Key? key}) : super(key: key);
 
   @override
   _DriverProfileWidgetState createState() => _DriverProfileWidgetState();
@@ -23,38 +18,26 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
-  TextEditingController? phoneNumberController;
+  TextEditingController? phoneNumberController1;
+  TextEditingController? phoneNumberController2;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    birthDateController = TextEditingController(
-        text: getJsonField(
-      widget.driverInfo,
-      r'''$.birthday''',
-    ).toString());
-    genderCodeController = TextEditingController(
-        text: getJsonField(
-      widget.driverInfo,
-      r'''$.gender''',
-    ).toString());
-    firstNameController = TextEditingController(
-        text: getJsonField(
-      widget.driverInfo,
-      r'''$.firstName''',
-    ).toString());
-    lastNameController = TextEditingController(
-        text: getJsonField(
-      widget.driverInfo,
-      r'''$.lastName''',
-    ).toString());
-    phoneNumberController = TextEditingController(
-        text: getJsonField(
-      widget.driverInfo,
-      r'''$.phone''',
-    ).toString());
+    birthDateController =
+        TextEditingController(text: FFAppState().driverBirthday);
+    genderCodeController =
+        TextEditingController(text: FFAppState().driverGenderCode);
+    firstNameController =
+        TextEditingController(text: FFAppState().driverFirstName);
+    lastNameController =
+        TextEditingController(text: FFAppState().driverLastName);
+    phoneNumberController1 =
+        TextEditingController(text: FFAppState().driverPhoneNumber);
+    phoneNumberController2 =
+        TextEditingController(text: FFAppState().driverReferralCode);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -64,7 +47,8 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
     genderCodeController?.dispose();
     firstNameController?.dispose();
     lastNameController?.dispose();
-    phoneNumberController?.dispose();
+    phoneNumberController1?.dispose();
+    phoneNumberController2?.dispose();
     super.dispose();
   }
 
@@ -127,13 +111,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                       shape: BoxShape.circle,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: valueOrDefault<String>(
-                        getJsonField(
-                          widget.driverInfo,
-                          r'''$.downloadUrls.profileImage''',
-                        ),
-                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/workout-web-app-manager-m1j9am/assets/v2bacnnrcrpc/addAvatarImage@2x.png',
-                      ),
+                      imageUrl: FFAppState().driverProfileImageDownloadUrl,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -268,7 +246,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                       child: TextFormField(
-                        controller: phoneNumberController,
+                        controller: phoneNumberController1,
                         readOnly: true,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -459,6 +437,55 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
+                      child: TextFormField(
+                        controller: phoneNumberController2,
+                        readOnly: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: '추천인코드',
+                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          filled: true,
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          contentPadding:
+                              EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                     ),
                   ],
