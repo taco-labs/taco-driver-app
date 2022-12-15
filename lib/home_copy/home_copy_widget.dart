@@ -843,6 +843,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   .fromGetLatestCallApiResponse(
                                                 (apiResultj1q?.jsonBody ?? ''),
                                               );
+                                              await actions.setCallState(
+                                                'DRIVER_TO_DEPARTURE',
+                                              );
                                             } else {
                                               setState(() {
                                                 FFAppState().errCode =
