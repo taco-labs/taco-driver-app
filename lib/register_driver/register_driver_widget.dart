@@ -499,7 +499,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           .secondaryBackground,
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
-                                              10, 24, 10, 24),
+                                              20, 24, 20, 24),
                                       suffixIcon: InkWell(
                                         onTap: () => setState(
                                           () => genderCodeVisibility =
@@ -549,6 +549,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                             child: FlutterFlowRadioButton(
                               options: ['개인 택시', '법인 택시'].toList(),
+                              initialValue: '개인 택시',
                               onChanged: (val) =>
                                   setState(() => radioButtonValue = val),
                               optionHeight: 30,
