@@ -19,6 +19,8 @@ import '../../flutter_flow/custom_functions.dart'
 import 'package:url_launcher/url_launcher.dart';
 import '../../flutter_flow/permissions_util.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:isolate';
+import 'dart:ui';
 
 const String NotificationCategory_Taxicall = "Taxicall";
 const String NotificationCategory_Payment = "Payment";
@@ -26,6 +28,21 @@ const String NotificationCategory_Driver = "Driver";
 
 const String TaxiCallStateRequested = "TAXI_CALL_REQUESTED";
 const String TaxiCallStateUserCancelled = "USER_CANCELLED";
+
+const FOREGROUND_ISOLATE_PORT_NAME = 'foreground_port';
+@pragma('vm:entry-point')
+Future<void> _fcmMessageHandlerBackground(RemoteMessage message) async {
+  debugPrint(
+      "_fcmMessageHandlerBackground received ${message.data.toString()}");
+  final foreground =
+      IsolateNameServer.lookupPortByName(FOREGROUND_ISOLATE_PORT_NAME);
+  if (foreground != null) {
+    foreground.send(message);
+  } else {
+    // ... handle message in background ...
+    debugPrint('foreground is null');
+  }
+}
 
 class LocalNotification {
   LocalNotification._();
@@ -85,6 +102,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  ReceivePort? _foregroundReceivePort;
+  StreamSubscription<RemoteMessage>? _foregroundMessageSubscription;
+
   Future setupInteractedMessage() async {
     // Get any messages which caused the application to open from
     // a terminated state.
@@ -99,15 +119,31 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
+    //FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
 
     // foreground handler
-    FirebaseMessaging.onMessage.listen(_handleMessage);
+    _foregroundMessageSubscription =
+        FirebaseMessaging.onMessage.listen(_handleMessage);
+
+    FirebaseMessaging.onBackgroundMessage(_fcmMessageHandlerBackground);
+
+    _foregroundReceivePort = ReceivePort();
+    if (!(IsolateNameServer.registerPortWithName(
+      _foregroundReceivePort!.sendPort,
+      FOREGROUND_ISOLATE_PORT_NAME,
+    ))) {
+      print('registerPortWithName failed in call manager');
+    }
+    _foregroundReceivePort!.listen(_handleBackgroundMessage);
+  }
+
+  void cleanupInteractedMessage() {
+    _foregroundMessageSubscription?.cancel();
   }
 
   void _handleMessage(RemoteMessage message) async {
     dynamic data = message.data;
-    debugPrint('FG Data received ${data.toString()}');
+    debugPrint('Message received in foreground  ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -147,7 +183,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
   void _handleInitialMessage(RemoteMessage message) async {
     dynamic data = message.data;
-    debugPrint('Initial Data received ${data.toString()}');
+    debugPrint('Initial data received ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -202,9 +238,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
   }
 
-  void _handleBackgroundMessage(RemoteMessage message) async {
+  void _handleBackgroundMessage(dynamic message) async {
+    if (message is! RemoteMessage) {
+      print('got wrong data type for handling in foreground');
+      return;
+    }
+
     dynamic data = message.data;
-    debugPrint('BG Data received ${data.toString()}');
+    debugPrint('Data received in background ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -214,41 +255,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         break;
       case NotificationCategory_Taxicall:
         if (data['taxiCallState'] == TaxiCallStateRequested) {
-          if (FFAppState().driverIsOnDuty) {
-            apiResultyb9 = await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
-              apiToken: FFAppState().apiToken,
-              driverId: FFAppState().driverId,
-              apiEndpointTarget: FFAppState().apiEndpointTarget,
-            );
-            if ((apiResultyb9?.succeeded ?? true)) {
-              setState(() {
-                actions.fromGetLatestCallTicketlApiResponse(
-                  (apiResultyb9?.jsonBody ?? ''),
-                );
-                actions.setCallState('TAXI_CALL_REQUESTED');
-              });
-            } else {
-              setState(() {
-                actions.setCallState('TAXI_CALL_WAITING');
-              });
-            }
-          }
+          setState(() {
+            actions.fromCallRequestedMessagePayload(data);
+            actions.setCallState('TAXI_CALL_REQUESTED');
+          });
         } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text('승객의 요청으로 배차가 취소되었습니다'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            },
-          );
-
           setState(() {
             actions.setCallState('TAXI_CALL_WAITING');
           });
@@ -261,6 +272,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   void initState() {
     super.initState();
 
+    IsolateNameServer.removePortNameMapping(FOREGROUND_ISOLATE_PORT_NAME);
     setupInteractedMessage();
     LocalNotification.initialize();
 
@@ -273,6 +285,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
   @override
   void dispose() {
+    cleanupInteractedMessage();
     taxiFareController?.dispose();
     tollFareController?.dispose();
     super.dispose();
@@ -487,139 +500,62 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '승객요청사항',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Text(
-                                    FFAppState().callTagsConcat,
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  FFAppState().callUserTag,
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .title1
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                          if (FFAppState().callTagsConcat != null &&
+                              FFAppState().callTagsConcat != '')
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Text(
+                                        '승객요청사항',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                       ),
+                                    ),
+                                    Text(
+                                      FFAppState().callTagsConcat,
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                            child: SingleChildScrollView(
+                          if (FFAppState().callUserTag != null &&
+                              FFAppState().callUserTag != '')
+                            SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '출발지까지',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      functions
-                                          .toHumanFriendlyDistanceFromMeters(
-                                              FFAppState()
-                                                  .callToDepartureDistance
-                                                  .toString()),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '/',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
                                   Text(
-                                    functions.toHumanFreindlyEtaFromNanoseconds(
-                                        FFAppState()
-                                            .callToDepartureEtaNanoSec
-                                            .toString()),
+                                    FFAppState().callUserTag,
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -634,7 +570,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 ],
                               ),
                             ),
-                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                             child: SingleChildScrollView(
@@ -647,45 +582,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 5, 0),
                                     child: Text(
-                                      '목적지까지',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      functions
-                                          .toHumanFriendlyDistanceFromMeters(
-                                              FFAppState()
-                                                  .callToArrivalDistance
-                                                  .toString()),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '/',
+                                      '출발지 약 ${functions.toHumanFriendlyDistanceFromMeters(FFAppState().callToDepartureDistance.toString())}',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -699,10 +596,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     ),
                                   ),
                                   Text(
-                                    functions.toHumanFreindlyEtaFromNanoseconds(
-                                        FFAppState()
-                                            .callToArrivalEtaNanoSec
-                                            .toString()),
+                                    '목적지 ${functions.toHumanFriendlyDistanceFromMeters(FFAppState().callToArrivalDistance.toString())} / ${functions.toHumanFreindlyEtaFromNanoseconds(FFAppState().callToArrivalEtaNanoSec.toString())}',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -978,6 +872,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             FFAppState().apiEndpointTarget,
                                       );
                                       if ((apiResultj1q?.succeeded ?? true)) {
+                                        await actions
+                                            .fromGetLatestCallApiResponse(
+                                          (apiResultj1q?.jsonBody ?? ''),
+                                        );
                                         await actions.setCallState(
                                           'DRIVER_TO_DEPARTURE',
                                         );
@@ -1348,20 +1246,37 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '요청내역',
+                          if (FFAppState().callTagsConcat != null &&
+                              FFAppState().callTagsConcat != '')
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Text(
+                                        '승객요청사항',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ),
+                                    Text(
+                                      FFAppState().callTagsConcat,
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -1373,9 +1288,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          if (FFAppState().callUserTag != null &&
+                              FFAppState().callUserTag != '')
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   Text(
-                                    FFAppState().callTagsConcat,
+                                    FFAppState().callUserTag,
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1390,29 +1316,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 ],
                               ),
                             ),
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  FFAppState().callUserTag,
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .title1
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
@@ -1650,7 +1553,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     },
                                     text: '목적지 길안내',
                                     options: FFButtonOptions(
-                                      width: 150,
+                                      width: 130,
                                       height: 50,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
@@ -1672,20 +1575,37 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '요청내역',
+                          if (FFAppState().callTagsConcat != null &&
+                              FFAppState().callTagsConcat != '')
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Text(
+                                        '승객요청사항',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ),
+                                    Text(
+                                      FFAppState().callTagsConcat,
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
@@ -1697,9 +1617,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          if (FFAppState().callUserTag != null &&
+                              FFAppState().callUserTag != '')
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   Text(
-                                    FFAppState().callTagsConcat,
+                                    FFAppState().callUserTag,
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
@@ -1714,29 +1645,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 ],
                               ),
                             ),
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  FFAppState().callUserTag,
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .title1
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
@@ -1935,7 +1843,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 5, 0),
                                         child: Text(
-                                          '적립 타코',
+                                          '적립 타코 ${FFAppState().callAdditionalPrice.toString()}개',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
@@ -1949,22 +1857,23 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               ),
                                         ),
                                       ),
-                                      Text(
-                                        FFAppState()
-                                            .callAdditionalPrice
-                                            .toString(),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
+                                      if (FFAppState()
+                                              .driverAdditionalRewardPrice >
+                                          0)
+                                        Text(
+                                          '(추천인 추가 적립 ${FFAppState().driverAdditionalRewardPrice.toString()}개)',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -2067,7 +1976,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           0, 5, 0, 10),
                                       child: TextFormField(
                                         controller: tollFareController,
-                                        autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '통행료',

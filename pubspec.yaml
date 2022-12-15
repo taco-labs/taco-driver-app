@@ -68,7 +68,7 @@ dependencies:
   stop_watch_timer: 1.5.0
   styled_divider: 1.0.4
   timeago: 3.2.2
-  url_launcher: 6.1.5
+  url_launcher: ^6.1.5
   webviewx: 0.2.1
 
 
