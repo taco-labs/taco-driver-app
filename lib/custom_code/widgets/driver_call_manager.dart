@@ -177,24 +177,26 @@ class _DriverCallManagerState extends State<DriverCallManager> {
             }
           }
         } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text('승객의 요청으로 배차가 취소되었습니다'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            },
-          );
+          if (FFAppState().isOnDrivingToDeparture) {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: Text('확인'),
+                    ),
+                  ],
+                );
+              },
+            );
 
-          setState(() {
-            actions.setCallState('TAXI_CALL_WAITING');
-          });
+            setState(() {
+              actions.setCallState('TAXI_CALL_WAITING');
+            });
+          }
         }
         break;
     }
