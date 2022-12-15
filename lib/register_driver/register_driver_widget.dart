@@ -549,7 +549,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                             child: FlutterFlowRadioButton(
                               options: ['개인 택시', '법인 택시'].toList(),
-                              initialValue: '개인 택시',
                               onChanged: (val) =>
                                   setState(() => radioButtonValue = val),
                               optionHeight: 30,
@@ -758,7 +757,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                           ),
                           Stack(
                             children: [
-                              if (radioButtonValue != '법인 택시')
+                              if (radioButtonValue == '개인 택시')
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       20, 0, 20, 10),
@@ -1039,7 +1038,25 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                           !formKey.currentState!.validate()) {
                         return;
                       }
-
+                      if (radioButtonValue == null) {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('오류'),
+                              content: Text('개인 또는 법인 택시를 선택해주세요'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('확인'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return;
+                      }
                       if (dropDownValue == null) {
                         await showDialog(
                           context: context,
