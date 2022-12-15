@@ -89,7 +89,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               height: MediaQuery.of(context).size.height * 1,
                               child: Stack(
                                 children: [
-                                  if (!profileUploadSucceeded!)
+                                  if (profileUploadSucceeded == null)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           2, 2, 2, 2),
@@ -283,7 +283,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                               height: MediaQuery.of(context).size.height * 1,
                               child: Stack(
                                 children: [
-                                  if (!licenseUploadSucceeded!)
+                                  if (licenseUploadSucceeded == null)
                                     Image.asset(
                                       'assets/images/Square_Placeholder.png',
                                       width: MediaQuery.of(context).size.width,
@@ -292,7 +292,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                               1,
                                       fit: BoxFit.cover,
                                     ),
-                                  if (licenseUploadSucceeded ?? true)
+                                  if (licenseUploadSucceeded != null)
                                     Image.network(
                                       FFAppState()
                                           .driverLicenseImageDownloadUrl,
