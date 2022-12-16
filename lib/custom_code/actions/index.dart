@@ -19,4 +19,3 @@ export 'from_call_requested_message_payload.dart'
 export 'set_call_state.dart' show setCallState;
 export 'is_kakao_navi_installed.dart' show isKakaoNaviInstalled;
 export 'install_kakao_navi.dart' show installKakaoNavi;
-export 'is_location_permission_granted.dart' show isLocationPermissionGranted;
