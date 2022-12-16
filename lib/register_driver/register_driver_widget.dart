@@ -1109,7 +1109,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             await actions.fromDriverSignApiResponse(
                               (apiResultbos?.jsonBody ?? ''),
                             );
-                            await requestPermission(locationPermission);
                             await requestPermission(notificationsPermission);
                             await requestPermission(photoLibraryPermission);
 
