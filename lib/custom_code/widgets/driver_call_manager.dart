@@ -89,6 +89,7 @@ class DriverCallManager extends StatefulWidget {
 
 class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResult438;
+  ApiCallResponse? apiResult439;
   ApiCallResponse? apiResultkg1;
   ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
@@ -2180,39 +2181,137 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     alignment: AlignmentDirectional(0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        await requestPermission(locationPermission);
-                        apiResult438 =
-                            await DriverInfoGroup.updateOnDutyCall.call(
-                          apiToken: FFAppState().apiToken,
-                          driverId: FFAppState().driverId,
-                          onDuty: true,
-                          apiEndpointTarget: FFAppState().apiEndpointTarget,
-                        );
-                        if ((apiResult438?.succeeded ?? true)) {
-                          setState(() {
-                            FFAppState().driverIsOnDuty = true;
-                          });
-                          await actions.setCallState(
-                            'TAXI_CALL_WAITING',
+                        if (await getPermissionStatus(locationPermission)) {
+                          apiResult438 =
+                              await DriverInfoGroup.updateOnDutyCall.call(
+                            apiToken: FFAppState().apiToken,
+                            driverId: FFAppState().driverId,
+                            onDuty: true,
+                            apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
-                          await actions.startLocationService();
+                          if ((apiResult438?.succeeded ?? true)) {
+                            setState(() {
+                              FFAppState().driverIsOnDuty = true;
+                            });
+                            await actions.setCallState(
+                              'TAXI_CALL_WAITING',
+                            );
+                            await actions.startLocationService();
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('오류'),
+                                  content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('확인'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('오류'),
-                                content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('확인'),
-                                  ),
-                                ],
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('위치 정보 사용'),
+                                    content: Text(
+                                        '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('거부'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('승인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            await requestPermission(locationPermission);
+                            if (await getPermissionStatus(locationPermission)) {
+                              apiResult439 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: true,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
-                            },
-                          );
+                              if ((apiResult439?.succeeded ?? true)) {
+                                setState(() {
+                                  FFAppState().driverIsOnDuty = true;
+                                });
+                                await actions.setCallState(
+                                  'TAXI_CALL_WAITING',
+                                );
+                                await actions.startLocationService();
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    content: Text(
+                                        '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  content: Text(
+                                      '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('확인'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         }
 
                         setState(() {});

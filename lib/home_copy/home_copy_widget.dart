@@ -2333,7 +2333,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             return AlertDialog(
                                               title: Text('위치 정보 사용'),
                                               content: Text(
-                                                  '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다.\''),
+                                                  '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
