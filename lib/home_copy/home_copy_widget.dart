@@ -436,26 +436,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 5, 0),
-                                            child: Text(
-                                              '승객요청사항',
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                          ),
                                           Text(
                                             FFAppState().callTagsConcat,
                                             textAlign: TextAlign.center,
@@ -1217,26 +1197,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 5, 0),
-                                            child: Text(
-                                              '승객요청사항',
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                          ),
                                           Text(
                                             FFAppState().callTagsConcat,
                                             textAlign: TextAlign.center,
@@ -1541,10 +1501,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               '목적지',
                                             );
                                           },
-                                          text: '목적지 길안내',
+                                          text: '길안내',
                                           options: FFButtonOptions(
                                             width: 130,
-                                            height: 50,
+                                            height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             textStyle:
@@ -1579,26 +1539,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 5, 0),
-                                            child: Text(
-                                              '승객요청사항',
-                                              textAlign: TextAlign.center,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title1
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                          ),
                                           Text(
                                             FFAppState().callTagsConcat,
                                             textAlign: TextAlign.center,
