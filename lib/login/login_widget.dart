@@ -87,7 +87,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                   child: Form(
                     key: formKey,
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.disabled,
                     child: TextFormField(
                       controller: phoneNumberController,
                       autofocus: true,
