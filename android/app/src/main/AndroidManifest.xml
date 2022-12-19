@@ -50,7 +50,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="taco" android:host="taco.com" />
+                <data android:scheme="tacodriver" android:host="tacodriver.com" />
             </intent-filter>
 
         </activity>

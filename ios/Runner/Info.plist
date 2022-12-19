@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Taco</string>
+	<string>TacoDriver</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>taco.com</string>
+        <string>tacodriver.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>taco</string>
+        <string>tacodriver</string>
         </array>
         </dict>
     </array>

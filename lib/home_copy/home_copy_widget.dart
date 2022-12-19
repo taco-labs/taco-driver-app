@@ -1503,7 +1503,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           },
                                           text: '길안내',
                                           options: FFButtonOptions(
-                                            width: 100,
+                                            width: 130,
                                             height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
