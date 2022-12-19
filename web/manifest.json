@@ -1,6 +1,6 @@
 {
-    "name": "Taco Driver",
-    "short_name": "Taco Driver",
+    "name": "Taco",
+    "short_name": "Taco",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
