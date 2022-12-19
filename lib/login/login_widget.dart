@@ -150,7 +150,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         if (val.length > 11) {
                           return '휴대폰 번호를 정확히 입력해주세요';
                         }
-                        if (!RegExp(r"01[016789][^0][0-9]{2,3}[0-9]{3,4}")
+                        if (!RegExp(r"01[016789][0-9]{3,4}[0-9]{4}")
                             .hasMatch(val)) {
                           return '휴대폰 번호를 정확히 입력해주세요';
                         }
