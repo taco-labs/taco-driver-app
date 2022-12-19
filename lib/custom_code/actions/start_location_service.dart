@@ -25,9 +25,15 @@ class LocationServiceRepository {
   }
 
   static const String isolateName = 'LocatorIsolate';
+  static String apiToken = '';
+  static String driverId = '';
+  static String apiEndpoint = '';
 
   Future<void> init(Map<dynamic, dynamic> params) async {
     debugPrint("***********Init callback handler");
+    apiToken = params['apiToken'];
+    apiEndpoint = params['apiEndpoint'];
+    driverId = params['driverId'];
   }
 
   Future<void> dispose() async {
@@ -38,11 +44,11 @@ class LocationServiceRepository {
     debugPrint('location in dart: ${locationDto.toString()}');
     ApiCallResponse? apiResult =
         await DriverInfoGroup.updateDriverLocationCall.call(
-      driverId: FFAppState().driverId,
-      apiToken: FFAppState().apiToken,
+      driverId: driverId,
+      apiToken: apiToken,
       latitude: locationDto.latitude,
       longitude: locationDto.longitude,
-      apiEndpointTarget: FFAppState().apiEndpointTarget,
+      apiEndpointTarget: apiEndpoint,
     );
 
     if (apiResult.succeeded == false) {
@@ -85,6 +91,11 @@ Future startLocationService() async {
   return await BackgroundLocator.registerLocationUpdate(
       LocationCallbackHandler.callback,
       initCallback: LocationCallbackHandler.initCallback,
+      initDataCallback: {
+        'apiToken': FFAppState().apiToken,
+        'apiEndpoint': FFAppState().apiEndpointTarget,
+        'driverId': FFAppState().driverId,
+      },
       disposeCallback: LocationCallbackHandler.disposeCallback,
       iosSettings: IOSSettings(
           accuracy: LocationAccuracy.NAVIGATION,
@@ -98,7 +109,7 @@ Future startLocationService() async {
           client: LocationClient.google,
           androidNotificationSettings: AndroidNotificationSettings(
               notificationChannelName: 'Location tracking',
-              notificationTitle: '타코 실행중',
+              notificationTitle: '타코 기사용',
               notificationMsg: '정확한 배차를 위해서 현위치를 사용합니다',
               notificationBigMsg: '',
               /*notificationBigMsg:

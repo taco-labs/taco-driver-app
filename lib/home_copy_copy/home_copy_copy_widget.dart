@@ -15,14 +15,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeCopyWidget extends StatefulWidget {
-  const HomeCopyWidget({Key? key}) : super(key: key);
+class HomeCopyCopyWidget extends StatefulWidget {
+  const HomeCopyCopyWidget({Key? key}) : super(key: key);
 
   @override
-  _HomeCopyWidgetState createState() => _HomeCopyWidgetState();
+  _HomeCopyCopyWidgetState createState() => _HomeCopyCopyWidgetState();
 }
 
-class _HomeCopyWidgetState extends State<HomeCopyWidget>
+class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget>
     with TickerProviderStateMixin {
   ApiCallResponse? apiResult438;
   ApiCallResponse? apiResult439;
@@ -502,7 +502,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 10, 0, 0),
+                                      0, 5, 0, 0),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
@@ -549,7 +549,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 10, 0, 0),
+                                      0, 5, 0, 0),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
@@ -557,6 +557,25 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            '예상운임 ${FFAppState().callBasePrice.toString()}원',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                        ),
                                         if (FFAppState().callAdditionalPrice >
                                             0)
                                           Text(
@@ -570,7 +589,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           context)
                                                       .primaryText,
                                                   fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                           ),
                                       ],
@@ -601,30 +620,43 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  2, 0, 0, 0),
-                                          child: Text(
-                                            FFAppState().callDepartureName !=
-                                                        null &&
-                                                    FFAppState()
-                                                            .callDepartureName !=
-                                                        ''
-                                                ? '${FFAppState().callDepartureName}'
-                                                : '',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                                        Text(
+                                          functions.toAddressNo(
+                                              FFAppState()
+                                                  .callDepartureAddressSubNo,
+                                              FFAppState()
+                                                  .callDepartureAddressMainNo),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFAppState().callDepartureName !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .callDepartureName !=
+                                                      ''
+                                              ? '(${FFAppState().callDepartureName})'
+                                              : '',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -659,30 +691,43 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  2, 0, 0, 0),
-                                          child: Text(
-                                            FFAppState().callArrivalName !=
-                                                        null &&
-                                                    FFAppState()
-                                                            .callArrivalName !=
-                                                        ''
-                                                ? '${FFAppState().callArrivalName}'
-                                                : '',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                                        Text(
+                                          functions.toAddressNo(
+                                              FFAppState()
+                                                  .callArrivalAddressSubNo,
+                                              FFAppState()
+                                                  .callArrivalAddressMainNo),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFAppState().callArrivalName !=
+                                                      null &&
+                                                  FFAppState()
+                                                          .callArrivalName !=
+                                                      ''
+                                              ? '(${FFAppState().callArrivalName})'
+                                              : '',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -2002,17 +2047,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 ),
                                             textAlign: TextAlign.center,
                                             keyboardType: TextInputType.number,
-                                            validator: (val) {
-                                              if (val == null || val.isEmpty) {
-                                                return '운임을 정확히 입력해주세요';
-                                              }
-
-                                              if (val.length < 1) {
-                                                return '운임을 정확히 입력해주세요';
-                                              }
-
-                                              return null;
-                                            },
                                           ),
                                           Padding(
                                             padding:
@@ -2114,18 +2148,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               textAlign: TextAlign.center,
                                               keyboardType:
                                                   TextInputType.number,
-                                              validator: (val) {
-                                                if (val == null ||
-                                                    val.isEmpty) {
-                                                  return '통행료를 정확히 입력해주세요';
-                                                }
-
-                                                if (val.length < 1) {
-                                                  return '통행료를 정확히 입력해주세요';
-                                                }
-
-                                                return null;
-                                              },
                                             ),
                                           ),
                                         ],

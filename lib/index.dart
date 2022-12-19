@@ -9,8 +9,8 @@ export 'register_installment/register_installment_widget.dart'
     show RegisterInstallmentWidget;
 export 'driver_profile/driver_profile_widget.dart' show DriverProfileWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
-export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export 'company_info/company_info_widget.dart' show CompanyInfoWidget;
+export 'home_copy/home_copy_widget.dart' show HomeCopyWidget;
 export 'policy/policy_widget.dart' show PolicyWidget;
 export 'terms_of_service/terms_of_service_widget.dart'
     show TermsOfServiceWidget;
@@ -21,3 +21,4 @@ export 'settlement_history/settlement_history_widget.dart'
 export 'support_chat/support_chat_widget.dart' show SupportChatWidget;
 export 'drive_history/drive_history_widget.dart' show DriveHistoryWidget;
 export 'setting_copy/setting_copy_widget.dart' show SettingCopyWidget;
+export 'home_copy_copy/home_copy_copy_widget.dart' show HomeCopyCopyWidget;
