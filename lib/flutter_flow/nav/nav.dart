@@ -130,14 +130,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'HomeCopy',
-              path: 'homeCopy',
-              builder: (context, params) => HomeCopyWidget(),
-            ),
-            FFRoute(
               name: 'CompanyInfo',
               path: 'companyInfo',
               builder: (context, params) => CompanyInfoWidget(),
+            ),
+            FFRoute(
+              name: 'HomeCopy',
+              path: 'homeCopy',
+              builder: (context, params) => HomeCopyWidget(),
             ),
             FFRoute(
               name: 'Policy',
@@ -187,6 +187,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SettingCopyWidget(
                 appVersion: params.getParam('appVersion', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'HomeCopyCopy',
+              path: 'homeCopyCopy',
+              builder: (context, params) => HomeCopyCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

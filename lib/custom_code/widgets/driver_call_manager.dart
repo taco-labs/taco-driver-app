@@ -572,7 +572,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               ),
                             ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -614,30 +615,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Text(
-                                      '예상운임 ${FFAppState().callBasePrice.toString()}원',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
                                   if (FFAppState().callAdditionalPrice > 0)
                                     Text(
                                       '타코 ${FFAppState().callAdditionalPrice.toString()}개',
@@ -649,7 +634,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             fontSize: 18,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                 ],
@@ -678,37 +663,26 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                   ),
-                                  Text(
-                                    functions.toAddressNo(
-                                        FFAppState().callDepartureAddressSubNo,
-                                        FFAppState()
-                                            .callDepartureAddressMainNo),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                  Text(
-                                    FFAppState().callDepartureName != null &&
-                                            FFAppState().callDepartureName != ''
-                                        ? '(${FFAppState().callDepartureName})'
-                                        : '',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        2, 0, 0, 0),
+                                    child: Text(
+                                      FFAppState().callDepartureName != null &&
+                                              FFAppState().callDepartureName !=
+                                                  ''
+                                          ? '${FFAppState().callDepartureName}'
+                                          : '',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -741,36 +715,25 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                   ),
-                                  Text(
-                                    functions.toAddressNo(
-                                        FFAppState().callArrivalAddressSubNo,
-                                        FFAppState().callArrivalAddressMainNo),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                  Text(
-                                    FFAppState().callArrivalName != null &&
-                                            FFAppState().callArrivalName != ''
-                                        ? '(${FFAppState().callArrivalName})'
-                                        : '',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        2, 0, 0, 0),
+                                    child: Text(
+                                      FFAppState().callArrivalName != null &&
+                                              FFAppState().callArrivalName != ''
+                                          ? '${FFAppState().callArrivalName}'
+                                          : '',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
                                   ),
                                 ],
                               ),
