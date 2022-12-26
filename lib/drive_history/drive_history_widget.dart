@@ -285,25 +285,38 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              functions
-                                                  .toHumanFreindlyCallState(
-                                                      getJsonField(
-                                                rideHistoriesItem,
-                                                r'''$.currentState''',
-                                              ).toString()),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                        fontSize: 14,
-                                                      ),
-                                            ),
+                                            if (functions
+                                                        .toHumanFreindlyCallState(
+                                                            getJsonField(
+                                                      rideHistoriesItem,
+                                                      r'''$.currentState''',
+                                                    ).toString()) !=
+                                                    null &&
+                                                functions
+                                                        .toHumanFreindlyCallState(
+                                                            getJsonField(
+                                                      rideHistoriesItem,
+                                                      r'''$.currentState''',
+                                                    ).toString()) !=
+                                                    '')
+                                              Text(
+                                                functions
+                                                    .toHumanFreindlyCallState(
+                                                        getJsonField(
+                                                  rideHistoriesItem,
+                                                  r'''$.currentState''',
+                                                ).toString()),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          fontSize: 14,
+                                                        ),
+                                              ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 10, 0, 0),
@@ -393,57 +406,14 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                '적립타코 ${getJsonField(
-                                                                  rideHistoriesItem,
-                                                                  r'''$.additionalPrice''',
-                                                                ).toString()}개',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      fontSize:
-                                                                          14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  if (functions
-                                                      .isCancelledCallRequest(
-                                                          getJsonField(
-                                                    rideHistoriesItem,
-                                                    r'''$.currentState''',
-                                                  ).toString()))
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 2),
-                                                          child:
-                                                              SingleChildScrollView(
+                                                        if (functions
+                                                                .toIntegerFromJson(
+                                                                    getJsonField(
+                                                              rideHistoriesItem,
+                                                              r'''$.additionalPrice''',
+                                                            )) >
+                                                            0)
+                                                          SingleChildScrollView(
                                                             scrollDirection:
                                                                 Axis.horizontal,
                                                             child: Row(
@@ -454,7 +424,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                 Text(
                                                                   '적립타코 ${getJsonField(
                                                                     rideHistoriesItem,
-                                                                    r'''$.cancelPenaltyPrice''',
+                                                                    r'''$.additionalPrice''',
                                                                   ).toString()}개',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -470,10 +440,102 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                             FontWeight.w500,
                                                                       ),
                                                                 ),
+                                                                if (functions
+                                                                        .toIntegerFromJson(
+                                                                            getJsonField(
+                                                                      rideHistoriesItem,
+                                                                      r'''$.driverAdditionalRewardPrice''',
+                                                                    )) >
+                                                                    0)
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    child: Text(
+                                                                      '(추가 ${getJsonField(
+                                                                        rideHistoriesItem,
+                                                                        r'''$.driverAdditionalRewardPrice''',
+                                                                      ).toString()}개)',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Poppins',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryText,
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                          ),
+                                                                    ),
+                                                                  ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ),
+                                                      ],
+                                                    ),
+                                                  if (functions
+                                                      .isCancelledCallRequest(
+                                                          getJsonField(
+                                                    rideHistoriesItem,
+                                                    r'''$.currentState''',
+                                                  ).toString()))
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        if (functions
+                                                                .toIntegerFromJson(
+                                                                    getJsonField(
+                                                              rideHistoriesItem,
+                                                              r'''$.cancelPenaltyPrice''',
+                                                            )) >
+                                                            0)
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        2),
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Text(
+                                                                    '적립타코 ${getJsonField(
+                                                                      rideHistoriesItem,
+                                                                      r'''$.cancelPenaltyPrice''',
+                                                                    ).toString()}개',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .subtitle1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Poppins',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
+                                                                          fontSize:
+                                                                              14,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
                                                       ],
                                                     ),
                                                 ],

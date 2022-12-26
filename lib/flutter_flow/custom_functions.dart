@@ -293,3 +293,9 @@ String getEmptyString() {
 String getGenderCode(String input) {
   return input.characters.first;
 }
+
+int toIntegerFromJson(int jsonString) {
+  int val = jsonString;
+
+  return val;
+}
