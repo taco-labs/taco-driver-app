@@ -18,6 +18,7 @@ class _EntryWidgetState extends State<EntryWidget> {
   ApiCallResponse? apiResultGetAccount;
   ApiCallResponse? apiResultyb1;
   ApiCallResponse? apiResultLatestCall;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -76,12 +77,10 @@ class _EntryWidgetState extends State<EntryWidget> {
 
                 context.goNamed('Home');
               } else {
-                setState(() {
-                  FFAppState().errCode = getJsonField(
-                    (apiResultLatestCall?.jsonBody ?? ''),
-                    r'''$.errCode''',
-                  ).toString().toString();
-                });
+                FFAppState().errCode = getJsonField(
+                  (apiResultLatestCall?.jsonBody ?? ''),
+                  r'''$.errCode''',
+                ).toString().toString();
                 if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                   await actions.setCallState(
                     'TAXI_CALL_WAITING',
@@ -111,12 +110,10 @@ class _EntryWidgetState extends State<EntryWidget> {
               context.goNamed('Home');
             }
           } else {
-            setState(() {
-              FFAppState().errCode = getJsonField(
-                (apiResultGetAccount?.jsonBody ?? ''),
-                r'''$.errCode''',
-              ).toString().toString();
-            });
+            FFAppState().errCode = getJsonField(
+              (apiResultGetAccount?.jsonBody ?? ''),
+              r'''$.errCode''',
+            ).toString().toString();
             if (FFAppState().errCode == 'ERR_NOT_FOUND') {
               context.goNamed('RegisterInstallment');
             } else {
@@ -147,6 +144,12 @@ class _EntryWidgetState extends State<EntryWidget> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override

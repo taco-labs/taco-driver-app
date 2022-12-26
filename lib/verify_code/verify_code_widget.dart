@@ -26,9 +26,11 @@ class VerifyCodeWidget extends StatefulWidget {
 }
 
 class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
-  StopWatchTimer? timerController;
-  String? timerValue;
-  int? timerMilliseconds;
+  int timerMilliseconds = 180000;
+  String timerValue = StopWatchTimer.getDisplayTime(180000, milliSecond: false);
+  StopWatchTimer timerController =
+      StopWatchTimer(mode: StopWatchMode.countDown);
+
   ApiCallResponse? apiResultGetAccount;
   ApiCallResponse? apiResultf8v;
   String? fcmToken;
@@ -37,17 +39,16 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultLatestCall;
   TextEditingController? textController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      timerController?.onExecute.add(
-        StopWatchExecute.start,
-      );
+      timerController.onExecute.add(StopWatchExecute.start);
     });
 
     textController = TextEditingController();
@@ -56,8 +57,9 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     textController?.dispose();
-    timerController?.dispose();
+    timerController.dispose();
     super.dispose();
   }
 
@@ -99,7 +101,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -247,12 +249,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
 
                                   context.goNamed('Home');
                                 } else {
-                                  setState(() {
-                                    FFAppState().errCode = getJsonField(
-                                      (apiResultLatestCall?.jsonBody ?? ''),
-                                      r'''$.errCode''',
-                                    ).toString();
-                                  });
+                                  FFAppState().errCode = getJsonField(
+                                    (apiResultLatestCall?.jsonBody ?? ''),
+                                    r'''$.errCode''',
+                                  ).toString();
                                   if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                                     await actions.setCallState(
                                       'TAXI_CALL_WAITING',
@@ -327,12 +327,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           context.goNamed('RegisterImages');
                         }
                       } else {
-                        setState(() {
-                          FFAppState().errCode = getJsonField(
-                            (apiResultf8v?.jsonBody ?? ''),
-                            r'''$.errCode''',
-                          ).toString();
-                        });
+                        FFAppState().errCode = getJsonField(
+                          (apiResultf8v?.jsonBody ?? ''),
+                          r'''$.errCode''',
+                        ).toString();
                         if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                           context.goNamed(
                             'RegisterDriver',
@@ -391,40 +389,25 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                   child: FlutterFlowTimer(
-                    timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
-                      timerMilliseconds ??= 180000,
-                      hours: true,
-                      minute: true,
-                      second: true,
-                      milliSecond: false,
-                    ),
-                    timer: timerController ??= StopWatchTimer(
-                      mode: StopWatchMode.countDown,
-                      presetMillisecond: timerMilliseconds ??= 180000,
-                      onChange: (value) {
-                        setState(() {
-                          timerMilliseconds = value;
-                          timerValue = StopWatchTimer.getDisplayTime(
-                            value,
-                            hours: true,
-                            minute: true,
-                            second: true,
-                            milliSecond: false,
-                          );
-                        });
-                      },
-                    ),
+                    initialTime: timerMilliseconds,
+                    getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
+                        value,
+                        milliSecond: false),
+                    timer: timerController,
+                    onChanged: (value, displayTime, shouldUpdate) {
+                      timerMilliseconds = value;
+                      timerValue = displayTime;
+                      if (shouldUpdate) setState(() {});
+                    },
+                    onEnded: () async {
+                      timerController.onExecute.add(StopWatchExecute.start);
+                    },
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 18,
                         ),
-                    onEnded: () async {
-                      timerController?.onExecute.add(
-                        StopWatchExecute.start,
-                      );
-                    },
                   ),
                 ),
               ],

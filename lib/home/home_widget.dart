@@ -22,6 +22,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   ApiCallResponse? apiResultqz6;
   String? appVersion;
   bool? isInstalled;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -54,6 +55,12 @@ class _HomeWidgetState extends State<HomeWidget> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -363,7 +370,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

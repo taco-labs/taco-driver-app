@@ -30,6 +30,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
   ApiCallResponse? apiResulttx1;
   bool? licenseUploadSucceeded;
   String? fcmToken;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -37,6 +38,12 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -63,7 +70,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -183,14 +190,11 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    setState(() {
-                                      FFAppState()
-                                              .driverProfileImageDownloadUrl =
-                                          DriverInfoGroup.getDriverCall
-                                              .profileImageDownloadUrl(
-                                        (apiResulttx0?.jsonBody ?? ''),
-                                      );
-                                    });
+                                    FFAppState().driverProfileImageDownloadUrl =
+                                        DriverInfoGroup.getDriverCall
+                                            .profileImageDownloadUrl(
+                                      (apiResulttx0?.jsonBody ?? ''),
+                                    );
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -357,14 +361,11 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    setState(() {
-                                      FFAppState()
-                                              .driverLicenseImageDownloadUrl =
-                                          DriverInfoGroup.getDriverCall
-                                              .licenseImageDownloadUrl(
-                                        (apiResulttx0?.jsonBody ?? ''),
-                                      );
-                                    });
+                                    FFAppState().driverLicenseImageDownloadUrl =
+                                        DriverInfoGroup.getDriverCall
+                                            .licenseImageDownloadUrl(
+                                      (apiResulttx0?.jsonBody ?? ''),
+                                    );
                                   } else {
                                     await showDialog(
                                       context: context,

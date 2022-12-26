@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
 
@@ -42,6 +43,8 @@ class SMSVerificationRequestCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -70,6 +73,8 @@ class SMSVerificationAndSigninCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -236,6 +241,8 @@ class SignupCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -387,6 +394,8 @@ class GetDriverCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -523,6 +532,8 @@ class UpdateDriverCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -552,6 +563,8 @@ class UpdateOnDutyCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -583,6 +596,8 @@ class UpdateDriverLocationCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -614,6 +629,8 @@ class RegisterSettlementAccountCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -657,6 +674,8 @@ class GetSettlementAccountCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -709,6 +728,8 @@ class UpdateDriverSettlementAccountCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -752,6 +773,8 @@ class GetDriverImageUrlsCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -799,6 +822,8 @@ class GetExpectetedSettlementCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -839,6 +864,8 @@ class ListDriverSettlementHistoryCall {
         'count': count,
       },
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -887,6 +914,8 @@ class RequestDriverSettlementCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -922,6 +951,8 @@ class DeleteDriverCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -943,6 +974,8 @@ class ActivateDriverCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -965,6 +998,8 @@ class ForceAcceptTaxiCallRequestCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1001,6 +1036,8 @@ class DeleteDriverCopyCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1022,6 +1059,8 @@ class ActivateDriverCopyCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1044,6 +1083,8 @@ class ForceAcceptTaxiCallRequestCopyCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1088,6 +1129,8 @@ class GetLatestTaxiCallCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1302,6 +1345,8 @@ class ListTaxiCallCall {
         'count': count,
       },
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1555,6 +1600,8 @@ class AcceptTaxiCallTicketCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1586,6 +1633,8 @@ class RejectTaxiCallTicketCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1609,6 +1658,8 @@ class TaxiCallDriverToArrivalCall {
       params: {},
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1634,6 +1685,8 @@ class CancelTaxiCallRequestCall {
         'confirmCancel': confirmCancel,
       },
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1665,6 +1718,8 @@ class DoneTaxiCallCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1687,6 +1742,8 @@ class GetLatestTaxiCallTicketCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -1803,6 +1860,8 @@ class GetUUIDCall {
       headers: {},
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
