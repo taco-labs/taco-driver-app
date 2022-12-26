@@ -19,6 +19,7 @@ class SettlementHistoryWidget extends StatefulWidget {
 
 class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
   PagingController<ApiPagingParams, dynamic>? _pagingController;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -26,6 +27,12 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -66,7 +73,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

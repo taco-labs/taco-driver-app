@@ -17,8 +17,9 @@ class _LoginWidgetState extends State<LoginWidget> {
   ApiCallResponse? apiResultUuid;
   ApiCallResponse? apiResultfwz;
   TextEditingController? phoneNumberController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     phoneNumberController?.dispose();
     super.dispose();
   }
@@ -57,7 +59,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -150,7 +152,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         if (val.length > 11) {
                           return '휴대폰 번호를 정확히 입력해주세요';
                         }
-                        if (!RegExp(r"01[016789][0-9]{3,4}[0-9]{4}")
+                        if (!RegExp('01[016789][0-9]{3,4}[0-9]{4}')
                             .hasMatch(val)) {
                           return '휴대폰 번호를 정확히 입력해주세요';
                         }

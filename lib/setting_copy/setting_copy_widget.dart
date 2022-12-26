@@ -20,6 +20,7 @@ class SettingCopyWidget extends StatefulWidget {
 
 class _SettingCopyWidgetState extends State<SettingCopyWidget> {
   ApiCallResponse? apiResult9ee;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,6 +28,12 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -67,7 +74,7 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -216,10 +223,8 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      setState(() {
-                        FFAppState().apiToken = '';
-                        FFAppState().driverId = '';
-                      });
+                      FFAppState().apiToken = '';
+                      FFAppState().driverId = '';
 
                       context.goNamed('Login');
                     },
@@ -269,10 +274,8 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResult9ee?.succeeded ?? true)) {
-                        setState(() {
-                          FFAppState().apiToken = '';
-                          FFAppState().driverId = '';
-                        });
+                        FFAppState().apiToken = '';
+                        FFAppState().driverId = '';
 
                         context.goNamed('Login');
                       } else {

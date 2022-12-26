@@ -34,7 +34,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   String? radioButtonValue;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
-
   late bool genderCodeVisibility;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
@@ -45,8 +44,9 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? taxiCompanyNameController;
   bool? termsCheckboxValue;
   bool? privacyCheckboxValue;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -66,6 +66,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     birthDateController?.dispose();
     genderCodeController?.dispose();
     firstNameController?.dispose();
@@ -102,7 +103,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -428,7 +429,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         return '주민번호 앞자리를 정확히 입력해주세요';
                                       }
                                       if (!RegExp(
-                                              r"^\d{2}[0-1]\d{1}[0-3]\d{1}$")
+                                              '^\\d{2}[0-1]\\d{1}[0-3]\\d{1}\$')
                                           .hasMatch(val)) {
                                         return '주민번호 앞자리를 정확히 입력해주세요';
                                       }
@@ -534,7 +535,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       if (val.length > 7) {
                                         return '주민번호 뒷자리를 정확히 입력해주세요';
                                       }
-                                      if (!RegExp(r"[1-4]\d{6}")
+                                      if (!RegExp('[1-4]\\d{6}')
                                           .hasMatch(val)) {
                                         return '주민번호 뒷자리를 정확히 입력해주세요';
                                       }
@@ -668,7 +669,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 if (val.length > 8) {
                                   return '차량번호를 정확히 입력해주세요';
                                 }
-                                if (!RegExp(r"^\d{2,3}[가-힣]\d{4}$")
+                                if (!RegExp('^\\d{2,3}[가-힣]\\d{4}\$')
                                     .hasMatch(val)) {
                                   return '차량번호를 정확히 입력해주세요';
                                 }
@@ -747,7 +748,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 if (val.length > 11) {
                                   return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
-                                if (!RegExp(r"^\d{2}-[가-힣][가-힣]-\d{5}$")
+                                if (!RegExp('^\\d{2}-[가-힣][가-힣]-\\d{5}\$')
                                     .hasMatch(val)) {
                                   return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
@@ -832,7 +833,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       if (val.length > 10) {
                                         return '사업자등록번호를 정확히 입력해주세요';
                                       }
-                                      if (!RegExp(r"^\d{10}$").hasMatch(val)) {
+                                      if (!RegExp('^\\d{10}\$').hasMatch(val)) {
                                         return '사업자등록번호를 정확히 입력해주세요';
                                       }
                                       return null;

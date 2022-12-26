@@ -28,6 +28,7 @@ class SettlementInfoWidget extends StatefulWidget {
 
 class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
   ApiCallResponse? apiResulta0z;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -35,6 +36,12 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -75,7 +82,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

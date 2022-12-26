@@ -27,8 +27,9 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
   ApiCallResponse? apiResultRegisterAccount;
   String? bankCodeValue;
   TextEditingController? accountNumberController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -39,6 +40,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     accountNumberController?.dispose();
     super.dispose();
   }
@@ -67,7 +69,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -182,7 +184,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                 if (val.length > 14) {
                                   return '계좌번호를 정확히 입력해주세요';
                                 }
-                                if (!RegExp(r"^[0-9]*$").hasMatch(val)) {
+                                if (!RegExp('^[0-9]*\$').hasMatch(val)) {
                                   return '계좌번호를 정확히 입력해주세요';
                                 }
                                 return null;

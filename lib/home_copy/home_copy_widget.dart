@@ -35,8 +35,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   ApiCallResponse? apiResultDoneTaxiCall;
   TextEditingController? taxiFareController;
   TextEditingController? tollFareController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     taxiFareController?.dispose();
     tollFareController?.dispose();
     super.dispose();
@@ -205,7 +207,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -695,14 +697,11 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 'TAXI_CALL_WAITING',
                                               );
                                             } else {
-                                              setState(() {
-                                                FFAppState().errCode =
-                                                    getJsonField(
-                                                  (apiResultw8d?.jsonBody ??
-                                                      ''),
-                                                  r'''$.errCode''',
-                                                ).toString();
-                                              });
+                                              FFAppState().errCode =
+                                                  getJsonField(
+                                                (apiResultw8d?.jsonBody ?? ''),
+                                                r'''$.errCode''',
+                                              ).toString();
                                               if ((FFAppState().errCode ==
                                                       'ERR_NOT_FOUND') ||
                                                   (FFAppState().errCode ==
@@ -782,14 +781,11 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 'DRIVER_TO_DEPARTURE',
                                               );
                                             } else {
-                                              setState(() {
-                                                FFAppState().errCode =
-                                                    getJsonField(
-                                                  (apiResultj1q?.jsonBody ??
-                                                      ''),
-                                                  r'''$.errCode''',
-                                                ).toString();
-                                              });
+                                              FFAppState().errCode =
+                                                  getJsonField(
+                                                (apiResultj1q?.jsonBody ?? ''),
+                                                r'''$.errCode''',
+                                              ).toString();
                                               if ((FFAppState().errCode ==
                                                       'ERR_NOT_FOUND') ||
                                                   (FFAppState().errCode ==
@@ -931,15 +927,13 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   'TAXI_CALL_WAITING',
                                                 );
                                               } else {
-                                                setState(() {
-                                                  FFAppState().errCode =
-                                                      getJsonField(
-                                                    (apiResultCancelCall
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$.errCode''',
-                                                  ).toString();
-                                                });
+                                                FFAppState().errCode =
+                                                    getJsonField(
+                                                  (apiResultCancelCall
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
                                                 if (FFAppState().errCode ==
                                                     'ERR_NEED_CONFIRMATION') {
                                                   var confirmDialogResponse =
@@ -2195,9 +2189,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                       FFAppState().apiEndpointTarget,
                                 );
                                 if ((apiResult438?.succeeded ?? true)) {
-                                  setState(() {
-                                    FFAppState().driverIsOnDuty = true;
-                                  });
+                                  FFAppState().driverIsOnDuty = true;
                                   await actions.setCallState(
                                     'TAXI_CALL_WAITING',
                                   );
@@ -2263,9 +2255,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           FFAppState().apiEndpointTarget,
                                     );
                                     if ((apiResult439?.succeeded ?? true)) {
-                                      setState(() {
-                                        FFAppState().driverIsOnDuty = true;
-                                      });
+                                      FFAppState().driverIsOnDuty = true;
                                       await actions.setCallState(
                                         'TAXI_CALL_WAITING',
                                       );
@@ -2367,9 +2357,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResultkg1?.succeeded ?? true)) {
-                                setState(() {
-                                  FFAppState().driverIsOnDuty = false;
-                                });
+                                FFAppState().driverIsOnDuty = false;
                                 await actions.setCallState(
                                   'NONE',
                                 );

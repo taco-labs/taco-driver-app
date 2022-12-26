@@ -18,6 +18,7 @@ class DriveHistoryWidget extends StatefulWidget {
 
 class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
   PagingController<ApiPagingParams, dynamic>? _pagingController;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -25,6 +26,12 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -65,7 +72,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
