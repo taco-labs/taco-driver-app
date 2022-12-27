@@ -1283,25 +1283,30 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Text(
-                                          FFAppState().callDepartureName !=
-                                                      null &&
-                                                  FFAppState()
-                                                          .callDepartureName !=
-                                                      ''
-                                              ? '(${FFAppState().callDepartureName})'
-                                              : '',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 0, 0, 0),
+                                          child: Text(
+                                            FFAppState().callDepartureName !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .callDepartureName !=
+                                                        ''
+                                                ? '${FFAppState().callDepartureName}'
+                                                : '',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1354,25 +1359,30 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Text(
-                                          FFAppState().callArrivalName !=
-                                                      null &&
-                                                  FFAppState()
-                                                          .callArrivalName !=
-                                                      ''
-                                              ? '(${FFAppState().callArrivalName})'
-                                              : '',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 0, 0, 0),
+                                          child: Text(
+                                            FFAppState().callArrivalName !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .callArrivalName !=
+                                                        ''
+                                                ? '${FFAppState().callArrivalName}'
+                                                : '',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1625,25 +1635,30 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Text(
-                                          FFAppState().callDepartureName !=
-                                                      null &&
-                                                  FFAppState()
-                                                          .callDepartureName !=
-                                                      ''
-                                              ? '(${FFAppState().callDepartureName})'
-                                              : '',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 0, 0, 0),
+                                          child: Text(
+                                            FFAppState().callDepartureName !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .callDepartureName !=
+                                                        ''
+                                                ? '${FFAppState().callDepartureName}'
+                                                : '',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1696,25 +1711,30 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
-                                        Text(
-                                          FFAppState().callArrivalName !=
-                                                      null &&
-                                                  FFAppState()
-                                                          .callArrivalName !=
-                                                      ''
-                                              ? '(${FFAppState().callArrivalName})'
-                                              : '',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 0, 0, 0),
+                                          child: Text(
+                                            FFAppState().callArrivalName !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .callArrivalName !=
+                                                        ''
+                                                ? '${FFAppState().callArrivalName}'
+                                                : '',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
