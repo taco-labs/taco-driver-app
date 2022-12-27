@@ -299,3 +299,16 @@ int toIntegerFromJson(int jsonString) {
 
   return val;
 }
+
+String toEtaOnTime(
+  String originTimeString,
+  int etaNanoseconds,
+) {
+  DateTime originTime = DateTime.parse(originTimeString).toLocal();
+  int etaSeconds = (etaNanoseconds / 1000000000).toInt();
+  DateTime etaOnTime = originTime.add(Duration(seconds: etaSeconds));
+
+  DateFormat df = DateFormat('HH:mm');
+
+  return df.format(etaOnTime);
+}

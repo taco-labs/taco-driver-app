@@ -76,10 +76,12 @@ class _EntryWidgetState extends State<EntryWidget> {
 
                 context.goNamed('Home');
               } else {
-                FFAppState().errCode = getJsonField(
-                  (apiResultLatestCall?.jsonBody ?? ''),
-                  r'''$.errCode''',
-                ).toString().toString();
+                FFAppState().update(() {
+                  FFAppState().errCode = getJsonField(
+                    (apiResultLatestCall?.jsonBody ?? ''),
+                    r'''$.errCode''',
+                  ).toString().toString();
+                });
                 if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                   await actions.setCallState(
                     'TAXI_CALL_WAITING',
@@ -109,10 +111,12 @@ class _EntryWidgetState extends State<EntryWidget> {
               context.goNamed('Home');
             }
           } else {
-            FFAppState().errCode = getJsonField(
-              (apiResultGetAccount?.jsonBody ?? ''),
-              r'''$.errCode''',
-            ).toString().toString();
+            FFAppState().update(() {
+              FFAppState().errCode = getJsonField(
+                (apiResultGetAccount?.jsonBody ?? ''),
+                r'''$.errCode''',
+              ).toString().toString();
+            });
             if (FFAppState().errCode == 'ERR_NOT_FOUND') {
               context.goNamed('RegisterInstallment');
             } else {

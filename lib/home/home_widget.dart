@@ -17,7 +17,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  ApiCallResponse? apiResult71p;
   ApiCallResponse? apiResultd22;
   ApiCallResponse? apiResultqz6;
   String? appVersion;
@@ -99,44 +98,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             InkWell(
               onTap: () async {
-                apiResult71p =
-                    await DriverInfoGroup.getDriverImageUrlsCall.call(
-                  driverId: FFAppState().driverId,
-                  apiToken: FFAppState().apiToken,
-                  apiEndpointTarget: FFAppState().apiEndpointTarget,
-                );
-                if ((apiResult71p?.succeeded ?? true)) {
-                  context.pushNamed(
-                    'DriverProfile',
-                    queryParams: {
-                      'driverProfileImageDownloadUrl': serializeParam(
-                        DriverInfoGroup.getDriverImageUrlsCall
-                            .downloadProfileImageUrl(
-                          (apiResult71p?.jsonBody ?? ''),
-                        ),
-                        ParamType.String,
-                      ),
-                    }.withoutNulls,
-                  );
-                } else {
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('오류'),
-                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('확인'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-
-                setState(() {});
+                context.pushNamed('DriverProfile');
               },
               child: ListTile(
                 title: Text(

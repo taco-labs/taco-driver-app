@@ -223,8 +223,10 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      FFAppState().apiToken = '';
-                      FFAppState().driverId = '';
+                      FFAppState().update(() {
+                        FFAppState().apiToken = '';
+                        FFAppState().driverId = '';
+                      });
 
                       context.goNamed('Login');
                     },
@@ -274,8 +276,10 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
                       );
                       if ((apiResult9ee?.succeeded ?? true)) {
-                        FFAppState().apiToken = '';
-                        FFAppState().driverId = '';
+                        FFAppState().update(() {
+                          FFAppState().apiToken = '';
+                          FFAppState().driverId = '';
+                        });
 
                         context.goNamed('Login');
                       } else {

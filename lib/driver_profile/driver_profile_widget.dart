@@ -7,12 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class DriverProfileWidget extends StatefulWidget {
-  const DriverProfileWidget({
-    Key? key,
-    this.driverProfileImageDownloadUrl,
-  }) : super(key: key);
-
-  final String? driverProfileImageDownloadUrl;
+  const DriverProfileWidget({Key? key}) : super(key: key);
 
   @override
   _DriverProfileWidgetState createState() => _DriverProfileWidgetState();
@@ -116,7 +111,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                       shape: BoxShape.circle,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: widget.driverProfileImageDownloadUrl!,
+                      imageUrl: FFAppState().driverProfileImageDownloadUrl,
                       fit: BoxFit.fitWidth,
                     ),
                   ),

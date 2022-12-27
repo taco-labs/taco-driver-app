@@ -512,24 +512,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 5, 0),
-                                      child: Text(
-                                        '승객요청사항',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
                                     Text(
                                       FFAppState().callTagsConcat,
                                       textAlign: TextAlign.center,
@@ -764,12 +746,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           'TAXI_CALL_WAITING',
                                         );
                                       } else {
-                                        setState(() {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResultw8d?.jsonBody ?? ''),
-                                            r'''$.errCode''',
-                                          ).toString();
-                                        });
+                                        FFAppState().errCode = getJsonField(
+                                          (apiResultw8d?.jsonBody ?? ''),
+                                          r'''$.errCode''',
+                                        ).toString();
                                         if ((FFAppState().errCode ==
                                                 'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
@@ -844,12 +824,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           'DRIVER_TO_DEPARTURE',
                                         );
                                       } else {
-                                        setState(() {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResultj1q?.jsonBody ?? ''),
-                                            r'''$.errCode''',
-                                          ).toString();
-                                        });
+                                        FFAppState().errCode = getJsonField(
+                                          (apiResultj1q?.jsonBody ?? ''),
+                                          r'''$.errCode''',
+                                        ).toString();
                                         if ((FFAppState().errCode ==
                                                 'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
@@ -981,13 +959,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             'TAXI_CALL_WAITING',
                                           );
                                         } else {
-                                          setState(() {
-                                            FFAppState().errCode = getJsonField(
-                                              (apiResultCancelCall?.jsonBody ??
-                                                  ''),
-                                              r'''$.errCode''',
-                                            ).toString();
-                                          });
+                                          FFAppState().errCode = getJsonField(
+                                            (apiResultCancelCall?.jsonBody ??
+                                                ''),
+                                            r'''$.errCode''',
+                                          ).toString();
                                           if (FFAppState().errCode ==
                                               'ERR_NEED_CONFIRMATION') {
                                             var confirmDialogResponse =
@@ -1221,24 +1197,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 5, 0),
-                                      child: Text(
-                                        '승객요청사항',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
                                     Text(
                                       FFAppState().callTagsConcat,
                                       textAlign: TextAlign.center,
@@ -1515,10 +1473,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         '목적지',
                                       );
                                     },
-                                    text: '목적지 길안내',
+                                    text: '길안내',
                                     options: FFButtonOptions(
                                       width: 130,
-                                      height: 50,
+                                      height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -1550,24 +1508,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 5, 0),
-                                      child: Text(
-                                        '승객요청사항',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
                                     Text(
                                       FFAppState().callTagsConcat,
                                       textAlign: TextAlign.center,
@@ -2153,9 +2093,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResult438?.succeeded ?? true)) {
-                            setState(() {
-                              FFAppState().driverIsOnDuty = true;
-                            });
+                            FFAppState().driverIsOnDuty = true;
                             await actions.setCallState(
                               'TAXI_CALL_WAITING',
                             );
@@ -2214,9 +2152,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResult439?.succeeded ?? true)) {
-                                setState(() {
-                                  FFAppState().driverIsOnDuty = true;
-                                });
+                                FFAppState().driverIsOnDuty = true;
                                 await actions.setCallState(
                                   'TAXI_CALL_WAITING',
                                 );
@@ -2315,9 +2251,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           apiEndpointTarget: FFAppState().apiEndpointTarget,
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
-                          setState(() {
-                            FFAppState().driverIsOnDuty = false;
-                          });
+                          FFAppState().driverIsOnDuty = false;
                           await actions.setCallState(
                             'NONE',
                           );

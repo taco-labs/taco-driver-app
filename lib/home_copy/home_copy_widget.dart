@@ -697,11 +697,14 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 'TAXI_CALL_WAITING',
                                               );
                                             } else {
-                                              FFAppState().errCode =
-                                                  getJsonField(
-                                                (apiResultw8d?.jsonBody ?? ''),
-                                                r'''$.errCode''',
-                                              ).toString();
+                                              FFAppState().update(() {
+                                                FFAppState().errCode =
+                                                    getJsonField(
+                                                  (apiResultw8d?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
+                                              });
                                               if ((FFAppState().errCode ==
                                                       'ERR_NOT_FOUND') ||
                                                   (FFAppState().errCode ==
@@ -781,11 +784,14 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 'DRIVER_TO_DEPARTURE',
                                               );
                                             } else {
-                                              FFAppState().errCode =
-                                                  getJsonField(
-                                                (apiResultj1q?.jsonBody ?? ''),
-                                                r'''$.errCode''',
-                                              ).toString();
+                                              FFAppState().update(() {
+                                                FFAppState().errCode =
+                                                    getJsonField(
+                                                  (apiResultj1q?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
+                                              });
                                               if ((FFAppState().errCode ==
                                                       'ERR_NOT_FOUND') ||
                                                   (FFAppState().errCode ==
@@ -927,13 +933,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   'TAXI_CALL_WAITING',
                                                 );
                                               } else {
-                                                FFAppState().errCode =
-                                                    getJsonField(
-                                                  (apiResultCancelCall
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.errCode''',
-                                                ).toString();
+                                                FFAppState().update(() {
+                                                  FFAppState().errCode =
+                                                      getJsonField(
+                                                    (apiResultCancelCall
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.errCode''',
+                                                  ).toString();
+                                                });
                                                 if (FFAppState().errCode ==
                                                     'ERR_NEED_CONFIRMATION') {
                                                   var confirmDialogResponse =
@@ -1964,7 +1972,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           fontFamily: 'Poppins',
                                                           fontSize: 18,
                                                         ),
-                                                hintText: '통행료 입력',
+                                                hintText: '통행료 및 추가금액 입력',
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -2048,18 +2056,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                               textAlign: TextAlign.center,
                                               keyboardType:
                                                   TextInputType.number,
-                                              validator: (val) {
-                                                if (val == null ||
-                                                    val.isEmpty) {
-                                                  return '통행료를 정확히 입력해주세요';
-                                                }
-
-                                                if (val.length < 1) {
-                                                  return '통행료를 정확히 입력해주세요';
-                                                }
-
-                                                return null;
-                                              },
                                             ),
                                           ),
                                         ],
@@ -2084,8 +2080,12 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           basePrice: int.tryParse(
                                               taxiFareController!.text),
                                           apiToken: FFAppState().apiToken,
-                                          tollFee: int.tryParse(
-                                              tollFareController!.text),
+                                          tollFee: tollFareController!.text !=
+                                                      null &&
+                                                  tollFareController!.text != ''
+                                              ? int.tryParse(
+                                                  tollFareController!.text)
+                                              : 0,
                                           apiEndpointTarget:
                                               FFAppState().apiEndpointTarget,
                                         );
@@ -2189,7 +2189,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                       FFAppState().apiEndpointTarget,
                                 );
                                 if ((apiResult438?.succeeded ?? true)) {
-                                  FFAppState().driverIsOnDuty = true;
+                                  FFAppState().update(() {
+                                    FFAppState().driverIsOnDuty = true;
+                                  });
                                   await actions.setCallState(
                                     'TAXI_CALL_WAITING',
                                   );
@@ -2255,7 +2257,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           FFAppState().apiEndpointTarget,
                                     );
                                     if ((apiResult439?.succeeded ?? true)) {
-                                      FFAppState().driverIsOnDuty = true;
+                                      FFAppState().update(() {
+                                        FFAppState().driverIsOnDuty = true;
+                                      });
                                       await actions.setCallState(
                                         'TAXI_CALL_WAITING',
                                       );
@@ -2357,7 +2361,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResultkg1?.succeeded ?? true)) {
-                                FFAppState().driverIsOnDuty = false;
+                                FFAppState().update(() {
+                                  FFAppState().driverIsOnDuty = false;
+                                });
                                 await actions.setCallState(
                                   'NONE',
                                 );

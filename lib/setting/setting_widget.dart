@@ -187,8 +187,10 @@ class _SettingWidgetState extends State<SettingWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      FFAppState().apiToken = '';
-                      FFAppState().driverId = '';
+                      FFAppState().update(() {
+                        FFAppState().apiToken = '';
+                        FFAppState().driverId = '';
+                      });
 
                       context.goNamed('Login');
                     },

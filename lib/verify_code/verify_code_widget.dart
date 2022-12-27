@@ -38,6 +38,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
   String? appVersion;
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResultLatestCall;
+  ApiCallResponse? apiResultucs;
   TextEditingController? textController;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -249,10 +250,12 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
 
                                   context.goNamed('Home');
                                 } else {
-                                  FFAppState().errCode = getJsonField(
-                                    (apiResultLatestCall?.jsonBody ?? ''),
-                                    r'''$.errCode''',
-                                  ).toString();
+                                  FFAppState().update(() {
+                                    FFAppState().errCode = getJsonField(
+                                      (apiResultLatestCall?.jsonBody ?? ''),
+                                      r'''$.errCode''',
+                                    ).toString();
+                                  });
                                   if (FFAppState().errCode == 'ERR_NOT_FOUND') {
                                     await actions.setCallState(
                                       'TAXI_CALL_WAITING',
@@ -327,24 +330,55 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           context.goNamed('RegisterImages');
                         }
                       } else {
-                        FFAppState().errCode = getJsonField(
-                          (apiResultf8v?.jsonBody ?? ''),
-                          r'''$.errCode''',
-                        ).toString();
+                        FFAppState().update(() {
+                          FFAppState().errCode = getJsonField(
+                            (apiResultf8v?.jsonBody ?? ''),
+                            r'''$.errCode''',
+                          ).toString();
+                        });
                         if (FFAppState().errCode == 'ERR_NOT_FOUND') {
-                          context.goNamed(
-                            'RegisterDriver',
-                            queryParams: {
-                              'phoneNumber': serializeParam(
-                                widget.phoneNumber,
-                                ParamType.String,
-                              ),
-                              'authSmsStateKey': serializeParam(
-                                widget.authSmsStateKey,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
+                          apiResultucs = await MiscGroup
+                              .getAvailableServiceRegionsCall
+                              .call(
+                            apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
+                          if ((apiResultucs?.succeeded ?? true)) {
+                            FFAppState().update(() {
+                              FFAppState().supportedServiceRegions =
+                                  (apiResultucs?.jsonBody ?? '').toList();
+                            });
+
+                            context.goNamed(
+                              'RegisterDriver',
+                              queryParams: {
+                                'phoneNumber': serializeParam(
+                                  widget.phoneNumber,
+                                  ParamType.String,
+                                ),
+                                'authSmsStateKey': serializeParam(
+                                  widget.authSmsStateKey,
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('오류'),
+                                  content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('확인'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         } else {
                           await showDialog(
                             context: context,

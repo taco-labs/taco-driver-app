@@ -574,7 +574,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
                             child: FlutterFlowDropDown<String>(
                               options:
-                                  functions.getSupportedServiceArea().toList(),
+                                  FFAppState().supportedServiceRegions.toList(),
                               onChanged: (val) =>
                                   setState(() => dropDownValue = val),
                               textStyle: FlutterFlowTheme.of(context)
