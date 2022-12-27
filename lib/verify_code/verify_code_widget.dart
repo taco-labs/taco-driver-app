@@ -343,10 +343,9 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResultucs?.succeeded ?? true)) {
-                            FFAppState().update(() {
-                              FFAppState().supportedServiceRegions =
-                                  (apiResultucs?.jsonBody ?? '').toList();
-                            });
+                            await actions.fromGetAvailableServiceRegions(
+                              (apiResultucs?.jsonBody ?? ''),
+                            );
 
                             context.goNamed(
                               'RegisterDriver',

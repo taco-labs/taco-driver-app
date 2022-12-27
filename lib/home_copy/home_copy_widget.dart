@@ -824,17 +824,15 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
-                                                      title: Text('콜 수락 실패'),
-                                                      content: Text((apiResultj1q
-                                                                  ?.statusCode ??
-                                                              200)
-                                                          .toString()),
+                                                      title: Text('오류'),
+                                                      content: Text(
+                                                          '서버 오류가 발생하여 다시 시도해주세요'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('Ok'),
+                                                          child: Text('확인'),
                                                         ),
                                                       ],
                                                     );
@@ -1505,7 +1503,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           },
                                           text: '길안내',
                                           options: FFButtonOptions(
-                                            width: 130,
+                                            width: 100,
                                             height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,

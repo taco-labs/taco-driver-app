@@ -90,6 +90,7 @@ Future fromGetLatestCallApiResponse(dynamic apiResponse) async {
       apiResponse['requestMinAdditionalPrice'];
   FFAppState().callMaxAdditionalPrice =
       apiResponse['requestMaxAdditionalPrice'];
+  FFAppState().callAdditionalPrice = apiResponse['additionalPrice'];
   FFAppState().driverAdditionalRewardPrice =
       apiResponse['driverAdditionalRewardPrice'];
 }
