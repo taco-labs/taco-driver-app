@@ -746,10 +746,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           'TAXI_CALL_WAITING',
                                         );
                                       } else {
-                                        FFAppState().errCode = getJsonField(
-                                          (apiResultw8d?.jsonBody ?? ''),
-                                          r'''$.errCode''',
-                                        ).toString();
+                                        FFAppState().update(() {
+                                          FFAppState().errCode = getJsonField(
+                                            (apiResultw8d?.jsonBody ?? ''),
+                                            r'''$.errCode''',
+                                          ).toString();
+                                        });
                                         if ((FFAppState().errCode ==
                                                 'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
@@ -824,10 +826,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           'DRIVER_TO_DEPARTURE',
                                         );
                                       } else {
-                                        FFAppState().errCode = getJsonField(
-                                          (apiResultj1q?.jsonBody ?? ''),
-                                          r'''$.errCode''',
-                                        ).toString();
+                                        FFAppState().update(() {
+                                          FFAppState().errCode = getJsonField(
+                                            (apiResultj1q?.jsonBody ?? ''),
+                                            r'''$.errCode''',
+                                          ).toString();
+                                        });
                                         if ((FFAppState().errCode ==
                                                 'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
@@ -857,17 +861,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: Text('콜 수락 실패'),
+                                                title: Text('오류'),
                                                 content: Text(
-                                                    (apiResultj1q?.statusCode ??
-                                                            200)
-                                                        .toString()),
+                                                    '서버 오류가 발생하여 다시 시도해주세요'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: Text('확인'),
                                                   ),
                                                 ],
                                               );
@@ -959,11 +961,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             'TAXI_CALL_WAITING',
                                           );
                                         } else {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResultCancelCall?.jsonBody ??
-                                                ''),
-                                            r'''$.errCode''',
-                                          ).toString();
+                                          FFAppState().update(() {
+                                            FFAppState().errCode = getJsonField(
+                                              (apiResultCancelCall?.jsonBody ??
+                                                  ''),
+                                              r'''$.errCode''',
+                                            ).toString();
+                                          });
                                           if (FFAppState().errCode ==
                                               'ERR_NEED_CONFIRMATION') {
                                             var confirmDialogResponse =
@@ -1475,7 +1479,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     },
                                     text: '길안내',
                                     options: FFButtonOptions(
-                                      width: 130,
+                                      width: 100,
                                       height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
@@ -1890,7 +1894,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     fontFamily: 'Poppins',
                                                     fontSize: 18,
                                                   ),
-                                          hintText: '통행료 입력',
+                                          hintText: '통행료 및 추가금액 입력',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -1960,17 +1964,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             ),
                                         textAlign: TextAlign.center,
                                         keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return '통행료를 정확히 입력해주세요';
-                                          }
-
-                                          if (val.length < 1) {
-                                            return '통행료를 정확히 입력해주세요';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ],
@@ -1993,8 +1986,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     basePrice:
                                         int.tryParse(taxiFareController!.text),
                                     apiToken: FFAppState().apiToken,
-                                    tollFee:
-                                        int.tryParse(tollFareController!.text),
+                                    tollFee: tollFareController!.text != null &&
+                                            tollFareController!.text != ''
+                                        ? int.tryParse(tollFareController!.text)
+                                        : 0,
                                     apiEndpointTarget:
                                         FFAppState().apiEndpointTarget,
                                   );
@@ -2093,7 +2088,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             apiEndpointTarget: FFAppState().apiEndpointTarget,
                           );
                           if ((apiResult438?.succeeded ?? true)) {
-                            FFAppState().driverIsOnDuty = true;
+                            FFAppState().update(() {
+                              FFAppState().driverIsOnDuty = true;
+                            });
                             await actions.setCallState(
                               'TAXI_CALL_WAITING',
                             );
@@ -2152,7 +2149,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResult439?.succeeded ?? true)) {
-                                FFAppState().driverIsOnDuty = true;
+                                FFAppState().update(() {
+                                  FFAppState().driverIsOnDuty = true;
+                                });
                                 await actions.setCallState(
                                   'TAXI_CALL_WAITING',
                                 );
@@ -2251,7 +2250,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           apiEndpointTarget: FFAppState().apiEndpointTarget,
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
-                          FFAppState().driverIsOnDuty = false;
+                          FFAppState().update(() {
+                            FFAppState().driverIsOnDuty = false;
+                          });
                           await actions.setCallState(
                             'NONE',
                           );
