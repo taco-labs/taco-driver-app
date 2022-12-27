@@ -1851,6 +1851,38 @@ class GetLatestTaxiCallTicketCall {
 
 /// End Taxi Call Group Code
 
+/// Start MISC Group Code
+
+class MiscGroup {
+  static String baseUrl = 'https://';
+  static Map<String, String> headers = {};
+  static GetAvailableServiceRegionsCall getAvailableServiceRegionsCall =
+      GetAvailableServiceRegionsCall();
+}
+
+class GetAvailableServiceRegionsCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Available Service Regions',
+      apiUrl:
+          '${MiscGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/service_region',
+      callType: ApiCallType.GET,
+      headers: {
+        ...MiscGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+/// End MISC Group Code
+
 class GetUUIDCall {
   static Future<ApiCallResponse> call() {
     return ApiManager.instance.makeApiCall(

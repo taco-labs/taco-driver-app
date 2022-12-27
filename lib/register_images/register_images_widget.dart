@@ -190,11 +190,14 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    FFAppState().driverProfileImageDownloadUrl =
-                                        DriverInfoGroup.getDriverCall
-                                            .profileImageDownloadUrl(
-                                      (apiResulttx0?.jsonBody ?? ''),
-                                    );
+                                    FFAppState().update(() {
+                                      FFAppState()
+                                              .driverProfileImageDownloadUrl =
+                                          DriverInfoGroup.getDriverCall
+                                              .profileImageDownloadUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      );
+                                    });
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -361,11 +364,14 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                   );
                                   if ((apiResultUpdateDriver2?.succeeded ??
                                       true)) {
-                                    FFAppState().driverLicenseImageDownloadUrl =
-                                        DriverInfoGroup.getDriverCall
-                                            .licenseImageDownloadUrl(
-                                      (apiResulttx0?.jsonBody ?? ''),
-                                    );
+                                    FFAppState().update(() {
+                                      FFAppState()
+                                              .driverLicenseImageDownloadUrl =
+                                          DriverInfoGroup.getDriverCall
+                                              .licenseImageDownloadUrl(
+                                        (apiResulttx0?.jsonBody ?? ''),
+                                      );
+                                    });
                                   } else {
                                     await showDialog(
                                       context: context,
