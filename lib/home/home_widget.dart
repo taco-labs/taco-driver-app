@@ -190,22 +190,58 @@ class _HomeWidgetState extends State<HomeWidget> {
                       }.withoutNulls,
                     );
                   } else {
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('오류'),
-                          content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('확인'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    FFAppState().errCode = getJsonField(
+                      (apiResultd22?.jsonBody ?? ''),
+                      r'''$.errCode''',
+                    ).toString();
+                    if (FFAppState().errCode == 'ERR_NOT_FOUND') {
+                      context.pushNamed(
+                        'SettlementInfo',
+                        queryParams: {
+                          'accountNumber': serializeParam(
+                            DriverInfoGroup.getSettlementAccountCall
+                                .accountNumber(
+                                  (apiResultqz6?.jsonBody ?? ''),
+                                )
+                                .toString(),
+                            ParamType.String,
+                          ),
+                          'bankCode': serializeParam(
+                            DriverInfoGroup.getSettlementAccountCall
+                                .bank(
+                                  (apiResultqz6?.jsonBody ?? ''),
+                                )
+                                .toString(),
+                            ParamType.String,
+                          ),
+                          'totalAmount': serializeParam(
+                            0,
+                            ParamType.int,
+                          ),
+                          'requestableAmount': serializeParam(
+                            0,
+                            ParamType.int,
+                          ),
+                        }.withoutNulls,
+                      );
+                    } else {
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('오류'),
+                            content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('확인'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   }
                 } else {
                   await showDialog(
