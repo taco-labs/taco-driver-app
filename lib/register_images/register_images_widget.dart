@@ -2,6 +2,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,10 +23,13 @@ class RegisterImagesWidget extends StatefulWidget {
 }
 
 class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
-  ApiCallResponse? apiResultUpdateDriver2;
+  bool isMediaUploading = false;
+  Uint8List uploadedFileBytes = Uint8List.fromList([]);
+
   ApiCallResponse? apiResulttx0;
   bool? profileUploadSucceeded;
   String? fcmToken2;
+  ApiCallResponse? apiResultUpdateDriver2;
   ApiCallResponse? apiResultUpdateDriver;
   ApiCallResponse? apiResulttx1;
   bool? licenseUploadSucceeded;
@@ -144,6 +148,43 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              final selectedMedia =
+                                  await selectMediaWithSourceBottomSheet(
+                                context: context,
+                                allowPhoto: true,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                setState(() => isMediaUploading = true);
+                                var selectedMediaBytes = <Uint8List>[];
+                                try {
+                                  showUploadMessage(
+                                    context,
+                                    'Uploading file...',
+                                    showLoading: true,
+                                  );
+                                  selectedMediaBytes = selectedMedia
+                                      .map((m) => m.bytes)
+                                      .toList();
+                                } finally {
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                  isMediaUploading = false;
+                                }
+                                if (selectedMediaBytes.length ==
+                                    selectedMedia.length) {
+                                  setState(() => uploadedFileBytes =
+                                      selectedMediaBytes.first);
+                                  showUploadMessage(context, 'Success!');
+                                } else {
+                                  setState(() {});
+                                  showUploadMessage(
+                                      context, 'Failed to upload media');
+                                  return;
+                                }
+                              }
+
                               apiResulttx0 =
                                   await DriverInfoGroup.getDriverCall.call(
                                 apiToken: FFAppState().apiToken,
