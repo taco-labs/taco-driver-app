@@ -153,68 +153,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         });
         break;
       case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          setState(() {
-            actions.fromCallRequestedMessagePayload(message.data);
-            actions.setCallState('TAXI_CALL_REQUESTED');
-          });
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text('승객의 요청으로 배차가 취소되었습니다'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            },
-          );
-
-          setState(() {
-            actions.setCallState('TAXI_CALL_WAITING');
-          });
-        }
-        break;
-    }
-  }
-
-  void _handleInitialMessage(RemoteMessage message) async {
-    dynamic data = message.data;
-    debugPrint('Initial data received ${data.toString()}');
-
-    switch (data['category']) {
-      case NotificationCategory_Driver:
-        setState(() {
-          FFAppState().driverIsActivated = true;
-        });
-        break;
-      case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          if (FFAppState().driverIsOnDuty) {
-            apiResultyb9 = await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
-              apiToken: FFAppState().apiToken,
-              driverId: FFAppState().driverId,
-              apiEndpointTarget: FFAppState().apiEndpointTarget,
-            );
-            if ((apiResultyb9?.succeeded ?? true)) {
-              setState(() {
-                actions.fromGetLatestCallTicketlApiResponse(
-                  (apiResultyb9?.jsonBody ?? ''),
-                );
-                actions.setCallState('TAXI_CALL_REQUESTED');
-              });
-            } else {
-              setState(() {
-                actions.setCallState('TAXI_CALL_WAITING');
-              });
-            }
-          }
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          if (FFAppState().isOnDrivingToDeparture) {
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            setState(() {
+              actions.fromCallRequestedMessagePayload(message.data);
+              actions.setCallState('TAXI_CALL_REQUESTED');
+            });
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
             await showDialog(
               context: context,
               builder: (alertDialogContext) {
@@ -239,6 +184,66 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
   }
 
+  void _handleInitialMessage(RemoteMessage message) async {
+    dynamic data = message.data;
+    debugPrint('Initial data received ${data.toString()}');
+
+    switch (data['category']) {
+      case NotificationCategory_Driver:
+        setState(() {
+          FFAppState().driverIsActivated = true;
+        });
+        break;
+      case NotificationCategory_Taxicall:
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            if (FFAppState().driverIsOnDuty) {
+              apiResultyb9 =
+              await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
+                apiToken: FFAppState().apiToken,
+                driverId: FFAppState().driverId,
+                apiEndpointTarget: FFAppState().apiEndpointTarget,
+              );
+              if ((apiResultyb9?.succeeded ?? true)) {
+                setState(() {
+                  actions.fromGetLatestCallTicketlApiResponse(
+                    (apiResultyb9?.jsonBody ?? ''),
+                  );
+                  actions.setCallState('TAXI_CALL_REQUESTED');
+                });
+              } else {
+                setState(() {
+                  actions.setCallState('TAXI_CALL_WAITING');
+                });
+              }
+            }
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+            if (FFAppState().isOnDrivingToDeparture) {
+              await showDialog(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(alertDialogContext),
+                        child: Text('확인'),
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
+            }
+          }
+        }
+        break;
+    }
+  }
+
   void _handleBackgroundMessage(dynamic message) async {
     if (message is! RemoteMessage) {
       print('got wrong data type for handling in foreground');
@@ -255,15 +260,17 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         });
         break;
       case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          setState(() {
-            actions.fromCallRequestedMessagePayload(data);
-            actions.setCallState('TAXI_CALL_REQUESTED');
-          });
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          setState(() {
-            actions.setCallState('TAXI_CALL_WAITING');
-          });
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            setState(() {
+              actions.fromCallRequestedMessagePayload(data);
+              actions.setCallState('TAXI_CALL_REQUESTED');
+            });
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+            setState(() {
+              actions.setCallState('TAXI_CALL_WAITING');
+            });
+          }
         }
         break;
     }
@@ -2097,6 +2104,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     alignment: AlignmentDirectional(0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        String? fcmToken = await actions.getFcmToken();
+                        debugPrint('fcmToken $fcmToken');
                         if (await getPermissionStatus(locationPermission)) {
                           apiResult438 =
                               await DriverInfoGroup.updateOnDutyCall.call(
