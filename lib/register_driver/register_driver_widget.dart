@@ -666,13 +666,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 if (val.length < 1) {
                                   return '차량번호를 정확히 입력해주세요';
                                 }
-                                if (val.length > 8) {
-                                  return '차량번호를 정확히 입력해주세요';
-                                }
-                                if (!RegExp('^\\d{2,3}[가-힣]\\d{4}\$')
-                                    .hasMatch(val)) {
-                                  return '차량번호를 정확히 입력해주세요';
-                                }
+
                                 return null;
                               },
                             ),
@@ -742,16 +736,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
 
-                                if (val.length < 11) {
+                                if (val.length < 1) {
                                   return '택시 자격증 번호를 정확히 입력해주세요';
                                 }
-                                if (val.length > 11) {
-                                  return '택시 자격증 번호를 정확히 입력해주세요';
-                                }
-                                if (!RegExp('^\\d{2}-[가-힣][가-힣]-\\d{5}\$')
-                                    .hasMatch(val)) {
-                                  return '택시 자격증 번호를 정확히 입력해주세요';
-                                }
+
                                 return null;
                               },
                             ),
