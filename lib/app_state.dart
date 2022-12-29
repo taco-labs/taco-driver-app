@@ -89,7 +89,7 @@ class FFAppState extends ChangeNotifier {
     _driverLicenseNumber = _value;
   }
 
-  String _apiEndpointTarget = 'dev';
+  String _apiEndpointTarget = 'prod';
   String get apiEndpointTarget => _apiEndpointTarget;
   set apiEndpointTarget(String _value) {
     _apiEndpointTarget = _value;
