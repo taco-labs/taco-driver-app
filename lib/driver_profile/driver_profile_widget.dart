@@ -18,8 +18,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
-  TextEditingController? phoneNumberController1;
-  TextEditingController? phoneNumberController2;
+  TextEditingController? phoneNumberController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -34,10 +33,8 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
         TextEditingController(text: FFAppState().driverFirstName);
     lastNameController =
         TextEditingController(text: FFAppState().driverLastName);
-    phoneNumberController1 =
+    phoneNumberController =
         TextEditingController(text: FFAppState().driverPhoneNumber);
-    phoneNumberController2 =
-        TextEditingController(text: FFAppState().driverReferralCode);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -47,8 +44,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
     genderCodeController?.dispose();
     firstNameController?.dispose();
     lastNameController?.dispose();
-    phoneNumberController1?.dispose();
-    phoneNumberController2?.dispose();
+    phoneNumberController?.dispose();
     super.dispose();
   }
 
@@ -246,7 +242,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                       child: TextFormField(
-                        controller: phoneNumberController1,
+                        controller: phoneNumberController,
                         readOnly: true,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -437,55 +433,6 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                      child: TextFormField(
-                        controller: phoneNumberController2,
-                        readOnly: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: '추천인코드',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                     ),
                   ],
