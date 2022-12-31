@@ -375,6 +375,12 @@ class DriverInfoGroup {
       ListDriverSettlementHistoryCall();
   static RequestDriverSettlementCall requestDriverSettlementCall =
       RequestDriverSettlementCall();
+  static ListDriverDenyTaxiCallTagCall listDriverDenyTaxiCallTagCall =
+      ListDriverDenyTaxiCallTagCall();
+  static AddDriverDenyTaxiCallTagCall addDriverDenyTaxiCallTagCall =
+      AddDriverDenyTaxiCallTagCall();
+  static DeleteDriverDenyTaxiCallTagCall deleteDriverDenyTaxiCallTagCall =
+      DeleteDriverDenyTaxiCallTagCall();
 }
 
 class GetDriverCall {
@@ -913,6 +919,81 @@ class RequestDriverSettlementCall {
       },
       params: {},
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ListDriverDenyTaxiCallTagCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? driverId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Driver Deny Taxi Call Tag',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/deny_taxi_call_tag',
+      callType: ApiCallType.GET,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AddDriverDenyTaxiCallTagCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? driverId = '',
+    int? tagId,
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Add Driver Deny Taxi Call Tag',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/deny_taxi_call_tag/${tagId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class DeleteDriverDenyTaxiCallTagCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? driverId = '',
+    int? tagId,
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Delete Driver Deny Taxi Call Tag',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/deny_taxi_call_tag/${tagId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

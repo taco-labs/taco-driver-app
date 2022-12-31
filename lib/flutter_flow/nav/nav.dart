@@ -132,14 +132,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => CompanyInfoWidget(),
             ),
             FFRoute(
-              name: 'HomeCopy',
-              path: 'homeCopy',
-              builder: (context, params) => HomeCopyWidget(),
-            ),
-            FFRoute(
               name: 'Policy',
               path: 'policy',
               builder: (context, params) => PolicyWidget(),
+            ),
+            FFRoute(
+              name: 'HomeCopy',
+              path: 'homeCopy',
+              builder: (context, params) => HomeCopyWidget(),
             ),
             FFRoute(
               name: 'TermsOfService',
