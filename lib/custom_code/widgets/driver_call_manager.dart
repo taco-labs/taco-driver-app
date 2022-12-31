@@ -315,7 +315,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     !FFAppState().isArrived)
                   Container(
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -324,7 +325,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         )
                       ],
                       border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
                         width: 2,
                       ),
                     ),
@@ -334,8 +336,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -345,11 +347,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 16,
-                                      ),
+                                    fontFamily: 'Poppins',
+                                    color:
+                                    FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 16,
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -359,36 +362,39 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                        ),
+                                      fontFamily: 'Poppins',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                    '매일 4시간 콜대기하고 3만원 적립의 혜택을 받아가세요!',
                                     maxLines: 2,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                        ),
+                                      fontFamily: 'Poppins',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -396,8 +402,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           ),
                           Divider(),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 20, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -407,16 +413,16 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16,
-                                      ),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 20, 0, 20),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -426,9 +432,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18,
-                                      ),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -438,9 +444,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 18,
-                                        ),
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -448,14 +454,16 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           ),
                           if (FFAppState().isOnCallWaiting)
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 0, 0, 10),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 40, 0),
                                     child: Text(
                                       '콜 대기중입니다...',
@@ -463,15 +471,16 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 18,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18,
+                                      ),
                                     ),
                                   ),
                                   Container(
                                     width: 40,
                                     height: 40,
-                                    child: custom_widgets.CallWaitingIndicator(
+                                    child: custom_widgets
+                                        .CallWaitingIndicator(
                                       width: 40,
                                       height: 40,
                                       color: FlutterFlowTheme.of(context)
@@ -489,7 +498,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 if (FFAppState().isOnCallViewing)
                   Container(
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -499,7 +509,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       ],
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
                         width: 2,
                       ),
                     ),
@@ -511,13 +522,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           if (FFAppState().callTagsConcat != null &&
                               FFAppState().callTagsConcat != '')
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 10, 0, 0),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       FFAppState().callTagsConcat,
@@ -525,12 +537,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -542,7 +555,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     FFAppState().callUserTag,
@@ -550,27 +564,30 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 5, 0),
                                     child: Text(
                                       '출발지 약 ${functions.toHumanFriendlyDistanceFromMeters(FFAppState().callToDepartureDistance.toString())}',
@@ -578,12 +595,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                   Text(
@@ -592,52 +610,57 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
-                                  if (FFAppState().callAdditionalPrice > 0)
+                                  if (FFAppState().callAdditionalPrice >
+                                      0)
                                     Text(
                                       '타코 ${FFAppState().callAdditionalPrice.toString()}개',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .primaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                 ],
                               ),
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
@@ -645,32 +668,37 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callDepartureName != null &&
-                                              FFAppState().callDepartureName !=
-                                                  ''
+                                      FFAppState().callDepartureName !=
+                                          null &&
+                                          FFAppState()
+                                              .callDepartureName !=
+                                              ''
                                           ? '${FFAppState().callDepartureName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -683,13 +711,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             size: 30,
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 10),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callArrivalAddressRegionDepth3} ',
@@ -697,31 +726,37 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callArrivalName != null &&
-                                              FFAppState().callArrivalName != ''
+                                      FFAppState().callArrivalName !=
+                                          null &&
+                                          FFAppState()
+                                              .callArrivalName !=
+                                              ''
                                           ? '${FFAppState().callArrivalName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -729,8 +764,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 40, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 40, 0, 10),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -743,24 +778,28 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       apiResultw8d = await TaxiCallGroup
                                           .rejectTaxiCallTicketCall
                                           .call(
-                                        ticketId: FFAppState().callTicketId,
+                                        ticketId:
+                                        FFAppState().callTicketId,
                                         apiToken: FFAppState().apiToken,
-                                        apiEndpointTarget:
-                                            FFAppState().apiEndpointTarget,
+                                        apiEndpointTarget: FFAppState()
+                                            .apiEndpointTarget,
                                       );
-                                      if ((apiResultw8d?.succeeded ?? true)) {
+                                      if ((apiResultw8d?.succeeded ??
+                                          true)) {
                                         await actions.setCallState(
                                           'TAXI_CALL_WAITING',
                                         );
                                       } else {
                                         FFAppState().update(() {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResultw8d?.jsonBody ?? ''),
-                                            r'''$.errCode''',
-                                          ).toString();
+                                          FFAppState().errCode =
+                                              getJsonField(
+                                                (apiResultw8d?.jsonBody ??
+                                                    ''),
+                                                r'''$.errCode''',
+                                              ).toString();
                                         });
                                         if ((FFAppState().errCode ==
-                                                'ERR_NOT_FOUND') ||
+                                            'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
                                                 'ERR_INVALID')) {
                                           await actions.setCallState(
@@ -769,7 +808,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         } else {
                                           await showDialog(
                                             context: context,
-                                            builder: (alertDialogContext) {
+                                            builder:
+                                                (alertDialogContext) {
                                               return AlertDialog(
                                                 title: Text('오류'),
                                                 content: Text(
@@ -796,18 +836,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      textStyle:
+                                      FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius:
+                                      BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
@@ -819,12 +861,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       apiResultj1q = await TaxiCallGroup
                                           .acceptTaxiCallTicketCall
                                           .call(
-                                        ticketId: FFAppState().callTicketId,
+                                        ticketId:
+                                        FFAppState().callTicketId,
                                         apiToken: FFAppState().apiToken,
-                                        apiEndpointTarget:
-                                            FFAppState().apiEndpointTarget,
+                                        apiEndpointTarget: FFAppState()
+                                            .apiEndpointTarget,
                                       );
-                                      if ((apiResultj1q?.succeeded ?? true)) {
+                                      if ((apiResultj1q?.succeeded ??
+                                          true)) {
                                         await actions
                                             .fromGetLatestCallApiResponse(
                                           (apiResultj1q?.jsonBody ?? ''),
@@ -834,21 +878,25 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         );
                                       } else {
                                         FFAppState().update(() {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResultj1q?.jsonBody ?? ''),
-                                            r'''$.errCode''',
-                                          ).toString();
+                                          FFAppState().errCode =
+                                              getJsonField(
+                                                (apiResultj1q?.jsonBody ??
+                                                    ''),
+                                                r'''$.errCode''',
+                                              ).toString();
                                         });
                                         if ((FFAppState().errCode ==
-                                                'ERR_NOT_FOUND') ||
+                                            'ERR_NOT_FOUND') ||
                                             (FFAppState().errCode ==
                                                 'ERR_INVALID')) {
                                           await showDialog(
                                             context: context,
-                                            builder: (alertDialogContext) {
+                                            builder:
+                                                (alertDialogContext) {
                                               return AlertDialog(
                                                 title: Text('오류'),
-                                                content: Text('만료된 콜 요청입니다'),
+                                                content:
+                                                Text('만료된 콜 요청입니다'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
@@ -866,7 +914,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         } else {
                                           await showDialog(
                                             context: context,
-                                            builder: (alertDialogContext) {
+                                            builder:
+                                                (alertDialogContext) {
                                               return AlertDialog(
                                                 title: Text('오류'),
                                                 content: Text(
@@ -893,18 +942,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      textStyle:
+                                      FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius:
+                                      BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
@@ -918,7 +969,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 if (FFAppState().isOnDrivingToDeparture)
                   Container(
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -928,7 +980,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       ],
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
                         width: 2,
                       ),
                     ),
@@ -938,90 +991,101 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         apiResultCancelCall =
-                                            await TaxiCallGroup
-                                                .cancelTaxiCallRequestCall
-                                                .call(
+                                        await TaxiCallGroup
+                                            .cancelTaxiCallRequestCall
+                                            .call(
                                           taxiCallRequestId:
-                                              FFAppState().callId,
+                                          FFAppState().callId,
                                           apiToken: FFAppState().apiToken,
-                                          apiEndpointTarget:
-                                              FFAppState().apiEndpointTarget,
+                                          apiEndpointTarget: FFAppState()
+                                              .apiEndpointTarget,
                                           confirmCancel: false,
                                         );
-                                        if ((apiResultCancelCall?.succeeded ??
+                                        if ((apiResultCancelCall
+                                            ?.succeeded ??
                                             true)) {
                                           await actions.setCallState(
                                             'TAXI_CALL_WAITING',
                                           );
                                         } else {
                                           FFAppState().update(() {
-                                            FFAppState().errCode = getJsonField(
-                                              (apiResultCancelCall?.jsonBody ??
-                                                  ''),
-                                              r'''$.errCode''',
-                                            ).toString();
+                                            FFAppState().errCode =
+                                                getJsonField(
+                                                  (apiResultCancelCall
+                                                      ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.errCode''',
+                                                ).toString();
                                           });
                                           if (FFAppState().errCode ==
                                               'ERR_NEED_CONFIRMATION') {
                                             var confirmDialogResponse =
                                                 await showDialog<bool>(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text('주의'),
-                                                          content: Text(
-                                                              '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext,
-                                                                      false),
-                                                              child: Text('유지'),
-                                                            ),
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext,
-                                                                      true),
-                                                              child: Text('취소'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ) ??
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                      Text('주의'),
+                                                      content: Text(
+                                                          '콜 수락을 취소하시겠습니까? 정당한 사유없이 취소하는 경우 페널티가 부과됩니다'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child: Text(
+                                                              '유지'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child: Text(
+                                                              '취소'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
                                                     false;
                                             if (confirmDialogResponse) {
                                               apiResultCancelCall2 =
-                                                  await TaxiCallGroup
-                                                      .cancelTaxiCallRequestCall
-                                                      .call(
+                                              await TaxiCallGroup
+                                                  .cancelTaxiCallRequestCall
+                                                  .call(
                                                 taxiCallRequestId:
-                                                    FFAppState().callId,
-                                                apiToken: FFAppState().apiToken,
-                                                apiEndpointTarget: FFAppState()
+                                                FFAppState().callId,
+                                                apiToken:
+                                                FFAppState().apiToken,
+                                                apiEndpointTarget:
+                                                FFAppState()
                                                     .apiEndpointTarget,
                                                 confirmCancel: true,
                                               );
                                               if ((apiResultCancelCall2
-                                                      ?.succeeded ??
+                                                  ?.succeeded ??
                                                   true)) {
-                                                await actions.setCallState(
+                                                await actions
+                                                    .setCallState(
                                                   'TAXI_CALL_WAITING',
                                                 );
                                               } else {
@@ -1038,7 +1102,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('확인'),
+                                                          child:
+                                                          Text('확인'),
                                                         ),
                                                       ],
                                                     );
@@ -1049,7 +1114,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           } else {
                                             await showDialog(
                                               context: context,
-                                              builder: (alertDialogContext) {
+                                              builder:
+                                                  (alertDialogContext) {
                                                 return AlertDialog(
                                                   title: Text('오류'),
                                                   content: Text(
@@ -1074,31 +1140,36 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       options: FFButtonOptions(
                                         width: 80,
                                         height: 60,
-                                        color: FlutterFlowTheme.of(context)
+                                        color:
+                                        FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        textStyle: FlutterFlowTheme.of(context)
+                                        textStyle:
+                                        FlutterFlowTheme.of(context)
                                             .subtitle2
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius:
+                                        BorderRadius.circular(8),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         await launchUrl(Uri(
                                           scheme: 'tel',
-                                          path: FFAppState().callUserPhone,
+                                          path:
+                                          FFAppState().callUserPhone,
                                         ));
                                       },
                                       text: '',
@@ -1109,31 +1180,36 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       options: FFButtonOptions(
                                         width: 60,
                                         height: 60,
-                                        color: FlutterFlowTheme.of(context)
+                                        color:
+                                        FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        textStyle: FlutterFlowTheme.of(context)
+                                        textStyle:
+                                        FlutterFlowTheme.of(context)
                                             .subtitle2
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius:
+                                        BorderRadius.circular(8),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         await launchUrl(Uri(
                                           scheme: 'sms',
-                                          path: FFAppState().callUserPhone,
+                                          path:
+                                          FFAppState().callUserPhone,
                                         ));
                                       },
                                       text: '',
@@ -1144,20 +1220,23 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       options: FFButtonOptions(
                                         width: 60,
                                         height: 60,
-                                        color: FlutterFlowTheme.of(context)
+                                        color:
+                                        FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        textStyle: FlutterFlowTheme.of(context)
+                                        textStyle:
+                                        FlutterFlowTheme.of(context)
                                             .subtitle2
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius:
+                                        BorderRadius.circular(8),
                                       ),
                                     ),
                                   ),
@@ -1179,18 +1258,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      textStyle:
+                                      FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius:
+                                      BorderRadius.circular(8),
                                     ),
                                   ),
                                 ],
@@ -1200,13 +1281,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           if (FFAppState().callTagsConcat != null &&
                               FFAppState().callTagsConcat != '')
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 10, 0, 0),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       FFAppState().callTagsConcat,
@@ -1214,12 +1296,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1231,7 +1314,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     FFAppState().callUserTag,
@@ -1239,24 +1323,26 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
@@ -1264,48 +1350,55 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Text(
                                     functions.toAddressNo(
-                                        FFAppState().callDepartureAddressSubNo,
+                                        FFAppState()
+                                            .callDepartureAddressSubNo,
                                         FFAppState()
                                             .callDepartureAddressMainNo),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callDepartureName != null &&
-                                              FFAppState().callDepartureName !=
-                                                  ''
+                                      FFAppState().callDepartureName !=
+                                          null &&
+                                          FFAppState()
+                                              .callDepartureName !=
+                                              ''
                                           ? '${FFAppState().callDepartureName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1318,13 +1411,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             size: 30,
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 10),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callArrivalAddressRegionDepth3} ',
@@ -1332,46 +1426,55 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Text(
                                     functions.toAddressNo(
-                                        FFAppState().callArrivalAddressSubNo,
-                                        FFAppState().callArrivalAddressMainNo),
+                                        FFAppState()
+                                            .callArrivalAddressSubNo,
+                                        FFAppState()
+                                            .callArrivalAddressMainNo),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callArrivalName != null &&
-                                              FFAppState().callArrivalName != ''
+                                      FFAppState().callArrivalName !=
+                                          null &&
+                                          FFAppState()
+                                              .callArrivalName !=
+                                              ''
                                           ? '${FFAppState().callArrivalName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1379,8 +1482,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 40, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 40, 0, 10),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1388,15 +1491,17 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 FFButtonWidget(
                                   onPressed: () async {
                                     apiResultDriverToArrival =
-                                        await TaxiCallGroup
-                                            .taxiCallDriverToArrivalCall
-                                            .call(
-                                      taxiCallRequestId: FFAppState().callId,
+                                    await TaxiCallGroup
+                                        .taxiCallDriverToArrivalCall
+                                        .call(
+                                      taxiCallRequestId:
+                                      FFAppState().callId,
                                       apiToken: FFAppState().apiToken,
                                       apiEndpointTarget:
-                                          FFAppState().apiEndpointTarget,
+                                      FFAppState().apiEndpointTarget,
                                     );
-                                    if ((apiResultDriverToArrival?.succeeded ??
+                                    if ((apiResultDriverToArrival
+                                        ?.succeeded ??
                                         true)) {
                                       await actions.setCallState(
                                         'DRIVER_TO_ARRIVAL',
@@ -1407,12 +1512,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             title: Text('오류'),
-                                            content:
-                                                Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                            content: Text(
+                                                '서버 오류가 발생하여 다시 시도해주세요'),
                                             actions: [
                                               TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
+                                                onPressed: () =>
+                                                    Navigator.pop(
+                                                        alertDialogContext),
                                                 child: Text('확인'),
                                               ),
                                             ],
@@ -1429,18 +1535,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     height: 60,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
+                                    textStyle:
+                                    FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
                                       width: 1,
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius:
+                                    BorderRadius.circular(8),
                                   ),
                                 ),
                               ],
@@ -1453,7 +1561,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 if (FFAppState().isOnDrivingToArrival)
                   Container(
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -1463,7 +1572,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       ],
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
                         width: 2,
                       ),
                     ),
@@ -1473,13 +1583,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   FFButtonWidget(
                                     onPressed: () async {
@@ -1499,18 +1610,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       height: 60,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      textStyle:
+                                      FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius:
+                                      BorderRadius.circular(8),
                                     ),
                                   ),
                                 ],
@@ -1520,13 +1633,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           if (FFAppState().callTagsConcat != null &&
                               FFAppState().callTagsConcat != '')
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 10, 0, 0),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       FFAppState().callTagsConcat,
@@ -1534,12 +1648,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1551,7 +1666,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     FFAppState().callUserTag,
@@ -1559,24 +1675,26 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callDepartureAddressRegionDepth2}  ${FFAppState().callDepartureAddressRegionDepth3} ',
@@ -1584,48 +1702,55 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Text(
                                     functions.toAddressNo(
-                                        FFAppState().callDepartureAddressSubNo,
+                                        FFAppState()
+                                            .callDepartureAddressSubNo,
                                         FFAppState()
                                             .callDepartureAddressMainNo),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callDepartureName != null &&
-                                              FFAppState().callDepartureName !=
-                                                  ''
+                                      FFAppState().callDepartureName !=
+                                          null &&
+                                          FFAppState()
+                                              .callDepartureName !=
+                                              ''
                                           ? '${FFAppState().callDepartureName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1638,13 +1763,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             size: 30,
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 0, 10),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callArrivalAddressRegionDepth3} ',
@@ -1652,46 +1778,55 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Text(
                                     functions.toAddressNo(
-                                        FFAppState().callArrivalAddressSubNo,
-                                        FFAppState().callArrivalAddressMainNo),
+                                        FFAppState()
+                                            .callArrivalAddressSubNo,
+                                        FFAppState()
+                                            .callArrivalAddressMainNo),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .title1
                                         .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
                                         2, 0, 0, 0),
                                     child: Text(
-                                      FFAppState().callArrivalName != null &&
-                                              FFAppState().callArrivalName != ''
+                                      FFAppState().callArrivalName !=
+                                          null &&
+                                          FFAppState()
+                                              .callArrivalName !=
+                                              ''
                                           ? '${FFAppState().callArrivalName}'
                                           : '',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .title1
                                           .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1699,8 +1834,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 40, 0, 10),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0, 40, 0, 10),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1717,18 +1852,20 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     height: 60,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
+                                    textStyle:
+                                    FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
                                       width: 1,
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius:
+                                    BorderRadius.circular(8),
                                   ),
                                 ),
                               ],
@@ -1741,7 +1878,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                 if (FFAppState().isArrived)
                   Container(
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -1751,12 +1889,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       ],
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .primaryBackground,
                         width: 2,
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                      padding:
+                      EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -1770,53 +1910,59 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 5, 0),
+                                        padding: EdgeInsetsDirectional
+                                            .fromSTEB(0, 0, 5, 0),
                                         child: Text(
                                           '적립 타코 ${FFAppState().callAdditionalPrice.toString()}개',
                                           textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
+                                          style:
+                                          FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme
+                                                .of(context)
+                                                .primaryText,
+                                            fontSize: 16,
+                                            fontWeight:
+                                            FontWeight.w600,
+                                          ),
                                         ),
                                       ),
                                       if (FFAppState()
-                                              .driverAdditionalRewardPrice >
+                                          .driverAdditionalRewardPrice >
                                           0)
                                         Text(
                                           '(추천인 추가 적립 ${FFAppState().driverAdditionalRewardPrice.toString()}개)',
                                           textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
+                                          style:
+                                          FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
-                                                fontFamily: 'Outfit',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme
+                                                .of(context)
+                                                .primaryText,
+                                            fontSize: 16,
+                                            fontWeight:
+                                            FontWeight.w600,
+                                          ),
                                         ),
                                     ],
                                   ),
                                 ),
                               ),
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 10, 0, 0),
                               child: Form(
                                 key: formKey,
-                                autovalidateMode: AutovalidateMode.disabled,
+                                autovalidateMode:
+                                AutovalidateMode.disabled,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -1826,70 +1972,87 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: '운임',
-                                        labelStyle: FlutterFlowTheme.of(context)
+                                        labelStyle:
+                                        FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 18,
-                                            ),
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                        ),
                                         hintText: '최종 미터기 실 운임 입력',
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder:
+                                        UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterFlowTheme.of(
+                                                context)
                                                 .secondaryText,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius:
+                                          const BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
+                                            topRight:
+                                            Radius.circular(4.0),
                                           ),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder:
+                                        UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterFlowTheme.of(
+                                                context)
                                                 .secondaryText,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius:
+                                          const BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
+                                            topRight:
+                                            Radius.circular(4.0),
                                           ),
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterFlowTheme.of(
+                                                context)
                                                 .alternate,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius:
+                                          const BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
+                                            topRight:
+                                            Radius.circular(4.0),
                                           ),
                                         ),
                                         focusedErrorBorder:
-                                            UnderlineInputBorder(
+                                        UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterFlowTheme.of(
+                                                context)
                                                 .alternate,
                                             width: 1,
                                           ),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius:
+                                          const BorderRadius.only(
                                             topLeft: Radius.circular(4.0),
-                                            topRight: Radius.circular(4.0),
+                                            topRight:
+                                            Radius.circular(4.0),
                                           ),
                                         ),
                                         filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
+                                        fillColor:
+                                        FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 20,
-                                          ),
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(
+                                            context)
+                                            .secondaryText,
+                                        fontSize: 20,
+                                      ),
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
                                       validator: (val) {
@@ -1905,7 +2068,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       },
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding:
+                                      EdgeInsetsDirectional.fromSTEB(
                                           0, 5, 0, 10),
                                       child: TextFormField(
                                         controller: tollFareController,
@@ -1913,82 +2077,96 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         decoration: InputDecoration(
                                           labelText: '통행료',
                                           labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 18,
-                                                  ),
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
                                           hintText: '통행료 및 추가금액 입력',
-                                          enabledBorder: UnderlineInputBorder(
+                                          enabledBorder:
+                                          UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .secondaryText,
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
+                                            const BorderRadius.only(
+                                              topLeft:
+                                              Radius.circular(4.0),
+                                              topRight:
+                                              Radius.circular(4.0),
                                             ),
                                           ),
-                                          focusedBorder: UnderlineInputBorder(
+                                          focusedBorder:
+                                          UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .secondaryText,
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
+                                            const BorderRadius.only(
+                                              topLeft:
+                                              Radius.circular(4.0),
+                                              topRight:
+                                              Radius.circular(4.0),
                                             ),
                                           ),
-                                          errorBorder: UnderlineInputBorder(
+                                          errorBorder:
+                                          UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .alternate,
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
+                                            const BorderRadius.only(
+                                              topLeft:
+                                              Radius.circular(4.0),
+                                              topRight:
+                                              Radius.circular(4.0),
                                             ),
                                           ),
                                           focusedErrorBorder:
-                                              UnderlineInputBorder(
+                                          UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .alternate,
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
+                                            const BorderRadius.only(
+                                              topLeft:
+                                              Radius.circular(4.0),
+                                              topRight:
+                                              Radius.circular(4.0),
                                             ),
                                           ),
                                           filled: true,
                                           fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
+                                          FlutterFlowTheme.of(context)
+                                              .primaryBackground,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
+                                        style:
+                                        FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 20,
-                                            ),
+                                          fontFamily: 'Poppins',
+                                          color:
+                                          FlutterFlowTheme.of(
+                                              context)
+                                              .secondaryText,
+                                          fontSize: 20,
+                                        ),
                                         textAlign: TextAlign.center,
-                                        keyboardType: TextInputType.number,
+                                        keyboardType:
+                                        TextInputType.number,
                                       ),
                                     ),
                                   ],
@@ -1996,8 +2174,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 31, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0, 31, 0, 0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   if (formKey.currentState == null ||
@@ -2006,17 +2184,21 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   }
 
                                   apiResultDoneTaxiCall =
-                                      await TaxiCallGroup.doneTaxiCallCall.call(
-                                    taxiCallRequestId: FFAppState().callId,
-                                    basePrice:
-                                        int.tryParse(taxiFareController!.text),
+                                  await TaxiCallGroup.doneTaxiCallCall
+                                      .call(
+                                    taxiCallRequestId:
+                                    FFAppState().callId,
+                                    basePrice: int.tryParse(
+                                        taxiFareController!.text),
                                     apiToken: FFAppState().apiToken,
-                                    tollFee: tollFareController!.text != null &&
-                                            tollFareController!.text != ''
-                                        ? int.tryParse(tollFareController!.text)
+                                    tollFee: tollFareController!.text !=
+                                        null &&
+                                        tollFareController!.text != ''
+                                        ? int.tryParse(
+                                        tollFareController!.text)
                                         : 0,
                                     apiEndpointTarget:
-                                        FFAppState().apiEndpointTarget,
+                                    FFAppState().apiEndpointTarget,
                                   );
                                   if ((apiResultDoneTaxiCall?.succeeded ??
                                       true)) {
@@ -2025,11 +2207,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       builder: (alertDialogContext) {
                                         return AlertDialog(
                                           title: Text('운행 종료'),
-                                          content: Text('승객에게 운임을 결제 받으세요'),
+                                          content:
+                                          Text('승객에게 운임을 결제 받으세요'),
                                           actions: [
                                             TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
+                                              onPressed: () =>
+                                                  Navigator.pop(
+                                                      alertDialogContext),
                                               child: Text('확인'),
                                             ),
                                           ],
@@ -2049,12 +2233,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       builder: (alertDialogContext) {
                                         return AlertDialog(
                                           title: Text('오류'),
-                                          content:
-                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                          content: Text(
+                                              '서버 오류가 발생하여 다시 시도해주세요'),
                                           actions: [
                                             TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
+                                              onPressed: () =>
+                                                  Navigator.pop(
+                                                      alertDialogContext),
                                               child: Text('확인'),
                                             ),
                                           ],
@@ -2069,15 +2254,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 options: FFButtonOptions(
                                   width: 300,
                                   height: 60,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                      ),
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1,
@@ -2104,15 +2289,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     alignment: AlignmentDirectional(0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        String? fcmToken = await actions.getFcmToken();
-                        debugPrint('fcmToken $fcmToken');
-                        if (await getPermissionStatus(locationPermission)) {
+                        if (await getPermissionStatus(
+                            locationPermission)) {
                           apiResult438 =
-                              await DriverInfoGroup.updateOnDutyCall.call(
+                          await DriverInfoGroup.updateOnDutyCall.call(
                             apiToken: FFAppState().apiToken,
                             driverId: FFAppState().driverId,
                             onDuty: true,
-                            apiEndpointTarget: FFAppState().apiEndpointTarget,
+                            apiEndpointTarget:
+                            FFAppState().apiEndpointTarget,
                           );
                           if ((apiResult438?.succeeded ?? true)) {
                             FFAppState().update(() {
@@ -2131,8 +2316,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   content: Text('서버 오류가 발생하여 다시 시도해주세요'),
                                   actions: [
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext),
                                       child: Text('확인'),
                                     ),
                                   ],
@@ -2141,7 +2326,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             );
                           }
                         } else {
-                          var confirmDialogResponse = await showDialog<bool>(
+                          var confirmDialogResponse =
+                              await showDialog<bool>(
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
@@ -2150,30 +2336,36 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
                                     actions: [
                                       TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
+                                        onPressed: () =>
+                                            Navigator.pop(
+                                                alertDialogContext,
+                                                false),
                                         child: Text('거부'),
                                       ),
                                       TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
+                                        onPressed: () =>
+                                            Navigator.pop(
+                                                alertDialogContext,
+                                                true),
                                         child: Text('승인'),
                                       ),
                                     ],
                                   );
                                 },
                               ) ??
-                              false;
+                                  false;
                           if (confirmDialogResponse) {
                             await requestPermission(locationPermission);
-                            if (await getPermissionStatus(locationPermission)) {
-                              apiResult439 =
-                                  await DriverInfoGroup.updateOnDutyCall.call(
+                            if (await getPermissionStatus(
+                                locationPermission)) {
+                              apiResult439 = await DriverInfoGroup
+                                  .updateOnDutyCall
+                                  .call(
                                 apiToken: FFAppState().apiToken,
                                 driverId: FFAppState().driverId,
                                 onDuty: true,
                                 apiEndpointTarget:
-                                    FFAppState().apiEndpointTarget,
+                                FFAppState().apiEndpointTarget,
                               );
                               if ((apiResult439?.succeeded ?? true)) {
                                 FFAppState().update(() {
@@ -2189,11 +2381,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
                                       title: Text('오류'),
-                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      content:
+                                      Text('서버 오류가 발생하여 다시 시도해주세요'),
                                       actions: [
                                         TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext),
                                           child: Text('확인'),
                                         ),
                                       ],
@@ -2210,8 +2403,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
                                     actions: [
                                       TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext),
                                         child: Text('확인'),
                                       ),
                                     ],
@@ -2228,8 +2421,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
                                   actions: [
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext),
                                       child: Text('확인'),
                                     ),
                                   ],
@@ -2246,12 +2439,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         width: 150,
                         height: 60,
                         color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                         borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1,
@@ -2270,11 +2464,12 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         apiResultkg1 =
-                            await DriverInfoGroup.updateOnDutyCall.call(
+                        await DriverInfoGroup.updateOnDutyCall.call(
                           apiToken: FFAppState().apiToken,
                           driverId: FFAppState().driverId,
                           onDuty: false,
-                          apiEndpointTarget: FFAppState().apiEndpointTarget,
+                          apiEndpointTarget:
+                          FFAppState().apiEndpointTarget,
                         );
                         if ((apiResultkg1?.succeeded ?? true)) {
                           FFAppState().update(() {
@@ -2310,12 +2505,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         width: 150,
                         height: 60,
                         color: FlutterFlowTheme.of(context).secondaryText,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
                         borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1,
@@ -2333,7 +2529,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context)
+                            .secondaryBackground,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 4,
@@ -2343,22 +2540,46 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         ],
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          color: FlutterFlowTheme.of(context)
+                              .primaryBackground,
                           width: 2,
                         ),
                       ),
-                      child: Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                          child: Text(
-                            '등록해주신 정보로 승인 심사중입니다',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                    ),
-                          ),
+                      child: Padding(
+                        padding:
+                        EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 0, 5),
+                                child: Text(
+                                  '등록해주신 정보로 승인 심사중입니다',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Text(
+                                '매일 일괄 처리해드리고 있으니 조금만 기다려 주세요',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
