@@ -55,13 +55,13 @@
 
 
 	<key>PermissionGroupNotification</key>
-      <string>Allow notification</string>
+    <string>Allow notification</string>
 	<key>NSCameraUsageDescription</key>
-      <string>Allow camera</string>
+    <string>Allow camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-      <string>Allow locations</string>
+    <string>Allow locations</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-      <string>Allow access to Photo Library</string>
+    <string>Allow access to Photo Library</string>
 
 
 	<key>UILaunchStoryboardName</key>

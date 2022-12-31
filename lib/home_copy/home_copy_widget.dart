@@ -291,7 +291,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                          '매일 4시간 콜 대기하시고 3만원 적립의 혜택을 받아가세요!',
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -2452,20 +2452,41 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 width: 2,
                               ),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0, 0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 15, 0, 15),
-                                child: Text(
-                                  '등록해주신 정보로 승인 심사중입니다',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 5),
+                                      child: Text(
+                                        '등록해주신 정보로 승인 심사중입니다',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18,
+                                            ),
                                       ),
-                                ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Text(
+                                      '매일 일괄 처리해드리고 있으니 조금만 기다려 주세요',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                          ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
