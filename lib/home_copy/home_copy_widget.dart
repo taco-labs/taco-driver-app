@@ -291,7 +291,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '매일 4시간 콜 대기하시고 3만원 적립의 혜택을 받아가세요!',
+                                          '매일 4시간 콜대기하고 3만원 적립의 혜택을 받아가세요!',
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
