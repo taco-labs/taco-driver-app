@@ -436,7 +436,7 @@ class GetDriverCall {
       );
   dynamic appVersion(dynamic response) => getJsonField(
         response,
-        r'''$.osVersion''',
+        r'''$.appVersion''',
       );
   dynamic isActive(dynamic response) => getJsonField(
         response,
