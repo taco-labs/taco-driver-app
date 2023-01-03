@@ -2292,22 +2292,48 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 );
                                 await actions.startLocationService();
                               } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('오류'),
-                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                FFAppState().update(() {
+                                  FFAppState().errCode = getJsonField(
+                                    (apiResult439?.jsonBody ?? ''),
+                                    r'''$.errCode''',
+                                  ).toString();
+                                });
+                                if (FFAppState().errCode == 'ERR_UNSUPPORTED') {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text(
+                                            '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                               }
                             } else {
                               await showDialog(
