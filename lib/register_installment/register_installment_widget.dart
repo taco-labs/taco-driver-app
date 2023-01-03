@@ -130,6 +130,15 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                           .secondaryText,
                                       fontSize: 18,
                                     ),
+                                hintText: '- 를 제외한 계좌번호를 입력해주세요',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 18,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)

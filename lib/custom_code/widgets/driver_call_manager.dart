@@ -153,68 +153,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         });
         break;
       case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          setState(() {
-            actions.fromCallRequestedMessagePayload(message.data);
-            actions.setCallState('TAXI_CALL_REQUESTED');
-          });
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                content: Text('승객의 요청으로 배차가 취소되었습니다'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            },
-          );
-
-          setState(() {
-            actions.setCallState('TAXI_CALL_WAITING');
-          });
-        }
-        break;
-    }
-  }
-
-  void _handleInitialMessage(RemoteMessage message) async {
-    dynamic data = message.data;
-    debugPrint('Initial data received ${data.toString()}');
-
-    switch (data['category']) {
-      case NotificationCategory_Driver:
-        setState(() {
-          FFAppState().driverIsActivated = true;
-        });
-        break;
-      case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          if (FFAppState().driverIsOnDuty) {
-            apiResultyb9 = await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
-              apiToken: FFAppState().apiToken,
-              driverId: FFAppState().driverId,
-              apiEndpointTarget: FFAppState().apiEndpointTarget,
-            );
-            if ((apiResultyb9?.succeeded ?? true)) {
-              setState(() {
-                actions.fromGetLatestCallTicketlApiResponse(
-                  (apiResultyb9?.jsonBody ?? ''),
-                );
-                actions.setCallState('TAXI_CALL_REQUESTED');
-              });
-            } else {
-              setState(() {
-                actions.setCallState('TAXI_CALL_WAITING');
-              });
-            }
-          }
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          if (FFAppState().isOnDrivingToDeparture) {
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            setState(() {
+              actions.fromCallRequestedMessagePayload(message.data);
+              actions.setCallState('TAXI_CALL_REQUESTED');
+            });
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
             await showDialog(
               context: context,
               builder: (alertDialogContext) {
@@ -239,6 +184,66 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
   }
 
+  void _handleInitialMessage(RemoteMessage message) async {
+    dynamic data = message.data;
+    debugPrint('Initial data received ${data.toString()}');
+
+    switch (data['category']) {
+      case NotificationCategory_Driver:
+        setState(() {
+          FFAppState().driverIsActivated = true;
+        });
+        break;
+      case NotificationCategory_Taxicall:
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            if (FFAppState().driverIsOnDuty) {
+              apiResultyb9 =
+                  await TaxiCallGroup.getLatestTaxiCallTicketCall.call(
+                apiToken: FFAppState().apiToken,
+                driverId: FFAppState().driverId,
+                apiEndpointTarget: FFAppState().apiEndpointTarget,
+              );
+              if ((apiResultyb9?.succeeded ?? true)) {
+                setState(() {
+                  actions.fromGetLatestCallTicketlApiResponse(
+                    (apiResultyb9?.jsonBody ?? ''),
+                  );
+                  actions.setCallState('TAXI_CALL_REQUESTED');
+                });
+              } else {
+                setState(() {
+                  actions.setCallState('TAXI_CALL_WAITING');
+                });
+              }
+            }
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+            if (FFAppState().isOnDrivingToDeparture) {
+              await showDialog(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    content: Text('승객의 요청으로 배차가 취소되었습니다'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(alertDialogContext),
+                        child: Text('확인'),
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
+            }
+          }
+        }
+        break;
+    }
+  }
+
   void _handleBackgroundMessage(dynamic message) async {
     if (message is! RemoteMessage) {
       print('got wrong data type for handling in foreground');
@@ -255,15 +260,17 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         });
         break;
       case NotificationCategory_Taxicall:
-        if (data['taxiCallState'] == TaxiCallStateRequested) {
-          setState(() {
-            actions.fromCallRequestedMessagePayload(data);
-            actions.setCallState('TAXI_CALL_REQUESTED');
-          });
-        } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-          setState(() {
-            actions.setCallState('TAXI_CALL_WAITING');
-          });
+        if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          if (data['taxiCallState'] == TaxiCallStateRequested) {
+            setState(() {
+              actions.fromCallRequestedMessagePayload(data);
+              actions.setCallState('TAXI_CALL_REQUESTED');
+            });
+          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
+            setState(() {
+              actions.setCallState('TAXI_CALL_WAITING');
+            });
+          }
         }
         break;
     }
@@ -372,7 +379,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '기사님의 행복한 운행을 위한 플랫폼 타코입니다!',
+                                    '매일 4시간 콜대기하고 3만원 적립의 혜택을 받아가세요!',
                                     maxLines: 2,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -2114,22 +2121,48 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             );
                             await actions.startLocationService();
                           } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('오류'),
-                                  content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            FFAppState().update(() {
+                              FFAppState().errCode = getJsonField(
+                                (apiResult438?.jsonBody ?? ''),
+                                r'''$.errCode''',
+                              ).toString();
+                            });
+                            if (FFAppState().errCode == 'ERR_UNSUPPORTED') {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('오류'),
+                                    content: Text(
+                                        '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('오류'),
+                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
                           }
                         } else {
                           var confirmDialogResponse = await showDialog<bool>(
@@ -2338,18 +2371,40 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           width: 2,
                         ),
                       ),
-                      child: Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                          child: Text(
-                            '등록해주신 정보로 승인 심사중입니다',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                                child: Text(
+                                  '등록해주신 정보로 승인 심사중입니다',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Text(
+                                '매일 일괄 처리해드리고 있으니 조금만 기다려 주세요',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
                                     ),
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
