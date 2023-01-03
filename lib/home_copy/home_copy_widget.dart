@@ -2392,7 +2392,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     } else {
                                       FFAppState().update(() {
                                         FFAppState().errCode = getJsonField(
-                                          (apiResult438?.jsonBody ?? ''),
+                                          (apiResult439?.jsonBody ?? ''),
                                           r'''$.errCode''',
                                         ).toString();
                                       });
