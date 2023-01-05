@@ -2790,47 +2790,49 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           alignment: AlignmentDirectional(0, 0),
                           child: InkWell(
                             onLongPress: () async {
-                              var _shouldSetState = false;
-                              apiResultkz1 =
-                                  await DriverInfoGroup.updateOnDutyCall.call(
-                                apiToken: FFAppState().apiToken,
-                                driverId: FFAppState().driverId,
-                                onDuty: false,
-                                apiEndpointTarget:
-                                    FFAppState().apiEndpointTarget,
-                              );
-                              _shouldSetState = true;
-                              if ((apiResultkz1?.succeeded ?? true)) {
+                              if (FFAppState().driverIsOnDuty) {
+                                apiResultkz1 =
+                                    await DriverInfoGroup.updateOnDutyCall.call(
+                                  apiToken: FFAppState().apiToken,
+                                  driverId: FFAppState().driverId,
+                                  onDuty: false,
+                                  apiEndpointTarget:
+                                      FFAppState().apiEndpointTarget,
+                                );
+                                if ((apiResultkz1?.succeeded ?? true)) {
+                                  FFAppState().update(() {
+                                    FFAppState().driverIsOnDuty = false;
+                                    FFAppState().driverIsAtWork = false;
+                                  });
+                                  await actions.setCallState(
+                                    'NONE',
+                                  );
+                                  await actions.cancelLocationService();
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              } else {
                                 FFAppState().update(() {
-                                  FFAppState().driverIsOnDuty = false;
                                   FFAppState().driverIsAtWork = false;
                                 });
-                                await actions.setCallState(
-                                  'NONE',
-                                );
-                                await actions.cancelLocationService();
-                                if (_shouldSetState) setState(() {});
-                                return;
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('오류'),
-                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
                               }
 
-                              if (_shouldSetState) setState(() {});
+                              setState(() {});
                             },
                             child: FFButtonWidget(
                               onPressed: () {
