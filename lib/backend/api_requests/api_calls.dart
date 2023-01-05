@@ -383,6 +383,10 @@ class DriverInfoGroup {
       AddDriverDenyTaxiCallTagCall();
   static DeleteDriverDenyTaxiCallTagCall deleteDriverDenyTaxiCallTagCall =
       DeleteDriverDenyTaxiCallTagCall();
+  static AddCarProfileCall addCarProfileCall = AddCarProfileCall();
+  static ListCarProfileCall listCarProfileCall = ListCarProfileCall();
+  static SelectCarProfileCall selectCarProfileCall = SelectCarProfileCall();
+  static UpdateCarProfileCall updateCarProfileCall = UpdateCarProfileCall();
 }
 
 class GetDriverCall {
@@ -996,6 +1000,113 @@ class DeleteDriverDenyTaxiCallTagCall {
         'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AddCarProfileCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? apiToken = '',
+    String? carNumber = '',
+    String? carType = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Add Car Profile',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/car_profile',
+      callType: ApiCallType.POST,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ListCarProfileCall {
+  Future<ApiCallResponse> call({
+    String? apiToken = '',
+    String? driverId = '',
+    String? apiEndpointTarget = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'List Car Profile',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/car_profile',
+      callType: ApiCallType.GET,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class SelectCarProfileCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? driverId = '',
+    String? carProfileId = '',
+    String? apiToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Select Car Profile',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/driver/${driverId}/car_profile/${carProfileId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class UpdateCarProfileCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? carProfileId = '',
+    String? carNumber = '',
+    String? carType = '',
+  }) {
+    final body = '''
+{
+  "carNumber": "${carNumber}",
+  "carType": "${carType}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Car Profile',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/car_profile/${carProfileId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...DriverInfoGroup.headers,
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
