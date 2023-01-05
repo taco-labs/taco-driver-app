@@ -99,14 +99,15 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                   .override(
                                     fontFamily: 'Poppins',
                                     color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                        .primaryText,
                                     fontSize: 18,
                                   ),
                               hintText: '은행',
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               elevation: 2,
                               borderColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderWidth: 2,
                               borderRadius: 8,
                               margin:
@@ -142,7 +143,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -150,7 +151,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -171,7 +172,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),

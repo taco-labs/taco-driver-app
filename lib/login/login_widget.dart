@@ -75,11 +75,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                           '로그인 또는 기사 회원 가입을 위해 휴대폰번호를 인증해주세요',
                           textAlign: TextAlign.center,
                           maxLines: 2,
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 18,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText2
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 18,
+                              ),
                         ),
                       ),
                     ],
@@ -95,7 +97,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: '-를 제외한 휴대폰 번호를 입력하세요',
+                        hintText: '- 를 제외한 휴대폰 번호를 입력하세요',
                         hintStyle:
                             FlutterFlowTheme.of(context).bodyText2.override(
                                   fontFamily: 'Poppins',

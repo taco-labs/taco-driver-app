@@ -101,8 +101,11 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Color(0xFFDBE2E7),
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                   shape: BoxShape.circle,
+                  border: Border.all(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
@@ -150,7 +153,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -158,7 +161,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -179,7 +182,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 0, 24),
                               ),
@@ -206,7 +209,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -214,7 +217,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -235,7 +238,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 0, 24),
                               ),
@@ -259,7 +262,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -267,7 +270,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -288,7 +291,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                           ),
                           filled: true,
                           fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                              FlutterFlowTheme.of(context).primaryBackground,
                           contentPadding:
                               EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                         ),
@@ -320,7 +323,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                          .secondaryBackground,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -328,7 +331,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                          .secondaryBackground,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -349,7 +352,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                      .primaryBackground,
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           20, 24, 20, 24),
@@ -388,7 +391,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                          .secondaryBackground,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -396,7 +399,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                          .secondaryBackground,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -417,7 +420,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                      .primaryBackground,
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           10, 24, 10, 24),
@@ -458,7 +461,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                      .secondaryBackground,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
@@ -466,7 +469,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                      .secondaryBackground,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
@@ -487,7 +490,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                                  .primaryBackground,
                               contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                             ),
@@ -502,8 +505,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               buttonSize: 60,
                               icon: Icon(
                                 Icons.content_copy,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 size: 24,
                               ),
                               onPressed: () async {

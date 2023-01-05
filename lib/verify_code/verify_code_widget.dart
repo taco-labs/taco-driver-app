@@ -438,7 +438,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 18,
                         ),
                   ),

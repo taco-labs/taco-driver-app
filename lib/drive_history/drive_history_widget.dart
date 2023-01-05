@@ -40,7 +40,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -83,7 +83,10 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                   children: [
                     Text(
                       '최근 운행내역',
-                      style: FlutterFlowTheme.of(context).bodyText2,
+                      style: FlutterFlowTheme.of(context).bodyText2.override(
+                            fontFamily: 'Poppins',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
                     ),
                   ],
                 ),
@@ -182,7 +185,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 7,
@@ -191,6 +194,10 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
                               ),
                               child: Padding(
                                 padding:
@@ -218,15 +225,17 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                 rideHistoriesItem,
                                                 r'''$.createTime''',
                                               ).toString()),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -241,6 +250,9 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                         .bodyText2
                                                         .override(
                                                           fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
@@ -260,14 +272,16 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                 rideHistoriesItem,
                                                 r'''$.arrival.address.addressName''',
                                               ).toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -358,7 +372,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontFamily:
                                                                             'Poppins',
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .primaryText,
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
@@ -395,7 +409,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontFamily:
                                                                             'Poppins',
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .primaryText,
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
@@ -433,7 +447,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontFamily:
                                                                             'Poppins',
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .primaryText,
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
@@ -466,7 +480,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                             fontFamily:
                                                                                 'Poppins',
                                                                             color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
+                                                                                FlutterFlowTheme.of(context).primaryText,
                                                                             fontSize:
                                                                                 14,
                                                                             fontWeight:

@@ -66,7 +66,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       drawer: Drawer(
         elevation: 16,
         child: Column(
@@ -222,18 +222,11 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           !FFAppState().isArrived)
                         Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                           ),
@@ -261,7 +254,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 fontFamily: 'Poppins',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .primaryText,
                                                 fontSize: 16,
                                               ),
                                         ),
@@ -277,7 +270,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                 ),
                                           ),
@@ -304,7 +297,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                 ),
                                           ),
@@ -416,19 +409,12 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                       if (FFAppState().isOnCallViewing)
                         Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(0),
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                           ),
@@ -463,7 +449,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     fontFamily: 'Outfit',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .primaryText,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -491,7 +477,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -523,7 +509,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     fontFamily: 'Outfit',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .primaryText,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -538,7 +524,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -904,19 +890,12 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                       if (FFAppState().isOnDrivingToDeparture)
                         Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(0),
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                           ),
@@ -1240,7 +1219,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     fontFamily: 'Outfit',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .primaryText,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -1268,7 +1247,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1507,19 +1486,12 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                       if (FFAppState().isOnDrivingToArrival)
                         Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(0),
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                           ),
@@ -1603,7 +1575,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                     fontFamily: 'Outfit',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
+                                                        .primaryText,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -1631,7 +1603,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1864,8 +1836,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                       if (FFAppState().isArrived)
                         Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4,
@@ -1876,7 +1848,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                             borderRadius: BorderRadius.circular(0),
                             border: Border.all(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               width: 2,
                             ),
                           ),
@@ -1966,6 +1938,17 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         fontSize: 18,
                                                       ),
                                               hintText: '최종 미터기 실 운임 입력',
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 20,
+                                                      ),
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
@@ -2036,7 +2019,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                                   fontSize: 20,
                                                 ),
                                             textAlign: TextAlign.center,
@@ -2070,6 +2053,16 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           fontSize: 18,
                                                         ),
                                                 hintText: '통행료 및 추가금액 입력',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 20,
+                                                        ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -2147,7 +2140,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .primaryText,
                                                         fontSize: 20,
                                                       ),
                                               textAlign: TextAlign.center,
@@ -2266,7 +2259,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 50, 10, 0),
                   child: Stack(
                     children: [
                       if (FFAppState().driverIsActivated &&
@@ -2573,7 +2566,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           child: Container(
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                                  .primaryBackground,
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 4,
@@ -2584,7 +2577,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                    .secondaryBackground,
                                 width: 2,
                               ),
                             ),
@@ -2606,7 +2599,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                             .bodyText1
                                             .override(
                                               fontFamily: 'Poppins',
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                       ),
                                     ),
@@ -2620,7 +2613,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Poppins',
-                                            fontSize: 18,
+                                            fontSize: 16,
                                           ),
                                     ),
                                   ),

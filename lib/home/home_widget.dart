@@ -92,7 +92,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       drawer: Drawer(
         elevation: 16,
         child: Column(
@@ -134,10 +134,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -155,10 +154,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -297,10 +295,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -330,10 +327,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -351,10 +347,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
