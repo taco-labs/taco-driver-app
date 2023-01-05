@@ -1240,22 +1240,50 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
 
                               context.goNamed('RegisterImages');
                             } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                              FFAppState().update(() {
+                                FFAppState().errCode = getJsonField(
+                                  (apiResultbos?.jsonBody ?? ''),
+                                  r'''$.errCode''',
+                                ).toString();
+                              });
+                              if ((FFAppState().errCode ==
+                                      'ERR_INVALID_REFERRAL_CODE') ||
+                                  (FFAppState().errCode ==
+                                      'ERR_NOTFOUND_REFERRAL_CODE')) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('추천인 코드를 정확히 입력해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
                           } else {
                             await showDialog(
