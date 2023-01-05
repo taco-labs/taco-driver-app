@@ -1895,25 +1895,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         ),
                                               ),
                                             ),
-                                            if (FFAppState()
-                                                    .driverAdditionalRewardPrice >
-                                                0)
-                                              Text(
-                                                '(추천인 추가 적립 ${FFAppState().driverAdditionalRewardPrice.toString()}개)',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
                                           ],
                                         ),
                                       ),

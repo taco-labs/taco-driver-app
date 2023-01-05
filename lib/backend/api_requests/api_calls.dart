@@ -210,6 +210,7 @@ class SignupCall {
     String? apiEndpointTarget = '',
     String? companyName = '',
     String? residentRegistrationNumber = '',
+    String? referralCode = '',
   }) {
     final body = '''
 {
@@ -227,7 +228,8 @@ class SignupCall {
   "carNumber": "${carNumber}",
   "companyRegistrationNumber": "${companyRegistrationNumber}",
   "serviceRegion": "${serviceRegion}",
-  "residentRegistrationNumber": "${residentRegistrationNumber}"
+  "residentRegistrationNumber": "${residentRegistrationNumber}",
+  "referralCode": "${referralCode}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Signup',
@@ -1690,10 +1692,6 @@ class AcceptTaxiCallTicketCall {
   dynamic callCurrentState(dynamic response) => getJsonField(
         response,
         r'''$.currentState''',
-      );
-  dynamic driverAdditionalRewardPrice(dynamic response) => getJsonField(
-        response,
-        r'''$.driverAdditionalRewardPrice''',
       );
 }
 
