@@ -491,6 +491,12 @@ class FFAppState extends ChangeNotifier {
   set appDownloadUrl(String _value) {
     _appDownloadUrl = _value;
   }
+
+  bool _driverIsAtWork = false;
+  bool get driverIsAtWork => _driverIsAtWork;
+  set driverIsAtWork(bool _value) {
+    _driverIsAtWork = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

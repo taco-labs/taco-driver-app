@@ -11,7 +11,6 @@ import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,8 +35,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   ApiCallResponse? apiResultDoneTaxiCall;
   TextEditingController? taxiFareController;
   TextEditingController? tollFareController;
-  ApiCallResponse? apiResult450;
-  ApiCallResponse? apiResult460;
+  ApiCallResponse? apiResult550;
+  ApiCallResponse? apiResult560;
+  ApiCallResponse? apiResultkz1;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
@@ -2545,72 +2545,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                             ),
                           ),
                         ),
-                      if (!FFAppState().driverIsActivated)
-                        Material(
-                          color: Colors.transparent,
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                width: 2,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10, 15, 10, 15),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Text(
-                                        '등록해주신 정보로 승인 심사중입니다',
-                                        maxLines: 2,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 16,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Text(
-                                      '매일 일괄 처리해드리고 있으니 조금만 기다려 주세요',
-                                      maxLines: 3,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 16,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
                     ],
                   ),
                 ),
@@ -2619,15 +2553,14 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                   child: Stack(
                     children: [
                       if (FFAppState().driverIsActivated &&
-                          !FFAppState().driverIsOnDuty &&
-                          false)
+                          !FFAppState().driverIsAtWork)
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (await getPermissionStatus(
                                   locationPermission)) {
-                                apiResult450 =
+                                apiResult550 =
                                     await DriverInfoGroup.updateOnDutyCall.call(
                                   apiToken: FFAppState().apiToken,
                                   driverId: FFAppState().driverId,
@@ -2635,9 +2568,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   apiEndpointTarget:
                                       FFAppState().apiEndpointTarget,
                                 );
-                                if ((apiResult450?.succeeded ?? true)) {
+                                if ((apiResult550?.succeeded ?? true)) {
                                   FFAppState().update(() {
                                     FFAppState().driverIsOnDuty = true;
+                                    FFAppState().driverIsAtWork = true;
                                   });
                                   await actions.setCallState(
                                     'TAXI_CALL_WAITING',
@@ -2646,7 +2580,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                 } else {
                                   FFAppState().update(() {
                                     FFAppState().errCode = getJsonField(
-                                      (apiResult450?.jsonBody ?? ''),
+                                      (apiResult550?.jsonBody ?? ''),
                                       r'''$.errCode''',
                                     ).toString();
                                   });
@@ -2722,7 +2656,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   await requestPermission(locationPermission);
                                   if (await getPermissionStatus(
                                       locationPermission)) {
-                                    apiResult460 = await DriverInfoGroup
+                                    apiResult560 = await DriverInfoGroup
                                         .updateOnDutyCall
                                         .call(
                                       apiToken: FFAppState().apiToken,
@@ -2731,9 +2665,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                       apiEndpointTarget:
                                           FFAppState().apiEndpointTarget,
                                     );
-                                    if ((apiResult460?.succeeded ?? true)) {
+                                    if ((apiResult560?.succeeded ?? true)) {
                                       FFAppState().update(() {
                                         FFAppState().driverIsOnDuty = true;
+                                        FFAppState().driverIsAtWork = true;
                                       });
                                       await actions.setCallState(
                                         'TAXI_CALL_WAITING',
@@ -2742,7 +2677,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                     } else {
                                       FFAppState().update(() {
                                         FFAppState().errCode = getJsonField(
-                                          (apiResult460?.jsonBody ?? ''),
+                                          (apiResult560?.jsonBody ?? ''),
                                           r'''$.errCode''',
                                         ).toString();
                                       });
@@ -2847,40 +2782,147 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                             ),
                           ),
                         ),
-                      Slidable(
-                        actionPane: const SlidableScrollActionPane(),
-                        secondaryActions: [
-                          IconSlideAction(
-                            caption: '',
-                            color: Color(0x00000000),
-                            icon: Icons.logout,
-                            onTap: () {
-                              print('SlidableActionWidget pressed ...');
+                      if (FFAppState().driverIsActivated &&
+                          FFAppState().driverIsAtWork)
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: InkWell(
+                            onLongPress: () async {
+                              var _shouldSetState = false;
+                              apiResultkz1 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: false,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
+                              );
+                              _shouldSetState = true;
+                              if ((apiResultkz1?.succeeded ?? true)) {
+                                FFAppState().update(() {
+                                  FFAppState().driverIsOnDuty = false;
+                                  FFAppState().driverIsAtWork = false;
+                                });
+                                await actions.setCallState(
+                                  'NONE',
+                                );
+                                await actions.cancelLocationService();
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+
+                              if (_shouldSetState) setState(() {});
                             },
-                          ),
-                        ],
-                        child: ListTile(
-                          title: Text(
-                            '밀어서 퇴근',
-                            style: FlutterFlowTheme.of(context).title3.override(
-                                  fontFamily: 'Poppins',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 18,
+                            child: FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: '길게눌러 퇴근하기',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 60,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      fontSize: 20,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
                                 ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                           ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 18,
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          dense: false,
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                         ),
-                      ),
+                      if (!FFAppState().driverIsActivated)
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 15, 10, 15),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 5),
+                                      child: Text(
+                                        '등록해주신 정보로 승인 심사중입니다',
+                                        maxLines: 2,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 16,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Text(
+                                      '매일 일괄 처리해드리고 있으니 조금만 기다려 주세요',
+                                      maxLines: 3,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 16,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
