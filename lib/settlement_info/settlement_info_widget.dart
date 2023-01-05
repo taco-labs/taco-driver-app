@@ -50,7 +50,7 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -95,8 +95,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                       '은행',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -114,9 +114,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -132,8 +131,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                       '계좌번호',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -151,9 +150,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -169,8 +167,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                       '총 적립 타코 개수',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -191,9 +189,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -209,8 +206,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                       '정산 가능 타코 개수',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -232,9 +229,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -316,7 +312,8 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'Poppins',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -346,10 +343,11 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                       ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
-                        color: Color(0xFF303030),
+                        color: FlutterFlowTheme.of(context).primaryText,
                         size: 20,
                       ),
-                      tileColor: Color(0xFFF5F5F5),
+                      tileColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       dense: false,
                     ),
                   ),

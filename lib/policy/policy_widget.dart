@@ -35,7 +35,7 @@ class _PolicyWidgetState extends State<PolicyWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -89,10 +89,11 @@ class _PolicyWidgetState extends State<PolicyWidget> {
                       ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
-                        color: Color(0xFF303030),
+                        color: FlutterFlowTheme.of(context).primaryText,
                         size: 20,
                       ),
-                      tileColor: Color(0xFFF5F5F5),
+                      tileColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       dense: false,
                     ),
                   ),
@@ -113,10 +114,10 @@ class _PolicyWidgetState extends State<PolicyWidget> {
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Color(0xFF303030),
+                      color: FlutterFlowTheme.of(context).primaryText,
                       size: 20,
                     ),
-                    tileColor: Color(0xFFF5F5F5),
+                    tileColor: FlutterFlowTheme.of(context).secondaryBackground,
                     dense: false,
                   ),
                 ),

@@ -35,7 +35,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -80,8 +80,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       '상호',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -99,9 +99,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -117,8 +116,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       '대표',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -136,9 +135,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -154,8 +152,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       '주소',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -173,9 +171,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -191,8 +188,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       '홈페이지',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -210,9 +207,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),
@@ -228,8 +224,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       '사업자등록번호',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 16,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14,
                           ),
                     ),
                   ),
@@ -247,9 +243,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               .bodyText1
                               .override(
                                 fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
                               ),
                         ),
                       ),

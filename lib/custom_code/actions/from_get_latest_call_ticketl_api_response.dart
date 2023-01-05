@@ -93,5 +93,4 @@ Future fromGetLatestCallTicketlApiResponse(dynamic apiResponse) async {
   FFAppState().callMaxAdditionalPrice =
       apiResponse['requestMaxAdditionalPrice'];
   FFAppState().callAdditionalPrice = apiResponse['additionalPrice'];
-  FFAppState().callAdditionalPrice = apiResponse[''];
 }

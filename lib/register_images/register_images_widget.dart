@@ -88,8 +88,13 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             width: 120,
                             height: 120,
                             decoration: BoxDecoration(
-                              color: Color(0xFFDBE2E7),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               shape: BoxShape.circle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
                             ),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
@@ -284,8 +289,13 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                             width: 240,
                             height: 150,
                             decoration: BoxDecoration(
-                              color: Color(0xFFDBE2E7),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               shape: BoxShape.rectangle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
                             ),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
