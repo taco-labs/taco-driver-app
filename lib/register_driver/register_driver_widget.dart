@@ -42,6 +42,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? licenseNumberController;
   TextEditingController? businessRegistrationNumberController;
   TextEditingController? taxiCompanyNameController;
+  TextEditingController? referralCodeController;
   bool? termsCheckboxValue;
   bool? privacyCheckboxValue;
   final _unfocusNode = FocusNode();
@@ -61,6 +62,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     licenseNumberController = TextEditingController();
     businessRegistrationNumberController = TextEditingController();
     taxiCompanyNameController = TextEditingController();
+    referralCodeController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -76,6 +78,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     licenseNumberController?.dispose();
     businessRegistrationNumberController?.dispose();
     taxiCompanyNameController?.dispose();
+    referralCodeController?.dispose();
     super.dispose();
   }
 
@@ -133,7 +136,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -141,7 +144,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -162,7 +165,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),
@@ -203,7 +206,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -212,7 +215,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -238,7 +241,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         filled: true,
                                         fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .primaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20, 24, 20, 24),
@@ -285,7 +288,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -294,7 +297,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -320,7 +323,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         filled: true,
                                         fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .primaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20, 24, 20, 24),
@@ -374,7 +377,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -382,7 +385,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -405,7 +408,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       ),
                                       filled: true,
                                       fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                          .primaryBackground,
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               20, 24, 20, 24),
@@ -466,7 +469,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -474,7 +477,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -497,7 +500,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       ),
                                       filled: true,
                                       fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                          .primaryBackground,
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               20, 24, 20, 24),
@@ -557,13 +560,16 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'Poppins',
-                                    color: Colors.black,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 18,
                                   ),
                               buttonPosition: RadioButtonPosition.left,
                               direction: Axis.horizontal,
-                              radioButtonColor: Colors.blue,
-                              inactiveRadioButtonColor: Color(0x8A000000),
+                              radioButtonColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              inactiveRadioButtonColor:
+                                  FlutterFlowTheme.of(context).secondaryText,
                               toggleable: false,
                               horizontalAlignment: WrapAlignment.start,
                               verticalAlignment: WrapCrossAlignment.start,
@@ -587,10 +593,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   ),
                               hintText: '운행지역',
                               fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                                  .primaryBackground,
                               elevation: 2,
                               borderColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderWidth: 2,
                               borderRadius: 8,
                               margin:
@@ -617,7 +623,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -625,7 +631,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -648,7 +654,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),
@@ -690,7 +696,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -698,7 +704,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -721,7 +727,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 20, 24),
                               ),
@@ -767,7 +773,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -775,7 +781,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
+                                              .secondaryBackground,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -798,7 +804,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       ),
                                       filled: true,
                                       fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                          .primaryBackground,
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               20, 24, 20, 24),
@@ -896,12 +902,78 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                           ),
                           Padding(
                             padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
+                            child: TextFormField(
+                              controller: referralCodeController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '추천인 코드 (선택)',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                    ),
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -962,6 +1034,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(

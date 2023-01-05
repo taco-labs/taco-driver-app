@@ -41,7 +41,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
@@ -177,8 +177,8 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 7,
@@ -187,6 +187,10 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                               )
                             ],
                             borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
                           ),
                           child: Padding(
                             padding:
@@ -210,7 +214,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               fontFamily: 'Poppins',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -224,6 +228,8 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                           .subtitle2
                                           .override(
                                             fontFamily: 'Poppins',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -250,7 +256,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               fontFamily: 'Poppins',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -275,7 +281,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               fontFamily: 'Poppins',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -288,7 +294,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               fontFamily: 'Poppins',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .primaryText,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),

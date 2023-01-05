@@ -490,6 +490,13 @@ class FFAppState extends ChangeNotifier {
   void removeFromSupportedServiceRegions(String _value) {
     _supportedServiceRegions.remove(_value);
   }
+
+  String _appDownloadUrl =
+      'https://play.google.com/store/apps/details?id=com.tacolabs.taco.driver';
+  String get appDownloadUrl => _appDownloadUrl;
+  set appDownloadUrl(String _value) {
+    _appDownloadUrl = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

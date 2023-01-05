@@ -30,8 +30,35 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.initDriverHome();
+      if (FFAppState().driverIsOnDuty) {
+        await actions.startLocationService();
+      }
       isInstalled = await actions.isKakaoNaviInstalled();
-      if (!isInstalled!) {
+      if (isInstalled!) {
+        var confirmDialogResponse = await showDialog<bool>(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  content: Text(
+                      '지금 동료 기사님을 초대하면 3천원 적립 혜택을 드려요! 초대하면 할수록 적립 혜택은 계속 누적되요'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                      child: Text('나중에'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                      child: Text('지금 초대하러가기'),
+                    ),
+                  ],
+                );
+              },
+            ) ??
+            false;
+        if (confirmDialogResponse) {
+          context.pushNamed('DriverProfile');
+        }
+      } else {
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
@@ -47,9 +74,6 @@ class _HomeWidgetState extends State<HomeWidget> {
           },
         );
         await actions.installKakaoNavi();
-      }
-      if (FFAppState().driverIsOnDuty) {
-        await actions.startLocationService();
       }
     });
 
@@ -68,7 +92,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       drawer: Drawer(
         elevation: 16,
         child: Column(
@@ -110,10 +134,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -131,10 +154,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -273,10 +295,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -306,10 +327,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
@@ -327,10 +347,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Color(0xFF303030),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 20,
                 ),
-                tileColor: Color(0xFFF5F5F5),
                 dense: false,
               ),
             ),
