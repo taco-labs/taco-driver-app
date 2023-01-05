@@ -618,7 +618,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     .override(
                                       fontFamily: 'Poppins',
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
+                                          .primaryText,
                                       fontSize: 18,
                                     ),
                                 hintText: '운행지역',
@@ -1002,6 +1002,23 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
                                     ),
+                                validator: (val) {
+                                  if (val == null || val.isEmpty) {
+                                    return '추천인코드를 정확히 입력해주세요';
+                                  }
+
+                                  if (val.length < 7) {
+                                    return '추천인코드를 정확히 입력해주세요';
+                                  }
+                                  if (val.length > 8) {
+                                    return '추천인코드를 정확히 입력해주세요';
+                                  }
+                                  if (!RegExp('^[a-z|A-Z]{7,8}\$')
+                                      .hasMatch(val)) {
+                                    return '추천인코드를 정확히 입력해주세요';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                             Padding(
