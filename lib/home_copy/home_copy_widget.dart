@@ -2785,7 +2785,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           ),
                         ),
                       if (FFAppState().driverIsActivated &&
-                          FFAppState().driverIsAtWork)
+                          FFAppState().driverIsAtWork &&
+                          !FFAppState().isOnDrivingToDeparture &&
+                          !FFAppState().isOnDrivingToArrival &&
+                          !FFAppState().isArrived)
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: InkWell(
