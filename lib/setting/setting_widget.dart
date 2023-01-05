@@ -146,7 +146,9 @@ class _SettingWidgetState extends State<SettingWidget> {
                     dense: false,
                   ),
                 ),
-                Divider(),
+                Divider(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                ),
                 InkWell(
                   onTap: () async {
                     context.pushNamed('Policy');
@@ -169,7 +171,9 @@ class _SettingWidgetState extends State<SettingWidget> {
                     dense: false,
                   ),
                 ),
-                Divider(),
+                Divider(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                ),
                 Align(
                   alignment: AlignmentDirectional(-0.9, 0),
                   child: Padding(

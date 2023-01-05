@@ -263,7 +263,9 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                   .fromSTEB(50, 0, 0, 0),
                                               child: Icon(
                                                 Icons.keyboard_arrow_down,
-                                                color: Colors.black,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                                 size: 24,
                                               ),
                                             ),

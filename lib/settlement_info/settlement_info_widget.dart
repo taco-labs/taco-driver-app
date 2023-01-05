@@ -308,11 +308,12 @@ class _SettlementInfoWidgetState extends State<SettlementInfoWidget> {
                           text: '정산요청',
                           options: FFButtonOptions(
                             height: 50,
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'Poppins',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
