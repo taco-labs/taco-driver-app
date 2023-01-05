@@ -758,7 +758,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                       .subtitle2
                                                       .override(
                                                         fontFamily: 'Poppins',
-                                                        color: Colors.white,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
                                                         fontSize: 18,
                                                       ),
                                               borderSide: BorderSide(
@@ -1065,7 +1067,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         .subtitle2
                                                         .override(
                                                           fontFamily: 'Poppins',
-                                                          color: Colors.white,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
                                                           fontSize: 18,
                                                         ),
                                                 borderSide: BorderSide(
@@ -1099,7 +1103,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 height: 60,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .primaryColor,
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle2
@@ -1139,7 +1143,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                 height: 60,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                        .primaryColor,
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle2
@@ -2545,7 +2549,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   .subtitle2
                                   .override(
                                     fontFamily: 'Poppins',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     fontSize: 18,
                                   ),
                               borderSide: BorderSide(
