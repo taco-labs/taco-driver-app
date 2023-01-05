@@ -32,6 +32,7 @@ Future setCallState(String currentState) async {
     case TaxiCallState_Waiting:
       {
         FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
           FFAppState().isOnCallWaiting = true;
         });
         break;
@@ -39,6 +40,7 @@ Future setCallState(String currentState) async {
     case TaxiCallState_Requested:
       {
         FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
           FFAppState().isOnCallViewing = true;
         });
         break;
@@ -46,6 +48,7 @@ Future setCallState(String currentState) async {
     case TaxiCallState_Driver_To_Departure:
       {
         FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
           FFAppState().isOnDrivingToDeparture = true;
         });
         break;
@@ -53,6 +56,7 @@ Future setCallState(String currentState) async {
     case TaxiCallState_Driver_To_Arrival:
       {
         FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
           FFAppState().isOnDrivingToArrival = true;
         });
         break;
@@ -60,6 +64,7 @@ Future setCallState(String currentState) async {
     case TaxiCallState_Arrived:
       {
         FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
           FFAppState().isArrived = true;
         });
         break;
