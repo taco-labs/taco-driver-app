@@ -2251,7 +2251,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                   child: Stack(
                     children: [
                       if (FFAppState().driverIsActivated &&
-                          !FFAppState().driverIsOnDuty)
+                          !FFAppState().driverIsOnDuty &&
+                          FFAppState().driverIsAtWork)
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: FFButtonWidget(
@@ -2482,7 +2483,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                           !FFAppState().isOnDrivingToDeparture &&
                           !FFAppState().isOnDrivingToArrival &&
                           !FFAppState().isArrived &&
-                          FFAppState().driverIsActivated)
+                          FFAppState().driverIsActivated &&
+                          FFAppState().driverIsAtWork)
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: FFButtonWidget(
