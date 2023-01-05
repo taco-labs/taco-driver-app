@@ -471,12 +471,6 @@ class FFAppState extends ChangeNotifier {
     _driverReferralCode = _value;
   }
 
-  int _driverAdditionalRewardPrice = 0;
-  int get driverAdditionalRewardPrice => _driverAdditionalRewardPrice;
-  set driverAdditionalRewardPrice(int _value) {
-    _driverAdditionalRewardPrice = _value;
-  }
-
   List<String> _supportedServiceRegions = [];
   List<String> get supportedServiceRegions => _supportedServiceRegions;
   set supportedServiceRegions(List<String> _value) {

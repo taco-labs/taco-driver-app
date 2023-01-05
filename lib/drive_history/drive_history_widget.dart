@@ -456,40 +456,6 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                             FontWeight.w500,
                                                                       ),
                                                                 ),
-                                                                if (functions
-                                                                        .toIntegerFromJson(
-                                                                            getJsonField(
-                                                                      rideHistoriesItem,
-                                                                      r'''$.driverAdditionalRewardPrice''',
-                                                                    )) >
-                                                                    0)
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            2,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      '(추가 ${getJsonField(
-                                                                        rideHistoriesItem,
-                                                                        r'''$.driverAdditionalRewardPrice''',
-                                                                      ).toString()}개)',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Poppins',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                            fontSize:
-                                                                                14,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ),
                                                               ],
                                                             ),
                                                           ),
