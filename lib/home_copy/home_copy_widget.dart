@@ -35,6 +35,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   ApiCallResponse? apiResultDoneTaxiCall;
   TextEditingController? taxiFareController;
   TextEditingController? tollFareController;
+  bool? switchValue;
   ApiCallResponse? apiResult550;
   ApiCallResponse? apiResult560;
   ApiCallResponse? apiResultkz1;
@@ -215,6 +216,23 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Switch.adaptive(
+                  value: switchValue ??= false,
+                  onChanged: (newValue) async {
+                    setState(() => switchValue = newValue!);
+                    if (newValue!) {
+                      setDarkModeSetting(context, ThemeMode.dark);
+                    } else {
+                      setDarkModeSetting(context, ThemeMode.light);
+                    }
+                  },
+                  activeColor: FlutterFlowTheme.of(context).primaryColor,
+                  activeTrackColor: FlutterFlowTheme.of(context).alternate,
+                  inactiveTrackColor:
+                      FlutterFlowTheme.of(context).secondaryText,
+                  inactiveThumbColor:
+                      FlutterFlowTheme.of(context).secondaryColor,
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10, 60, 10, 0),
                   child: Stack(
