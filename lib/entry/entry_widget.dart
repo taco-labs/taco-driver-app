@@ -27,6 +27,10 @@ class _EntryWidgetState extends State<EntryWidget> {
     // On page load action.
     debugPrint('driverId ${FFAppState().driverId} apiToken ${FFAppState().apiToken}');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setDarkModeSetting(
+        context,
+        FFAppState().darkModeSetting ? ThemeMode.dark : ThemeMode.light,
+      );
       apiResultyb1 = await DriverInfoGroup.getDriverCall.call(
         apiToken: FFAppState().apiToken,
         driverId: FFAppState().driverId,
