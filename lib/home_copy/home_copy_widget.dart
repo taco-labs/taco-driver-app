@@ -216,25 +216,44 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Switch.adaptive(
-                  value: switchValue ??= false,
-                  onChanged: (newValue) async {
-                    setState(() => switchValue = newValue!);
-                    if (newValue!) {
-                      setDarkModeSetting(context, ThemeMode.dark);
-                    } else {
-                      setDarkModeSetting(context, ThemeMode.light);
-                    }
-                  },
-                  activeColor: FlutterFlowTheme.of(context).primaryColor,
-                  activeTrackColor: FlutterFlowTheme.of(context).alternate,
-                  inactiveTrackColor:
-                      FlutterFlowTheme.of(context).secondaryText,
-                  inactiveThumbColor:
-                      FlutterFlowTheme.of(context).secondaryColor,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                        child: Text(
+                          '야간주행모드',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                  ),
+                        ),
+                      ),
+                      Switch.adaptive(
+                        value: switchValue ??= FFAppState().darkModeSetting,
+                        onChanged: (newValue) async {
+                          setState(() => switchValue = newValue!);
+                          if (newValue!) {
+                            setDarkModeSetting(context, ThemeMode.dark);
+                            FFAppState().darkModeSetting = true;
+                          } else {
+                            setDarkModeSetting(context, ThemeMode.light);
+                            FFAppState().darkModeSetting = false;
+                          }
+                        },
+                        activeColor: Colors.white,
+                        activeTrackColor:
+                            FlutterFlowTheme.of(context).primaryColor,
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 60, 10, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 40, 10, 0),
                   child: Stack(
                     children: [
                       if (!FFAppState().isOnCallViewing &&

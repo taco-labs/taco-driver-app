@@ -18,6 +18,7 @@ class FFAppState extends ChangeNotifier {
     prefs = await SharedPreferences.getInstance();
     _apiToken = prefs.getString('ff_apiToken') ?? _apiToken;
     _driverId = prefs.getString('ff_driverId') ?? _driverId;
+    _darkModeSetting = prefs.getBool('ff_darkModeSetting') ?? _darkModeSetting;
   }
 
   void update(VoidCallback callback) {
@@ -496,6 +497,13 @@ class FFAppState extends ChangeNotifier {
   bool get driverIsAtWork => _driverIsAtWork;
   set driverIsAtWork(bool _value) {
     _driverIsAtWork = _value;
+  }
+
+  bool _darkModeSetting = false;
+  bool get darkModeSetting => _darkModeSetting;
+  set darkModeSetting(bool _value) {
+    _darkModeSetting = _value;
+    prefs.setBool('ff_darkModeSetting', _value);
   }
 }
 
