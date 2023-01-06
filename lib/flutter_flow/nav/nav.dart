@@ -184,11 +184,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SettingCopyWidget(
                 appVersion: params.getParam('appVersion', ParamType.String),
               ),
-            ),
-            FFRoute(
-              name: 'HomeCopyCopy',
-              path: 'homeCopyCopy',
-              builder: (context, params) => HomeCopyCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -21,4 +21,3 @@ export 'settlement_history/settlement_history_widget.dart'
 export 'support_chat/support_chat_widget.dart' show SupportChatWidget;
 export 'drive_history/drive_history_widget.dart' show DriveHistoryWidget;
 export 'setting_copy/setting_copy_widget.dart' show SettingCopyWidget;
-export 'home_copy_copy/home_copy_copy_widget.dart' show HomeCopyCopyWidget;
