@@ -948,7 +948,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 controller: referralCodeController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: '추천인 코드 (선택)',
+                                  labelText: '추천인 번호 (선택)',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

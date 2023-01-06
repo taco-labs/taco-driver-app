@@ -454,7 +454,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: '추천인코드',
+                              labelText: '내 추천인번호',
                               labelStyle:
                                   FlutterFlowTheme.of(context).bodyText2,
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
