@@ -1,6 +1,5 @@
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -183,27 +182,19 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.drag_handle,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () async {
+        title: InkWell(
+          onTap: () async {
             scaffoldKey.currentState!.openDrawer();
           },
-        ),
-        title: Text(
-          '운행',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22,
-              ),
+          child: Text(
+            '메뉴',
+            style: FlutterFlowTheme.of(context).title2.override(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontSize: 22,
+                  decoration: TextDecoration.underline,
+                ),
+          ),
         ),
         actions: [],
         centerTitle: false,
