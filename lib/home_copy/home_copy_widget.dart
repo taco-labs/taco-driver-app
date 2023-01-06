@@ -220,10 +220,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
                         child: Text(
                           '야간주행모드',
                           style:
