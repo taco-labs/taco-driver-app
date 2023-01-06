@@ -562,9 +562,9 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               await Share.share(
                                   FFAppState().driverReferralCode);
                             },
-                            text: '추천인코드 공유',
+                            text: '내 추천인번호 공유',
                             options: FFButtonOptions(
-                              width: 140,
+                              width: 150,
                               height: 50,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
