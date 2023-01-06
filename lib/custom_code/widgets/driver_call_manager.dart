@@ -102,6 +102,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResult460;
   TextEditingController? taxiFareController;
   TextEditingController? tollFareController;
+  bool? switchValue;
   ApiCallResponse? apiResult550;
   ApiCallResponse? apiResult560;
   ApiCallResponse? apiResultkz1;
@@ -311,7 +312,41 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10, 60, 10, 0),
+            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
+                  child: Text(
+                    '야간주행모드',
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          fontSize: 16,
+                        ),
+                  ),
+                ),
+                Switch.adaptive(
+                  value: switchValue ??= FFAppState().darkModeSetting,
+                  onChanged: (newValue) async {
+                    setState(() => switchValue = newValue!);
+                    if (newValue!) {
+                      setDarkModeSetting(context, ThemeMode.dark);
+                      FFAppState().darkModeSetting = true;
+                    } else {
+                      setDarkModeSetting(context, ThemeMode.light);
+                      FFAppState().darkModeSetting = false;
+                    }
+                  },
+                  activeColor: Colors.white,
+                  activeTrackColor: FlutterFlowTheme.of(context).primaryColor,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(10, 40, 10, 0),
             child: Stack(
               children: [
                 if (!FFAppState().isOnCallViewing &&
@@ -2666,7 +2701,10 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                     ),
                   ),
                 if (FFAppState().driverIsActivated &&
-                    FFAppState().driverIsAtWork)
+                    FFAppState().driverIsAtWork &&
+                    !FFAppState().isOnDrivingToDeparture &&
+                    !FFAppState().isOnDrivingToArrival &&
+                    !FFAppState().isArrived)
                   Align(
                     alignment: AlignmentDirectional(0, 0),
                     child: InkWell(
