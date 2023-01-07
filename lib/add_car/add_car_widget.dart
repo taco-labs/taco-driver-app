@@ -294,7 +294,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                                 if (val.length > 2) {
                                                   return '차량번호를 정확히 입력해주세요';
                                                 }
-                                                if (!RegExp('^[0-9]\$')
+                                                if (!RegExp('^[0-9]*\$')
                                                     .hasMatch(val)) {
                                                   return '차량번호를 정확히 입력해주세요';
                                                 }
@@ -427,7 +427,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                             if (val.length > 4) {
                                               return '차량번호를 정확히 입력해주세요';
                                             }
-                                            if (!RegExp('^[0-9]\$')
+                                            if (!RegExp('^[0-9]*\$')
                                                 .hasMatch(val)) {
                                               return '차량번호를 정확히 입력해주세요';
                                             }

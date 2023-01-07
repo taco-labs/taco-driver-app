@@ -257,6 +257,9 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                                                         .subtitle2
                                                         .override(
                                                           fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -278,6 +281,10 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                                                       .bodyText2
                                                       .override(
                                                         fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                       ),
