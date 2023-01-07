@@ -930,13 +930,10 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     return '추천인코드를 정확히 입력해주세요';
                                   }
 
-                                  if (val.length < 7) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
                                   if (val.length > 8) {
                                     return '추천인코드를 정확히 입력해주세요';
                                   }
-                                  if (!RegExp('^[a-z|A-Z]{7,8}\$')
+                                  if (!RegExp('^[a-z|A-Z]{0,8}\$')
                                       .hasMatch(val)) {
                                     return '추천인코드를 정확히 입력해주세요';
                                   }
