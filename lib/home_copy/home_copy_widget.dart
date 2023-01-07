@@ -339,55 +339,145 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   Divider(),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          FFAppState().driverLicenseNumber,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 16,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 20, 0, 20),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                    child: Stack(
                                       children: [
-                                        Text(
-                                          FFAppState().driverServiceRegion,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 18,
+                                        if (FFAppState().driverCarNumber !=
+                                                null &&
+                                            FFAppState().driverCarNumber != '')
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    FFAppState()
+                                                        .driverCarNumber,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 20,
+                                                        ),
+                                                  ),
+                                                ],
                                               ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 0, 0, 0),
-                                          child: Text(
-                                            FFAppState().driverCarNumber,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18,
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 10, 0, 10),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      '${FFAppState().driverCarModel} / ${FFAppState().driverTaxiCategory}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 16,
+                                                              ),
+                                                    ),
+                                                  ],
                                                 ),
+                                              ),
+                                              if (!FFAppState().driverIsAtWork)
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                          'CarSetting');
+                                                    },
+                                                    text: '차량 변경',
+                                                    options: FFButtonOptions(
+                                                      width: 100,
+                                                      height: 40,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16,
+                                                              ),
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
                                           ),
-                                        ),
+                                        if (FFAppState().driverCarNumber ==
+                                                null ||
+                                            FFAppState().driverCarNumber == '')
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: FFButtonWidget(
+                                                  onPressed: () async {
+                                                    context.pushNamed(
+                                                        'CarSetting');
+                                                  },
+                                                  text: '차량 추가',
+                                                  options: FFButtonOptions(
+                                                    width: 120,
+                                                    height: 50,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: Colors.white,
+                                                          fontSize: 18,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -651,7 +741,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
@@ -1314,24 +1405,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                           ),
-                                          Text(
-                                            functions.toAddressNo(
-                                                FFAppState()
-                                                    .callDepartureAddressSubNo,
-                                                FFAppState()
-                                                    .callDepartureAddressMainNo),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1364,7 +1437,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
@@ -1379,24 +1453,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         children: [
                                           Text(
                                             '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callArrivalAddressRegionDepth3} ',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                          Text(
-                                            functions.toAddressNo(
-                                                FFAppState()
-                                                    .callArrivalAddressSubNo,
-                                                FFAppState()
-                                                    .callArrivalAddressMainNo),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1
@@ -1670,24 +1726,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                           ),
-                                          Text(
-                                            functions.toAddressNo(
-                                                FFAppState()
-                                                    .callDepartureAddressSubNo,
-                                                FFAppState()
-                                                    .callDepartureAddressMainNo),
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1720,7 +1758,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
@@ -1735,24 +1774,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         children: [
                                           Text(
                                             '${FFAppState().callArrivalAddressRegionDepth2}  ${FFAppState().callArrivalAddressRegionDepth3} ',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                          Text(
-                                            functions.toAddressNo(
-                                                FFAppState()
-                                                    .callArrivalAddressSubNo,
-                                                FFAppState()
-                                                    .callArrivalAddressMainNo),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1

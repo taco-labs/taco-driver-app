@@ -505,6 +505,18 @@ class FFAppState extends ChangeNotifier {
     _darkModeSetting = _value;
     prefs.setBool('ff_darkModeSetting', _value);
   }
+
+  String _driverCarModel = '';
+  String get driverCarModel => _driverCarModel;
+  set driverCarModel(String _value) {
+    _driverCarModel = _value;
+  }
+
+  String _driverTaxiCategory = '';
+  String get driverTaxiCategory => _driverTaxiCategory;
+  set driverTaxiCategory(String _value) {
+    _driverTaxiCategory = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

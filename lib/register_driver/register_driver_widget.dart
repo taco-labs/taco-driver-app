@@ -26,7 +26,7 @@ class RegisterDriverWidget extends StatefulWidget {
 }
 
 class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
-  ApiCallResponse? apiResultbos;
+  ApiCallResponse? apiResultbox;
   String? appVersion;
   String? getFcmTokenResult;
   String? osType;
@@ -38,7 +38,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? phoneNumberController;
-  TextEditingController? carNumberController;
   TextEditingController? licenseNumberController;
   TextEditingController? businessRegistrationNumberController;
   TextEditingController? taxiCompanyNameController;
@@ -58,7 +57,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
     phoneNumberController = TextEditingController(text: widget.phoneNumber);
-    carNumberController = TextEditingController();
     licenseNumberController = TextEditingController();
     businessRegistrationNumberController = TextEditingController();
     taxiCompanyNameController = TextEditingController();
@@ -74,7 +72,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
     firstNameController?.dispose();
     lastNameController?.dispose();
     phoneNumberController?.dispose();
-    carNumberController?.dispose();
     licenseNumberController?.dispose();
     businessRegistrationNumberController?.dispose();
     taxiCompanyNameController?.dispose();
@@ -638,80 +635,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
                               child: TextFormField(
-                                controller: carNumberController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: '차량번호',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18,
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20, 24, 20, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                    ),
-                                validator: (val) {
-                                  if (val == null || val.isEmpty) {
-                                    return '차량번호를 정확히 입력해주세요';
-                                  }
-
-                                  if (val.length < 1) {
-                                    return '차량번호를 정확히 입력해주세요';
-                                  }
-
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 5),
-                              child: TextFormField(
                                 controller: licenseNumberController,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -1002,23 +925,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
                                     ),
-                                validator: (val) {
-                                  if (val == null || val.isEmpty) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-
-                                  if (val.length < 7) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-                                  if (val.length > 8) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-                                  if (!RegExp('^[a-z|A-Z]{7,8}\$')
-                                      .hasMatch(val)) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
                             Padding(
@@ -1207,7 +1113,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             getFcmTokenResult = await actions.getFcmToken();
                             appVersion = await actions.getAppVersion();
                             osType = await actions.getPlatformCode();
-                            apiResultbos = await SignupGroup.signupCall.call(
+                            apiResultbox = await SignupGroup.signupCall.call(
                               firstName: firstNameController!.text,
                               lastName: lastNameController!.text,
                               birthday: birthDateController!.text,
@@ -1221,7 +1127,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               driverType:
                                   functions.toDriverType(radioButtonValue!),
                               driverLicenseId: licenseNumberController!.text,
-                              carNumber: carNumberController!.text,
                               companyRegistrationNumber:
                                   businessRegistrationNumberController!.text,
                               serviceRegion: dropDownValue,
@@ -1231,9 +1136,9 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                   '${birthDateController!.text}${genderCodeController!.text}',
                               referralCode: referralCodeController!.text,
                             );
-                            if ((apiResultbos?.succeeded ?? true)) {
+                            if ((apiResultbox?.succeeded ?? true)) {
                               await actions.fromDriverSignApiResponse(
-                                (apiResultbos?.jsonBody ?? ''),
+                                (apiResultbox?.jsonBody ?? ''),
                               );
                               await requestPermission(notificationsPermission);
                               await requestPermission(photoLibraryPermission);
@@ -1242,7 +1147,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                             } else {
                               FFAppState().update(() {
                                 FFAppState().errCode = getJsonField(
-                                  (apiResultbos?.jsonBody ?? ''),
+                                  (apiResultbox?.jsonBody ?? ''),
                                   r'''$.errCode''',
                                 ).toString();
                               });
