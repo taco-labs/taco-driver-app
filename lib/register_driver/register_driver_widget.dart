@@ -925,20 +925,6 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
                                     ),
-                                validator: (val) {
-                                  if (val == null || val.isEmpty) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-
-                                  if (val.length > 8) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-                                  if (!RegExp('^[a-z|A-Z]{0,8}\$')
-                                      .hasMatch(val)) {
-                                    return '추천인코드를 정확히 입력해주세요';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
                             Padding(
