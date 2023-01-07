@@ -120,6 +120,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => DriverProfileWidget(),
             ),
             FFRoute(
+              name: 'CarSetting',
+              path: 'carSetting',
+              builder: (context, params) => CarSettingWidget(),
+            ),
+            FFRoute(
+              name: 'AddCar',
+              path: 'addCar',
+              builder: (context, params) => AddCarWidget(),
+            ),
+            FFRoute(
+              name: 'ModifyCar',
+              path: 'modifyCar',
+              builder: (context, params) => ModifyCarWidget(
+                phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                authSmsStateKey:
+                    params.getParam('authSmsStateKey', ParamType.String),
+              ),
+            ),
+            FFRoute(
               name: 'Setting',
               path: 'setting',
               builder: (context, params) => SettingWidget(

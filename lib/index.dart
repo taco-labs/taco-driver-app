@@ -8,6 +8,9 @@ export 'home/home_widget.dart' show HomeWidget;
 export 'register_installment/register_installment_widget.dart'
     show RegisterInstallmentWidget;
 export 'driver_profile/driver_profile_widget.dart' show DriverProfileWidget;
+export 'car_setting/car_setting_widget.dart' show CarSettingWidget;
+export 'add_car/add_car_widget.dart' show AddCarWidget;
+export 'modify_car/modify_car_widget.dart' show ModifyCarWidget;
 export 'setting/setting_widget.dart' show SettingWidget;
 export 'company_info/company_info_widget.dart' show CompanyInfoWidget;
 export 'policy/policy_widget.dart' show PolicyWidget;

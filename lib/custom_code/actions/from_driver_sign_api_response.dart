@@ -40,4 +40,6 @@ Future fromDriverSignApiResponse(dynamic apiResponse) async {
   FFAppState().driverLicenseImageDownloadUrl =
       driverInfo['downloadUrls']['licenseImage'];
   FFAppState().driverReferralCode = driverInfo['referralCode'];
+  FFAppState().driverCarModel = driverInfo['carModel'];
+  FFAppState().driverTaxiCategory = driverInfo['taxiCategory'];
 }

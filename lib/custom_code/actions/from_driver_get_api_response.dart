@@ -36,4 +36,6 @@ Future fromDriverGetApiResponse(dynamic apiResponse) async {
   FFAppState().driverLicenseImageDownloadUrl =
       apiResponse['downloadUrls']['licenseImage'];
   FFAppState().driverReferralCode = apiResponse['referralCode'];
+  FFAppState().driverCarModel = apiResponse['carModel'];
+  FFAppState().driverTaxiCategory = apiResponse['taxiCategory'];
 }
