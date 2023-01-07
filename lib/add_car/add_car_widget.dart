@@ -596,14 +596,17 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                           taxiCategory: taxiCategoryDropDownValue,
                         );
                         if ((apiResultAddCar?.succeeded ?? true)) {
-                          FFAppState().update(() {
-                            FFAppState().driverCarModel =
-                                carModelDropDownValue!;
-                            FFAppState().driverCarNumber =
-                                '${carRegionDropDownValue}${carFirstNumberController!.text}${carKeyDropDownValue}${carLastNumberController!.text}';
-                            FFAppState().driverTaxiCategory =
-                                taxiCategoryDropDownValue!;
-                          });
+                          if (FFAppState().driverCarNumber == null ||
+                              FFAppState().driverCarNumber == '') {
+                            FFAppState().update(() {
+                              FFAppState().driverCarModel =
+                                  carModelDropDownValue!;
+                              FFAppState().driverCarNumber =
+                                  '${carRegionDropDownValue}${carFirstNumberController!.text}${carKeyDropDownValue}${carLastNumberController!.text}';
+                              FFAppState().driverTaxiCategory =
+                                  taxiCategoryDropDownValue!;
+                            });
+                          }
 
                           context.goNamed('CarSetting');
                         } else {
