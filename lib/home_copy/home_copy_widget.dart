@@ -741,7 +741,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
@@ -1436,7 +1437,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
@@ -1756,7 +1758,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     size: 30,
                                   ),
                                   Padding(
