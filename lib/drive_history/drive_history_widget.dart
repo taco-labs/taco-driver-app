@@ -241,10 +241,13 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 10, 0, 0),
                                               child: Text(
-                                                getJsonField(
+                                                '${getJsonField(
                                                   rideHistoriesItem,
-                                                  r'''$.departure.address.addressName''',
-                                                ).toString(),
+                                                  r'''$.departure.address.regionDepth2''',
+                                                ).toString()} ${getJsonField(
+                                                  rideHistoriesItem,
+                                                  r'''$.departure.address.regionDepth3''',
+                                                ).toString()}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText2
@@ -270,10 +273,13 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                               ),
                                             ),
                                             Text(
-                                              getJsonField(
+                                              '${getJsonField(
                                                 rideHistoriesItem,
-                                                r'''$.arrival.address.addressName''',
-                                              ).toString(),
+                                                r'''$.arrival.address.regionDepth2''',
+                                              ).toString()} ${getJsonField(
+                                                rideHistoriesItem,
+                                                r'''$.arrival.address.regionDepth3''',
+                                              ).toString()}',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyText2

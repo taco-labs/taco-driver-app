@@ -115,10 +115,6 @@ class SMSVerificationAndSigninCall {
         response,
         r'''$.driver.appOs''',
       );
-  dynamic driverAppVersion(dynamic response) => getJsonField(
-        response,
-        r'''$.driver.osVersion''',
-      );
   dynamic driverIsActive(dynamic response) => getJsonField(
         response,
         r'''$.driver.active''',
@@ -178,6 +174,22 @@ class SMSVerificationAndSigninCall {
   dynamic driverServiceRegion(dynamic response) => getJsonField(
         response,
         r'''$.driver.serviceRegion''',
+      );
+  dynamic appVersion(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.appVersion''',
+      );
+  dynamic driverTaxiCategory(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.taxiCategory''',
+      );
+  dynamic driverReferralCode(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.referralCode''',
+      );
+  dynamic driverCarModel(dynamic response) => getJsonField(
+        response,
+        r'''$.driver.carModel''',
       );
 }
 
@@ -387,6 +399,7 @@ class DriverInfoGroup {
   static ListCarProfileCall listCarProfileCall = ListCarProfileCall();
   static SelectCarProfileCall selectCarProfileCall = SelectCarProfileCall();
   static UpdateCarProfileCall updateCarProfileCall = UpdateCarProfileCall();
+  static DeleteCarProfileCall deleteCarProfileCall = DeleteCarProfileCall();
 }
 
 class GetDriverCall {
@@ -1013,8 +1026,17 @@ class AddCarProfileCall {
     String? apiEndpointTarget = '',
     String? apiToken = '',
     String? carNumber = '',
-    String? carType = '',
+    String? carModel = '',
+    bool? selectAsProfile,
+    String? taxiCategory = '',
   }) {
+    final body = '''
+{
+  "selectAsProfile": "${selectAsProfile}",
+  "taxiCategory": "${taxiCategory}",
+  "carNumber": "${carNumber}",
+  "carModel": "${carModel}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Add Car Profile',
       apiUrl:
@@ -1025,6 +1047,7 @@ class AddCarProfileCall {
         'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
+      body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -1056,6 +1079,23 @@ class ListCarProfileCall {
       cache: false,
     );
   }
+
+  dynamic carIdList(dynamic response) => getJsonField(
+        response,
+        r'''$[:].id''',
+      );
+  dynamic carSelectedList(dynamic response) => getJsonField(
+        response,
+        r'''$[:].selected''',
+      );
+  dynamic carDriverIdList(dynamic response) => getJsonField(
+        response,
+        r'''$[:].driverId''',
+      );
+  dynamic carNumberList(dynamic response) => getJsonField(
+        response,
+        r'''$[:].carNumber''',
+      );
 }
 
 class SelectCarProfileCall {
@@ -1075,7 +1115,7 @@ class SelectCarProfileCall {
         'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
-      bodyType: BodyType.JSON,
+      bodyType: BodyType.NONE,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1088,13 +1128,16 @@ class UpdateCarProfileCall {
   Future<ApiCallResponse> call({
     String? apiEndpointTarget = '',
     String? carProfileId = '',
+    String? carModel = '',
+    String? taxiCategory = '',
     String? carNumber = '',
-    String? carType = '',
+    String? apiToken = '',
   }) {
     final body = '''
 {
+  "taxiCategory": "${taxiCategory}",
   "carNumber": "${carNumber}",
-  "carType": "${carType}"
+  "carModel": "${carModel}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Car Profile',
@@ -1103,10 +1146,35 @@ class UpdateCarProfileCall {
       callType: ApiCallType.PUT,
       headers: {
         ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
       },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class DeleteCarProfileCall {
+  Future<ApiCallResponse> call({
+    String? apiEndpointTarget = '',
+    String? apiToken = '',
+    String? carProfileId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Delete Car Profile',
+      apiUrl:
+          '${DriverInfoGroup.baseUrl}driver.${apiEndpointTarget}.api.taco-labs.com/car_profile/${carProfileId}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        ...DriverInfoGroup.headers,
+        'Authorization': 'Bearer ${apiToken}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
