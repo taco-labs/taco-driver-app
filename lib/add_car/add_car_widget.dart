@@ -604,7 +604,8 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                             FFAppState().driverTaxiCategory =
                                 taxiCategoryDropDownValue!;
                           });
-                          context.pop();
+
+                          context.goNamed('CarSetting');
                         } else {
                           await showDialog(
                             context: context,

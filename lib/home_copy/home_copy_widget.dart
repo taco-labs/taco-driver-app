@@ -361,7 +361,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                         .bodyText1
                                                         .override(
                                                           fontFamily: 'Poppins',
-                                                          fontSize: 18,
+                                                          fontSize: 20,
                                                         ),
                                                   ),
                                                 ],
