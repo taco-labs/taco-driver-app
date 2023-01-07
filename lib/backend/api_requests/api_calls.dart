@@ -1032,7 +1032,7 @@ class AddCarProfileCall {
   }) {
     final body = '''
 {
-  "selectAsProfile": "${selectAsProfile}",
+  "selectAsProfile": ${selectAsProfile},
   "taxiCategory": "${taxiCategory}",
   "carNumber": "${carNumber}",
   "carModel": "${carModel}"
