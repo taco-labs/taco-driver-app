@@ -2263,24 +2263,6 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                         );
                                         if ((apiResultDoneTaxiCall?.succeeded ??
                                             true)) {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('운행 종료'),
-                                                content:
-                                                    Text('승객에게 운임을 결제 받으세요'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('확인'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
                                           setState(() {
                                             tollFareController?.clear();
                                             taxiFareController?.clear();
