@@ -814,7 +814,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -823,7 +823,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .secondaryBackground,
                                             width: 2,
                                           ),
                                           borderRadius:
@@ -849,7 +849,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                         ),
                                         filled: true,
                                         fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .primaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20, 24, 20, 24),
