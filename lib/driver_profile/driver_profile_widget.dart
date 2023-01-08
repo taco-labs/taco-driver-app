@@ -6,7 +6,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -18,7 +17,6 @@ class DriverProfileWidget extends StatefulWidget {
 }
 
 class _DriverProfileWidgetState extends State<DriverProfileWidget> {
-  AudioPlayer? soundPlayer;
   TextEditingController? birthDateController;
   TextEditingController? genderCodeController;
   TextEditingController? firstNameController;
@@ -539,15 +537,6 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              soundPlayer ??= AudioPlayer();
-                              if (soundPlayer!.playing) {
-                                await soundPlayer!.stop();
-                              }
-
-                              soundPlayer!
-                                  .setAsset('assets/audios/__-2.mp3')
-                                  .then((_) => soundPlayer!.play());
-
                               await Share.share(FFAppState().appDownloadUrl);
                             },
                             text: '어플 공유',
