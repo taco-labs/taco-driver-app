@@ -4,7 +4,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 class SettingCopyWidget extends StatefulWidget {
@@ -21,9 +20,6 @@ class SettingCopyWidget extends StatefulWidget {
 
 class _SettingCopyWidgetState extends State<SettingCopyWidget> {
   ApiCallResponse? apiResult9ee;
-  AudioPlayer? soundPlayer1;
-  AudioPlayer? soundPlayer2;
-  AudioPlayer? soundPlayer3;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -133,33 +129,6 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                 InkWell(
                   onTap: () async {
                     context.pushNamed('CompanyInfo');
-
-                    soundPlayer1 ??= AudioPlayer();
-                    if (soundPlayer1!.playing) {
-                      await soundPlayer1!.stop();
-                    }
-
-                    soundPlayer1!
-                        .setAsset('assets/audios/RiderCancelled.mp3')
-                        .then((_) => soundPlayer1!.play());
-
-                    soundPlayer2 ??= AudioPlayer();
-                    if (soundPlayer2!.playing) {
-                      await soundPlayer2!.stop();
-                    }
-                    soundPlayer2!.setVolume(1);
-                    soundPlayer2!
-                        .setAsset('assets/audios/CallCardWithTaco.mp3')
-                        .then((_) => soundPlayer2!.play());
-
-                    soundPlayer3 ??= AudioPlayer();
-                    if (soundPlayer3!.playing) {
-                      await soundPlayer3!.stop();
-                    }
-
-                    soundPlayer3!
-                        .setAsset('assets/audios/CallCard.mp3')
-                        .then((_) => soundPlayer3!.play());
                   },
                   child: ListTile(
                     title: Text(
