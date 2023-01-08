@@ -517,6 +517,12 @@ class FFAppState extends ChangeNotifier {
   set driverTaxiCategory(String _value) {
     _driverTaxiCategory = _value;
   }
+
+  bool _isReferralAdShowed = false;
+  bool get isReferralAdShowed => _isReferralAdShowed;
+  set isReferralAdShowed(bool _value) {
+    _isReferralAdShowed = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

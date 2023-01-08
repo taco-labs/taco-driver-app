@@ -34,28 +34,35 @@ class _HomeWidgetState extends State<HomeWidget> {
       }
       isInstalled = await actions.isKakaoNaviInstalled();
       if (isInstalled!) {
-        var confirmDialogResponse = await showDialog<bool>(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  content: Text(
-                      '지금 동료 기사님을 초대하면 3천원 적립 혜택을 드려요! 초대하면 할수록 적립 혜택은 계속 누적되요'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext, false),
-                      child: Text('나중에'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext, true),
-                      child: Text('지금 초대하러가기'),
-                    ),
-                  ],
-                );
-              },
-            ) ??
-            false;
-        if (confirmDialogResponse) {
-          context.pushNamed('DriverProfile');
+        if (!FFAppState().isReferralAdShowed) {
+          FFAppState().update(() {
+            FFAppState().isReferralAdShowed = true;
+          });
+          var confirmDialogResponse = await showDialog<bool>(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    content: Text(
+                        '지금 동료 기사님을 초대하면 3천원 적립 혜택을 드려요! 초대하면 할수록 적립 혜택은 계속 누적되요'),
+                    actions: [
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, false),
+                        child: Text('나중에'),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, true),
+                        child: Text('지금 초대하러가기'),
+                      ),
+                    ],
+                  );
+                },
+              ) ??
+              false;
+          if (confirmDialogResponse) {
+            context.pushNamed('DriverProfile');
+          }
         }
       } else {
         await showDialog(
