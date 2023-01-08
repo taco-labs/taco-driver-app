@@ -2498,7 +2498,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
             child: Stack(
               children: [
                 if (FFAppState().driverIsActivated &&
-                    !FFAppState().driverIsAtWork)
+                    !FFAppState().driverIsAtWork &&
+                    (FFAppState().driverCarNumber != null &&
+                        FFAppState().driverCarNumber != ''))
                   Align(
                     alignment: AlignmentDirectional(0, 0),
                     child: FFButtonWidget(
