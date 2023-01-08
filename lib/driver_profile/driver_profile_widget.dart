@@ -539,7 +539,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                             onPressed: () async {
                               await Share.share(FFAppState().appDownloadUrl);
                             },
-                            text: '앱 공유',
+                            text: '어플 공유',
                             options: FFButtonOptions(
                               width: 100,
                               height: 50,
