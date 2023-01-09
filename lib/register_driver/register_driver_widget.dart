@@ -973,7 +973,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             ),
                                           ),
                                           unselectedWidgetColor:
-                                              Color(0xFFF5F5F5),
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
                                         ),
                                         child: Checkbox(
                                           value: termsCheckboxValue ??= true,
@@ -1037,7 +1038,8 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             ),
                                           ),
                                           unselectedWidgetColor:
-                                              Color(0xFFF5F5F5),
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
                                         ),
                                         child: Checkbox(
                                           value: privacyCheckboxValue ??= true,
