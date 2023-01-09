@@ -68,7 +68,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
           },
         ),
         title: Text(
-          '차량 추가',
+          '차량 추가',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
