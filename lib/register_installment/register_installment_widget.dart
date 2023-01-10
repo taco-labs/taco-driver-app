@@ -120,7 +120,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: TextFormField(
                               controller: accountNumberController,
                               obscureText: false,
