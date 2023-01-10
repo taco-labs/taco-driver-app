@@ -1929,6 +1929,7 @@ class CancelTaxiCallRequestCall {
     String? apiToken = '',
     String? apiEndpointTarget = '',
     bool? confirmCancel,
+    bool? isUserFault,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Cancel Taxi Call Request',
@@ -1941,6 +1942,7 @@ class CancelTaxiCallRequestCall {
       },
       params: {
         'confirmCancel': confirmCancel,
+        'isUserFault': isUserFault,
       },
       returnBody: true,
       encodeBodyUtf8: false,
