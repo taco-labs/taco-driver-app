@@ -214,6 +214,53 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                 ),
                 Divider(),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                  child: InkWell(
+                    onTap: () async {
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('주의'),
+                                content: Text(
+                                    '회원 탈퇴는 고객센터 통해서 도와드리고 있습니다. 탈퇴 진행을 위해 고객센터로 이동하시겠습니까?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('취소'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('고객센터로 이동'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        context.pushNamed('SupportChat');
+                      }
+                    },
+                    child: ListTile(
+                      title: Text(
+                        '탈퇴하기',
+                        style: FlutterFlowTheme.of(context).title3.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      tileColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      dense: false,
+                    ),
+                  ),
+                ),
+                Divider(),
               ],
             ),
           ),
