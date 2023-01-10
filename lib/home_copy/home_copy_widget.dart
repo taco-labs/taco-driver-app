@@ -33,8 +33,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   ApiCallResponse? apiResultkg1;
   AudioPlayer? soundPlayer9;
   ApiCallResponse? apiResultCancelCall2;
-  ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
+  ApiCallResponse? apiResultCancelCall3;
   ApiCallResponse? apiResultDriverToArrival;
   AudioPlayer? soundPlayer2;
   ApiCallResponse? apiResultj1q;
@@ -1212,7 +1212,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           );
                                                         }
                                                       } else {
-                                                        apiResultCancelCall2 =
+                                                        apiResultCancelCall3 =
                                                             await TaxiCallGroup
                                                                 .cancelTaxiCallRequestCall
                                                                 .call(
@@ -1227,7 +1227,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                           confirmCancel: true,
                                                           isUserFault: false,
                                                         );
-                                                        if ((apiResultCancelCall2
+                                                        if ((apiResultCancelCall3
                                                                 ?.succeeded ??
                                                             true)) {
                                                           await actions
