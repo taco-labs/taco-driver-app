@@ -62,6 +62,8 @@
     <string>Allow locations</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Allow access to Photo Library</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Allow access to camera</string>
 
 
 	<key>UILaunchStoryboardName</key>

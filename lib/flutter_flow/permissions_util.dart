@@ -13,6 +13,7 @@ final notificationsPermission = Permission.notification;
 final cameraPermission = Permission.camera;
 final locationPermission = Permission.location;
 final photoLibraryPermission = Permission.photos;
+final microphonePermission = Permission.microphone;
 
 Future<bool> getPermissionStatus(Permission setting) async {
   if (kIsWeb) {

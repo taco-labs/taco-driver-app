@@ -94,6 +94,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResultkg1;
   ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
+  ApiCallResponse? apiResultCancelCall3;
   ApiCallResponse? apiResultDriverToArrival;
   ApiCallResponse? apiResultj1q;
   ApiCallResponse? apiResultw8d;
@@ -1155,45 +1156,120 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                       ) ??
                                                       false;
                                               if (confirmDialogResponse) {
-                                                apiResultCancelCall2 =
-                                                    await TaxiCallGroup
-                                                        .cancelTaxiCallRequestCall
-                                                        .call(
-                                                  taxiCallRequestId:
-                                                      FFAppState().callId,
-                                                  apiToken:
-                                                      FFAppState().apiToken,
-                                                  apiEndpointTarget:
-                                                      FFAppState()
-                                                          .apiEndpointTarget,
-                                                  confirmCancel: true,
-                                                );
-                                                if ((apiResultCancelCall2
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  await actions.setCallState(
-                                                    'TAXI_CALL_WAITING',
+                                                confirmDialogResponse =
+                                                    await showDialog<bool>(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              content: Text(
+                                                                  '탑승지 도착 3분 경과후 연락두절 등 손님 귀책으로 인한 취소인가요?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                  child: Text(
+                                                                      '기사님사유'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                  child: Text(
+                                                                      '손님귀책사유'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ) ??
+                                                        false;
+                                                if (confirmDialogResponse) {
+                                                  apiResultCancelCall2 =
+                                                      await TaxiCallGroup
+                                                          .cancelTaxiCallRequestCall
+                                                          .call(
+                                                    taxiCallRequestId:
+                                                        FFAppState().callId,
+                                                    apiToken:
+                                                        FFAppState().apiToken,
+                                                    apiEndpointTarget:
+                                                        FFAppState()
+                                                            .apiEndpointTarget,
+                                                    confirmCancel: true,
+                                                    isUserFault: true,
                                                   );
+                                                  if ((apiResultCancelCall2
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    await actions.setCallState(
+                                                      'TAXI_CALL_WAITING',
+                                                    );
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('오류'),
+                                                          content: Text(
+                                                              '서버 오류가 발생하여 다시 시도해주세요'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('확인'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('오류'),
-                                                        content: Text(
-                                                            '서버 오류가 발생하여 다시 시도해주세요'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('확인'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
+                                                  apiResultCancelCall3 =
+                                                      await TaxiCallGroup
+                                                          .cancelTaxiCallRequestCall
+                                                          .call(
+                                                    taxiCallRequestId:
+                                                        FFAppState().callId,
+                                                    apiToken:
+                                                        FFAppState().apiToken,
+                                                    apiEndpointTarget:
+                                                        FFAppState()
+                                                            .apiEndpointTarget,
+                                                    confirmCancel: true,
+                                                    isUserFault: false,
                                                   );
+                                                  if ((apiResultCancelCall3
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    await actions.setCallState(
+                                                      'TAXI_CALL_WAITING',
+                                                    );
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('오류'),
+                                                          content: Text(
+                                                              '서버 오류가 발생하여 다시 시도해주세요'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('확인'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 }
                                               }
                                             } else {
