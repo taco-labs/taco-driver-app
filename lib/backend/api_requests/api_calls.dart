@@ -635,11 +635,13 @@ class RegisterSettlementAccountCall {
     String? bank = '',
     String? accountNumber = '',
     String? apiEndpointTarget = '',
+    String? accountHolderBirthday = '',
   }) {
     final body = '''
 {
   "bank": "${bank}",
-  "accountNumber": "${accountNumber}"
+  "accountNumber": "${accountNumber}",
+  "accountHolderBirthday": "${accountHolderBirthday}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Register settlement account',
@@ -734,11 +736,13 @@ class UpdateDriverSettlementAccountCall {
     String? bank = '',
     String? accountNumber = '',
     String? apiEndpointTarget = '',
+    String? accountHolderBirthday = '',
   }) {
     final body = '''
 {
   "bank": "${bank}",
-  "accountNumber": "${accountNumber}"
+  "accountNumber": "${accountNumber}",
+  "accountHolderBirthday": "${accountHolderBirthday}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update driver settlement account',
