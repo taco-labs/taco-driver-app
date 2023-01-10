@@ -27,6 +27,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
   ApiCallResponse? apiResultRegisterAccount;
   String? bankCodeValue;
   TextEditingController? accountNumberController;
+  TextEditingController? accountHolderBirthdayController;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
@@ -34,6 +35,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
   @override
   void initState() {
     super.initState();
+    accountHolderBirthdayController = TextEditingController();
     accountNumberController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -41,6 +43,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
   @override
   void dispose() {
     _unfocusNode.dispose();
+    accountHolderBirthdayController?.dispose();
     accountNumberController?.dispose();
     super.dispose();
   }
@@ -117,7 +120,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: TextFormField(
                               controller: accountNumberController,
                               obscureText: false,
@@ -201,6 +204,93 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                               },
                             ),
                           ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                            child: TextFormField(
+                              controller: accountHolderBirthdayController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: '계좌주 생년월일',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 18,
+                                    ),
+                                hintText: '계좌주의 주민번호 앞 6자리를 입력해주세요',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 18,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 24, 20, 24),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ),
+                              keyboardType: TextInputType.number,
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return '계좌주의 주민번호 앞 6자리를 정확히 입력해주세요';
+                                }
+
+                                if (val.length < 6) {
+                                  return '계좌주의 주민번호 앞 6자리를 정확히 입력해주세요';
+                                }
+                                if (val.length > 6) {
+                                  return '계좌주의 주민번호 앞 6자리를 정확히 입력해주세요';
+                                }
+                                if (!RegExp('^\\d{2}[0-1]\\d{1}[0-3]\\d{1}\$')
+                                    .hasMatch(val)) {
+                                  return '계좌주의 주민번호 앞 6자리를 정확히 입력해주세요';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -243,6 +333,8 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                         bank: bankCodeValue,
                         accountNumber: accountNumberController!.text,
                         apiEndpointTarget: FFAppState().apiEndpointTarget,
+                        accountHolderBirthday:
+                            accountHolderBirthdayController!.text,
                       );
                       if ((apiResultRegisterAccount?.succeeded ?? true)) {
                         context.goNamed('Home');
