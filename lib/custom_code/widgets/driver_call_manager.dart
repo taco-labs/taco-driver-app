@@ -94,6 +94,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResultkg1;
   ApiCallResponse? apiResultCancelCall2;
   ApiCallResponse? apiResultCancelCall;
+  ApiCallResponse? apiResultCancelCall3;
   ApiCallResponse? apiResultDriverToArrival;
   ApiCallResponse? apiResultj1q;
   ApiCallResponse? apiResultw8d;
@@ -107,22 +108,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
   ApiCallResponse? apiResult550;
   ApiCallResponse? apiResult560;
   ApiCallResponse? apiResultkz1;
-  AudioPlayer? soundPlayer1;
-  AudioPlayer? soundPlayer2;
-  AudioPlayer? soundPlayer3;
-  AudioPlayer? soundPlayer4;
-  AudioPlayer? soundPlayer5;
-  AudioPlayer? soundPlayer6;
-  AudioPlayer? soundPlayer7;
-  AudioPlayer? soundPlayer8;
-  AudioPlayer? soundPlayer9;
-  AudioPlayer? soundPlayer10;
-  AudioPlayer? soundPlayer11;
-  AudioPlayer? soundPlayer12;
-  AudioPlayer? soundPlayer13;
-  AudioPlayer? soundPlayer14;
-  AudioPlayer? soundPlayer15;
-  AudioPlayer? soundPlayer16;
+  AudioPlayer? soundPlayer;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -182,23 +168,23 @@ class _DriverCallManagerState extends State<DriverCallManager> {
               actions.fromCallRequestedMessagePayload(message.data);
               actions.setCallState('TAXI_CALL_REQUESTED');
             });
-            soundPlayer15 ??= AudioPlayer();
-            if (soundPlayer15!.playing) {
-              await soundPlayer15!.stop();
+            soundPlayer ??= AudioPlayer();
+            if (soundPlayer!.playing) {
+              await soundPlayer!.stop();
             }
 
-            soundPlayer15!
+            soundPlayer!
                 .setAsset('assets/audios/CallRequested.mp3')
-                .then((_) => soundPlayer15!.play());
+                .then((_) => soundPlayer!.play());
           } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-            soundPlayer16 ??= AudioPlayer();
-            if (soundPlayer16!.playing) {
-              await soundPlayer16!.stop();
+            soundPlayer ??= AudioPlayer();
+            if (soundPlayer!.playing) {
+              await soundPlayer!.stop();
             }
 
-            soundPlayer16!
+            soundPlayer!
                 .setAsset('assets/audios/RiderCancelled.mp3')
-                .then((_) => soundPlayer16!.play());
+                .then((_) => soundPlayer!.play());
             await showDialog(
               context: context,
               builder: (alertDialogContext) {
@@ -986,16 +972,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           await actions.setCallState(
                                             'DRIVER_TO_DEPARTURE',
                                           );
-                                          soundPlayer1 ??= AudioPlayer();
-                                          if (soundPlayer1!.playing) {
-                                            await soundPlayer1!.stop();
+                                          soundPlayer ??= AudioPlayer();
+                                          if (soundPlayer!.playing) {
+                                            await soundPlayer!.stop();
                                           }
 
-                                          soundPlayer1!
+                                          soundPlayer!
                                               .setAsset(
                                                   'assets/audios/CallAccepted.mp3')
-                                              .then(
-                                                  (_) => soundPlayer1!.play());
+                                              .then((_) => soundPlayer!.play());
                                         } else {
                                           FFAppState().update(() {
                                             FFAppState().errCode = getJsonField(
@@ -1171,45 +1156,120 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                       ) ??
                                                       false;
                                               if (confirmDialogResponse) {
-                                                apiResultCancelCall2 =
-                                                    await TaxiCallGroup
-                                                        .cancelTaxiCallRequestCall
-                                                        .call(
-                                                  taxiCallRequestId:
-                                                      FFAppState().callId,
-                                                  apiToken:
-                                                      FFAppState().apiToken,
-                                                  apiEndpointTarget:
-                                                      FFAppState()
-                                                          .apiEndpointTarget,
-                                                  confirmCancel: true,
-                                                );
-                                                if ((apiResultCancelCall2
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  await actions.setCallState(
-                                                    'TAXI_CALL_WAITING',
+                                                confirmDialogResponse =
+                                                    await showDialog<bool>(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              content: Text(
+                                                                  '탑승지 도착 3분 경과후 연락두절 등 손님 귀책으로 인한 취소인가요?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                  child: Text(
+                                                                      '기사님사유'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                  child: Text(
+                                                                      '손님귀책사유'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ) ??
+                                                        false;
+                                                if (confirmDialogResponse) {
+                                                  apiResultCancelCall2 =
+                                                      await TaxiCallGroup
+                                                          .cancelTaxiCallRequestCall
+                                                          .call(
+                                                    taxiCallRequestId:
+                                                        FFAppState().callId,
+                                                    apiToken:
+                                                        FFAppState().apiToken,
+                                                    apiEndpointTarget:
+                                                        FFAppState()
+                                                            .apiEndpointTarget,
+                                                    confirmCancel: true,
+                                                    isUserFault: true,
                                                   );
+                                                  if ((apiResultCancelCall2
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    await actions.setCallState(
+                                                      'TAXI_CALL_WAITING',
+                                                    );
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('오류'),
+                                                          content: Text(
+                                                              '서버 오류가 발생하여 다시 시도해주세요'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('확인'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('오류'),
-                                                        content: Text(
-                                                            '서버 오류가 발생하여 다시 시도해주세요'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('확인'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
+                                                  apiResultCancelCall3 =
+                                                      await TaxiCallGroup
+                                                          .cancelTaxiCallRequestCall
+                                                          .call(
+                                                    taxiCallRequestId:
+                                                        FFAppState().callId,
+                                                    apiToken:
+                                                        FFAppState().apiToken,
+                                                    apiEndpointTarget:
+                                                        FFAppState()
+                                                            .apiEndpointTarget,
+                                                    confirmCancel: true,
+                                                    isUserFault: false,
                                                   );
+                                                  if ((apiResultCancelCall3
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    await actions.setCallState(
+                                                      'TAXI_CALL_WAITING',
+                                                    );
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('오류'),
+                                                          content: Text(
+                                                              '서버 오류가 발생하여 다시 시도해주세요'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('확인'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 }
                                               }
                                             } else {
@@ -1553,15 +1613,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         await actions.setCallState(
                                           'DRIVER_TO_ARRIVAL',
                                         );
-                                        soundPlayer2 ??= AudioPlayer();
-                                        if (soundPlayer2!.playing) {
-                                          await soundPlayer2!.stop();
+                                        soundPlayer ??= AudioPlayer();
+                                        if (soundPlayer!.playing) {
+                                          await soundPlayer!.stop();
                                         }
 
-                                        soundPlayer2!
+                                        soundPlayer!
                                             .setAsset(
                                                 'assets/audios/RiderOnboarded.mp3')
-                                            .then((_) => soundPlayer2!.play());
+                                            .then((_) => soundPlayer!.play());
                                       } else {
                                         await showDialog(
                                           context: context,
@@ -1872,14 +1932,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       await actions.setCallState(
                                         'ARRIVED',
                                       );
-                                      soundPlayer3 ??= AudioPlayer();
-                                      if (soundPlayer3!.playing) {
-                                        await soundPlayer3!.stop();
+                                      soundPlayer ??= AudioPlayer();
+                                      if (soundPlayer!.playing) {
+                                        await soundPlayer!.stop();
                                       }
 
-                                      soundPlayer3!
+                                      soundPlayer!
                                           .setAsset('assets/audios/Arrived.mp3')
-                                          .then((_) => soundPlayer3!.play());
+                                          .then((_) => soundPlayer!.play());
                                     },
                                     text: '목적지 도착',
                                     options: FFButtonOptions(
@@ -2193,22 +2253,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   );
                                   if ((apiResultDoneTaxiCall?.succeeded ??
                                       true)) {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('운행 종료'),
-                                          content: Text('승객에게 운임을 결제 받으세요'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('확인'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                     setState(() {
                                       tollFareController?.clear();
                                       taxiFareController?.clear();
@@ -2216,15 +2260,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     await actions.setCallState(
                                       'TAXI_CALL_WAITING',
                                     );
-                                    soundPlayer4 ??= AudioPlayer();
-                                    if (soundPlayer4!.playing) {
-                                      await soundPlayer4!.stop();
+                                    soundPlayer ??= AudioPlayer();
+                                    if (soundPlayer!.playing) {
+                                      await soundPlayer!.stop();
                                     }
 
-                                    soundPlayer4!
+                                    soundPlayer!
                                         .setAsset(
                                             'assets/audios/TaxiFareInputSuccess.mp3')
-                                        .then((_) => soundPlayer4!.play());
+                                        .then((_) => soundPlayer!.play());
                                   } else {
                                     await showDialog(
                                       context: context,
@@ -2303,14 +2347,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               'TAXI_CALL_WAITING',
                             );
                             await actions.startLocationService();
-                            soundPlayer5 ??= AudioPlayer();
-                            if (soundPlayer5!.playing) {
-                              await soundPlayer5!.stop();
+                            soundPlayer ??= AudioPlayer();
+                            if (soundPlayer!.playing) {
+                              await soundPlayer!.stop();
                             }
 
-                            soundPlayer5!
+                            soundPlayer!
                                 .setAsset('assets/audios/StartCallWaiting.mp3')
-                                .then((_) => soundPlayer5!.play());
+                                .then((_) => soundPlayer!.play());
                           } else {
                             FFAppState().update(() {
                               FFAppState().errCode = getJsonField(
@@ -2336,15 +2380,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   );
                                 },
                               );
-                              soundPlayer6 ??= AudioPlayer();
-                              if (soundPlayer6!.playing) {
-                                await soundPlayer6!.stop();
+                              soundPlayer ??= AudioPlayer();
+                              if (soundPlayer!.playing) {
+                                await soundPlayer!.stop();
                               }
 
-                              soundPlayer6!
+                              soundPlayer!
                                   .setAsset(
                                       'assets/audios/NotSupportedRegion.mp3')
-                                  .then((_) => soundPlayer6!.play());
+                                  .then((_) => soundPlayer!.play());
                             } else {
                               await showDialog(
                                 context: context,
@@ -2407,15 +2451,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   'TAXI_CALL_WAITING',
                                 );
                                 await actions.startLocationService();
-                                soundPlayer7 ??= AudioPlayer();
-                                if (soundPlayer7!.playing) {
-                                  await soundPlayer7!.stop();
+                                soundPlayer ??= AudioPlayer();
+                                if (soundPlayer!.playing) {
+                                  await soundPlayer!.stop();
                                 }
 
-                                soundPlayer7!
+                                soundPlayer!
                                     .setAsset(
                                         'assets/audios/StartCallWaiting.mp3')
-                                    .then((_) => soundPlayer7!.play());
+                                    .then((_) => soundPlayer!.play());
                               } else {
                                 FFAppState().update(() {
                                   FFAppState().errCode = getJsonField(
@@ -2441,15 +2485,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       );
                                     },
                                   );
-                                  soundPlayer8 ??= AudioPlayer();
-                                  if (soundPlayer8!.playing) {
-                                    await soundPlayer8!.stop();
+                                  soundPlayer ??= AudioPlayer();
+                                  if (soundPlayer!.playing) {
+                                    await soundPlayer!.stop();
                                   }
 
-                                  soundPlayer8!
+                                  soundPlayer!
                                       .setAsset(
                                           'assets/audios/NotSupportedRegion.mp3')
-                                      .then((_) => soundPlayer8!.play());
+                                      .then((_) => soundPlayer!.play());
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -2553,14 +2597,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             'NONE',
                           );
                           await actions.cancelLocationService();
-                          soundPlayer9 ??= AudioPlayer();
-                          if (soundPlayer9!.playing) {
-                            await soundPlayer9!.stop();
+                          soundPlayer ??= AudioPlayer();
+                          if (soundPlayer!.playing) {
+                            await soundPlayer!.stop();
                           }
 
-                          soundPlayer9!
+                          soundPlayer!
                               .setAsset('assets/audios/PauseCallWaiting.mp3')
-                              .then((_) => soundPlayer9!.play());
+                              .then((_) => soundPlayer!.play());
                         } else {
                           await showDialog(
                             context: context,
@@ -2634,14 +2678,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               'TAXI_CALL_WAITING',
                             );
                             await actions.startLocationService();
-                            soundPlayer10 ??= AudioPlayer();
-                            if (soundPlayer10!.playing) {
-                              await soundPlayer10!.stop();
+                            soundPlayer ??= AudioPlayer();
+                            if (soundPlayer!.playing) {
+                              await soundPlayer!.stop();
                             }
 
-                            soundPlayer10!
+                            soundPlayer!
                                 .setAsset('assets/audios/StartWorking.mp3')
-                                .then((_) => soundPlayer10!.play());
+                                .then((_) => soundPlayer!.play());
                           } else {
                             FFAppState().update(() {
                               FFAppState().errCode = getJsonField(
@@ -2667,15 +2711,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   );
                                 },
                               );
-                              soundPlayer11 ??= AudioPlayer();
-                              if (soundPlayer11!.playing) {
-                                await soundPlayer11!.stop();
+                              soundPlayer ??= AudioPlayer();
+                              if (soundPlayer!.playing) {
+                                await soundPlayer!.stop();
                               }
 
-                              soundPlayer11!
+                              soundPlayer!
                                   .setAsset(
                                       'assets/audios/NotSupportedRegion.mp3')
-                                  .then((_) => soundPlayer11!.play());
+                                  .then((_) => soundPlayer!.play());
                             } else {
                               await showDialog(
                                 context: context,
@@ -2739,14 +2783,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   'TAXI_CALL_WAITING',
                                 );
                                 await actions.startLocationService();
-                                soundPlayer12 ??= AudioPlayer();
-                                if (soundPlayer12!.playing) {
-                                  await soundPlayer12!.stop();
+                                soundPlayer ??= AudioPlayer();
+                                if (soundPlayer!.playing) {
+                                  await soundPlayer!.stop();
                                 }
 
-                                soundPlayer12!
+                                soundPlayer!
                                     .setAsset('assets/audios/StartWorking.mp3')
-                                    .then((_) => soundPlayer12!.play());
+                                    .then((_) => soundPlayer!.play());
                               } else {
                                 FFAppState().update(() {
                                   FFAppState().errCode = getJsonField(
@@ -2772,15 +2816,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       );
                                     },
                                   );
-                                  soundPlayer13 ??= AudioPlayer();
-                                  if (soundPlayer13!.playing) {
-                                    await soundPlayer13!.stop();
+                                  soundPlayer ??= AudioPlayer();
+                                  if (soundPlayer!.playing) {
+                                    await soundPlayer!.stop();
                                   }
 
-                                  soundPlayer13!
+                                  soundPlayer!
                                       .setAsset(
                                           'assets/audios/NotSupportedRegion.mp3')
-                                      .then((_) => soundPlayer13!.play());
+                                      .then((_) => soundPlayer!.play());
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -2885,14 +2929,14 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               'NONE',
                             );
                             await actions.cancelLocationService();
-                            soundPlayer14 ??= AudioPlayer();
-                            if (soundPlayer14!.playing) {
-                              await soundPlayer14!.stop();
+                            soundPlayer ??= AudioPlayer();
+                            if (soundPlayer!.playing) {
+                              await soundPlayer!.stop();
                             }
 
-                            soundPlayer14!
+                            soundPlayer!
                                 .setAsset('assets/audios/EndWorking.mp3')
-                                .then((_) => soundPlayer14!.play());
+                                .then((_) => soundPlayer!.play());
                           } else {
                             await showDialog(
                               context: context,
