@@ -2,6 +2,9 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +22,10 @@ class SettingCopyWidget extends StatefulWidget {
 }
 
 class _SettingCopyWidgetState extends State<SettingCopyWidget> {
+  bool isMediaUploading = false;
+  FFLocalFile uploadedLocalFile = FFLocalFile(bytes: Uint8List.fromList([]));
+
+  bool? uploadImageSucceeded;
   ApiCallResponse? apiResult9ee;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -318,6 +325,59 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                   ),
                 ),
                 Divider(),
+                FFButtonWidget(
+                  onPressed: () async {
+                    final selectedMedia =
+                        await selectMediaWithSourceBottomSheet(
+                      context: context,
+                      allowPhoto: true,
+                    );
+                    if (selectedMedia != null &&
+                        selectedMedia.every((m) =>
+                            validateFileFormat(m.storagePath, context))) {
+                      setState(() => isMediaUploading = true);
+                      var selectedLocalFiles = <FFLocalFile>[];
+                      try {
+                        selectedLocalFiles = selectedMedia
+                            .map((m) => FFLocalFile(
+                                  name: m.storagePath.split('/').last,
+                                  bytes: m.bytes,
+                                ))
+                            .toList();
+                      } finally {
+                        isMediaUploading = false;
+                      }
+                      if (selectedLocalFiles.length == selectedMedia.length) {
+                        setState(
+                            () => uploadedLocalFile = selectedLocalFiles.first);
+                      } else {
+                        setState(() {});
+                        return;
+                      }
+                    }
+
+                    uploadImageSucceeded = await actions.uploadImage(
+                      'd',
+                    );
+
+                    setState(() {});
+                  },
+                  text: 'Button',
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ],
             ),
           ),
