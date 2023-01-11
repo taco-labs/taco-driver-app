@@ -1085,6 +1085,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
                                                       FFAppState()
                                                           .apiEndpointTarget,
                                                   confirmCancel: false,
+                                                  isUserFault: false,
                                                 );
                                                 if ((apiResultCancelCall
                                                         ?.succeeded ??

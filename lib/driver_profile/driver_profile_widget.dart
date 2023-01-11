@@ -535,50 +535,63 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          FFButtonWidget(
-                            onPressed: () async {
-                              await Share.share(FFAppState().appDownloadUrl);
-                            },
-                            text: '어플 공유',
-                            options: FFButtonOptions(
-                              width: 100,
-                              height: 50,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                          Builder(
+                            builder: (context) => FFButtonWidget(
+                              onPressed: () async {
+                                await Share.share(
+                                  FFAppState().appDownloadUrl,
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                              text: '어플 공유',
+                              options: FFButtonOptions(
+                                width: 100,
+                                height: 50,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          FFButtonWidget(
-                            onPressed: () async {
-                              await Share.share(
-                                  FFAppState().driverReferralCode);
-                            },
-                            text: '내 추천인번호 공유',
-                            options: FFButtonOptions(
-                              width: 150,
-                              height: 50,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                          Builder(
+                            builder: (context) => FFButtonWidget(
+                              onPressed: () async {
+                                await Share.share(
+                                  FFAppState().driverReferralCode,
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                              text: '내 추천인번호 공유',
+                              options: FFButtonOptions(
+                                width: 150,
+                                height: 50,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ],
