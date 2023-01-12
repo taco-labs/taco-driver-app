@@ -457,6 +457,12 @@ class FFAppState extends ChangeNotifier {
   set isReferralAdShowed(bool _value) {
     _isReferralAdShowed = _value;
   }
+
+  bool _isOnCallWaitingPaused = false;
+  bool get isOnCallWaitingPaused => _isOnCallWaitingPaused;
+  set isOnCallWaitingPaused(bool _value) {
+    _isOnCallWaitingPaused = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
