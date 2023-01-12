@@ -222,7 +222,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
@@ -267,7 +267,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     child: Stack(
                       children: [
                         if (!FFAppState().isOnCallViewing &&
@@ -292,23 +292,36 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 40, 10, 40),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 10, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            '${FFAppState().driverLastName}${FFAppState().driverFirstName}',
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${FFAppState().driverLastName}${FFAppState().driverFirstName}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 16,
+                                              ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5, 0, 0, 0),
+                                          child: Text(
+                                            '기사님 안녕하세요',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -319,27 +332,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                   fontSize: 16,
                                                 ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 0, 0, 0),
-                                            child: Text(
-                                              '기사님 안녕하세요',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 16,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -547,8 +541,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 90, 10, 90),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -556,7 +550,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 80, 0, 10),
+                                          0, 0, 0, 10),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -597,8 +591,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                         ),
                                         FaIcon(
                                           FontAwesomeIcons.solidCircle,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                                          color: Color(0xFF6B59F0),
                                           size: 10,
                                         ),
                                       ],
@@ -622,8 +615,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 90, 10, 90),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -631,7 +624,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 80, 0, 10),
+                                          0, 0, 0, 10),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -2973,7 +2966,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.2,
                     child: Stack(
                       children: [
                         if (FFAppState().driverIsActivated &&
@@ -2981,7 +2974,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                             (FFAppState().driverCarNumber != null &&
                                 FFAppState().driverCarNumber != ''))
                           Align(
-                            alignment: AlignmentDirectional(0, 1),
+                            alignment: AlignmentDirectional(0, 0.9),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 if (await getPermissionStatus(
@@ -3253,7 +3246,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                             !FFAppState().isOnDrivingToArrival &&
                             !FFAppState().isArrived)
                           Align(
-                            alignment: AlignmentDirectional(0, 1),
+                            alignment: AlignmentDirectional(0, 0.9),
                             child: InkWell(
                               onLongPress: () async {
                                 if (FFAppState().driverIsOnDuty) {
