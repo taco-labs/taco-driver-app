@@ -2,7 +2,9 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +24,20 @@ class RegisterImagesWidget extends StatefulWidget {
 }
 
 class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
-  ApiCallResponse? apiResultUpdateDriver2;
+  bool isMediaUploading1 = false;
+  FFLocalFile uploadedLocalFile1 = FFLocalFile(bytes: Uint8List.fromList([]));
+
   ApiCallResponse? apiResulttx0;
   bool? profileUploadSucceeded;
   String? fcmToken2;
-  ApiCallResponse? apiResultUpdateDriver;
+  ApiCallResponse? apiResultUpdateDriver2;
+  bool isMediaUploading2 = false;
+  FFLocalFile uploadedLocalFile2 = FFLocalFile(bytes: Uint8List.fromList([]));
+
   ApiCallResponse? apiResulttx1;
   bool? licenseUploadSucceeded;
   String? fcmToken;
+  ApiCallResponse? apiResultUpdateDriver;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -159,6 +167,40 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResulttx0?.succeeded ?? true)) {
+                                await requestPermission(photoLibraryPermission);
+                                await requestPermission(photoLibraryPermission);
+                                final selectedMedia =
+                                    await selectMediaWithSourceBottomSheet(
+                                  context: context,
+                                  allowPhoto: true,
+                                );
+                                if (selectedMedia != null &&
+                                    selectedMedia.every((m) =>
+                                        validateFileFormat(
+                                            m.storagePath, context))) {
+                                  setState(() => isMediaUploading1 = true);
+                                  var selectedLocalFiles = <FFLocalFile>[];
+                                  try {
+                                    selectedLocalFiles = selectedMedia
+                                        .map((m) => FFLocalFile(
+                                              name:
+                                                  m.storagePath.split('/').last,
+                                              bytes: m.bytes,
+                                            ))
+                                        .toList();
+                                  } finally {
+                                    isMediaUploading1 = false;
+                                  }
+                                  if (selectedLocalFiles.length ==
+                                      selectedMedia.length) {
+                                    setState(() => uploadedLocalFile1 =
+                                        selectedLocalFiles.first);
+                                  } else {
+                                    setState(() {});
+                                    return;
+                                  }
+                                }
+
                                 profileUploadSucceeded =
                                     await actions.uploadImage(
                                   DriverInfoGroup.getDriverCall
@@ -166,6 +208,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         (apiResulttx0?.jsonBody ?? ''),
                                       )
                                       .toString(),
+                                  null!,
                                 );
                                 if (profileUploadSucceeded!) {
                                   fcmToken2 = await actions.getFcmToken();
@@ -340,6 +383,40 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResulttx1?.succeeded ?? true)) {
+                                await requestPermission(photoLibraryPermission);
+                                await requestPermission(cameraPermission);
+                                final selectedMedia =
+                                    await selectMediaWithSourceBottomSheet(
+                                  context: context,
+                                  allowPhoto: true,
+                                );
+                                if (selectedMedia != null &&
+                                    selectedMedia.every((m) =>
+                                        validateFileFormat(
+                                            m.storagePath, context))) {
+                                  setState(() => isMediaUploading2 = true);
+                                  var selectedLocalFiles = <FFLocalFile>[];
+                                  try {
+                                    selectedLocalFiles = selectedMedia
+                                        .map((m) => FFLocalFile(
+                                              name:
+                                                  m.storagePath.split('/').last,
+                                              bytes: m.bytes,
+                                            ))
+                                        .toList();
+                                  } finally {
+                                    isMediaUploading2 = false;
+                                  }
+                                  if (selectedLocalFiles.length ==
+                                      selectedMedia.length) {
+                                    setState(() => uploadedLocalFile2 =
+                                        selectedLocalFiles.first);
+                                  } else {
+                                    setState(() {});
+                                    return;
+                                  }
+                                }
+
                                 licenseUploadSucceeded =
                                     await actions.uploadImage(
                                   DriverInfoGroup.getDriverCall
@@ -347,6 +424,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         (apiResulttx1?.jsonBody ?? ''),
                                       )
                                       .toString(),
+                                  null!,
                                 );
                                 if (licenseUploadSucceeded!) {
                                   fcmToken = await actions.getFcmToken();

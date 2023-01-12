@@ -3,8 +3,6 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
-import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +20,6 @@ class SettingCopyWidget extends StatefulWidget {
 }
 
 class _SettingCopyWidgetState extends State<SettingCopyWidget> {
-  bool isMediaUploading = false;
-  FFLocalFile uploadedLocalFile = FFLocalFile(bytes: Uint8List.fromList([]));
-
-  bool? uploadImageSucceeded;
   ApiCallResponse? apiResult9ee;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -326,41 +320,8 @@ class _SettingCopyWidgetState extends State<SettingCopyWidget> {
                 ),
                 Divider(),
                 FFButtonWidget(
-                  onPressed: () async {
-                    final selectedMedia =
-                        await selectMediaWithSourceBottomSheet(
-                      context: context,
-                      allowPhoto: true,
-                    );
-                    if (selectedMedia != null &&
-                        selectedMedia.every((m) =>
-                            validateFileFormat(m.storagePath, context))) {
-                      setState(() => isMediaUploading = true);
-                      var selectedLocalFiles = <FFLocalFile>[];
-                      try {
-                        selectedLocalFiles = selectedMedia
-                            .map((m) => FFLocalFile(
-                                  name: m.storagePath.split('/').last,
-                                  bytes: m.bytes,
-                                ))
-                            .toList();
-                      } finally {
-                        isMediaUploading = false;
-                      }
-                      if (selectedLocalFiles.length == selectedMedia.length) {
-                        setState(
-                            () => uploadedLocalFile = selectedLocalFiles.first);
-                      } else {
-                        setState(() {});
-                        return;
-                      }
-                    }
-
-                    uploadImageSucceeded = await actions.uploadImage(
-                      'd',
-                    );
-
-                    setState(() {});
+                  onPressed: () {
+                    print('Button pressed ...');
                   },
                   text: 'Button',
                   options: FFButtonOptions(
