@@ -14,6 +14,16 @@ export 'schema/serializers.dart';
 export 'schema/driver_record.dart';
 
 /// Functions to query DriverRecords (as a Stream and as a Future).
+Future<int> queryDriverRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DriverRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<DriverRecord>> queryDriverRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -54,6 +64,22 @@ Future<FFFirestorePage<DriverRecord>> queryDriverRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+Future<int> queryCollectionCount(
+  Query collection, {
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) {
+  final builder = queryBuilder ?? (q) => q;
+  var query = builder(collection);
+  if (limit > 0) {
+    query = query.limit(limit);
+  }
+
+  return query.count().get().catchError((err) {
+    print('Error querying $collection: $err');
+  }).then((value) => value.count);
+}
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,

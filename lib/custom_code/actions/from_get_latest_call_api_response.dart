@@ -64,24 +64,10 @@ Future fromGetLatestCallApiResponse(dynamic apiResponse) async {
   FFAppState().callArrivalAddressSubNo = arrivalAddressInfo['subAddressNo'];
 
   // Distance from departure to arrival in meters
-  List<dynamic> toArrivalRoute = apiResponse['toArrivalPath'];
-  List<dynamic> toDepartureRoute = apiResponse['toDeparturePath'];
   FFAppState().callToArrivalDistance = apiResponse['toArrivalDistance'];
   FFAppState().callToArrivalEtaNanoSec = apiResponse['toArrivalEta'];
-  FFAppState().callToArrivalRouteLatitudes.clear();
-  FFAppState().callToArrivalRouteLongitudes.clear();
-  for (dynamic point in toArrivalRoute) {
-    FFAppState().callToArrivalRouteLatitudes.add(point['latitude']);
-    FFAppState().callToArrivalRouteLongitudes.add(point['longitude']);
-  }
+
   FFAppState().callToDepartureDistance = apiResponse['toDepartureDistance'];
-  FFAppState().callToDepartureEtaNanoSec = apiResponse['toDepartureEta'];
-  FFAppState().callToDepartureRouteLatitudes.clear();
-  FFAppState().callToDepartureRouteLongitudes.clear();
-  for (dynamic point in toDepartureRoute) {
-    FFAppState().callToDepartureRouteLatitudes.add(point['latitude']);
-    FFAppState().callToDepartureRouteLongitudes.add(point['longitude']);
-  }
 
   // Taxi fares
   FFAppState().callBasePrice = apiResponse['requestBasePrice'];

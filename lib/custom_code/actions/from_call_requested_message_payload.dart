@@ -63,10 +63,6 @@ Future fromCallRequestedMessagePayload(dynamic payload) async {
 
   FFAppState().callToDepartureDistance =
       int.parse(payload['toDepartureDistance']);
-  if (payload['toDepartureETA'] != null) {
-    FFAppState().callToDepartureEtaNanoSec =
-        int.parse(payload['toDepartureETA']);
-  }
 
   // Taxi fares
   FFAppState().callBasePrice = int.parse(payload['requestBasePrice']);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
-import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
@@ -291,75 +290,10 @@ class FFAppState extends ChangeNotifier {
     _callToArrivalEtaNanoSec = _value;
   }
 
-  List<dynamic> _callToArrivalRouteLatitudes = [];
-  List<dynamic> get callToArrivalRouteLatitudes => _callToArrivalRouteLatitudes;
-  set callToArrivalRouteLatitudes(List<dynamic> _value) {
-    _callToArrivalRouteLatitudes = _value;
-  }
-
-  void addToCallToArrivalRouteLatitudes(dynamic _value) {
-    _callToArrivalRouteLatitudes.add(_value);
-  }
-
-  void removeFromCallToArrivalRouteLatitudes(dynamic _value) {
-    _callToArrivalRouteLatitudes.remove(_value);
-  }
-
-  List<dynamic> _callToArrivalRouteLongitudes = [];
-  List<dynamic> get callToArrivalRouteLongitudes =>
-      _callToArrivalRouteLongitudes;
-  set callToArrivalRouteLongitudes(List<dynamic> _value) {
-    _callToArrivalRouteLongitudes = _value;
-  }
-
-  void addToCallToArrivalRouteLongitudes(dynamic _value) {
-    _callToArrivalRouteLongitudes.add(_value);
-  }
-
-  void removeFromCallToArrivalRouteLongitudes(dynamic _value) {
-    _callToArrivalRouteLongitudes.remove(_value);
-  }
-
   int _callToDepartureDistance = 0;
   int get callToDepartureDistance => _callToDepartureDistance;
   set callToDepartureDistance(int _value) {
     _callToDepartureDistance = _value;
-  }
-
-  int _callToDepartureEtaNanoSec = 0;
-  int get callToDepartureEtaNanoSec => _callToDepartureEtaNanoSec;
-  set callToDepartureEtaNanoSec(int _value) {
-    _callToDepartureEtaNanoSec = _value;
-  }
-
-  List<dynamic> _callToDepartureRouteLatitudes = [];
-  List<dynamic> get callToDepartureRouteLatitudes =>
-      _callToDepartureRouteLatitudes;
-  set callToDepartureRouteLatitudes(List<dynamic> _value) {
-    _callToDepartureRouteLatitudes = _value;
-  }
-
-  void addToCallToDepartureRouteLatitudes(dynamic _value) {
-    _callToDepartureRouteLatitudes.add(_value);
-  }
-
-  void removeFromCallToDepartureRouteLatitudes(dynamic _value) {
-    _callToDepartureRouteLatitudes.remove(_value);
-  }
-
-  List<dynamic> _callToDepartureRouteLongitudes = [];
-  List<dynamic> get callToDepartureRouteLongitudes =>
-      _callToDepartureRouteLongitudes;
-  set callToDepartureRouteLongitudes(List<dynamic> _value) {
-    _callToDepartureRouteLongitudes = _value;
-  }
-
-  void addToCallToDepartureRouteLongitudes(dynamic _value) {
-    _callToDepartureRouteLongitudes.add(_value);
-  }
-
-  void removeFromCallToDepartureRouteLongitudes(dynamic _value) {
-    _callToDepartureRouteLongitudes.remove(_value);
   }
 
   int _callBasePrice = 0;
@@ -522,6 +456,12 @@ class FFAppState extends ChangeNotifier {
   bool get isReferralAdShowed => _isReferralAdShowed;
   set isReferralAdShowed(bool _value) {
     _isReferralAdShowed = _value;
+  }
+
+  bool _isOnCallWaitingPaused = false;
+  bool get isOnCallWaitingPaused => _isOnCallWaitingPaused;
+  set isOnCallWaitingPaused(bool _value) {
+    _isOnCallWaitingPaused = _value;
   }
 }
 

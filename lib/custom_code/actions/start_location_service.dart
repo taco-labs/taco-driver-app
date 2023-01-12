@@ -53,7 +53,7 @@ class LocationServiceRepository {
 
     if (apiResult.succeeded == false) {
       debugPrint(
-          "Update Driver Location API call failed with ${apiResult.statusCode.toString()}");
+          "Update Driver Location API call failed with ${apiResult.jsonBody['errCode']}");
     }
   }
 }
