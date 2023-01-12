@@ -13,6 +13,7 @@ import '../actions/index.dart'; // Imports custom actions
 // Begin custom widget code
 
 const String TaxiCallState_Waiting = 'TAXI_CALL_WAITING';
+const String TaxiCallState_Waiting_Paused = 'TAXI_CALL_WAITING_PAUSED';
 const String TaxiCallState_Requested = 'TAXI_CALL_REQUESTED';
 const String TaxiCallState_Driver_To_Departure = 'DRIVER_TO_DEPARTURE';
 const String TaxiCallState_Driver_To_Arrival = 'DRIVER_TO_ARRIVAL';
@@ -24,6 +25,7 @@ Future setCallState(String currentState) async {
   FFAppState().isArrived = false;
   FFAppState().isOnCallViewing = false;
   FFAppState().isOnCallWaiting = false;
+  FFAppState().isOnCallWaitingPaused = false;
   FFAppState().isOnDrivingToDeparture = false;
   FFAppState().isOnDrivingToArrival = false;
 
@@ -34,6 +36,14 @@ Future setCallState(String currentState) async {
         FFAppState().update(() {
           FFAppState().driverIsAtWork = true;
           FFAppState().isOnCallWaiting = true;
+        });
+        break;
+      }
+    case TaxiCallState_Waiting_Paused:
+      {
+        FFAppState().update(() {
+          FFAppState().driverIsAtWork = true;
+          FFAppState().isOnCallWaitingPaused = true;
         });
         break;
       }
