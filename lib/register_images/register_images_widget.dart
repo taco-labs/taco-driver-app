@@ -208,7 +208,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         (apiResulttx0?.jsonBody ?? ''),
                                       )
                                       .toString(),
-                                  null!,
+                                  uploadedLocalFile1,
                                 );
                                 if (profileUploadSucceeded!) {
                                   fcmToken2 = await actions.getFcmToken();
@@ -424,7 +424,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                         (apiResulttx1?.jsonBody ?? ''),
                                       )
                                       .toString(),
-                                  null!,
+                                  uploadedLocalFile2,
                                 );
                                 if (licenseUploadSucceeded!) {
                                   fcmToken = await actions.getFcmToken();
