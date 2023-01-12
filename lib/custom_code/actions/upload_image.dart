@@ -12,7 +12,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 
-Future<bool> uploadImage(String uploadUrl) async {
+Future<bool> uploadImage(String uploadUrl, dynamic uploadedLocalFile) async {
   bool succeeded = false;
   FilePickerResult? result = await FilePicker.platform.pickFiles();
   if (result != null) {
