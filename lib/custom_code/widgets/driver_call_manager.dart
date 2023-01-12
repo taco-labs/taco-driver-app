@@ -1106,6 +1106,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             apiEndpointTarget:
                                                 FFAppState().apiEndpointTarget,
                                             confirmCancel: false,
+                                            isUserFault: false,
                                           );
                                           if ((apiResultCancelCall?.succeeded ??
                                               true)) {
