@@ -13,9 +13,9 @@ import 'package:mime_type/mime_type.dart';
 
 Future<bool> uploadImage(String uploadUrl, dynamic uploadedLocalFile) async {
   bool succeeded = false;
-  FFLocalFile file = uploadedLocalFile;
+  FFLocalFile? file = uploadedLocalFile;
 
-  if (file.bytes == null) {
+  if (file == null || file.bytes == null) {
     debugPrint("uploadImage action: requested file bytes is null");
     return succeeded;
   }

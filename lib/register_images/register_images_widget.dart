@@ -173,6 +173,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     await selectMediaWithSourceBottomSheet(
                                   context: context,
                                   allowPhoto: true,
+                                  pickerFontFamily: 'Poppins',
                                 );
                                 if (selectedMedia != null &&
                                     selectedMedia.every((m) =>
@@ -199,6 +200,9 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     setState(() {});
                                     return;
                                   }
+                                } else {
+                                  setState(() {});
+                                  return;
                                 }
 
                                 profileUploadSucceeded =
@@ -389,6 +393,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     await selectMediaWithSourceBottomSheet(
                                   context: context,
                                   allowPhoto: true,
+                                  pickerFontFamily: 'Poppins',
                                 );
                                 if (selectedMedia != null &&
                                     selectedMedia.every((m) =>
@@ -415,6 +420,9 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     setState(() {});
                                     return;
                                   }
+                                } else {
+                                  setState(() {});
+                                  return;
                                 }
 
                                 licenseUploadSucceeded =
