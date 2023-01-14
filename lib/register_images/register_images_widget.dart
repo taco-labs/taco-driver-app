@@ -200,6 +200,9 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     setState(() {});
                                     return;
                                   }
+                                } else {
+                                  setState(() {});
+                                  return;
                                 }
 
                                 profileUploadSucceeded =
@@ -417,6 +420,9 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     setState(() {});
                                     return;
                                   }
+                                } else {
+                                  setState(() {});
+                                  return;
                                 }
 
                                 licenseUploadSucceeded =
