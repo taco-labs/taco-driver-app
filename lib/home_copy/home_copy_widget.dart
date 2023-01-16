@@ -2856,7 +2856,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               },
                               text: '콜 받기',
                               options: FFButtonOptions(
-                                width: 150,
+                                width: double.infinity,
                                 height: 60,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
@@ -2933,7 +2933,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               },
                               text: '콜 멈추기',
                               options: FFButtonOptions(
-                                width: 150,
+                                width: double.infinity,
                                 height: 60,
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
