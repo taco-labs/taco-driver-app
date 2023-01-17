@@ -120,6 +120,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -141,6 +142,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -158,6 +160,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                 style: FlutterFlowTheme.of(context).title3.override(
                       fontFamily: 'Poppins',
                       fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               trailing: Icon(
@@ -178,6 +181,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -205,6 +209,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   fontFamily: 'Poppins',
                   color: Colors.white,
                   fontSize: 22,
+                  fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
                 ),
           ),
@@ -240,6 +245,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                           ),
                         ),
@@ -314,6 +320,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                         Padding(
@@ -330,6 +337,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           context)
                                                       .primaryText,
                                                   fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ),
@@ -348,17 +356,17 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                             Text(
                                               '매일 4시간 콜대기하고 3만원 적립의 혜택을 받아가세요!',
                                               maxLines: 2,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 16,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -386,15 +394,16 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     Text(
                                                       FFAppState()
                                                           .driverCarNumber,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 20,
-                                                              ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                     ),
                                                   ],
                                                 ),
@@ -421,6 +430,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                       ),
                                                     ],
@@ -455,6 +467,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                         borderSide: BorderSide(
                                                           color: Colors
@@ -564,6 +579,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 28,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ],
@@ -638,6 +654,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 28,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ],
@@ -721,7 +738,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -749,7 +766,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -781,7 +798,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -797,7 +814,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -859,7 +876,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -884,7 +901,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -920,7 +937,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -945,7 +962,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1041,6 +1058,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   .of(context)
                                                               .primaryBackground,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1164,6 +1183,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1452,6 +1473,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                 .of(context)
                                                             .primaryBackground,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1491,6 +1514,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1530,6 +1555,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1566,6 +1593,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1605,7 +1634,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -1634,7 +1663,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -1662,7 +1691,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -1687,7 +1716,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1723,7 +1752,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -1748,7 +1777,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1830,6 +1859,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -1905,6 +1936,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1944,7 +1977,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -1973,7 +2006,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -2001,7 +2034,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -2026,7 +2059,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -2062,7 +2095,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -2087,7 +2120,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -2118,7 +2151,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -2163,6 +2196,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -2234,10 +2269,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
+                                                                .alternate,
                                                         fontSize: 16,
                                                         fontWeight:
-                                                            FontWeight.w600,
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ),
@@ -2267,6 +2302,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 hintText: '최종 미터기 실 운임 입력',
                                                 hintStyle:
@@ -2278,6 +2315,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   .of(context)
                                                               .secondaryText,
                                                           fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
@@ -2348,17 +2387,17 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 20,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                               textAlign: TextAlign.center,
                                               keyboardType:
                                                   TextInputType.number,
@@ -2389,6 +2428,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   hintText: '통행료 및 추가금액 입력',
                                                   hintStyle: FlutterFlowTheme
@@ -2401,6 +2442,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                     context)
                                                                 .secondaryText,
                                                         fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   enabledBorder:
                                                       UnderlineInputBorder(
@@ -2581,6 +2624,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -2866,6 +2910,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -2944,6 +2989,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -3226,6 +3272,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -3316,6 +3363,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                         fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
@@ -3374,6 +3422,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ),
@@ -3388,6 +3437,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                               .override(
                                                 fontFamily: 'Poppins',
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),

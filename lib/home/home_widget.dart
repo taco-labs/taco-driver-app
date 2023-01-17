@@ -114,6 +114,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                   Text(
@@ -121,6 +122,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                 ],
@@ -136,6 +138,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -156,6 +159,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -297,6 +301,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -329,6 +334,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -349,6 +355,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -375,6 +382,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   fontFamily: 'Poppins',
                   color: Colors.white,
                   fontSize: 22,
+                  fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
                 ),
           ),

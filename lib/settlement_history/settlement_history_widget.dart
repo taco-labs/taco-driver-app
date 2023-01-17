@@ -84,7 +84,10 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                   children: [
                     Text(
                       '최근 정산내역',
-                      style: FlutterFlowTheme.of(context).bodyText2,
+                      style: FlutterFlowTheme.of(context).bodyText2.override(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ],
                 ),
@@ -215,7 +218,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ),
@@ -231,7 +234,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ],
@@ -257,7 +260,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -283,7 +286,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 14,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Text(
@@ -296,7 +299,7 @@ class _SettlementHistoryWidgetState extends State<SettlementHistoryWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 14,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],

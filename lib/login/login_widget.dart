@@ -81,6 +81,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 fontFamily: 'Poppins',
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                         ),
                       ),
@@ -102,6 +103,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             FlutterFlowTheme.of(context).bodyText2.override(
                                   fontFamily: 'Poppins',
                                   fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -140,6 +142,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.phone,
@@ -248,6 +251,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 fontFamily: 'Poppins',
                                 color: Colors.white,
                                 fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                       elevation: 3,
                       borderSide: BorderSide(
