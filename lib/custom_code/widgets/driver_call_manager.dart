@@ -73,8 +73,11 @@ Future<void> _fcmMessageHandlerBackground(RemoteMessage message) async {
         arrivalAddressRegionDepth3: data["arrivalAddressRegionDepth3"],
         arrivalName: data["arrivalBuildingName"],
         updateTime: DateTime.parse(data["updateTime"]));
+    final isActive = await FlutterOverlayWindow.isActive();
     await FlutterOverlayWindow.shareData(taxiCallRequestTicket);
-    await FlutterOverlayWindow.showOverlay();
+    if (!isActive) {
+      await FlutterOverlayWindow.showOverlay();
+    }
   } else {
     await LocalNotification.showNotification(message);
   }
