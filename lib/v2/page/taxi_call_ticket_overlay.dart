@@ -55,8 +55,8 @@ class TaxiCallTicketOverlayPage extends HookConsumerWidget {
                 FlutterForegroundTask.launchApp();
               } on ApiError catch (error) {
                 String errorMessage;
-                if (error.errorCode == 'ERR_NOT_FOUND' &&
-                    error.errorMessage == 'ERR_INVALID') {
+                if (error.errorCode == 'ERR_NOT_FOUND' ||
+                    error.errorCode == 'ERR_INVALID') {
                   errorMessage = "만료된 콜 요청입니다";
                 } else {
                   errorMessage = '서버 오류가 발생했습니다';
