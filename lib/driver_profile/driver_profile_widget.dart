@@ -146,10 +146,18 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: '성',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -186,7 +194,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 0, 24),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               keyboardType: TextInputType.name,
                             ),
                           ),
@@ -202,10 +215,18 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: '이름',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -242,7 +263,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     20, 24, 0, 24),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               keyboardType: TextInputType.name,
                             ),
                           ),
@@ -257,8 +283,16 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: '휴대폰번호',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText2.override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).bodyText2.override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
@@ -295,7 +329,10 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                           contentPadding:
                               EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                            ),
                         keyboardType: TextInputType.phone,
                       ),
                     ),
@@ -316,8 +353,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: '주민등록번호',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                   hintStyle:
                                       FlutterFlowTheme.of(context).bodyText2,
                                   enabledBorder: OutlineInputBorder(
@@ -357,7 +398,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           20, 24, 20, 24),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -425,7 +471,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           10, 24, 10, 24),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -455,8 +506,12 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: '내 추천인번호',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText2,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .bodyText2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -494,7 +549,11 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                               contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.9, 0),
@@ -555,6 +614,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                     .override(
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -585,6 +645,7 @@ class _DriverProfileWidgetState extends State<DriverProfileWidget> {
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,

@@ -104,6 +104,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               hintText: '은행',
                               fillColor: FlutterFlowTheme.of(context)
@@ -133,6 +134,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 hintText: '- 를 제외한 계좌번호를 입력해주세요',
                                 hintStyle: FlutterFlowTheme.of(context)
@@ -142,6 +144,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -184,6 +187,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                   .override(
                                     fontFamily: 'Poppins',
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               keyboardType: TextInputType.number,
                               validator: (val) {
@@ -219,6 +223,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 hintText: '계좌주의 주민번호 앞 6자리를 입력해주세요',
                                 hintStyle: FlutterFlowTheme.of(context)
@@ -228,6 +233,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -270,6 +276,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                                   .override(
                                     fontFamily: 'Poppins',
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               keyboardType: TextInputType.number,
                               validator: (val) {
@@ -369,6 +376,7 @@ class _RegisterInstallmentWidgetState extends State<RegisterInstallmentWidget> {
                           .override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).primaryBtnText,
+                            fontWeight: FontWeight.bold,
                           ),
                       borderSide: BorderSide(
                         color: Colors.transparent,

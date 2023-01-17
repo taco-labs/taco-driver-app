@@ -86,6 +86,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                       style: FlutterFlowTheme.of(context).bodyText2.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).secondaryText,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ],
@@ -234,7 +235,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -257,7 +258,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                   .of(context)
                                                               .primaryText,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -288,7 +289,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -337,6 +338,8 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                   .of(context)
                                                               .alternate,
                                                           fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             Padding(
@@ -384,7 +387,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
-                                                                            FontWeight.w500,
+                                                                            FontWeight.bold,
                                                                       ),
                                                                 ),
                                                               ],
@@ -421,7 +424,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
-                                                                            FontWeight.w500,
+                                                                            FontWeight.bold,
                                                                       ),
                                                                 ),
                                                               ],
@@ -459,7 +462,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                                                                         fontSize:
                                                                             14,
                                                                         fontWeight:
-                                                                            FontWeight.w500,
+                                                                            FontWeight.bold,
                                                                       ),
                                                                 ),
                                                               ],

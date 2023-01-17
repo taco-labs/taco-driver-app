@@ -321,6 +321,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     fontFamily: 'Poppins',
                                     color: Colors.white,
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               borderSide: BorderSide(
                                 color: Colors.transparent,
@@ -541,6 +542,7 @@ class _RegisterImagesWidgetState extends State<RegisterImagesWidget> {
                                     fontFamily: 'Poppins',
                                     color: Colors.white,
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               borderSide: BorderSide(
                                 color: Colors.transparent,
