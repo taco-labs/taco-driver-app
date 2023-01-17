@@ -1,10 +1,4 @@
 // Automatic FlutterFlow imports
-import 'dart:developer';
-
-import 'package:flutter_overlay_window/flutter_overlay_window.dart';
-import 'package:taco_driver/v2/models/api_token.dart';
-import 'package:taco_driver/v2/models/taxi_call.dart';
-
 import '../../backend/backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
@@ -28,6 +22,11 @@ import 'dart:isolate';
 import 'dart:ui';
 import 'package:just_audio/just_audio.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:developer';
+
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
+import 'package:taco_driver/v2/models/api_token.dart';
+import 'package:taco_driver/v2/models/taxi_call.dart';
 
 const String NotificationCategory_Taxicall = "Taxicall";
 const String NotificationCategory_Payment = "Payment";
@@ -328,7 +327,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
 
     dynamic data = message.data;
-    log('Data recieved in background ${data.toString()}');
+    log('Data received in background ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -352,24 +351,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
               break;
             case TaxiCallStateDriverToDeparture:
               actions.fromGetLatestCallApiResponse(data);
-              actions.setCallState(
-                TaxiCallStateDriverToDeparture,
-              );
+              actions.setCallState('DRIVER_TO_DEPARTURE');
               break;
             case ExtTaxiCallStateDriverRejected:
               setState(() {
                 actions.setCallState('TAXI_CALL_WAITING');
               });
-          }
-          if (data['taxiCallState'] == TaxiCallStateRequested) {
-            setState(() {
-              actions.fromCallRequestedMessagePayload(data);
-              actions.setCallState('TAXI_CALL_REQUESTED');
-            });
-          } else if (data['taxiCallState'] == TaxiCallStateUserCancelled) {
-            setState(() {
-              actions.setCallState('TAXI_CALL_WAITING');
-            });
+              break;
           }
         }
         break;
@@ -430,6 +418,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ),
@@ -499,6 +488,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
                                           fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                   ),
                                   Padding(
@@ -513,6 +503,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ),
@@ -538,6 +529,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -568,6 +560,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -593,6 +587,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                                     context)
                                                                 .secondaryText,
                                                         fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ],
@@ -621,6 +617,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -715,6 +713,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 28,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ],
@@ -784,6 +783,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 28,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ],
@@ -861,7 +861,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -887,7 +887,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -916,7 +916,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -931,7 +931,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -986,7 +986,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 18,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -1009,7 +1009,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -1043,7 +1043,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 18,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -1066,7 +1066,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -1153,6 +1153,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -1183,7 +1184,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               (apiResultj1q?.jsonBody ?? ''),
                                             );
                                             await actions.setCallState(
-                                              TaxiCallStateDriverToDeparture,
+                                              'DRIVER_TO_DEPARTURE',
                                             );
                                             soundPlayer ??= AudioPlayer();
                                             if (soundPlayer!.playing) {
@@ -1265,6 +1266,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -1530,16 +1532,17 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                             height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      fontSize: 18,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,
@@ -1576,6 +1579,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                       fontFamily: 'Poppins',
                                                       color: Colors.white,
                                                       fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
@@ -1613,6 +1618,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                       fontFamily: 'Poppins',
                                                       color: Colors.white,
                                                       fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
@@ -1648,6 +1655,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -1685,7 +1693,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ],
@@ -1712,7 +1720,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -1738,7 +1746,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 20,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -1761,7 +1769,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 20,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -1795,7 +1803,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -1818,7 +1826,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -1895,6 +1903,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               fontFamily: 'Poppins',
                                               color: Colors.white,
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
@@ -1965,6 +1974,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -2002,7 +2012,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ],
@@ -2029,7 +2039,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -2055,7 +2065,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -2078,7 +2088,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -2112,7 +2122,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 20,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                       Padding(
@@ -2135,7 +2145,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 20,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),
@@ -2164,7 +2174,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                       ),
                                     ],
@@ -2205,6 +2215,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               fontFamily: 'Poppins',
                                               color: Colors.white,
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
@@ -2272,9 +2283,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryText,
+                                                      .alternate,
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ),
@@ -2303,6 +2314,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           hintText: '최종 미터기 실 운임 입력',
                                           hintStyle: FlutterFlowTheme.of(
@@ -2314,6 +2326,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 fontSize: 20,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -2381,6 +2394,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               fontSize: 20,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         textAlign: TextAlign.center,
                                         keyboardType: TextInputType.number,
@@ -2410,19 +2424,21 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                                     .override(
                                                       fontFamily: 'Poppins',
                                                       fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                             hintText: '통행료 및 추가금액 입력',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      fontSize: 20,
-                                                    ),
+                                            hintStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -2576,6 +2592,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           fontFamily: 'Poppins',
                                           color: Colors.white,
                                           fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
@@ -2831,6 +2848,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               );
                             }
                           }
+
                           setState(() {});
                         },
                         text: '콜 받기',
@@ -2843,6 +2861,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     fontFamily: 'Poppins',
                                     color: Colors.white,
                                     fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                           borderSide: BorderSide(
                             color: Colors.transparent,
@@ -2917,6 +2936,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
                           borderSide: BorderSide(
                             color: Colors.transparent,
@@ -2943,131 +2963,61 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                           FFAppState().driverCarNumber != ''))
                     Align(
                       alignment: AlignmentDirectional(0, 0.9),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          if (await getPermissionStatus(locationPermission)) {
-                            apiResult550 =
-                                await DriverInfoGroup.updateOnDutyCall.call(
-                              apiToken: FFAppState().apiToken,
-                              driverId: FFAppState().driverId,
-                              onDuty: true,
-                              apiEndpointTarget: FFAppState().apiEndpointTarget,
-                            );
-                            if ((apiResult550?.succeeded ?? true)) {
-                              FFAppState().update(() {
-                                FFAppState().driverIsOnDuty = true;
-                                FFAppState().driverIsAtWork = true;
-                              });
-                              await actions.setCallState(
-                                'TAXI_CALL_WAITING',
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            if (await getPermissionStatus(locationPermission)) {
+                              apiResult550 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: true,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
                               );
-                              await actions.startLocationService();
-                              soundPlayer ??= AudioPlayer();
-                              if (soundPlayer!.playing) {
-                                await soundPlayer!.stop();
-                              }
-
-                              soundPlayer!
-                                  .setAsset('assets/audios/StartWorking.mp3')
-                                  .then((_) => soundPlayer!.play());
-                            } else {
-                              FFAppState().update(() {
-                                FFAppState().errCode = getJsonField(
-                                  (apiResult550?.jsonBody ?? ''),
-                                  r'''$.errCode''',
-                                ).toString();
-                              });
-                              if (FFAppState().errCode == 'ERR_UNSUPPORTED') {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('오류'),
-                                      content: Text(
-                                          '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
+                              if ((apiResult550?.succeeded ?? true)) {
+                                FFAppState().update(() {
+                                  FFAppState().driverIsOnDuty = true;
+                                  FFAppState().driverIsAtWork = true;
+                                });
+                                await actions.setCallState(
+                                  'TAXI_CALL_WAITING',
                                 );
+                                await actions.startLocationService();
                                 soundPlayer ??= AudioPlayer();
                                 if (soundPlayer!.playing) {
                                   await soundPlayer!.stop();
                                 }
 
                                 soundPlayer!
-                                    .setAsset(
-                                        'assets/audios/NotSupportedRegion.mp3')
+                                    .setAsset('assets/audios/StartWorking.mp3')
                                     .then((_) => soundPlayer!.play());
                               } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('오류'),
-                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            }
-                          } else {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('위치 정보 사용'),
-                                      content: Text(
-                                          '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, false),
-                                          child: Text('거부'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, true),
-                                          child: Text('승인'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ) ??
-                                false;
-                            if (confirmDialogResponse) {
-                              await requestPermission(locationPermission);
-                              if (await getPermissionStatus(
-                                  locationPermission)) {
-                                apiResult560 =
-                                    await DriverInfoGroup.updateOnDutyCall.call(
-                                  apiToken: FFAppState().apiToken,
-                                  driverId: FFAppState().driverId,
-                                  onDuty: true,
-                                  apiEndpointTarget:
-                                      FFAppState().apiEndpointTarget,
-                                );
-                                if ((apiResult560?.succeeded ?? true)) {
-                                  FFAppState().update(() {
-                                    FFAppState().driverIsOnDuty = true;
-                                    FFAppState().driverIsAtWork = true;
-                                  });
-                                  await actions.setCallState(
-                                    'TAXI_CALL_WAITING',
+                                FFAppState().update(() {
+                                  FFAppState().errCode = getJsonField(
+                                    (apiResult550?.jsonBody ?? ''),
+                                    r'''$.errCode''',
+                                  ).toString();
+                                });
+                                if (FFAppState().errCode == 'ERR_UNSUPPORTED') {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text(
+                                            '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
-                                  await actions.startLocationService();
                                   soundPlayer ??= AudioPlayer();
                                   if (soundPlayer!.playing) {
                                     await soundPlayer!.stop();
@@ -3075,34 +3025,74 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
                                   soundPlayer!
                                       .setAsset(
-                                          'assets/audios/StartWorking.mp3')
+                                          'assets/audios/NotSupportedRegion.mp3')
                                       .then((_) => soundPlayer!.play());
                                 } else {
-                                  FFAppState().update(() {
-                                    FFAppState().errCode = getJsonField(
-                                      (apiResult560?.jsonBody ?? ''),
-                                      r'''$.errCode''',
-                                    ).toString();
-                                  });
-                                  if (FFAppState().errCode ==
-                                      'ERR_UNSUPPORTED') {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('오류'),
-                                          content: Text(
-                                              '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('확인'),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('오류'),
+                                        content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+                            } else {
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('위치 정보 사용'),
+                                            content: Text(
+                                                '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('거부'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('승인'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                await requestPermission(locationPermission);
+                                if (await getPermissionStatus(
+                                    locationPermission)) {
+                                  apiResult560 = await DriverInfoGroup
+                                      .updateOnDutyCall
+                                      .call(
+                                    apiToken: FFAppState().apiToken,
+                                    driverId: FFAppState().driverId,
+                                    onDuty: true,
+                                    apiEndpointTarget:
+                                        FFAppState().apiEndpointTarget,
+                                  );
+                                  if ((apiResult560?.succeeded ?? true)) {
+                                    FFAppState().update(() {
+                                      FFAppState().driverIsOnDuty = true;
+                                      FFAppState().driverIsAtWork = true;
+                                    });
+                                    await actions.setCallState(
+                                      'TAXI_CALL_WAITING',
                                     );
+                                    await actions.startLocationService();
                                     soundPlayer ??= AudioPlayer();
                                     if (soundPlayer!.playing) {
                                       await soundPlayer!.stop();
@@ -3110,27 +3100,80 @@ class _DriverCallManagerState extends State<DriverCallManager> {
 
                                     soundPlayer!
                                         .setAsset(
-                                            'assets/audios/NotSupportedRegion.mp3')
+                                            'assets/audios/StartWorking.mp3')
                                         .then((_) => soundPlayer!.play());
                                   } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('오류'),
-                                          content:
-                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('확인'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                    FFAppState().update(() {
+                                      FFAppState().errCode = getJsonField(
+                                        (apiResult560?.jsonBody ?? ''),
+                                        r'''$.errCode''',
+                                      ).toString();
+                                    });
+                                    if (FFAppState().errCode ==
+                                        'ERR_UNSUPPORTED') {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('오류'),
+                                            content: Text(
+                                                '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('확인'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      soundPlayer ??= AudioPlayer();
+                                      if (soundPlayer!.playing) {
+                                        await soundPlayer!.stop();
+                                      }
+
+                                      soundPlayer!
+                                          .setAsset(
+                                              'assets/audios/NotSupportedRegion.mp3')
+                                          .then((_) => soundPlayer!.play());
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('오류'),
+                                            content:
+                                                Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('확인'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
                                   }
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        content: Text(
+                                            '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 }
                               } else {
                                 await showDialog(
@@ -3150,173 +3193,21 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   },
                                 );
                               }
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    content: Text(
-                                        '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
                             }
-                          }
 
-                          // get request permission for system alert
-                          final permissionGranted =
-                              await FlutterOverlayWindow.isPermissionGranted();
-                          debugPrint(
-                              "Permission Granted???: $permissionGranted");
-                          if (permissionGranted) {
-                          } else {
-                            final confirm = await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    content: Text(
-                                        '다른 앱 사용 중에도 콜 티켓을 수신하기 위해 설정을 수정해주세요. 다른 앱 위에 표시 -> 타코택시 기사용 선택 ->다른 앱 위에 표시 허용 선택'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
-                                        child: Text('거부'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
-                                        child: Text('승인'),
-                                      ),
-                                    ],
-                                  );
-                                });
-                            if (confirm) {
-                              await FlutterOverlayWindow.requestPermission();
-                              await FlutterOverlayWindow.shareData(ApiToken(
-                                  token: FFAppState().apiToken,
-                                  driverId: FFAppState().driverId));
-                            } else {
-                              await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      content: Text(
-                                          '다른 앱 사용 중에도 콜 티켓을 수신하려면 설정이 필요합니다'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('확인'),
-                                        ),
-                                      ],
-                                    );
-                                  });
-                            }
-                          }
-
-                          setState(() {});
-                        },
-                        text: '출근하기',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 60,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                  if (FFAppState().driverIsActivated &&
-                      FFAppState().driverIsAtWork &&
-                      !FFAppState().isOnDrivingToDeparture &&
-                      !FFAppState().isOnDrivingToArrival &&
-                      !FFAppState().isArrived)
-                    Align(
-                      alignment: AlignmentDirectional(0, 0.9),
-                      child: InkWell(
-                        onLongPress: () async {
-                          if (FFAppState().driverIsOnDuty) {
-                            apiResultkz1 =
-                                await DriverInfoGroup.updateOnDutyCall.call(
-                              apiToken: FFAppState().apiToken,
-                              driverId: FFAppState().driverId,
-                              onDuty: false,
-                              apiEndpointTarget: FFAppState().apiEndpointTarget,
-                            );
-                            if ((apiResultkz1?.succeeded ?? true)) {
-                              FFAppState().update(() {
-                                FFAppState().driverIsOnDuty = false;
-                                FFAppState().driverIsAtWork = false;
-                              });
-                              await actions.setCallState(
-                                'NONE',
-                              );
-                              await actions.cancelLocationService();
-                              soundPlayer ??= AudioPlayer();
-                              if (soundPlayer!.playing) {
-                                await soundPlayer!.stop();
-                              }
-
-                              soundPlayer!
-                                  .setAsset('assets/audios/EndWorking.mp3')
-                                  .then((_) => soundPlayer!.play());
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('오류'),
-                                    content: Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('확인'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          } else {
-                            FFAppState().update(() {
-                              FFAppState().driverIsAtWork = false;
-                            });
-                          }
-
-                          setState(() {});
-                        },
-                        child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                            setState(() {});
                           },
-                          text: '길게눌러 퇴근하기',
+                          text: '출근하기',
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 60,
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'Poppins',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                      color: Colors.white,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -3327,35 +3218,126 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         ),
                       ),
                     ),
-                  if (!FFAppState().driverIsActivated)
-                    Material(
-                      color: Colors.transparent,
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x33000000),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            width: 2,
+                  if (FFAppState().driverIsActivated &&
+                      FFAppState().driverIsAtWork &&
+                      !FFAppState().isOnDrivingToDeparture &&
+                      !FFAppState().isOnDrivingToArrival &&
+                      !FFAppState().isArrived)
+                    Align(
+                      alignment: AlignmentDirectional(0, 0.9),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        child: InkWell(
+                          onLongPress: () async {
+                            if (FFAppState().driverIsOnDuty) {
+                              apiResultkz1 =
+                                  await DriverInfoGroup.updateOnDutyCall.call(
+                                apiToken: FFAppState().apiToken,
+                                driverId: FFAppState().driverId,
+                                onDuty: false,
+                                apiEndpointTarget:
+                                    FFAppState().apiEndpointTarget,
+                              );
+                              if ((apiResultkz1?.succeeded ?? true)) {
+                                FFAppState().update(() {
+                                  FFAppState().driverIsOnDuty = false;
+                                  FFAppState().driverIsAtWork = false;
+                                });
+                                await actions.setCallState(
+                                  'NONE',
+                                );
+                                await actions.cancelLocationService();
+                                soundPlayer ??= AudioPlayer();
+                                if (soundPlayer!.playing) {
+                                  await soundPlayer!.stop();
+                                }
+
+                                soundPlayer!
+                                    .setAsset('assets/audios/EndWorking.mp3')
+                                    .then((_) => soundPlayer!.play());
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('오류'),
+                                      content: Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            } else {
+                              FFAppState().update(() {
+                                FFAppState().driverIsAtWork = false;
+                              });
+                            }
+
+                            setState(() {});
+                          },
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: '길게눌러 퇴근하기',
+                            options: FFButtonOptions(
+                              width: double.infinity,
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0, 0.95),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 15, 10, 15),
+                      ),
+                    ),
+                  if (!FFAppState().driverIsActivated)
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                      child: Material(
+                        color: Colors.transparent,
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              width: 2,
+                            ),
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0, 0.95),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -3373,6 +3355,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ),
@@ -3387,6 +3370,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                         .override(
                                           fontFamily: 'Poppins',
                                           fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                   ),
                                 ),
