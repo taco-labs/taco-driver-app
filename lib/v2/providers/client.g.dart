@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$ApiClientHash() => r'37be9a566f9fb1f670f46f427b53809a015c4f13';
+String _$ApiClientHash() => r'4914b302b7cf801321266e3654cb173f3967eedb';
 
 /// See also [ApiClient].
 final apiClientProvider =
