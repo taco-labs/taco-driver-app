@@ -84,6 +84,7 @@ class TaxiCallTicketOverlayPage extends HookConsumerWidget {
                 await apiClient
                     .invoke((client) => client.rejectTicket(ticket.ticketId));
                 final remoteMessage = RemoteMessage(data: {
+                  'category': NotificationCategory_Taxicall,
                   'taxiCallState': ExtTaxiCallStateDriverRejected,
                 });
                 final foreground = IsolateNameServer.lookupPortByName(
