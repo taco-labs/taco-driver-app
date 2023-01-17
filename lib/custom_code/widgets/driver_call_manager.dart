@@ -1,4 +1,10 @@
 // Automatic FlutterFlow imports
+import 'dart:developer';
+
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
+import 'package:taco_driver/v2/models/api_token.dart';
+import 'package:taco_driver/v2/models/taxi_call.dart';
+
 import '../../backend/backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
@@ -29,6 +35,8 @@ const String NotificationCategory_Driver = "Driver";
 
 const String TaxiCallStateRequested = "TAXI_CALL_REQUESTED";
 const String TaxiCallStateUserCancelled = "USER_CANCELLED";
+const String TaxiCallStateDriverToDeparture = 'DRIVER_TO_DEPARTURE';
+const String ExtTaxiCallStateDriverRejected = 'DRIVER_REJECTED';
 
 const FOREGROUND_ISOLATE_PORT_NAME = 'foreground_port';
 @pragma('vm:entry-point')
@@ -42,6 +50,33 @@ Future<void> _fcmMessageHandlerBackground(RemoteMessage message) async {
   } else {
     // ... handle message in background ...
     debugPrint('foreground is null');
+  }
+
+  final data = message.data;
+
+  // Open service overlay
+  if (data["taxiCallState"] == TaxiCallStateRequested) {
+    final taxiCallRequestTicket = TaxiCallTicket(
+        taxiCallRequestId: data["taxiCallRequestId"],
+        ticketId: data["taxiCallTicketId"],
+        attempt: int.parse(data["ticketAttempt"]),
+        tags: data["tags"],
+        userTag: data["userTag"],
+        toDepartureDistance: int.parse(data["toDepartureDistance"]),
+        toArrivalDistance: int.parse(data["toArrivalDistance"]),
+        toArrivalETA: int.parse(data["toArrivalETA"]),
+        additionalPrice: int.parse(data["additionalPrice"]),
+        departureAddressRegionDepth2: data["departureAddressRegionDepth2"],
+        departureAddressRegionDepth3: data["departureAddressRegionDepth3"],
+        departureName: data["departureBuildingName"],
+        arrivalAddressRegionDepth2: data["arrivalAddressRegionDepth2"],
+        arrivalAddressRegionDepth3: data["arrivalAddressRegionDepth3"],
+        arrivalName: data["arrivalBuildingName"],
+        updateTime: DateTime.parse(data["updateTime"]));
+    await FlutterOverlayWindow.shareData(taxiCallRequestTicket);
+    await FlutterOverlayWindow.showOverlay();
+  } else {
+    await LocalNotification.showNotification(message);
   }
 }
 
@@ -60,9 +95,10 @@ class LocalNotification {
 
     const AndroidNotificationChannel androidNotificationChannel =
         AndroidNotificationChannel(
-      'taco_driver_channel_id', // 임의의 id
-      'Taco Driver Channel', // 설정에 보일 채널명
-      description: 'Taco Driver Channel', // 설정에 보일 채널 설명
+      playSound: false,
+      'driver_channel', // 임의의 id
+      'Driver MISC Channel', // 설정에 보일 채널명
+      description: 'Taco Driver MISC Channel', // 설정에 보일 채널 설명
       importance: Importance.max,
     );
 
@@ -71,6 +107,21 @@ class LocalNotification {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(androidNotificationChannel);
+  }
+
+  static showNotification(RemoteMessage message) async {
+    final androidNotificationDetal = AndroidNotificationDetails(
+      'taco_driver_channel_id_2',
+      'Taco Driver MISC Channel',
+      playSound: false,
+    );
+
+    flutterLocalNotificationsPlugin.show(
+        // TODO (Taekyeom) message id?
+        0,
+        message.notification?.title,
+        message.notification?.body,
+        NotificationDetails(android: androidNotificationDetal));
   }
 }
 
@@ -274,7 +325,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
 
     dynamic data = message.data;
-    debugPrint('Data received in background ${data.toString()}');
+    log('Data recieved in background ${data.toString()}');
 
     switch (data['category']) {
       case NotificationCategory_Driver:
@@ -284,6 +335,29 @@ class _DriverCallManagerState extends State<DriverCallManager> {
         break;
       case NotificationCategory_Taxicall:
         if (FFAppState().driverIsActivated && FFAppState().driverIsOnDuty) {
+          switch (data['taxiCallState']) {
+            case TaxiCallStateRequested:
+              setState(() {
+                actions.fromCallRequestedMessagePayload(data);
+                actions.setCallState('TAXI_CALL_REQUESTED');
+              });
+              break;
+            case TaxiCallStateUserCancelled:
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
+              break;
+            case TaxiCallStateDriverToDeparture:
+              actions.fromGetLatestCallApiResponse(data);
+              actions.setCallState(
+                TaxiCallStateDriverToDeparture,
+              );
+              break;
+            case ExtTaxiCallStateDriverRejected:
+              setState(() {
+                actions.setCallState('TAXI_CALL_WAITING');
+              });
+          }
           if (data['taxiCallState'] == TaxiCallStateRequested) {
             setState(() {
               actions.fromCallRequestedMessagePayload(data);
@@ -299,6 +373,11 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     }
   }
 
+  static initOverlayWidget() async {
+    await FlutterOverlayWindow.shareData(ApiToken(
+        token: FFAppState().apiToken, driverId: FFAppState().driverId));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -312,6 +391,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     debugPrint(
         'driverId ${FFAppState().driverId} apiToken ${FFAppState().apiToken}');
+    initOverlayWidget();
   }
 
   @override
@@ -1100,7 +1180,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                               (apiResultj1q?.jsonBody ?? ''),
                                             );
                                             await actions.setCallState(
-                                              'DRIVER_TO_DEPARTURE',
+                                              TaxiCallStateDriverToDeparture,
                                             );
                                             soundPlayer ??= AudioPlayer();
                                             if (soundPlayer!.playing) {
@@ -2748,7 +2828,6 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               );
                             }
                           }
-
                           setState(() {});
                         },
                         text: '콜 받기',
@@ -3085,6 +3164,57 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   );
                                 },
                               );
+                            }
+                          }
+
+                          // get request permission for system alert
+                          final permissionGranted =
+                              await FlutterOverlayWindow.isPermissionGranted();
+                          debugPrint(
+                              "Permission Granted???: $permissionGranted");
+                          if (permissionGranted) {
+                          } else {
+                            final confirm = await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    content: Text(
+                                        '다른 앱 사용 중에도 콜 티켓을 수신하기 위해 설정을 수정해주세요. 다른 앱 위에 표시 -> 타코택시 기사용 선택 ->다른 앱 위에 표시 허용 선택'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('거부'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('승인'),
+                                      ),
+                                    ],
+                                  );
+                                });
+                            if (confirm) {
+                              await FlutterOverlayWindow.requestPermission();
+                              await FlutterOverlayWindow.shareData(ApiToken(
+                                  token: FFAppState().apiToken,
+                                  driverId: FFAppState().driverId));
+                            } else {
+                              await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text(
+                                          '다른 앱 사용 중에도 콜 티켓을 수신하려면 설정이 필요합니다'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('확인'),
+                                        ),
+                                      ],
+                                    );
+                                  });
                             }
                           }
 
