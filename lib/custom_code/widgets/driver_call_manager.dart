@@ -3195,6 +3195,57 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               }
                             }
 
+                            // get request permission for system alert
+                            final permissionGranted = await FlutterOverlayWindow
+                                .isPermissionGranted();
+                            debugPrint(
+                                "Permission Granted???: $permissionGranted");
+                            if (permissionGranted) {
+                            } else {
+                              final confirm = await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text(
+                                          '콜 카드 수신을 위해 설정을 수정해주세요. 다른 앱 위에 표시 -> 타코택시 기사용 선택 -> 다른 앱 위에 표시 허용 선택'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('거부'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('승인'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                              if (confirm) {
+                                await FlutterOverlayWindow.requestPermission();
+                                await FlutterOverlayWindow.shareData(ApiToken(
+                                    token: FFAppState().apiToken,
+                                    driverId: FFAppState().driverId));
+                              } else {
+                                await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        content: Text(
+                                            '다른 앱 사용 중에도 콜 티켓을 수신하려면 설정이 필요합니다'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('확인'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              }
+                            }
+
                             setState(() {});
                           },
                           text: '출근하기',
