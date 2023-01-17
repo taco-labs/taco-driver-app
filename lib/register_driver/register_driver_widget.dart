@@ -128,10 +128,18 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: '휴대폰번호',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -174,6 +182,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 17,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 keyboardType: TextInputType.phone,
                               ),
@@ -201,10 +210,15 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -259,6 +273,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .override(
                                               fontFamily: 'Poppins',
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         keyboardType: TextInputType.name,
                                         validator: (val) {
@@ -291,10 +306,15 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -349,6 +369,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .override(
                                               fontFamily: 'Poppins',
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         keyboardType: TextInputType.name,
                                         validator: (val) {
@@ -387,9 +408,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .override(
                                               fontFamily: 'Poppins',
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -438,6 +464,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 18,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                       keyboardType: TextInputType.number,
                                       validator: (val) {
@@ -475,7 +502,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       controller: genderCodeController,
                                       obscureText: !genderCodeVisibility,
                                       decoration: InputDecoration(
-                                        labelText: '주민번호 뒷자리',
+                                        labelText: '뒷자리',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -484,9 +511,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -550,6 +582,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 18,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                       keyboardType: TextInputType.number,
                                       validator: (val) {
@@ -617,6 +650,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 hintText: '운행지역',
                                 fillColor: FlutterFlowTheme.of(context)
@@ -644,9 +678,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       .override(
                                         fontFamily: 'Poppins',
                                         fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -691,6 +730,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 validator: (val) {
                                   if (val == null || val.isEmpty) {
@@ -808,9 +848,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                             .override(
                                               fontFamily: 'Poppins',
                                               fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -859,6 +904,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                           .override(
                                             fontFamily: 'Poppins',
                                             fontSize: 18,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ),
@@ -877,9 +923,14 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                       .override(
                                         fontFamily: 'Poppins',
                                         fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -924,6 +975,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                     .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                               ),
                             ),
@@ -959,6 +1011,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                               .bodyText1
                                               .override(
                                                 fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
                                                 decoration:
                                                     TextDecoration.underline,
                                               ),
@@ -1024,6 +1077,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                                               .bodyText1
                                               .override(
                                                 fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
                                                 decoration:
                                                     TextDecoration.underline,
                                               ),
@@ -1242,6 +1296,7 @@ class _RegisterDriverWidgetState extends State<RegisterDriverWidget> {
                               fontFamily: 'Poppins',
                               color:
                                   FlutterFlowTheme.of(context).primaryBtnText,
+                              fontWeight: FontWeight.bold,
                             ),
                         borderSide: BorderSide(
                           color: Colors.transparent,

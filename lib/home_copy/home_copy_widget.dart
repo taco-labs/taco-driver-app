@@ -120,6 +120,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -141,6 +142,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -158,6 +160,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                 style: FlutterFlowTheme.of(context).title3.override(
                       fontFamily: 'Poppins',
                       fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               trailing: Icon(
@@ -178,6 +181,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   style: FlutterFlowTheme.of(context).title3.override(
                         fontFamily: 'Poppins',
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
                 trailing: Icon(
@@ -205,6 +209,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                   fontFamily: 'Poppins',
                   color: Colors.white,
                   fontSize: 22,
+                  fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
                 ),
           ),
@@ -240,6 +245,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                           ),
                         ),
@@ -314,6 +320,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                         Padding(
@@ -330,6 +337,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           context)
                                                       .primaryText,
                                                   fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ),
@@ -348,17 +356,17 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                             Text(
                                               '매일 4시간 콜대기하고 3만원 적립의 혜택을 받아가세요!',
                                               maxLines: 2,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 16,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -386,15 +394,16 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     Text(
                                                       FFAppState()
                                                           .driverCarNumber,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 20,
-                                                              ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                     ),
                                                   ],
                                                 ),
@@ -421,6 +430,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                       ),
                                                     ],
@@ -455,6 +467,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                         borderSide: BorderSide(
                                                           color: Colors
@@ -564,6 +579,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 28,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ],
@@ -638,6 +654,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 28,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ],
@@ -721,7 +738,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -749,7 +766,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -781,7 +798,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -797,7 +814,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -859,7 +876,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -884,7 +901,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -920,7 +937,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -945,7 +962,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1041,6 +1058,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   .of(context)
                                                               .primaryBackground,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1164,6 +1183,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1452,6 +1473,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                 .of(context)
                                                             .primaryBackground,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1491,6 +1514,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1530,6 +1555,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
@@ -1566,6 +1593,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1605,7 +1634,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -1634,7 +1663,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -1662,7 +1691,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -1687,7 +1716,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1723,7 +1752,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -1748,7 +1777,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -1830,6 +1859,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -1905,6 +1936,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                           fontFamily: 'Poppins',
                                                           color: Colors.white,
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
@@ -1944,7 +1977,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .primaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -1973,7 +2006,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -2001,7 +2034,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -2026,7 +2059,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -2062,7 +2095,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                             Padding(
@@ -2087,7 +2120,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                               .secondaryText,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ),
@@ -2118,7 +2151,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                             ),
                                           ],
@@ -2163,6 +2196,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         fontFamily: 'Poppins',
                                                         color: Colors.white,
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -2234,10 +2269,10 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
+                                                                .alternate,
                                                         fontSize: 16,
                                                         fontWeight:
-                                                            FontWeight.w600,
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ),
@@ -2267,6 +2302,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 hintText: '최종 미터기 실 운임 입력',
                                                 hintStyle:
@@ -2278,6 +2315,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                   .of(context)
                                                               .secondaryText,
                                                           fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
@@ -2348,17 +2387,17 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 20,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                               textAlign: TextAlign.center,
                                               keyboardType:
                                                   TextInputType.number,
@@ -2389,6 +2428,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   hintText: '통행료 및 추가금액 입력',
                                                   hintStyle: FlutterFlowTheme
@@ -2401,6 +2442,8 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                                     context)
                                                                 .secondaryText,
                                                         fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                   enabledBorder:
                                                       UnderlineInputBorder(
@@ -2581,6 +2624,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                     fontFamily: 'Poppins',
                                                     color: Colors.white,
                                                     fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
@@ -2856,7 +2900,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               },
                               text: '콜 받기',
                               options: FFButtonOptions(
-                                width: 150,
+                                width: double.infinity,
                                 height: 60,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
@@ -2866,6 +2910,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -2933,7 +2978,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               },
                               text: '콜 멈추기',
                               options: FFButtonOptions(
-                                width: 150,
+                                width: double.infinity,
                                 height: 60,
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
@@ -2944,6 +2989,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
                                       fontSize: 18,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -2970,209 +3016,235 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                 FFAppState().driverCarNumber != ''))
                           Align(
                             alignment: AlignmentDirectional(0, 0.9),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                if (await getPermissionStatus(
-                                    locationPermission)) {
-                                  apiResult550 = await DriverInfoGroup
-                                      .updateOnDutyCall
-                                      .call(
-                                    apiToken: FFAppState().apiToken,
-                                    driverId: FFAppState().driverId,
-                                    onDuty: true,
-                                    apiEndpointTarget:
-                                        FFAppState().apiEndpointTarget,
-                                  );
-                                  if ((apiResult550?.succeeded ?? true)) {
-                                    FFAppState().update(() {
-                                      FFAppState().driverIsOnDuty = true;
-                                      FFAppState().driverIsAtWork = true;
-                                    });
-                                    await actions.setCallState(
-                                      'TAXI_CALL_WAITING',
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  if (await getPermissionStatus(
+                                      locationPermission)) {
+                                    apiResult550 = await DriverInfoGroup
+                                        .updateOnDutyCall
+                                        .call(
+                                      apiToken: FFAppState().apiToken,
+                                      driverId: FFAppState().driverId,
+                                      onDuty: true,
+                                      apiEndpointTarget:
+                                          FFAppState().apiEndpointTarget,
                                     );
-                                    await actions.startLocationService();
-                                    soundPlayer10 ??= AudioPlayer();
-                                    if (soundPlayer10!.playing) {
-                                      await soundPlayer10!.stop();
-                                    }
-
-                                    soundPlayer10!
-                                        .setAsset(
-                                            'assets/audios/StartWorking.mp3')
-                                        .then((_) => soundPlayer10!.play());
-                                  } else {
-                                    FFAppState().update(() {
-                                      FFAppState().errCode = getJsonField(
-                                        (apiResult550?.jsonBody ?? ''),
-                                        r'''$.errCode''',
-                                      ).toString();
-                                    });
-                                    if (FFAppState().errCode ==
-                                        'ERR_UNSUPPORTED') {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('오류'),
-                                            content: Text(
-                                                '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('확인'),
-                                              ),
-                                            ],
-                                          );
-                                        },
+                                    if ((apiResult550?.succeeded ?? true)) {
+                                      FFAppState().update(() {
+                                        FFAppState().driverIsOnDuty = true;
+                                        FFAppState().driverIsAtWork = true;
+                                      });
+                                      await actions.setCallState(
+                                        'TAXI_CALL_WAITING',
                                       );
-                                      soundPlayer11 ??= AudioPlayer();
-                                      if (soundPlayer11!.playing) {
-                                        await soundPlayer11!.stop();
+                                      await actions.startLocationService();
+                                      soundPlayer10 ??= AudioPlayer();
+                                      if (soundPlayer10!.playing) {
+                                        await soundPlayer10!.stop();
                                       }
 
-                                      soundPlayer11!
+                                      soundPlayer10!
                                           .setAsset(
-                                              'assets/audios/NotSupportedRegion.mp3')
-                                          .then((_) => soundPlayer11!.play());
+                                              'assets/audios/StartWorking.mp3')
+                                          .then((_) => soundPlayer10!.play());
                                     } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('오류'),
-                                            content:
-                                                Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('확인'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
-                                  }
-                                } else {
-                                  var confirmDialogResponse =
-                                      await showDialog<bool>(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('위치 정보 사용'),
-                                                content: Text(
-                                                    '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            false),
-                                                    child: Text('거부'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            true),
-                                                    child: Text('승인'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ) ??
-                                          false;
-                                  if (confirmDialogResponse) {
-                                    await requestPermission(locationPermission);
-                                    if (await getPermissionStatus(
-                                        locationPermission)) {
-                                      apiResult560 = await DriverInfoGroup
-                                          .updateOnDutyCall
-                                          .call(
-                                        apiToken: FFAppState().apiToken,
-                                        driverId: FFAppState().driverId,
-                                        onDuty: true,
-                                        apiEndpointTarget:
-                                            FFAppState().apiEndpointTarget,
-                                      );
-                                      if ((apiResult560?.succeeded ?? true)) {
-                                        FFAppState().update(() {
-                                          FFAppState().driverIsOnDuty = true;
-                                          FFAppState().driverIsAtWork = true;
-                                        });
-                                        await actions.setCallState(
-                                          'TAXI_CALL_WAITING',
+                                      FFAppState().update(() {
+                                        FFAppState().errCode = getJsonField(
+                                          (apiResult550?.jsonBody ?? ''),
+                                          r'''$.errCode''',
+                                        ).toString();
+                                      });
+                                      if (FFAppState().errCode ==
+                                          'ERR_UNSUPPORTED') {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('오류'),
+                                              content: Text(
+                                                  '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('확인'),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
-                                        await actions.startLocationService();
-                                        soundPlayer12 ??= AudioPlayer();
-                                        if (soundPlayer12!.playing) {
-                                          await soundPlayer12!.stop();
+                                        soundPlayer11 ??= AudioPlayer();
+                                        if (soundPlayer11!.playing) {
+                                          await soundPlayer11!.stop();
                                         }
 
-                                        soundPlayer12!
+                                        soundPlayer11!
                                             .setAsset(
-                                                'assets/audios/StartWorking.mp3')
-                                            .then((_) => soundPlayer12!.play());
+                                                'assets/audios/NotSupportedRegion.mp3')
+                                            .then((_) => soundPlayer11!.play());
                                       } else {
-                                        FFAppState().update(() {
-                                          FFAppState().errCode = getJsonField(
-                                            (apiResult560?.jsonBody ?? ''),
-                                            r'''$.errCode''',
-                                          ).toString();
-                                        });
-                                        if (FFAppState().errCode ==
-                                            'ERR_UNSUPPORTED') {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('오류'),
-                                                content: Text(
-                                                    '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('확인'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('오류'),
+                                              content:
+                                                  Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('확인'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+                                    }
+                                  } else {
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('위치 정보 사용'),
+                                                  content: Text(
+                                                      '타코 기사용 앱은 앱이 종료되었거나 사용중이 아닐 때도 위치 데이터를 수집하여 승객과의 거리를 고려한 정확한 배차 기능을 지원합니다'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              false),
+                                                      child: Text('거부'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              true),
+                                                      child: Text('승인'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (confirmDialogResponse) {
+                                      await requestPermission(
+                                          locationPermission);
+                                      if (await getPermissionStatus(
+                                          locationPermission)) {
+                                        apiResult560 = await DriverInfoGroup
+                                            .updateOnDutyCall
+                                            .call(
+                                          apiToken: FFAppState().apiToken,
+                                          driverId: FFAppState().driverId,
+                                          onDuty: true,
+                                          apiEndpointTarget:
+                                              FFAppState().apiEndpointTarget,
+                                        );
+                                        if ((apiResult560?.succeeded ?? true)) {
+                                          FFAppState().update(() {
+                                            FFAppState().driverIsOnDuty = true;
+                                            FFAppState().driverIsAtWork = true;
+                                          });
+                                          await actions.setCallState(
+                                            'TAXI_CALL_WAITING',
                                           );
-                                          soundPlayer13 ??= AudioPlayer();
-                                          if (soundPlayer13!.playing) {
-                                            await soundPlayer13!.stop();
+                                          await actions.startLocationService();
+                                          soundPlayer12 ??= AudioPlayer();
+                                          if (soundPlayer12!.playing) {
+                                            await soundPlayer12!.stop();
                                           }
 
-                                          soundPlayer13!
+                                          soundPlayer12!
                                               .setAsset(
-                                                  'assets/audios/NotSupportedRegion.mp3')
+                                                  'assets/audios/StartWorking.mp3')
                                               .then(
-                                                  (_) => soundPlayer13!.play());
+                                                  (_) => soundPlayer12!.play());
                                         } else {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('오류'),
-                                                content: Text(
-                                                    '서버 오류가 발생하여 다시 시도해주세요'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('확인'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                          FFAppState().update(() {
+                                            FFAppState().errCode = getJsonField(
+                                              (apiResult560?.jsonBody ?? ''),
+                                              r'''$.errCode''',
+                                            ).toString();
+                                          });
+                                          if (FFAppState().errCode ==
+                                              'ERR_UNSUPPORTED') {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('오류'),
+                                                  content: Text(
+                                                      '현재 미지원 지역입니다 순차적으로 오픈될 예정이니 조금만 기다려주세요'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('확인'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            soundPlayer13 ??= AudioPlayer();
+                                            if (soundPlayer13!.playing) {
+                                              await soundPlayer13!.stop();
+                                            }
+
+                                            soundPlayer13!
+                                                .setAsset(
+                                                    'assets/audios/NotSupportedRegion.mp3')
+                                                .then((_) =>
+                                                    soundPlayer13!.play());
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('오류'),
+                                                  content: Text(
+                                                      '서버 오류가 발생하여 다시 시도해주세요'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('확인'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
                                         }
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              content: Text(
+                                                  '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('확인'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                       }
                                     } else {
                                       await showDialog(
@@ -3192,130 +3264,23 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                         },
                                       );
                                     }
-                                  } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          content: Text(
-                                              '정확한 배차 기능 제공을 위해서 위치 정보 접근을 허용해주세요'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('확인'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                   }
-                                }
 
-                                setState(() {});
-                              },
-                              text: '출근하기',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 60,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          ),
-                        if (FFAppState().driverIsActivated &&
-                            FFAppState().driverIsAtWork &&
-                            !FFAppState().isOnDrivingToDeparture &&
-                            !FFAppState().isOnDrivingToArrival &&
-                            !FFAppState().isArrived)
-                          Align(
-                            alignment: AlignmentDirectional(0, 0.9),
-                            child: InkWell(
-                              onLongPress: () async {
-                                if (FFAppState().driverIsOnDuty) {
-                                  apiResultkz1 = await DriverInfoGroup
-                                      .updateOnDutyCall
-                                      .call(
-                                    apiToken: FFAppState().apiToken,
-                                    driverId: FFAppState().driverId,
-                                    onDuty: false,
-                                    apiEndpointTarget:
-                                        FFAppState().apiEndpointTarget,
-                                  );
-                                  if ((apiResultkz1?.succeeded ?? true)) {
-                                    FFAppState().update(() {
-                                      FFAppState().driverIsOnDuty = false;
-                                      FFAppState().driverIsAtWork = false;
-                                    });
-                                    await actions.setCallState(
-                                      'NONE',
-                                    );
-                                    await actions.cancelLocationService();
-                                    soundPlayer14 ??= AudioPlayer();
-                                    if (soundPlayer14!.playing) {
-                                      await soundPlayer14!.stop();
-                                    }
-
-                                    soundPlayer14!
-                                        .setAsset(
-                                            'assets/audios/EndWorking.mp3')
-                                        .then((_) => soundPlayer14!.play());
-                                  } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('오류'),
-                                          content:
-                                              Text('서버 오류가 발생하여 다시 시도해주세요'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('확인'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }
-                                } else {
-                                  FFAppState().update(() {
-                                    FFAppState().driverIsAtWork = false;
-                                  });
-                                }
-
-                                setState(() {});
-                              },
-                              child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                  setState(() {});
                                 },
-                                text: '길게눌러 퇴근하기',
+                                text: '출근하기',
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 60,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
                                         fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
+                                        color: Colors.white,
                                         fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
@@ -3326,36 +3291,132 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                               ),
                             ),
                           ),
-                        if (!FFAppState().driverIsActivated)
-                          Material(
-                            color: Colors.transparent,
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4,
-                                    color: Color(0x33000000),
-                                    offset: Offset(0, 2),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  width: 2,
+                        if (FFAppState().driverIsActivated &&
+                            FFAppState().driverIsAtWork &&
+                            !FFAppState().isOnDrivingToDeparture &&
+                            !FFAppState().isOnDrivingToArrival &&
+                            !FFAppState().isArrived)
+                          Align(
+                            alignment: AlignmentDirectional(0, 0.9),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                              child: InkWell(
+                                onLongPress: () async {
+                                  if (FFAppState().driverIsOnDuty) {
+                                    apiResultkz1 = await DriverInfoGroup
+                                        .updateOnDutyCall
+                                        .call(
+                                      apiToken: FFAppState().apiToken,
+                                      driverId: FFAppState().driverId,
+                                      onDuty: false,
+                                      apiEndpointTarget:
+                                          FFAppState().apiEndpointTarget,
+                                    );
+                                    if ((apiResultkz1?.succeeded ?? true)) {
+                                      FFAppState().update(() {
+                                        FFAppState().driverIsOnDuty = false;
+                                        FFAppState().driverIsAtWork = false;
+                                      });
+                                      await actions.setCallState(
+                                        'NONE',
+                                      );
+                                      await actions.cancelLocationService();
+                                      soundPlayer14 ??= AudioPlayer();
+                                      if (soundPlayer14!.playing) {
+                                        await soundPlayer14!.stop();
+                                      }
+
+                                      soundPlayer14!
+                                          .setAsset(
+                                              'assets/audios/EndWorking.mp3')
+                                          .then((_) => soundPlayer14!.play());
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('오류'),
+                                            content:
+                                                Text('서버 오류가 발생하여 다시 시도해주세요'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('확인'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  } else {
+                                    FFAppState().update(() {
+                                      FFAppState().driverIsAtWork = false;
+                                    });
+                                  }
+
+                                  setState(() {});
+                                },
+                                child: FFButtonWidget(
+                                  onPressed: () {
+                                    print('Button pressed ...');
+                                  },
+                                  text: '길게눌러 퇴근하기',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 60,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0, 0.95),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 15, 10, 15),
+                            ),
+                          ),
+                        if (!FFAppState().driverIsActivated)
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x33000000),
+                                      offset: Offset(0, 2),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0.95),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -3374,6 +3435,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                           ),
                                         ),
@@ -3388,6 +3450,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget> {
                                               .override(
                                                 fontFamily: 'Poppins',
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                       ),

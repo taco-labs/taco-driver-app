@@ -262,7 +262,7 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                                                               .primaryText,
                                                           fontSize: 14,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                               Padding(
@@ -286,7 +286,7 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                                                                     context)
                                                                 .primaryText,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ),
@@ -419,6 +419,9 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                                                                           context)
                                                                       .primaryBackground,
                                                                   fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                         borderSide: BorderSide(
                                                           color: Colors
@@ -463,6 +466,7 @@ class _CarSettingWidgetState extends State<CarSettingWidget> {
                           fontFamily: 'Poppins',
                           color: Colors.white,
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                     elevation: 3,
                     borderSide: BorderSide(

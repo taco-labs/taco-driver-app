@@ -110,6 +110,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
@@ -129,6 +130,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                   hintText: '택시종류 선택',
                                   fillColor: FlutterFlowTheme.of(context)
@@ -157,6 +159,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
                                           fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                   ),
                                 ),
@@ -186,6 +189,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                           fillColor:
                                               FlutterFlowTheme.of(context)
@@ -219,6 +223,8 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
@@ -278,6 +284,8 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                               textAlign: TextAlign.center,
                                               keyboardType:
@@ -314,17 +322,17 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                             onChanged: (val) => setState(() =>
                                                 carKeyDropDownValue = val),
                                             width: 100,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 16,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                             fillColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
@@ -358,6 +366,8 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                                     .override(
                                                       fontFamily: 'Poppins',
                                                       fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
@@ -413,6 +423,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                               .override(
                                                 fontFamily: 'Poppins',
                                                 fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                           textAlign: TextAlign.center,
                                           keyboardType: TextInputType.number,
@@ -453,6 +464,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
                                           fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                   ),
                                 ),
@@ -533,6 +545,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                   hintText: '차량모델 선택',
                                   fillColor: FlutterFlowTheme.of(context)
@@ -641,6 +654,7 @@ class _AddCarWidgetState extends State<AddCarWidget> {
                               fontFamily: 'Poppins',
                               color:
                                   FlutterFlowTheme.of(context).primaryBtnText,
+                              fontWeight: FontWeight.bold,
                             ),
                         borderSide: BorderSide(
                           color: Colors.transparent,

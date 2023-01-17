@@ -86,6 +86,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).secondaryText,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ),
@@ -103,6 +104,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
                                     fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                         ),
                       ),
@@ -116,7 +118,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
                                       fontSize: 16,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.bold,
                                     ),
                           ),
                         ),
@@ -134,7 +136,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                     trailing: Icon(
@@ -159,7 +161,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                     trailing: Icon(
@@ -183,6 +185,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).secondaryText,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ),
@@ -204,7 +207,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         style: FlutterFlowTheme.of(context).title3.override(
                               fontFamily: 'Poppins',
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.bold,
                             ),
                       ),
                       tileColor:
@@ -251,7 +254,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         style: FlutterFlowTheme.of(context).title3.override(
                               fontFamily: 'Poppins',
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.bold,
                             ),
                       ),
                       tileColor:

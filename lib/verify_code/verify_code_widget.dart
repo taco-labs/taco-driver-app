@@ -122,6 +122,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             FlutterFlowTheme.of(context).bodyText2.override(
                                   fontFamily: 'Poppins',
                                   fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -160,6 +161,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
@@ -410,6 +412,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                 fontFamily: 'Poppins',
                                 color: Colors.white,
                                 fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                       borderSide: BorderSide(
                         color: Colors.transparent,
@@ -440,6 +443,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                 ),

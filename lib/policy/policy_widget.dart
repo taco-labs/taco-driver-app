@@ -84,7 +84,7 @@ class _PolicyWidgetState extends State<PolicyWidget> {
                         style: FlutterFlowTheme.of(context).title3.override(
                               fontFamily: 'Poppins',
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.bold,
                             ),
                       ),
                       trailing: Icon(
@@ -109,7 +109,7 @@ class _PolicyWidgetState extends State<PolicyWidget> {
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                     trailing: Icon(
