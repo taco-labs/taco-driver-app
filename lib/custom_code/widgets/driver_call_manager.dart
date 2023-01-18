@@ -1,4 +1,8 @@
 // Automatic FlutterFlow imports
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:taco_driver/v2/foreground_task/background_message.dart';
+import 'package:taco_driver/v2/foreground_task/firebase_remote_message_callback.dart';
+
 import '../../backend/backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
@@ -37,6 +41,16 @@ const String TaxiCallStateUserCancelled = "USER_CANCELLED";
 const String TaxiCallStateDriverToDeparture = 'DRIVER_TO_DEPARTURE';
 const String ExtTaxiCallStateDriverRejected = 'DRIVER_REJECTED';
 
+@pragma('vm:entry-point')
+void startCallback() {
+  FlutterForegroundTask.setTaskHandler(InitialTaskHandler());
+}
+
+@pragma('vm:entry-point')
+void updateCallback() {
+  FlutterForegroundTask.setTaskHandler(TaxiCallTicketHandler());
+}
+
 const FOREGROUND_ISOLATE_PORT_NAME = 'foreground_port';
 @pragma('vm:entry-point')
 Future<void> _fcmMessageHandlerBackground(RemoteMessage message) async {
@@ -72,10 +86,9 @@ Future<void> _fcmMessageHandlerBackground(RemoteMessage message) async {
         arrivalAddressRegionDepth3: data["arrivalAddressRegionDepth3"],
         arrivalName: data["arrivalBuildingName"],
         updateTime: DateTime.parse(data["updateTime"]));
-    final isActive = await FlutterOverlayWindow.isActive();
     await FlutterOverlayWindow.shareData(taxiCallRequestTicket);
-    if (!isActive) {
-      await FlutterOverlayWindow.showOverlay();
+    if (await FlutterForegroundTask.isRunningService) {
+      FlutterForegroundTask.updateService(callback: updateCallback);
     }
   } else {
     await LocalNotification.showNotification(message);
@@ -198,8 +211,67 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     _foregroundReceivePort!.listen(_handleBackgroundMessage);
   }
 
+  Future<void> _initForegroundTask() async {
+    FlutterForegroundTask.init(
+      androidNotificationOptions: AndroidNotificationOptions(
+        channelId: 'notification_channel_id',
+        channelName: 'Foreground Notification',
+        channelDescription:
+            'This notification appears when the foreground service is running.',
+        channelImportance: NotificationChannelImportance.LOW,
+        priority: NotificationPriority.LOW,
+        iconData: const NotificationIconData(
+          resType: ResourceType.mipmap,
+          resPrefix: ResourcePrefix.ic,
+          name: 'launcher',
+        ),
+        playSound: false,
+        buttons: [
+          const NotificationButton(id: 'sendButton', text: 'Send'),
+          const NotificationButton(id: 'testButton', text: 'Test'),
+        ],
+      ),
+      iosNotificationOptions: const IOSNotificationOptions(
+        showNotification: true,
+        playSound: false,
+      ),
+      foregroundTaskOptions: const ForegroundTaskOptions(
+        interval: 5000,
+        autoRunOnBoot: true,
+        allowWifiLock: true,
+      ),
+    );
+  }
+
   void cleanupInteractedMessage() {
     _foregroundMessageSubscription?.cancel();
+  }
+
+  Future<bool> _startForegroundTask() async {
+    // You can save data using the saveData function.
+    bool result;
+
+    if (await FlutterForegroundTask.isRunningService) {
+      debugPrint("TACO::RESART");
+      result = await FlutterForegroundTask.restartService();
+    } else {
+      debugPrint("TACO::START SERVICE");
+      result = await FlutterForegroundTask.startService(
+        notificationTitle: 'Foreground Service is running',
+        notificationText: 'Tap to return to the app',
+        callback: startCallback,
+      );
+    }
+
+    debugPrint("TACO::START SERVICE:: $result");
+
+    // TODO (taekyeom) ReceivePort를 background task 에서 넘어오는 값을 쓰는게 좋을 듯 하다.
+
+    return result;
+  }
+
+  Future<bool> _stopForegroundTask() async {
+    return await FlutterForegroundTask.stopService();
   }
 
   void _handleMessage(RemoteMessage message) async {
@@ -376,6 +448,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
     IsolateNameServer.removePortNameMapping(FOREGROUND_ISOLATE_PORT_NAME);
     setupInteractedMessage();
     LocalNotification.initialize();
+    _initForegroundTask();
 
     taxiFareController = TextEditingController();
     tollFareController = TextEditingController(text: '0');
@@ -1632,15 +1705,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          await actions.launchKakaoNavi(
-                                            functions.toLatitudeFromLatLng(
-                                                FFAppState()
-                                                    .callDepartureCoordinate!),
-                                            functions.toLongitudeFromLatLng(
-                                                FFAppState()
-                                                    .callDepartureCoordinate!),
-                                            '출발지',
-                                          );
+                                          // await actions.launchKakaoNavi(
+                                          //   functions.toLatitudeFromLatLng(
+                                          //       FFAppState()
+                                          //           .callDepartureCoordinate!),
+                                          //   functions.toLongitudeFromLatLng(
+                                          //       FFAppState()
+                                          //           .callDepartureCoordinate!),
+                                          //   '출발지',
+                                          // );
                                         },
                                         text: '길안내',
                                         options: FFButtonOptions(
@@ -1951,15 +2024,15 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     children: [
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          await actions.launchKakaoNavi(
-                                            functions.toLatitudeFromLatLng(
-                                                FFAppState()
-                                                    .callArrivalCoordinate!),
-                                            functions.toLongitudeFromLatLng(
-                                                FFAppState()
-                                                    .callArrivalCoordinate!),
-                                            '목적지',
-                                          );
+                                          // await actions.launchKakaoNavi(
+                                          //   functions.toLatitudeFromLatLng(
+                                          //       FFAppState()
+                                          //           .callArrivalCoordinate!),
+                                          //   functions.toLongitudeFromLatLng(
+                                          //       FFAppState()
+                                          //           .callArrivalCoordinate!),
+                                          //   '목적지',
+                                          // );
                                         },
                                         text: '길안내',
                                         options: FFButtonOptions(
@@ -2923,6 +2996,8 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                             );
                           }
 
+                          await _stopForegroundTask();
+
                           setState(() {});
                         },
                         text: '콜 멈추기',
@@ -2967,7 +3042,9 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            debugPrint("TACO:: 출근");
                             if (await getPermissionStatus(locationPermission)) {
+                              debugPrint("TACO:: 퍼미션");
                               apiResult550 =
                                   await DriverInfoGroup.updateOnDutyCall.call(
                                 apiToken: FFAppState().apiToken,
@@ -2977,6 +3054,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     FFAppState().apiEndpointTarget,
                               );
                               if ((apiResult550?.succeeded ?? true)) {
+                                debugPrint("TACO:: 퍼미션 성공 ");
                                 FFAppState().update(() {
                                   FFAppState().driverIsOnDuty = true;
                                   FFAppState().driverIsAtWork = true;
@@ -3023,6 +3101,7 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                     await soundPlayer!.stop();
                                   }
 
+                                  debugPrint("TACO:: 소리 재생");
                                   soundPlayer!
                                       .setAsset(
                                           'assets/audios/NotSupportedRegion.mp3')
@@ -3195,12 +3274,18 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                               }
                             }
 
+                            debugPrint("TACO:: 백그라운드");
+
                             // get request permission for system alert
                             final permissionGranted = await FlutterOverlayWindow
                                 .isPermissionGranted();
                             debugPrint(
                                 "Permission Granted???: $permissionGranted");
                             if (permissionGranted) {
+                              await FlutterOverlayWindow.shareData(ApiToken(
+                                  token: FFAppState().apiToken,
+                                  driverId: FFAppState().driverId));
+                              await _startForegroundTask();
                             } else {
                               final confirm = await showDialog(
                                   context: context,
@@ -3224,9 +3309,13 @@ class _DriverCallManagerState extends State<DriverCallManager> {
                                   });
                               if (confirm) {
                                 await FlutterOverlayWindow.requestPermission();
-                                await FlutterOverlayWindow.shareData(ApiToken(
-                                    token: FFAppState().apiToken,
-                                    driverId: FFAppState().driverId));
+                                if (await FlutterOverlayWindow
+                                    .isPermissionGranted()) {
+                                  await FlutterOverlayWindow.shareData(ApiToken(
+                                      token: FFAppState().apiToken,
+                                      driverId: FFAppState().driverId));
+                                  await _startForegroundTask();
+                                }
                               } else {
                                 await showDialog(
                                     context: context,

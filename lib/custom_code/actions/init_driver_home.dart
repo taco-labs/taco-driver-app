@@ -62,9 +62,9 @@ void sendRefreshedFcmToken(String fcmToken) async {
 }
 
 Future initDriverHome() async {
-  KakaoSdk.init(
-    nativeAppKey: '$kakaoAppKey',
-  );
+  // KakaoSdk.init(
+  //   nativeAppKey: '$kakaoAppKey',
+  // );
   await BackgroundLocator.initialize();
 
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {

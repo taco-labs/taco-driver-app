@@ -1,3 +1,5 @@
+import 'package:flutter_foreground_task/ui/with_foreground_task.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -96,7 +98,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
+    return WithForegroundTask(
+        child: Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       drawer: Drawer(
@@ -411,6 +414,6 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
