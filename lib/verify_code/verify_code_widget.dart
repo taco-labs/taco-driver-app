@@ -348,8 +348,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             await actions.fromGetAvailableServiceRegions(
                               (apiResultucs?.jsonBody ?? ''),
                             );
-
-                            context.goNamed(
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
+                            context.pushNamed(
                               'RegisterDriver',
                               queryParams: {
                                 'phoneNumber': serializeParam(
