@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:upgrader/upgrader.dart';
 
 class EntryWidget extends StatefulWidget {
   const EntryWidget({Key? key}) : super(key: key);
@@ -164,7 +165,11 @@ class _EntryWidgetState extends State<EntryWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
+    return UpgradeAlert(
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(days: 1),
+      ),
+      child: Container(
       color: Color(0xFFFFEB62),
       child: Center(
         child: Image.asset(
@@ -172,6 +177,7 @@ class _EntryWidgetState extends State<EntryWidget> {
           width: 100,
           fit: BoxFit.cover,
         ),
+      ),
       ),
     );
   }
