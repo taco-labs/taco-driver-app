@@ -9,14 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class RegisterInstallmentWidget extends StatefulWidget {
-  const RegisterInstallmentWidget({
-    Key? key,
-    this.phoneNumber,
-    this.authSmsStateKey,
-  }) : super(key: key);
-
-  final String? phoneNumber;
-  final String? authSmsStateKey;
+  const RegisterInstallmentWidget({Key? key}) : super(key: key);
 
   @override
   _RegisterInstallmentWidgetState createState() =>
