@@ -164,9 +164,15 @@ class _EntryWidgetState extends State<EntryWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Color(0xFFFFEB62),
+    return Container(
+      color: Color(0xFFFFEB62),
+      child: Center(
+        child: Image.asset(
+          'assets/images/Original_on_Transparent.png',
+          width: 100,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

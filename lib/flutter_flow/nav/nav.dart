@@ -45,6 +45,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             )
           : EntryWidget(),
       routes: [
+        GoRoute(
+          name: 'Login',
+          path: '/login',
+          builder: (context, params) => LoginWidget(),
+        ),
+        GoRoute(
+          name: 'RegisterImages',
+          path: '/registerImages',
+          builder: (context, params) => RegisterImagesWidget(),
+        ),
+        GoRoute(
+          name: 'Home',
+          path: '/home',
+          builder: (context, params) => HomeWidget(),
+        ),
+        GoRoute(
+          name: 'RegisterInstallment',
+          path: '/registerInstallment',
+          builder: (context, params) => RegisterInstallmentWidget(),
+        ),
         FFRoute(
           name: '_initialize',
           path: '/',
@@ -63,11 +83,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 )
               : EntryWidget(),
           routes: [
-            FFRoute(
-              name: 'Login',
-              path: 'login',
-              builder: (context, params) => LoginWidget(),
-            ),
             FFRoute(
               name: 'Entry',
               path: 'entry',
@@ -90,21 +105,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 authSmsStateKey:
                     params.getParam('authSmsStateKey', ParamType.String),
               ),
-            ),
-            FFRoute(
-              name: 'RegisterImages',
-              path: 'registerImages',
-              builder: (context, params) => RegisterImagesWidget(),
-            ),
-            FFRoute(
-              name: 'Home',
-              path: 'home',
-              builder: (context, params) => HomeWidget(),
-            ),
-            FFRoute(
-              name: 'RegisterInstallment',
-              path: 'registerInstallment',
-              builder: (context, params) => RegisterInstallmentWidget(),
             ),
             FFRoute(
               name: 'DriverProfile',
