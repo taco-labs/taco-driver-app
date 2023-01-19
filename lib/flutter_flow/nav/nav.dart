@@ -94,11 +94,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'RegisterImages',
               path: 'registerImages',
-              builder: (context, params) => RegisterImagesWidget(
-                phoneNumber: params.getParam('phoneNumber', ParamType.String),
-                authSmsStateKey:
-                    params.getParam('authSmsStateKey', ParamType.String),
-              ),
+              builder: (context, params) => RegisterImagesWidget(),
             ),
             FFRoute(
               name: 'Home',
@@ -108,11 +104,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'RegisterInstallment',
               path: 'registerInstallment',
-              builder: (context, params) => RegisterInstallmentWidget(
-                phoneNumber: params.getParam('phoneNumber', ParamType.String),
-                authSmsStateKey:
-                    params.getParam('authSmsStateKey', ParamType.String),
-              ),
+              builder: (context, params) => RegisterInstallmentWidget(),
             ),
             FFRoute(
               name: 'DriverProfile',
