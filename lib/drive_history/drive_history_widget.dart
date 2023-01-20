@@ -138,7 +138,7 @@ class _DriveHistoryWidgetState extends State<DriveHistoryWidget> {
                           final pageItems = TaxiCallGroup.listTaxiCallCall
                               .callList(
                                 listViewListTaxiCallResponse.jsonBody,
-                              )
+                              )!
                               .toList() as List;
                           final newNumItems =
                               nextPageMarker.numItems + pageItems.length;
